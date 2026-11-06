@@ -1,0 +1,1628 @@
+{
+  "state": "ready",
+  "id": "db9b7b78e85555bc88fd",
+  "generatedAt": "2026-11-06T09:54:16.734Z",
+  "location": {
+    "id": "shanghai",
+    "name": "上海",
+    "lat": 31.2304,
+    "lon": 121.4737,
+    "timezone": "Asia/Shanghai"
+  },
+  "date": "2026-11-06",
+  "eventType": "sunset",
+  "event": {
+    "time": "2026-11-06T09:03:31.323Z",
+    "azimuth": 252,
+    "altitude": -1.06
+  },
+  "model": "gfs",
+  "weatherModel": "NCEP GFS (Open-Meteo GFS)",
+  "leadTimeHours": -0.8,
+  "data": {
+    "weather": {
+      "fetchedAt": "2026-11-06T09:29:02.268Z",
+      "cache": "fresh",
+      "ageMinutes": 25.24,
+      "initializationTime": null,
+      "provider": "Open-Meteo",
+      "sourceUrl": "https://open-meteo.com/en/docs/gfs-api",
+      "profile": "Pressure-level cloud-cover diagnostic and geopotential height",
+      "nativeTimeStepMinutes": 60,
+      "apiTimeStepMinutes": 60,
+      "gridResolutionDegrees": 0.25,
+      "precipitationMeaning": "mm accumulated over the preceding hour",
+      "pointCount": 42,
+      "pressureLevelCount": 11,
+      "staleReason": null
+    },
+    "aerosol": {
+      "fetchedAt": "2026-11-06T09:29:03.808Z",
+      "cache": "fresh",
+      "provider": "CAMS Global via Open-Meteo",
+      "wavelengthNm": 550,
+      "nativeTimeStepMinutes": 180,
+      "gridResolutionDegrees": 0.4,
+      "initializationTime": null,
+      "error": null,
+      "sourceUrl": "https://open-meteo.com/en/docs/air-quality-api"
+    }
+  },
+  "modelVersion": "section-optics-0.3.1",
+  "calibration": "experimental",
+  "score": 13.2,
+  "label": "霞光条件偏弱",
+  "advice": "留意临近日出日落的变化",
+  "pathCoverage": "within-sampling",
+  "peakTime": "2026-11-06T08:58:31.323Z",
+  "window": {
+    "start": "2026-11-06T08:58:31.323Z",
+    "end": "2026-11-06T09:03:31.323Z",
+    "resolutionMinutes": 5,
+    "clipped": false
+  },
+  "towardSun": 5.6,
+  "oppositeSun": 8.1,
+  "sensitivity": {
+    "minimum": 4.7,
+    "maximum": 15.9,
+    "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+  },
+  "cloudOverlapSensitivity": {
+    "minimum": 0,
+    "maximum": 13.7,
+    "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+  },
+  "aod": 0.26,
+  "visibilityKm": 24.14,
+  "precipitationMm": 0,
+  "missingAerosol": false,
+  "reasons": [
+    "参考时刻有 2 处采样云底具备可见受光条件。",
+    "本地 AOD550 为 0.26，已按垂直分布假设纳入光路积分。",
+    "参考时刻的气溶胶高度假设带来约 11.2 分的变化。",
+    "参考时刻的云层重叠情景给出 0–13.7 分。"
+  ],
+  "uncertainty": [
+    "所选日出日落事件已发生，结果为当前资料下的回算。",
+    "云量代表出现面积，云内消光系数、云底重建及云层重叠方式采用情景假设；云水与冰含量仍待补充。",
+    "三方位插值形成随太阳转动的二维截面，细小云洞、云顶侧面受光与建筑遮挡需现场判断。",
+    "5 分钟曲线是天气场上的推算；GFS 原始资料约 1 小时、ECMWF 与 CAMS 约 3 小时，窗口精度受这些资料约束。",
+    "指数正在积累实测校准，当前表示模型观赏潜力。"
+  ],
+  "timeline": [
+    {
+      "time": "2026-11-06T08:23:31.323Z",
+      "score": 0.1,
+      "solarAltitude": 6.94,
+      "towardSun": 0,
+      "oppositeSun": 0.1
+    },
+    {
+      "time": "2026-11-06T08:28:31.323Z",
+      "score": 0.1,
+      "solarAltitude": 5.96,
+      "towardSun": 0,
+      "oppositeSun": 0.1
+    },
+    {
+      "time": "2026-11-06T08:33:31.323Z",
+      "score": 0.4,
+      "solarAltitude": 4.97,
+      "towardSun": 0.2,
+      "oppositeSun": 0.2
+    },
+    {
+      "time": "2026-11-06T08:38:31.323Z",
+      "score": 0.5,
+      "solarAltitude": 3.97,
+      "towardSun": 0.2,
+      "oppositeSun": 0.2
+    },
+    {
+      "time": "2026-11-06T08:43:31.323Z",
+      "score": 0.5,
+      "solarAltitude": 2.97,
+      "towardSun": 0.2,
+      "oppositeSun": 0.3
+    },
+    {
+      "time": "2026-11-06T08:48:31.323Z",
+      "score": 0.4,
+      "solarAltitude": 1.97,
+      "towardSun": 0.2,
+      "oppositeSun": 0.2
+    },
+    {
+      "time": "2026-11-06T08:53:31.323Z",
+      "score": 0.3,
+      "solarAltitude": 0.96,
+      "towardSun": 0.1,
+      "oppositeSun": 0.2
+    },
+    {
+      "time": "2026-11-06T08:58:31.323Z",
+      "score": 13.2,
+      "solarAltitude": -0.05,
+      "towardSun": 5.6,
+      "oppositeSun": 8.1
+    },
+    {
+      "time": "2026-11-06T09:03:31.323Z",
+      "score": 12.2,
+      "solarAltitude": -1.06,
+      "towardSun": 5.5,
+      "oppositeSun": 7.1
+    },
+    {
+      "time": "2026-11-06T09:08:31.323Z",
+      "score": 0,
+      "solarAltitude": -2.08,
+      "towardSun": 0,
+      "oppositeSun": 0
+    },
+    {
+      "time": "2026-11-06T09:13:31.323Z",
+      "score": 0,
+      "solarAltitude": -3.1,
+      "towardSun": 0,
+      "oppositeSun": 0
+    },
+    {
+      "time": "2026-11-06T09:18:31.323Z",
+      "score": 0,
+      "solarAltitude": -4.13,
+      "towardSun": 0,
+      "oppositeSun": 0
+    },
+    {
+      "time": "2026-11-06T09:23:31.323Z",
+      "score": 0,
+      "solarAltitude": -5.16,
+      "towardSun": 0,
+      "oppositeSun": 0
+    },
+    {
+      "time": "2026-11-06T09:28:31.323Z",
+      "score": 0,
+      "solarAltitude": -6.19,
+      "towardSun": 0,
+      "oppositeSun": 0
+    },
+    {
+      "time": "2026-11-06T09:33:31.323Z",
+      "score": 0,
+      "solarAltitude": -7.23,
+      "towardSun": 0,
+      "oppositeSun": 0
+    },
+    {
+      "time": "2026-11-06T09:38:31.323Z",
+      "score": 0,
+      "solarAltitude": -8.26,
+      "towardSun": 0,
+      "oppositeSun": 0
+    },
+    {
+      "time": "2026-11-06T09:43:31.323Z",
+      "score": 0,
+      "solarAltitude": -9.31,
+      "towardSun": 0,
+      "oppositeSun": 0
+    }
+  ],
+  "section": {
+    "time": "2026-11-06T08:58:31.323Z",
+    "bearing": 251.35,
+    "fanOffsetsDegrees": [
+      -8,
+      0,
+      8
+    ],
+    "distancesKm": [
+      -150,
+      -100,
+      -50,
+      -25,
+      0,
+      25,
+      50,
+      100,
+      150,
+      200,
+      300,
+      450,
+      600,
+      800
+    ],
+    "rays": [
+      [
+        {
+          "distanceKm": 0,
+          "heightKm": 6.64
+        },
+        {
+          "distanceKm": 24.97,
+          "heightKm": 6.67
+        },
+        {
+          "distanceKm": 49.95,
+          "heightKm": 6.79
+        },
+        {
+          "distanceKm": 74.92,
+          "heightKm": 7.02
+        },
+        {
+          "distanceKm": 99.89,
+          "heightKm": 7.34
+        },
+        {
+          "distanceKm": 124.86,
+          "heightKm": 7.76
+        },
+        {
+          "distanceKm": 149.82,
+          "heightKm": 8.27
+        },
+        {
+          "distanceKm": 174.78,
+          "heightKm": 8.89
+        },
+        {
+          "distanceKm": 199.73,
+          "heightKm": 9.6
+        },
+        {
+          "distanceKm": 224.68,
+          "heightKm": 10.41
+        },
+        {
+          "distanceKm": 249.62,
+          "heightKm": 11.32
+        },
+        {
+          "distanceKm": 274.55,
+          "heightKm": 12.33
+        },
+        {
+          "distanceKm": 299.48,
+          "heightKm": 13.43
+        },
+        {
+          "distanceKm": 324.4,
+          "heightKm": 14.63
+        },
+        {
+          "distanceKm": 349.3,
+          "heightKm": 15.93
+        },
+        {
+          "distanceKm": 374.2,
+          "heightKm": 17.33
+        },
+        {
+          "distanceKm": 399.08,
+          "heightKm": 18.82
+        },
+        {
+          "distanceKm": 423.96,
+          "heightKm": 20.42
+        },
+        {
+          "distanceKm": 448.82,
+          "heightKm": 22.1
+        },
+        {
+          "distanceKm": 473.66,
+          "heightKm": 23.89
+        },
+        {
+          "distanceKm": 498.49,
+          "heightKm": 25.77
+        },
+        {
+          "distanceKm": 523.31,
+          "heightKm": 27.76
+        },
+        {
+          "distanceKm": 548.11,
+          "heightKm": 29.83
+        },
+        {
+          "distanceKm": 572.9,
+          "heightKm": 32.01
+        },
+        {
+          "distanceKm": 597.66,
+          "heightKm": 34.28
+        },
+        {
+          "distanceKm": 622.41,
+          "heightKm": 36.65
+        },
+        {
+          "distanceKm": 647.15,
+          "heightKm": 39.11
+        },
+        {
+          "distanceKm": 671.86,
+          "heightKm": 41.68
+        },
+        {
+          "distanceKm": 696.55,
+          "heightKm": 44.33
+        },
+        {
+          "distanceKm": 721.22,
+          "heightKm": 47.09
+        },
+        {
+          "distanceKm": 745.87,
+          "heightKm": 49.94
+        },
+        {
+          "distanceKm": 770.5,
+          "heightKm": 52.88
+        },
+        {
+          "distanceKm": 795.1,
+          "heightKm": 55.93
+        },
+        {
+          "distanceKm": 819.68,
+          "heightKm": 59.06
+        },
+        {
+          "distanceKm": 844.24,
+          "heightKm": 62.3
+        },
+        {
+          "distanceKm": 868.77,
+          "heightKm": 65.63
+        },
+        {
+          "distanceKm": 893.27,
+          "heightKm": 69.05
+        },
+        {
+          "distanceKm": 917.75,
+          "heightKm": 72.57
+        },
+        {
+          "distanceKm": 942.2,
+          "heightKm": 76.19
+        },
+        {
+          "distanceKm": 966.63,
+          "heightKm": 79.9
+        },
+        {
+          "distanceKm": 991.02,
+          "heightKm": 83.7
+        },
+        {
+          "distanceKm": 1015.39,
+          "heightKm": 87.6
+        },
+        {
+          "distanceKm": 1039.73,
+          "heightKm": 91.59
+        },
+        {
+          "distanceKm": 1064.03,
+          "heightKm": 95.68
+        },
+        {
+          "distanceKm": 1088.31,
+          "heightKm": 99.86
+        },
+        {
+          "distanceKm": 1112.55,
+          "heightKm": 104.14
+        },
+        {
+          "distanceKm": 1136.76,
+          "heightKm": 108.51
+        },
+        {
+          "distanceKm": 1160.94,
+          "heightKm": 112.97
+        },
+        {
+          "distanceKm": 1185.09,
+          "heightKm": 117.52
+        }
+      ],
+      [
+        {
+          "distanceKm": -25,
+          "heightKm": 6.64
+        },
+        {
+          "distanceKm": -0.03,
+          "heightKm": 6.57
+        },
+        {
+          "distanceKm": 24.95,
+          "heightKm": 6.6
+        },
+        {
+          "distanceKm": 49.92,
+          "heightKm": 6.72
+        },
+        {
+          "distanceKm": 74.89,
+          "heightKm": 6.94
+        },
+        {
+          "distanceKm": 99.86,
+          "heightKm": 7.27
+        },
+        {
+          "distanceKm": 124.83,
+          "heightKm": 7.68
+        },
+        {
+          "distanceKm": 149.79,
+          "heightKm": 8.2
+        },
+        {
+          "distanceKm": 174.75,
+          "heightKm": 8.82
+        },
+        {
+          "distanceKm": 199.71,
+          "heightKm": 9.53
+        },
+        {
+          "distanceKm": 224.66,
+          "heightKm": 10.34
+        },
+        {
+          "distanceKm": 249.6,
+          "heightKm": 11.25
+        },
+        {
+          "distanceKm": 274.53,
+          "heightKm": 12.25
+        },
+        {
+          "distanceKm": 299.46,
+          "heightKm": 13.36
+        },
+        {
+          "distanceKm": 324.37,
+          "heightKm": 14.56
+        },
+        {
+          "distanceKm": 349.28,
+          "heightKm": 15.86
+        },
+        {
+          "distanceKm": 374.18,
+          "heightKm": 17.26
+        },
+        {
+          "distanceKm": 399.06,
+          "heightKm": 18.75
+        },
+        {
+          "distanceKm": 423.93,
+          "heightKm": 20.34
+        },
+        {
+          "distanceKm": 448.79,
+          "heightKm": 22.03
+        },
+        {
+          "distanceKm": 473.64,
+          "heightKm": 23.82
+        },
+        {
+          "distanceKm": 498.47,
+          "heightKm": 25.7
+        },
+        {
+          "distanceKm": 523.29,
+          "heightKm": 27.68
+        },
+        {
+          "distanceKm": 548.09,
+          "heightKm": 29.76
+        },
+        {
+          "distanceKm": 572.88,
+          "heightKm": 31.94
+        },
+        {
+          "distanceKm": 597.65,
+          "heightKm": 34.21
+        },
+        {
+          "distanceKm": 622.4,
+          "heightKm": 36.58
+        },
+        {
+          "distanceKm": 647.13,
+          "heightKm": 39.04
+        },
+        {
+          "distanceKm": 671.84,
+          "heightKm": 41.6
+        },
+        {
+          "distanceKm": 696.53,
+          "heightKm": 44.26
+        },
+        {
+          "distanceKm": 721.2,
+          "heightKm": 47.01
+        },
+        {
+          "distanceKm": 745.85,
+          "heightKm": 49.86
+        },
+        {
+          "distanceKm": 770.48,
+          "heightKm": 52.81
+        },
+        {
+          "distanceKm": 795.08,
+          "heightKm": 55.85
+        },
+        {
+          "distanceKm": 819.66,
+          "heightKm": 58.99
+        },
+        {
+          "distanceKm": 844.22,
+          "heightKm": 62.22
+        },
+        {
+          "distanceKm": 868.75,
+          "heightKm": 65.55
+        },
+        {
+          "distanceKm": 893.26,
+          "heightKm": 68.98
+        },
+        {
+          "distanceKm": 917.74,
+          "heightKm": 72.5
+        },
+        {
+          "distanceKm": 942.19,
+          "heightKm": 76.11
+        },
+        {
+          "distanceKm": 966.61,
+          "heightKm": 79.82
+        },
+        {
+          "distanceKm": 991.01,
+          "heightKm": 83.63
+        },
+        {
+          "distanceKm": 1015.38,
+          "heightKm": 87.53
+        },
+        {
+          "distanceKm": 1039.71,
+          "heightKm": 91.52
+        },
+        {
+          "distanceKm": 1064.02,
+          "heightKm": 95.61
+        },
+        {
+          "distanceKm": 1088.3,
+          "heightKm": 99.79
+        },
+        {
+          "distanceKm": 1112.54,
+          "heightKm": 104.06
+        },
+        {
+          "distanceKm": 1136.75,
+          "heightKm": 108.43
+        },
+        {
+          "distanceKm": 1160.93,
+          "heightKm": 112.89
+        }
+      ]
+    ],
+    "columns": [
+      {
+        "distanceKm": -150,
+        "terrainKm": 0,
+        "aod": 0.27,
+        "levels": [
+          {
+            "pressureHpa": 1000,
+            "heightKm": 0.23,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 925,
+            "heightKm": 0.88,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 850,
+            "heightKm": 1.57,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 700,
+            "heightKm": 3.15,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 600,
+            "heightKm": 4.37,
+            "cloudCover": 4
+          },
+          {
+            "pressureHpa": 500,
+            "heightKm": 5.78,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 400,
+            "heightKm": 7.46,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 300,
+            "heightKm": 9.53,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 250,
+            "heightKm": 10.79,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 200,
+            "heightKm": 12.27,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 150,
+            "heightKm": 14.07,
+            "cloudCover": 0
+          }
+        ]
+      },
+      {
+        "distanceKm": -100,
+        "terrainKm": 0,
+        "aod": 0.27,
+        "levels": [
+          {
+            "pressureHpa": 1000,
+            "heightKm": 0.22,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 925,
+            "heightKm": 0.88,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 850,
+            "heightKm": 1.58,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 700,
+            "heightKm": 3.15,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 600,
+            "heightKm": 4.37,
+            "cloudCover": 3
+          },
+          {
+            "pressureHpa": 500,
+            "heightKm": 5.79,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 400,
+            "heightKm": 7.47,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 300,
+            "heightKm": 9.55,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 250,
+            "heightKm": 10.8,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 200,
+            "heightKm": 12.28,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 150,
+            "heightKm": 14.08,
+            "cloudCover": 0
+          }
+        ]
+      },
+      {
+        "distanceKm": -50,
+        "terrainKm": 0,
+        "aod": 0.251,
+        "levels": [
+          {
+            "pressureHpa": 1000,
+            "heightKm": 0.22,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 925,
+            "heightKm": 0.88,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 850,
+            "heightKm": 1.58,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 700,
+            "heightKm": 3.15,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 600,
+            "heightKm": 4.38,
+            "cloudCover": 1.9
+          },
+          {
+            "pressureHpa": 500,
+            "heightKm": 5.8,
+            "cloudCover": 0.3
+          },
+          {
+            "pressureHpa": 400,
+            "heightKm": 7.47,
+            "cloudCover": 25.2
+          },
+          {
+            "pressureHpa": 300,
+            "heightKm": 9.56,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 250,
+            "heightKm": 10.81,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 200,
+            "heightKm": 12.29,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 150,
+            "heightKm": 14.09,
+            "cloudCover": 0
+          }
+        ]
+      },
+      {
+        "distanceKm": -25,
+        "terrainKm": 0,
+        "aod": 0.26,
+        "levels": [
+          {
+            "pressureHpa": 1000,
+            "heightKm": 0.22,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 925,
+            "heightKm": 0.88,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 850,
+            "heightKm": 1.58,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 700,
+            "heightKm": 3.15,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 600,
+            "heightKm": 4.38,
+            "cloudCover": 1.6
+          },
+          {
+            "pressureHpa": 500,
+            "heightKm": 5.8,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 400,
+            "heightKm": 7.47,
+            "cloudCover": 31.2
+          },
+          {
+            "pressureHpa": 300,
+            "heightKm": 9.56,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 250,
+            "heightKm": 10.81,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 200,
+            "heightKm": 12.29,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 150,
+            "heightKm": 14.09,
+            "cloudCover": 0
+          }
+        ]
+      },
+      {
+        "distanceKm": 0,
+        "terrainKm": 0.005,
+        "aod": 0.26,
+        "levels": [
+          {
+            "pressureHpa": 1000,
+            "heightKm": 0.22,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 925,
+            "heightKm": 0.88,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 850,
+            "heightKm": 1.58,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 700,
+            "heightKm": 3.15,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 600,
+            "heightKm": 4.38,
+            "cloudCover": 0.1
+          },
+          {
+            "pressureHpa": 500,
+            "heightKm": 5.8,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 400,
+            "heightKm": 7.48,
+            "cloudCover": 27.3
+          },
+          {
+            "pressureHpa": 300,
+            "heightKm": 9.56,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 250,
+            "heightKm": 10.81,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 200,
+            "heightKm": 12.29,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 150,
+            "heightKm": 14.09,
+            "cloudCover": 0
+          }
+        ]
+      },
+      {
+        "distanceKm": 25,
+        "terrainKm": 0.0038390098557149204,
+        "aod": 0.311,
+        "levels": [
+          {
+            "pressureHpa": 1000,
+            "heightKm": 0.22,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 925,
+            "heightKm": 0.88,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 850,
+            "heightKm": 1.58,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 700,
+            "heightKm": 3.15,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 600,
+            "heightKm": 4.38,
+            "cloudCover": 0.1
+          },
+          {
+            "pressureHpa": 500,
+            "heightKm": 5.8,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 400,
+            "heightKm": 7.48,
+            "cloudCover": 9.8
+          },
+          {
+            "pressureHpa": 300,
+            "heightKm": 9.56,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 250,
+            "heightKm": 10.81,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 200,
+            "heightKm": 12.29,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 150,
+            "heightKm": 14.09,
+            "cloudCover": 0
+          }
+        ]
+      },
+      {
+        "distanceKm": 50,
+        "terrainKm": 0,
+        "aod": 0.395,
+        "levels": [
+          {
+            "pressureHpa": 1000,
+            "heightKm": 0.22,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 925,
+            "heightKm": 0.88,
+            "cloudCover": 3
+          },
+          {
+            "pressureHpa": 850,
+            "heightKm": 1.58,
+            "cloudCover": 90.2
+          },
+          {
+            "pressureHpa": 700,
+            "heightKm": 3.15,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 600,
+            "heightKm": 4.38,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 500,
+            "heightKm": 5.8,
+            "cloudCover": 0.6
+          },
+          {
+            "pressureHpa": 400,
+            "heightKm": 7.49,
+            "cloudCover": 65.6
+          },
+          {
+            "pressureHpa": 300,
+            "heightKm": 9.57,
+            "cloudCover": 5.9
+          },
+          {
+            "pressureHpa": 250,
+            "heightKm": 10.82,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 200,
+            "heightKm": 12.3,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 150,
+            "heightKm": 14.1,
+            "cloudCover": 0
+          }
+        ]
+      },
+      {
+        "distanceKm": 100,
+        "terrainKm": 0.0034024753607126996,
+        "aod": 0.62,
+        "levels": [
+          {
+            "pressureHpa": 1000,
+            "heightKm": 0.22,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 925,
+            "heightKm": 0.88,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 850,
+            "heightKm": 1.58,
+            "cloudCover": 20.6
+          },
+          {
+            "pressureHpa": 700,
+            "heightKm": 3.15,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 600,
+            "heightKm": 4.38,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 500,
+            "heightKm": 5.81,
+            "cloudCover": 0.1
+          },
+          {
+            "pressureHpa": 400,
+            "heightKm": 7.49,
+            "cloudCover": 30
+          },
+          {
+            "pressureHpa": 300,
+            "heightKm": 9.57,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 250,
+            "heightKm": 10.83,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 200,
+            "heightKm": 12.3,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 150,
+            "heightKm": 14.1,
+            "cloudCover": 0
+          }
+        ]
+      },
+      {
+        "distanceKm": 150,
+        "terrainKm": 0.07200930552716253,
+        "aod": 0.59,
+        "levels": [
+          {
+            "pressureHpa": 1000,
+            "heightKm": 0.22,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 925,
+            "heightKm": 0.87,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 850,
+            "heightKm": 1.57,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 700,
+            "heightKm": 3.15,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 600,
+            "heightKm": 4.39,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 500,
+            "heightKm": 5.81,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 400,
+            "heightKm": 7.49,
+            "cloudCover": 54.2
+          },
+          {
+            "pressureHpa": 300,
+            "heightKm": 9.58,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 250,
+            "heightKm": 10.84,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 200,
+            "heightKm": 12.31,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 150,
+            "heightKm": 14.11,
+            "cloudCover": 0
+          }
+        ]
+      },
+      {
+        "distanceKm": 200,
+        "terrainKm": 0.3572289250169449,
+        "aod": 0.46,
+        "levels": [
+          {
+            "pressureHpa": 1000,
+            "heightKm": 0.21,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 925,
+            "heightKm": 0.87,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 850,
+            "heightKm": 1.57,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 700,
+            "heightKm": 3.16,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 600,
+            "heightKm": 4.39,
+            "cloudCover": 0.2
+          },
+          {
+            "pressureHpa": 500,
+            "heightKm": 5.81,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 400,
+            "heightKm": 7.5,
+            "cloudCover": 10.3
+          },
+          {
+            "pressureHpa": 300,
+            "heightKm": 9.58,
+            "cloudCover": 0.3
+          },
+          {
+            "pressureHpa": 250,
+            "heightKm": 10.84,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 200,
+            "heightKm": 12.31,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 150,
+            "heightKm": 14.11,
+            "cloudCover": 0
+          }
+        ]
+      },
+      {
+        "distanceKm": 300,
+        "terrainKm": 0.2352723813763566,
+        "aod": 0.224,
+        "levels": [
+          {
+            "pressureHpa": 1000,
+            "heightKm": 0.21,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 925,
+            "heightKm": 0.86,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 850,
+            "heightKm": 1.57,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 700,
+            "heightKm": 3.16,
+            "cloudCover": 0.1
+          },
+          {
+            "pressureHpa": 600,
+            "heightKm": 4.39,
+            "cloudCover": 3.2
+          },
+          {
+            "pressureHpa": 500,
+            "heightKm": 5.82,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 400,
+            "heightKm": 7.51,
+            "cloudCover": 55.2
+          },
+          {
+            "pressureHpa": 300,
+            "heightKm": 9.6,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 250,
+            "heightKm": 10.86,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 200,
+            "heightKm": 12.33,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 150,
+            "heightKm": 14.12,
+            "cloudCover": 0
+          }
+        ]
+      },
+      {
+        "distanceKm": 450,
+        "terrainKm": 0.2934861334072158,
+        "aod": 0.209,
+        "levels": [
+          {
+            "pressureHpa": 1000,
+            "heightKm": 0.2,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 925,
+            "heightKm": 0.86,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 850,
+            "heightKm": 1.56,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 700,
+            "heightKm": 3.16,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 600,
+            "heightKm": 4.4,
+            "cloudCover": 2.6
+          },
+          {
+            "pressureHpa": 500,
+            "heightKm": 5.83,
+            "cloudCover": 0.1
+          },
+          {
+            "pressureHpa": 400,
+            "heightKm": 7.52,
+            "cloudCover": 91.5
+          },
+          {
+            "pressureHpa": 300,
+            "heightKm": 9.61,
+            "cloudCover": 0.6
+          },
+          {
+            "pressureHpa": 250,
+            "heightKm": 10.87,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 200,
+            "heightKm": 12.34,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 150,
+            "heightKm": 14.13,
+            "cloudCover": 0
+          }
+        ]
+      },
+      {
+        "distanceKm": 600,
+        "terrainKm": 0.06521673160930062,
+        "aod": 0.279,
+        "levels": [
+          {
+            "pressureHpa": 1000,
+            "heightKm": 0.2,
+            "cloudCover": 0.4
+          },
+          {
+            "pressureHpa": 925,
+            "heightKm": 0.85,
+            "cloudCover": 0.4
+          },
+          {
+            "pressureHpa": 850,
+            "heightKm": 1.56,
+            "cloudCover": 6.4
+          },
+          {
+            "pressureHpa": 700,
+            "heightKm": 3.16,
+            "cloudCover": 2.5
+          },
+          {
+            "pressureHpa": 600,
+            "heightKm": 4.4,
+            "cloudCover": 0.1
+          },
+          {
+            "pressureHpa": 500,
+            "heightKm": 5.83,
+            "cloudCover": 8.1
+          },
+          {
+            "pressureHpa": 400,
+            "heightKm": 7.53,
+            "cloudCover": 82
+          },
+          {
+            "pressureHpa": 300,
+            "heightKm": 9.62,
+            "cloudCover": 0.1
+          },
+          {
+            "pressureHpa": 250,
+            "heightKm": 10.88,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 200,
+            "heightKm": 12.35,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 150,
+            "heightKm": 14.15,
+            "cloudCover": 0
+          }
+        ]
+      },
+      {
+        "distanceKm": 800,
+        "terrainKm": 0.1960898005993051,
+        "aod": 0.248,
+        "levels": [
+          {
+            "pressureHpa": 1000,
+            "heightKm": 0.19,
+            "cloudCover": 0.6
+          },
+          {
+            "pressureHpa": 925,
+            "heightKm": 0.85,
+            "cloudCover": 6.7
+          },
+          {
+            "pressureHpa": 850,
+            "heightKm": 1.56,
+            "cloudCover": 12.3
+          },
+          {
+            "pressureHpa": 700,
+            "heightKm": 3.16,
+            "cloudCover": 0.2
+          },
+          {
+            "pressureHpa": 600,
+            "heightKm": 4.41,
+            "cloudCover": 11.6
+          },
+          {
+            "pressureHpa": 500,
+            "heightKm": 5.85,
+            "cloudCover": 84.8
+          },
+          {
+            "pressureHpa": 400,
+            "heightKm": 7.55,
+            "cloudCover": 34.4
+          },
+          {
+            "pressureHpa": 300,
+            "heightKm": 9.64,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 250,
+            "heightKm": 10.9,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 200,
+            "heightKm": 12.38,
+            "cloudCover": 0
+          },
+          {
+            "pressureHpa": 150,
+            "heightKm": 14.17,
+            "cloudCover": 0
+          }
+        ]
+      }
+    ],
+    "targets": [
+      {
+        "x": -50,
+        "baseKm": 6.64,
+        "topKm": 8.51,
+        "elevation": 7.32,
+        "cover": 0.23,
+        "strength": 0.0276,
+        "reason": "illuminated",
+        "bounded": true,
+        "missingAerosol": false,
+        "viewingPathKm": 50.4634,
+        "viewingRayleighDepth550": 0.413078,
+        "color": "#ff6d11"
+      },
+      {
+        "x": -25,
+        "baseKm": 6.64,
+        "topKm": 8.52,
+        "elevation": 14.74,
+        "cover": 0.3,
+        "strength": 0.0577,
+        "reason": "illuminated",
+        "bounded": true,
+        "missingAerosol": false,
+        "viewingPathKm": 25.877,
+        "viewingRayleighDepth550": 0.211171,
+        "color": "#ff8620"
+      },
+      {
+        "x": 0,
+        "baseKm": 6.64,
+        "topKm": 8.52,
+        "elevation": 90,
+        "cover": 0.27,
+        "strength": 0.0718,
+        "reason": "illuminated",
+        "bounded": true,
+        "missingAerosol": false,
+        "viewingPathKm": 6.632,
+        "viewingRayleighDepth550": 0.054055,
+        "color": "#ff9e33"
+      },
+      {
+        "x": 50,
+        "baseKm": 1.23,
+        "topKm": 2.37,
+        "elevation": 1.18,
+        "cover": 0.87,
+        "strength": 0,
+        "reason": "cloud-obstruction",
+        "bounded": true,
+        "missingAerosol": false,
+        "viewingPathKm": 50.0196,
+        "viewingRayleighDepth550": 0.558558,
+        "color": "#000000"
+      },
+      {
+        "x": 100,
+        "baseKm": 6.65,
+        "topKm": 8.53,
+        "elevation": 3.35,
+        "cover": 0.09,
+        "strength": 0,
+        "reason": "cloud-obstruction",
+        "bounded": true,
+        "missingAerosol": false,
+        "viewingPathKm": 100.2713,
+        "viewingRayleighDepth550": 0.830353,
+        "color": "#000000"
+      },
+      {
+        "x": 150,
+        "baseKm": 6.65,
+        "topKm": 8.54,
+        "elevation": 1.86,
+        "cover": 0.54,
+        "strength": 0,
+        "reason": "cloud-obstruction",
+        "bounded": true,
+        "missingAerosol": false,
+        "viewingPathKm": 150.2221,
+        "viewingRayleighDepth550": 1.269072,
+        "color": "#000000"
+      }
+    ]
+  },
+  "assumptions": {
+    "earthRadiusKm": 6371,
+    "molecularScaleHeightKm": 8,
+    "molecularExtinction550PerKm": 0.012,
+    "aerosolScaleHeightsKm": [
+      0.8,
+      1.5,
+      3
+    ],
+    "aerosolAngstromExponent": 1.2,
+    "conditionalCloudExtinctionPerKm": {
+      "low": 2,
+      "mid": 0.7,
+      "high": 0.2
+    },
+    "cloudOverlap": [
+      "decorrelated",
+      "maximum",
+      "random-columns"
+    ],
+    "cloudHorizontalCorrelationLengthKm": 50,
+    "profileCloudThreshold": 0.15,
+    "minimumViewElevationDegrees": 0.5,
+    "maximumTargetDistanceKm": 300,
+    "solarRayStepKm": 4,
+    "viewingRayStepKm": 0.5,
+    "timelineStepMinutes": 5,
+    "qualityScale": "independent heuristic 0–100",
+    "calibration": "experimental"
+  },
+  "retention": {
+    "state": "saved",
+    "retainedAt": "2026-11-06T09:54:16.734Z",
+    "limit": 180
+  }
+}

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111a2a">
+  <meta name="description" content="长三角朝霞晚霞预测。查看日出日落、云层受光、观测窗口和大气截面。">
+  <title>Sunsetbot · 长三角朝晚霞</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css"><script src="/app.mjs" type="module"></script>
+</head>
+<body>
+  <a class="skip" href="#forecast-form">选择预报条件</a>
+  <div class="page">
+    <header class="header">
+      <a class="brand" href="/" aria-label="Sunsetbot 首页"><svg viewBox="0 0 44 44" aria-hidden="true"><path d="M7 28a15 15 0 0 1 30 0M3 28h38M9 35h26M17 41h10"/></svg><span>sunsetbot<small>长三角朝晚霞</small></span></a>
+      <span class="header-note">读懂云层，遇见霞光 <span class="dot"></span></span>
+    </header>
+
+    <main>
+      <section class="intro"><p class="eyebrow">SUNRISE & SUNSET OBSERVATORY</p><h1>把下一场霞光，<br class="mobile-break">放进你的计划。</h1><p>从云层、光路与大气通透度，看看值得等待的天空。</p></section>
+
+      <form id="forecast-form" class="query-panel">
+        <div class="query-fields">
+          <label>观测地点<select id="city" name="city" required><option value="shanghai">上海</option></select></label>
+          <label>日期<select id="date" name="date" required></select></label>
+          <fieldset><legend>时段</legend><div class="segmented"><label><input type="radio" name="event" value="sunrise"><span>朝霞</span></label><label><input type="radio" name="event" value="sunset" checked><span>晚霞</span></label></div></fieldset>
+          <fieldset><legend>天气模型</legend><div class="segmented"><label><input type="radio" name="model" value="gfs" checked><span>GFS</span></label><label><input type="radio" name="model" value="ecmwf"><span>ECMWF</span></label></div></fieldset>
+          <button class="primary" id="query" type="submit">获取预报 <span aria-hidden="true">↗</span></button>
+        </div>
+        <details class="custom"><summary>使用经纬度</summary><div class="custom-fields"><label class="check"><input id="custom" type="checkbox">启用自选位置</label><label>北纬 <input id="lat" type="number" step="0.0001" min="27" max="35" value="31.2304" disabled></label><label>东经 <input id="lon" type="number" step="0.0001" min="116" max="125" value="121.4737" disabled></label><p>WGS84 坐标 · 长三角范围</p></div></details>
+      </form>
+
+      <div id="status" class="status" role="status" aria-live="polite">正在准备当地日期与观测点…</div>
+      <section id="empty" class="empty" hidden><svg viewBox="0 0 100 50" aria-hidden="true"><path d="M5 40h90M30 40a20 20 0 0 1 40 0M18 15l6 6M50 2v8M82 15l-6 6"/></svg><h2>选择一个时刻，看看天空的条件。</h2><p>查询后可查看观测窗口、霞光曲线和大气截面。</p></section>
+
+      <div id="result" hidden>
+        <section class="forecast-top" aria-labelledby="result-title">
+          <div class="summary">
+            <p class="eyebrow" id="result-context"></p><h2 id="result-title"></h2>
+            <div class="score-line"><strong id="score"></strong><span>/ 100<small>霞光截面指数 · 实验模型</small></span></div>
+            <p class="verdict" id="verdict"></p><p id="advice" class="secondary"></p><p id="summary-range" class="secondary"></p>
+            <div class="conditions"><span>AOD550 <b id="aod"></b></span><span>能见度 <b id="visibility"></b></span><span>模型 <b id="model-value"></b></span></div>
+          </div>
+          <div class="observing">
+            <div class="observing-heading"><span class="eyebrow">OBSERVING WINDOW</span><span id="event-badge" class="badge"></span></div>
+            <p class="event-clock" id="event-clock"></p><p class="secondary" id="bearing"></p>
+            <div class="window"><span>模型参考时段</span><strong id="window"></strong><small id="window-note"></small></div>
+            <div class="direction-scores"><div><span>太阳方向</span><strong id="toward"></strong></div><div><span>反太阳方向</span><strong id="opposite"></strong></div></div>
+          </div>
+        </section>
+
+        <div class="data-line"><span id="freshness"></span><span id="data-state"></span></div>
+
+        <section class="panel chart-panel" aria-labelledby="timeline-title">
+          <div class="section-heading"><div><p class="eyebrow">THE COLOUR OF TIME</p><h2 id="timeline-title">模型里的霞光变化</h2></div><p>模型参考 <b id="peak"></b><span class="secondary"> · 当地时间</span></p></div>
+          <div id="timeline-chart" class="chart" role="img" aria-label="日出或日落前后观赏潜力曲线"></div>
+          <div class="timeline-inspector"><label for="time-slider">查看时刻</label><input id="time-slider" type="range" min="0" max="16" step="1" value="8"><output id="time-value" for="time-slider"></output></div>
+          <p id="cadence" class="caption">曲线以 5 分钟推算；时间窗口受原始天气资料分辨率约束。</p>
+        </section>
+
+        <section class="panel" aria-labelledby="section-title">
+          <div class="section-heading"><div><p class="eyebrow">FOLLOW THE LIGHT</p><h2 id="section-title">峰值时段的大气截面</h2></div><p id="section-time"></p></div>
+          <p class="section-description">从本地沿太阳方向取样 800 公里，观察云层的空间分布。<span class="legend"><i class="cloud-key"></i>云量 <i class="light-key"></i>受光云底与光路</span></p>
+          <div class="section-scroll"><div id="section-chart" class="section-chart" role="img" aria-label="本地到太阳方向的高度与距离云量截面"></div></div>
+          <div class="section-foot"><span>← 反太阳方向</span><span id="section-bearing"></span><span>太阳方向 →</span></div>
+          <details class="raw-data"><summary>查看参考截面数据</summary><div class="table-scroll"><table id="profile-table"><caption>参考截面的等压面高度与云量（插值）</caption><thead><tr><th>距离 km</th><th>气压 hPa</th><th>高度 km</th><th>云量 %</th><th>AOD550</th></tr></thead><tbody></tbody></table></div></details>
+        </section>
+
+        <section class="explanation-grid">
+          <div class="panel"><p class="eyebrow">READING THE SKY</p><h2>这次预报的依据</h2><ul id="reasons" class="reason-list"></ul><div class="sensitivity"><span>气溶胶高度假设敏感性</span><strong id="sensitivity"></strong><small>参考时刻采用不同气溶胶垂直分布的结果。</small></div><div class="sensitivity"><span>云层重叠情景敏感性</span><strong id="overlap-sensitivity"></strong><small>参考时刻采用水平相关衰减、完全相关与独立云柱的结果。</small></div></div>
+          <div class="panel"><p class="eyebrow">BEFORE YOU GO</p><h2>临近时再看一眼天空</h2><ul id="uncertainty" class="notes"></ul><a id="windy" class="text-link" href="https://www.windy.com/" target="_blank" rel="noopener noreferrer">到 Windy 核对临近云况 ↗</a></div>
+        </section>
+        <div class="export-line"><button id="download" class="secondary-button" type="button">保存这次预报 JSON ↓</button><span id="forecast-id"></span></div>
+      </div>
+      <details class="method panel"><summary>关于这套预测</summary><p>Sunsetbot 使用 GFS / ECMWF 的等压面云量与位势高度、CAMS 气溶胶资料，沿球面地球上的光路计算云层受光和视线遮挡。指数表示这套独立模型的相对观赏潜力，正在积累实测校准。</p><p>本地时间统一采用 Asia/Shanghai。云的液水、冰含量及细小云洞仍有资料缺口，临近卫星云图与现场观察能帮助判断变化。</p><p>公开研究参考：<a href="https://www.sunsetbot.top/halo/" target="_blank" rel="noopener noreferrer">原作者技术博客</a> · 数据：<a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo</a> / NOAA / ECMWF / CAMS。</p></details>
+    </main>
+    <footer><span>sunsetbot <span class="muted">/</span> 为每一次抬头做准备</span><span>独立实现 · 长三角观测</span></footer>
+  </div>
+</body>
+</html>

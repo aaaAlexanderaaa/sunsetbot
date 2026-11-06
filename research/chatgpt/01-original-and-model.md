@@ -1,0 +1,129 @@
+## 结论
+
+**建议以“太阳—云层—观察者”的三维光路计算为核心，以卫星临近订正弥补数值模式的云洞误差，最后再建立火烧云质量评分。**
+
+目前公开数据已足够构建有物理依据的独立版本。真正的瓶颈是**云的三维结构、透光性及其位置误差**。对于上海，12–48 小时预报优先补足云水、云冰和垂直结构；日落前 0–2 小时则优先引入卫星实况。
+
+## 一、原作者实际上公开了什么？
+
+最有价值的材料是原作者 2022 年长文：
+
+url《2022年盛夏上海火烧云典型情况分类》https://www.weibo.com/ttarticle/p/show?id=2309404806042994475312。[weibo.com](https://www.weibo.com/ttarticle/p/show?id=2309404806042994475312&utm_source=chatgpt.com)
+
+它比网站首页更接近真实预测方法，包含大气截面图及以下具体经验：
+
+- **高云漏光型**：关注太阳方向上卷云的薄区、云洞，及其是否允许阳光穿过；高云云底温度低于 −25℃、云层分布不均是作者的经验判据。
+- **高云边界型**：高云边界距离上海约 500 km 内值得关注；GFS 中低于 −30℃的高湿层即使相对湿度约 90%，厚度小于 2 km 时仍可能透光。
+- **临近预测**：日出日落前一小时，用红外卫星云图识别云洞，再结合云底高度、气溶胶消光分布和简化光路，估计可照亮的云层范围及持续时间。
+- **对流型**：作者明确指出单一大气截面图通常帮助有限，必须观察对流发展、云砧平移和降水雷达。[weibo.com](https://www.weibo.com/ttarticle/p/show?id=2309404806042994475312&utm_source=chatgpt.com)
+
+这些是**原作者的经验方法**，其中亮温、湿层厚度等阈值带有上海盛夏、特定卫星通道及天气背景的适用条件，移植时需要重新检验。
+
+还有一例很有启发性：2023 年 9 月 19 日，作者复盘一次被低估的晚霞，认为可能同时**低估了高积云高度、高估了气溶胶消光高度**。这直接指出两个关键误差来源。[Sina Mobile](https://www.sina.cn/news/detail/4947747830501671.html?utm_source=chatgpt.com)
+
+**公开程度的边界：**
+
+你发现的三篇 2026 年教程确实值得优先阅读，但本次检索对三个正文地址均返回超时。因此，目前无法核实其是否包含完整推导、实际权重、源代码或新的截面图解释。
+
+已核实的其他材料中，原站url地图说明https://sunsetbot.top/map/公开了约 **0.001–2.5 的鲜艳度等级区间**，但未给出可复现的连续评分公式。这是质量指数，不能直接当成发生概率。GitHub 上的 urlfengfengzhidao/sunsetbothttps://github.com/fengfengzhidao/sunsetbot 等项目主要调用原站并推送结果，属于接口客户端。[Rosy Cloud Analysis and Recording](https://sunsetbot.top/map/?src=www.jspoo.com&utm_source=chatgpt.com)[fengfengzhidao/sunsetbot: 火烧云推送 · GitHub](https://github.com/fengfengzhidao/sunsetbot?utm_source=chatgpt.com)
+
+**维护状态**方面，未找到足以核实的正式停服公告。结合你观测的空预测响应和 detailed 页面 Python 异常，可以确认当前相关服务存在可用性问题；具体是数据更新中断、任务故障还是维护调整，仍待核实。
+
+## 二、哪些数据现在就能取得？
+
+| 数据源 | 实际可用的核心变量 | 关键缺口 |
+|--------|--------|--------|
+| urlOpen-Meteo GFShttps://open-meteo.com/en/docs/gfs-api | **逐气压层云量**、位势高度、温度、湿度、风；高/中/低层云量 | API 缺少云液水、云冰混合比；云的光学厚度仍需估计 |
+| urlOpen-Meteo ECMWFhttps://open-meteo.com/en/docs/ecmwf-api | 原生高/中/低云量、气压层温湿风、位势高度 | **逐气压层云量由相对湿度估算**，属于 Sundqvist 参数化结果 |
+| urlOpen-Meteo CAMShttps://open-meteo.com/en/docs/air-quality-api | 550 nm 整层 AOD，全球约 45 km、原生 3 小时时效 | 缺少气溶胶垂直分布，难以计算接近地平线的斜向光程 |
+| urlNOAA GFS GRIB2https://www.nco.ncep.noaa.gov/pmb/products/gfs/gfs.t00z.pgrb2b.0p25.f000.shtml | 气压层 `TCDC`、`CLWMR`、`ICMR`、`HGT`、`RH` 等 | 仍需假设有效粒径、次网格云结构及云层重叠关系 |
+| urlECMWF Open Datahttps://www.ecmwf.int/en/forecasts/datasets/open-data | `tcc/hcc/mcc/lcc`、柱积分云液水 `tclw`、云冰 `tciw`，气压层温湿风 | 免费子集缺乏完整的原生三维云液水、云冰分布 |
+| urlCAMS Atmosphere Data Storehttps://ads.atmosphere.copernicus.eu/datasets/cams-global-atmospheric-composition-forecasts?tab=overview | **532 nm 气溶胶消光系数**、多波段光学量、模型层气象与部分云水变量 | 全球约 0.4° 分辨率；需要注册并按变量、层次确认下载组合 |
+
+上述区别均可在模型官方清单中核查。尤其值得注意：**Open-Meteo 的 GFS 已经提供原生气压层云量**，所以无需一开始就下载完整 GRIB2 才能建立垂直云场。[Open Meteo](https://open-meteo.com/en/docs/gfs-api?utm_source=chatgpt.com) [Open Meteo](https://open-meteo.com/en/docs/ecmwf-api?utm_source=chatgpt.com) [NWS Central Operations](https://www.nco.ncep.noaa.gov/pmb/products/gfs/gfs.t00z.pgrb2b.0p25.f000.shtml?utm_source=chatgpt.com) [ECMWF](https://www.ecmwf.int/en/forecasts/datasets/open-data?utm_source=chatgpt.com) [ads.atmosphere.copernicus.eu](https://ads.atmosphere.copernicus.eu/datasets/cams-global-atmospheric-composition-forecasts?tab=overview&utm_source=chatgpt.com)
+
+另一个容易遗漏的变化：ECMWF 从 **2026 年 10 月 20 日**起公开提供 0.1° IFS 数据，包含独立气压层文件，通常比 0.25°版本晚约两小时发布。它值得作为空间分布对照，但更细的输出网格仍来自同一约 9 km 模型。[ECMWF](https://www.ecmwf.int/en/forecasts/datasets/open-data?utm_source=chatgpt.com)
+
+## 三、独立光路模型如何实现？
+
+以下属于**我的建模建议**，并非原站已公开的代码。
+
+### 1\. 判断云层能否被太阳直接照亮
+
+通过 urlNREL Solar Position Algorithmhttps://midcdmz.nlr.gov/spa/ 获取任意时刻太阳方向。把每个云体元放在地心坐标系中，从云点 \(P\) 沿太阳方向 \(\hat s\) 作直线：
+
+\[
+P+\lambda\hat s,\qquad \lambda\geq0
+\]
+
+若射线进入地球，云点位于地球本影；否则继续计算大气和上游云层的遮挡。
+
+一个很好用的几何校验是：忽略折射时，距离地面 10 km 的云，在自身当地太阳高度约 **−3.2°** 时仍可能受到直射；5 km 云约为 −2.3°。
+
+作者所谓“抛物线简化”可以用局部地球曲率理解。工程上直接使用三维球面或椭球几何更稳健，之后再处理近地平线大气折射。
+
+### 2\. 同时计算两条光路
+
+对每个可见云体元，分别计算：
+
+**太阳 → 云：** 决定照明强度。
+
+**云 → 观察者：** 决定云是否被低云、雾霾或前景遮挡，以及实际占据多少天空面积。
+
+单色光透过率可以从 Beer–Lambert 关系开始：
+
+\[
+T_\lambda=\exp\left[-\int_{\text{ray}}
+\left(\beta_{\rm Rayleigh,\lambda}
++\beta_{\rm aerosol,\lambda}
++\beta_{\rm cloud,\lambda}\right)\,ds\right]
+\]
+
+这里最重要的是沿**真实斜向路径**积分。整层 AOD 只表示垂直积分；接近地平线时，其垂直分布会显著影响结果。
+
+对于云，先用云水路径、云冰路径和假定粒径估算光学厚度；把格点云量作为**子网格覆盖概率**，使用随机云实现或最大—随机重叠方案计算遮挡。将每个格点直接视作完全均匀的实体云，会产生虚假的连续云墙。
+
+### 3\. 正向和反太阳方向统一求解
+
+观察者向西看日落、向东看反太阳方向时，仍然使用上述两条光路；只是云的位置、散射角和所处地球阴影发生变化。
+
+特别是东方高云：即使地面已日落，它的高处仍可能受到来自西方的太阳光。随后地球阴影向上推进，先覆盖低云再覆盖高云。
+
+因此，应以**云点自己的太阳高度、云层高度及实际遮挡**判定受光，而非仅用上海地面日落时间判断。
+
+对于“维纳斯带”等反太阳方向的粉紫色天空，还需要大气多次散射模型；它应与**直接受光云层**分开评估，避免把不同现象混成一个评分。
+
+## 四、最值得优先补足的是什么？
+
+决定性问题是：**同样的三层云量，可以对应薄卷云、厚云墙、云洞或不同高度的云层，最终晚霞却截然不同。**
+
+我的优先级取决于预报时效：
+
+**12–48 小时：优先三维云结构和云光学厚度。** 从 Open-Meteo GFS 气压层云量开始，随后增加原始 GFS `CLWMR/ICMR`。云量决定覆盖，云水/云冰有助于区分薄云与厚云，位势高度决定光路穿过哪里。ECMWF 的柱积分云水、云冰可作为独立约束。
+
+**0–2 小时：优先卫星云洞、云边界和云砧订正。** 原作者反复指出，数十公里的云边界偏差就可能导致预测翻转。这种误差依赖临近观测修正，增加评分公式的复杂度收益有限。
+
+卫星数据源也有一个容易忽略的实际变化：WMO 记录显示 **FY-4B 的 AGRI 于 2026 年 7 月 30 日停止工作**。建议验证日本气象厅 **Himawari-9** 的实时获取链路；其全圆盘约每 10 分钟观测一次，urlJMA SATAIDhttps://www.wis-jma.go.jp/cms/sataid/data.html也提供可参考的数据发布方式。原作者的 10.8 μm 亮温阈值需针对实际通道重新验证。[space.oscar.wmo.int](https://space.oscar.wmo.int/satellites/view/fy_4b?utm_source=chatgpt.com) [JMA Net](https://www.jma-net.go.jp/sat_info/himawari/role.html?utm_source=chatgpt.com) [wis-jma.go.jp](https://www.wis-jma.go.jp/cms/sataid/data.html?utm_source=chatgpt.com)
+
+## 五、建议的可验证实施路线
+
+**阶段 A：建立物理基线。** 上海固定观测点，Open-Meteo GFS 压力层云量、位势高度、风和 CAMS AOD；首先输出“哪些云被照亮、哪些被遮挡、占据多大视场、能持续多久”。鲜艳度先采用简单、可解释的经验分数。
+
+**阶段 B：逐个消除关键近似。** 加入 GFS GRIB2 云水/云冰、ECMWF 对照，以及云重叠的不确定性计算。为每次预测保留模型初始化时间、预报时效、原始格点数据、光路截面结果和有效数据比例，保证每次判断可追溯。
+
+**阶段 C：卫星临近订正与统计校准。** 利用 Himawari 云洞、云边界和云砧运动更新临近云场，再以真实观测校准亮度、颜色、持续时间及综合质量。
+
+验证应分两类：
+
+- **物理验证**：无云、单层不透明云、上下叠云、云洞、地球阴影边界、东方高云等构造案例，逐项验证几何与透过率。
+- **预报验证**：用历史时刻实际可获得的模式预报进行回放，对比现场记录；分别计算提前 24、12、6、2 小时的表现，并做逐模块消融。使用 Brier 分数、可靠性曲线和 PR-AUC 检验概率校准与稀有强事件识别。
+
+原站的url上海历史记录https://sunsetbot.top/record/可作为正例和云类型证据，但完整验证还需纳入**每一个普通、失败或无霞日落**。原站 ERA5 混淆矩阵属于再分析评估，适合参考算法上限，实际预报能力应以历史预报回放判断。[Rosy Cloud Analysis and Recording](https://sunsetbot.top/record/?utm_source=chatgpt.com) [Rosy Cloud Analysis and Recording](https://sunsetbot.top/record/2023/?utm_source=chatgpt.com) [Rosy Cloud Analysis and Recording](https://www.sunsetbot.top/?utm_source=chatgpt.com)
+
+### 另外两个值得纳入决策的事实
+
+url星图云火烧云预报 APIhttps://open.geovisearth.com/support/document?docId=495提供国内区域的三天质量预测，指标描述与 sunsetbot 高度相似。双方的算法或业务关系尚未核实，但可作为**外部模型对照**，不能充当观测真值。[open.geovisearth.com](https://open.geovisearth.com/support/document?docId=495&utm_source=chatgpt.com)
+
+交付层面建议采用**数据采集器、物理预测核心、统计校准器、Web/API 四个可替换组件**，统一 Docker 部署。Open-Meteo 免费 API 可用于非商业原型；若公开服务涉及商业使用，应按其url授权与价格条款https://open-meteo.com/en/pricing处理。ECMWF 自身的开放数据则采用 CC BY 4.0 条件。[Open Meteo](https://open-meteo.com/en/pricing?utm_source=chatgpt.com) [ECMWF](https://www.ecmwf.int/en/forecasts/datasets/open-data?utm_source=chatgpt.com)
+
+**最终建议：先把“哪片云、为什么、在什么时候受光”算对，再优化鲜艳度分数。** 这是从一个云量经验打分器走向接近原站实际能力的最短、且每一步均可独立验证的路线。

@@ -1,0 +1,108 @@
+我在实现一个实验性朝晚霞截面指数。下面这段云出现概率积分与目标云面条件化的实现，是否与给定概率模型一致？我最需要识别会系统改变光路透射率的数学或实现错误。
+
+天气输入提供等压面云覆盖分数 f 和高度，没有云水/冰光学厚度。太阳入射路径与观察路径的各步在同一云格里累积“条件于该格有云”的灰色光学厚度 tau；两条路径的格子合并积分。同一水平云柱内各高度共享 U~Uniform(0,1)，高度格存在云的事件为 U<f，表示垂直最大重叠这个显式假设。水平云柱按太阳方向的有符号距离 x 排序；相邻云柱间以 r=exp(-abs(dx)/L) 复制上一个 U，以 1-r 独立重抽均匀 U。中央情景 L=50 km 是待观测校准的相关长度；另外比较 r=0 和 r=1 两个情景。
+
+目标云底的出现面积也沿同一个 U 定义：从低到高扫描，below 为所有更低可用层的最大云量。当当前 f>below 时，产生一块新云底，面积 f-below，存在条件 below<=U<f。每个云底在最近等压面格的下边界，云底与消光网格高度保持一致。这样低层20%、高层80%会有低云底20%、露出高云底60%。透射率按目标云底条件区间求期望，最后再乘目标面积。保持原始 f，不强制提升目标柱的任何云量。
+
+先前实现把整个云层最大覆盖率当作条件面积，并把所有层分数提升到该最大值，造成额外遮挡；远处数百公里云格的完全相关还把遮挡概率推到1。此处代码是为修复这两个问题而重新实现。中央模型横向按距离衰减，垂直最大重叠、云内消光系数和阈值仍明确是经验假设。三方位42点上海GFS/ECMWF/CAMS真实调用和原始留存已经成功，物理与工程回归23项已通过；尚无现场观测技巧结论。网页标为实验性霞光截面指数，直接显示情景分差，时间标为模型参考时刻。
+
+解析检查包括：单个10%不透明云格透光率约0.9；两独立云柱约0.81；已知10%云格存在时透光率exp(-tau)；20%低云与80%高云的露出高云底条件区间[.2,.8]，低云在该区间消失；距20%目标云底500 km的50%不透明遮挡云柱，L=50 km时透光率约0.5*(1-exp(-10))。以下给出实际实现与实际调用片段。
+
+完整云概率积分：
+```javascript
+// Each vertical column shares U~Uniform(0,1): a cell exists when U<fraction.
+// Horizontally, U is copied with probability exp(-distance/L), or independently
+// redrawn. Piecewise-constant quadrature integrates the Markov chain exactly.
+export function cloudTransmission(pieces, { overlap = 'decorrelated', correlationLengthKm = 50, condition = null } = {}) {
+  if (!['maximum', 'random-columns', 'decorrelated'].includes(overlap)) throw new Error('Unknown cloud overlap scenario');
+  const groups = new Map();
+  for (const { column, x, level, fraction, depth } of pieces) {
+    if (depth <= 0 || fraction <= 0) continue;
+    const key = `${column}:${level}`;
+    const cell = groups.get(key) ?? { column, x, level, depth: 0, weightedFraction: 0 };
+    cell.depth += depth;
+    cell.weightedFraction += fraction * depth;
+    groups.set(key, cell);
+  }
+  const cells = [...groups.values()].map(c => ({ ...c, fraction: c.weightedFraction / c.depth }));
+  const columns = new Map();
+  for (const c of cells) {
+    if (!columns.has(c.column)) columns.set(c.column, { column: c.column, x: c.x, cells: [] });
+    columns.get(c.column).cells.push(c);
+  }
+  if (condition && !columns.has(condition.column)) columns.set(condition.column, { column: condition.column, x: condition.x, cells: [] });
+  const breaks = [...new Set([0, 1, ...cells.map(c => c.fraction), ...(condition ? [condition.lower, condition.upper] : [])])].sort((a, b) => a - b);
+  const bins = breaks.slice(1).map((end, i) => ({ u: (breaks[i] + end) / 2, width: end - breaks[i] }));
+  let density = bins.map(() => 1), previous = null;
+  for (const c of [...columns.values()].sort((a, b) => a.x - b.x)) {
+    const mass = density.reduce((sum, d, i) => sum + d * bins[i].width, 0);
+    const correlation = previous === null || overlap === 'random-columns' ? 0 : overlap === 'maximum' ? 1 :
+      Math.exp(-Math.abs(c.x - previous) / correlationLengthKm);
+    density = bins.map((bin, i) => {
+      const depth = c.cells.reduce((sum, cell) => sum + (bin.u < cell.fraction ? cell.depth : 0), 0);
+      const selected = !condition || c.column !== condition.column || (bin.u >= condition.lower && bin.u < condition.upper);
+      return selected ? (correlation * density[i] + (1 - correlation) * mass) * Math.exp(-Math.min(80, depth)) : 0;
+    });
+    previous = c.x;
+  }
+  const mass = density.reduce((sum, d, i) => sum + d * bins[i].width, 0);
+  return mass / (condition ? condition.upper - condition.lower : 1);
+}
+
+```
+
+完整目标云底提取：
+```javascript
+export function cloudDecks(levels, ground = 0) {
+  const decks = [];
+  let below = 0;
+  for (let i = 0; i < levels.length; i++) {
+    const level = levels[i];
+    if (level.height < ground) continue;
+    const lower = below;
+    below = Math.max(below, level.cover);
+    if (level.cover < ASSUMPTIONS.profileCloudThreshold || level.cover <= lower) continue;
+    const previous = levels[i - 1], next = levels[i + 1];
+    // A base face occupies the new fraction beyond all lower cloudy bands.
+    // Conditioning uses this exact U interval, preserving every original f.
+    const base = Math.max(ground + 0.05, previous ?
+      (previous.height + level.height) / 2 : level.height - 0.3);
+    const top = next ? (level.height + next.height) / 2 : level.height + 0.5;
+    if (top > base) decks.push({ base, top, cover: level.cover - lower, lower, upper: level.cover });
+  }
+  return decks;
+}
+
+```
+
+实际光路调用和面积加权：
+```javascript
+function targetLight(columns, target, altitude, observerHeight, aerosolHeight, overlap) {
+  const origin = sectionPoint(target.x, target.base), direction = [Math.cos(altitude * RAD), Math.sin(altitude * RAD)];
+  const dark = { strength: 0, rgb: [0, 0, 0], bounded: true, missingAerosol: false, reason: 'earth-shadow' };
+  if (earthBlocks(origin, direction)) return dark;
+  const solar = opticalDepth(columns, origin, direction, 1600, aerosolHeight, ASSUMPTIONS.solarRayStepKm, 0.3);
+  const observer = sectionPoint(0, observerHeight), delta = [origin[0] - observer[0], origin[1] - observer[1]];
+  const distance = Math.hypot(...delta);
+  const viewing = opticalDepth(columns, observer, delta.map(v => v / distance), Math.max(0, distance - 1),
+    aerosolHeight, ASSUMPTIONS.viewingRayStepKm);
+  if (solar.blocked || viewing.blocked) return { ...dark, reason: 'terrain-obstruction' };
+  const condition = { column: target.index, x: target.x, lower: target.lower, upper: target.upper };
+  const cloud = cloudTransmission([...solar.pieces, ...viewing.pieces], { overlap, condition,
+    correlationLengthKm: ASSUMPTIONS.cloudHorizontalCorrelationLengthKm });
+  const rgb = [680, 550, 440].map(wavelength => cloud * Math.exp(
+    -(solar.rayleigh + viewing.rayleigh) * (550 / wavelength) ** 4 -
+    (solar.aerosol + viewing.aerosol) * (550 / wavelength) ** ASSUMPTIONS.aerosolAngstromExponent));
+  const luminance = 0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[2];
+  const warmth = clamp((rgb[0] - rgb[2]) / Math.max(rgb[0], 0.00001));
+  return { strength: clamp(Math.sqrt(luminance) * warmth * 2.5) * target.cover, rgb,
+    bounded: solar.bounded && viewing.bounded, missingAerosol: solar.missingAerosol || viewing.missingAerosol,
+    reason: cloud < 0.05 ? 'cloud-obstruction' : 'illuminated' };
+}
+
+```
+
+光路格元构造：
+```javascript
+if (v.fraction > 0) depth.pieces.push({ column: v.column, x: columns[v.column].x, level: v.level, fraction: v.fraction, depth: v.coefficient * ds });
+```

@@ -1,0 +1,892 @@
+我正在独立实现一个面向长三角、上海优先的朝晚霞预报服务，交付方式是自托管中文网页、HTTP API 和 Docker。请审查下面这版准备交付的预测引擎，判断修正是否解决了上一轮发现的关键失真，以及当前仍最影响使用者判断的问题是什么。
+
+这里的 Sunsetbot 是依据 sunsetbot.top 作者公开教程实现的新程序，原站自有引擎源码没有公开。天气资料为 Open-Meteo 的全球 GFS、ECMWF IFS 0.25° 等压面云量/位势高度和 CAMS Global AOD550。原作者强调球面几何、云底受光、太阳入射与观察光路遮挡、气溶胶分布、临近云况。目标是可用且诚实表达科学边界的首版，实测预测技巧仍待观测配对校准。
+
+上一轮独立评审指出：把云量转成连续均匀消光会夸大低云覆盖遮挡；固定太阳方位、3°仰角阈值和150 km目标距离漏掉远处低空霞光；5分钟曲线比原始小时/3小时资料精细；降水前一小时累计量不适合线性插值；缺失AOD称潜力上界、给出0敏感性、全零时给出首个时刻峰值会误导。评审也建议留存输入与未来观测配对。
+
+本版改成云出现概率与条件云内光学厚度分离，积分步共用云格出现变量；以最大重叠为中心、水平云柱独立为备选情景；联合两条路径并条件于目标云存在。三方位扇面随太阳方位插值，低仰角0.5°，太阳向目标到300 km，反太阳向150 km。明确原始资料时间间隔、缺失资料因子、空峰值和空敏感性；降水用对应小时区间；保存180份唯一预报和实际供应商原始数据。19项工程/物理回归已通过，已保存的上海真实单截面资料可以离线重放；三方位实时检查随后执行。
+
+已知仍采用经验云底15%阈值、最近等压面格、粗水平取样和经验云内消光系数。主要受光对象为云底，云顶/侧面、多次散射和次网格云洞尚需后续扩展。敏感性是中心参考时刻的模型情景范围。本文附上完整相关实现与模型解释，作为本地实现事实依据。
+
+材料 src/astro.mjs：
+```
+import SunCalc from 'suncalc';
+
+export const EARTH_KM = 6371;
+export const RAD = Math.PI / 180;
+export const clamp = (x, min = 0, max = 1) => Math.max(min, Math.min(max, x));
+export const round = (x, digits = 2) => Number(x.toFixed(digits));
+
+export function civilDate(instant, zone = 'Asia/Shanghai') {
+  const parts = new Intl.DateTimeFormat('en-US', {
+    timeZone: zone, year: 'numeric', month: '2-digit', day: '2-digit',
+  }).formatToParts(new Date(instant));
+  const value = type => parts.find(p => p.type === type).value;
+  return `${value('year')}-${value('month')}-${value('day')}`;
+}
+
+export function addDays(date, days) {
+  return new Date(Date.parse(`${date}T12:00:00Z`) + days * 86400000).toISOString().slice(0, 10);
+}
+
+export function validDate(date) {
+  return /^\d{4}-\d{2}-\d{2}$/.test(date) &&
+    Number.isFinite(Date.parse(`${date}T12:00:00Z`)) && addDays(date, 0) === date;
+}
+
+export function sunPosition(instant, lat, lon) {
+  const p = SunCalc.getPosition(new Date(instant), lat, lon);
+  return { altitude: p.altitude / RAD, azimuth: (p.azimuth / RAD + 180 + 360) % 360 };
+}
+
+export function solarEvent(date, event, lat, lon, zone) {
+  for (const day of [-1, 0, 1]) {
+    const times = SunCalc.getTimes(new Date(`${addDays(date, day)}T12:00:00Z`), lat, lon);
+    const value = times[event];
+    if (Number.isFinite(+value) && civilDate(value, zone) === date) {
+      return { time: value.toISOString(), ...sunPosition(value, lat, lon) };
+    }
+  }
+  return null;
+}
+
+export function destination(lat, lon, bearing, km) {
+  const phi = lat * RAD, lambda = lon * RAD, theta = bearing * RAD, d = km / EARTH_KM;
+  const p = Math.asin(Math.sin(phi) * Math.cos(d) + Math.cos(phi) * Math.sin(d) * Math.cos(theta));
+  const l = lambda + Math.atan2(Math.sin(theta) * Math.sin(d) * Math.cos(phi), Math.cos(d) - Math.sin(phi) * Math.sin(p));
+  return { lat: round(p / RAD, 4), lon: round(((l / RAD + 540) % 360) - 180, 4) };
+}
+
+export function sectionPoint(x, height) {
+  const a = x / EARTH_KM, r = EARTH_KM + height;
+  return [r * Math.sin(a), r * Math.cos(a)];
+}
+
+export function rayPoint(point, direction, distance) {
+  const x = point[0] + direction[0] * distance, y = point[1] + direction[1] * distance;
+  return { x: Math.atan2(x, y) * EARTH_KM, height: Math.hypot(x, y) - EARTH_KM };
+}
+
+export function earthBlocks(point, direction) {
+  const t = -(point[0] * direction[0] + point[1] * direction[1]);
+  return t > 0 && Math.hypot(point[0] + t * direction[0], point[1] + t * direction[1]) < EARTH_KM;
+}
+
+export function viewElevation(x, height, observerHeight = 0) {
+  const p = sectionPoint(x, height);
+  return Math.atan2(p[1] - EARTH_KM - observerHeight, Math.abs(p[0])) / RAD;
+}
+
+
+```
+
+材料 src/cloud-optics.mjs：
+```
+// Cloud fraction is an occurrence probability. Optical depth is conditional on
+// the cell being cloudy. A shared uniform variate represents maximum overlap;
+// independent horizontal-column variates represent the alternative scenario.
+function expectation(cells, limit = 1) {
+  const breaks = [...new Set([0, limit, ...cells.map(c => c.fraction).filter(f => f > 0 && f < limit)])].sort((a, b) => a - b);
+  let transmission = 0;
+  for (let i = 1; i < breaks.length; i++) {
+    const middle = (breaks[i - 1] + breaks[i]) / 2;
+    const depth = cells.reduce((sum, c) => sum + (middle < c.fraction ? c.depth : 0), 0);
+    transmission += (breaks[i] - breaks[i - 1]) / limit * Math.exp(-Math.min(80, depth));
+  }
+  return transmission;
+}
+
+export function cloudTransmission(pieces, { overlap = 'maximum', condition = null } = {}) {
+  const groups = new Map();
+  for (const { column, level, fraction, depth } of pieces) {
+    if (depth <= 0 || fraction <= 0) continue;
+    const key = `${column}:${level}`;
+    const cell = groups.get(key) ?? { column, level, depth: 0, weightedFraction: 0 };
+    cell.depth += depth;
+    cell.weightedFraction += fraction * depth;
+    groups.set(key, cell);
+  }
+  const cells = [...groups.values()].map(c => ({ ...c,
+    fraction: condition && c.column === condition.column && condition.levels.includes(c.level) ?
+      Math.max(c.weightedFraction / c.depth, condition.probability) : c.weightedFraction / c.depth,
+  }));
+  if (overlap === 'maximum') return expectation(cells, condition?.probability ?? 1);
+  if (overlap !== 'random-columns') throw new Error('Unknown cloud overlap scenario');
+  const columns = new Map();
+  for (const c of cells) { if (!columns.has(c.column)) columns.set(c.column, []); columns.get(c.column).push(c); }
+  return [...columns].reduce((t, [column, values]) => t * expectation(values,
+    column === condition?.column ? condition.probability : 1), 1);
+}
+
+```
+
+材料 src/engine.mjs：
+```
+import { EARTH_KM, RAD, clamp, round, sectionPoint, rayPoint, earthBlocks, viewElevation, sunPosition } from './astro.mjs';
+import { LEVELS, interpolate, precedingAccumulation } from './provider.mjs';
+import { cloudTransmission } from './cloud-optics.mjs';
+import { AppError } from './errors.mjs';
+
+export const MODEL_VERSION = 'section-optics-0.2.0';
+export const DISTANCES = [-150, -100, -50, -25, 0, 25, 50, 100, 150, 200, 300, 450, 600, 800];
+export const ASSUMPTIONS = {
+  earthRadiusKm: EARTH_KM, molecularScaleHeightKm: 8, molecularExtinction550PerKm: 0.012,
+  aerosolScaleHeightsKm: [0.8, 1.5, 3], aerosolAngstromExponent: 1.2,
+  conditionalCloudExtinctionPerKm: { low: 2, mid: 0.7, high: 0.2 },
+  cloudOverlap: ['maximum', 'random-columns'], profileCloudThreshold: 0.15,
+  minimumViewElevationDegrees: 0.5, maximumTargetDistanceKm: 300,
+  solarRayStepKm: 4, viewingRayStepKm: 0.5, timelineStepMinutes: 5,
+  qualityScale: 'independent heuristic 0–100', calibration: 'experimental',
+};
+
+const angleDifference = (a, b) => ((a - b + 540) % 360) - 180;
+export function samplingOffsets(event, location) {
+  const offsets = [-40, 40].map(m => Math.abs(angleDifference(
+    sunPosition(Date.parse(event.time) + m * 60000, location.lat, location.lon).azimuth, event.azimuth)));
+  const width = Math.ceil(Math.max(...offsets)) + 2;
+  return [-width, 0, width];
+}
+
+function profile(row, time) {
+  const levels = LEVELS.map(pressure => ({ pressure,
+    height: interpolate(row, `geopotential_height_${pressure}hPa`, time),
+    cover: interpolate(row, `cloud_cover_${pressure}hPa`, time),
+  }));
+  if (levels.some(p => p.cover === null || p.height === null || p.height < -1000 || p.cover < 0 || p.cover > 100)) {
+    throw new AppError('PROFILE_INCOMPLETE', '预报时段的垂直云层数据缺失，请选择其他时段或模型。');
+  }
+  levels.forEach(p => { p.cover /= 100; p.height /= 1000; });
+  levels.sort((a, b) => a.height - b.height);
+  if (levels.some((p, i) => i && p.height <= levels[i - 1].height)) {
+    throw new AppError('PROFILE_HEIGHT', '云层高度序列需要检查，请选择其他模型。');
+  }
+  return levels;
+}
+
+export function cloudDecks(levels, ground = 0) {
+  const decks = [];
+  for (let i = 0; i < levels.length; i++) {
+    if (levels[i].cover < ASSUMPTIONS.profileCloudThreshold || levels[i].height < ground) continue;
+    const begin = i;
+    while (i + 1 < levels.length && levels[i + 1].cover >= ASSUMPTIONS.profileCloudThreshold) i++;
+    const end = i, previous = levels[begin - 1], next = levels[end + 1];
+    const base = Math.max(ground + 0.05, previous ? previous.height +
+      (levels[begin].height - previous.height) * (ASSUMPTIONS.profileCloudThreshold - previous.cover) /
+      (levels[begin].cover - previous.cover) : levels[begin].height);
+    const top = next ? levels[end].height + (next.height - levels[end].height) * 0.5 : levels[end].height + 0.5;
+    decks.push({ base, top, cover: Math.max(...levels.slice(begin, end + 1).map(l => l.cover)),
+      levels: Array.from({ length: end - begin + 1 }, (_, j) => begin + j) });
+  }
+  return decks;
+}
+
+function pair(values, value, key) {
+  let i = 0;
+  while (i < values.length - 2 && value > key(values[i + 1])) i++;
+  const a = values[i], b = values[i + 1];
+  return { a, b, index: i, w: clamp((value - key(a)) / (key(b) - key(a))) };
+}
+
+function prepareColumns(weather, aerosol, time, offset, fanOffsets) {
+  const single = fanOffsets.length === 1;
+  const angular = single ? { index: 0, w: 0 } : pair(fanOffsets, offset, v => v);
+  const first = angular.index * DISTANCES.length;
+  const second = single ? first : first + DISTANCES.length;
+  const blendOptional = (a, b) => a === null || b === null ? null : a * (1 - angular.w) + b * angular.w;
+  return DISTANCES.map((x, index) => {
+    const a = weather[first + index], b = weather[second + index];
+    const al = profile(a, time), bl = single ? al : profile(b, time);
+    const levels = al.map((p, j) => ({ pressure: p.pressure,
+      height: p.height * (1 - angular.w) + bl[j].height * angular.w,
+      cover: p.cover * (1 - angular.w) + bl[j].cover * angular.w }));
+    return { x, index, levels,
+      ground: Math.max(0, (Number(a.elevation) || 0) * (1 - angular.w) + (Number(b.elevation) || 0) * angular.w) / 1000,
+      aod: aerosol ? blendOptional(interpolate(aerosol[first + index], 'aerosol_optical_depth', time),
+        interpolate(aerosol[second + index], 'aerosol_optical_depth', time)) : null };
+  });
+}
+
+function atmosphere(columns, x, height, aerosolHeight) {
+  // Repeated integration steps share an occurrence variate per horizontal
+  // column/vertical-level cell, and accumulate conditional cloudy depth.
+  const { a, b, w } = pair(columns, x, c => c.x), column = w <= 0.5 ? a : b;
+  const levels = column.levels;
+  let level = 0;
+  while (level < levels.length - 1 && height > (levels[level].height + levels[level + 1].height) / 2) level++;
+  const within = height >= Math.max(column.ground, levels[0].height - 0.3) && height <= levels.at(-1).height + 0.5;
+  const fraction = within ? levels[level].cover : 0;
+  const coefficient = ASSUMPTIONS.conditionalCloudExtinctionPerKm[height < 3 ? 'low' : height < 8 ? 'mid' : 'high'];
+  const aod = a.aod === null || b.aod === null ? null : a.aod * (1 - w) + b.aod * w;
+  return { column: column.index, level, fraction, coefficient,
+    rayleigh: ASSUMPTIONS.molecularExtinction550PerKm * Math.exp(-Math.max(0, height) / ASSUMPTIONS.molecularScaleHeightKm),
+    aerosol: aod === null ? 0 : aod / aerosolHeight * Math.exp(-Math.max(0, height) / aerosolHeight),
+    terrain: a.ground * (1 - w) + b.ground * w, missingAerosol: aod === null };
+}
+
+function opticalDepth(columns, origin, direction, maxDistance, aerosolHeight, step, skip = 0) {
+  const depth = { pieces: [], rayleigh: 0, aerosol: 0, bounded: true, blocked: false, missingAerosol: false };
+  for (let start = skip; start < maxDistance; start += step) {
+    const ds = Math.min(step, maxDistance - start), p = rayPoint(origin, direction, start + ds / 2);
+    if (p.height > 65) break;
+    if (p.height < 0) { depth.blocked = true; break; }
+    const v = atmosphere(columns, p.x, p.height, aerosolHeight);
+    if ((p.x < columns[0].x || p.x > columns.at(-1).x) && p.height < 15) depth.bounded = false;
+    if (p.height < v.terrain) { depth.blocked = true; break; }
+    if (v.fraction > 0) depth.pieces.push({ column: v.column, level: v.level, fraction: v.fraction, depth: v.coefficient * ds });
+    depth.rayleigh += v.rayleigh * ds;
+    depth.aerosol += v.aerosol * ds;
+    depth.missingAerosol ||= v.missingAerosol;
+  }
+  return depth;
+}
+
+function targetLight(columns, target, altitude, observerHeight, aerosolHeight, overlap) {
+  const origin = sectionPoint(target.x, target.base), direction = [Math.cos(altitude * RAD), Math.sin(altitude * RAD)];
+  const dark = { strength: 0, rgb: [0, 0, 0], bounded: true, missingAerosol: false, reason: 'earth-shadow' };
+  if (earthBlocks(origin, direction)) return dark;
+  const solar = opticalDepth(columns, origin, direction, 1600, aerosolHeight, ASSUMPTIONS.solarRayStepKm, 0.3);
+  const observer = sectionPoint(0, observerHeight), delta = [origin[0] - observer[0], origin[1] - observer[1]];
+  const distance = Math.hypot(...delta);
+  const viewing = opticalDepth(columns, observer, delta.map(v => v / distance), Math.max(0, distance - 1),
+    aerosolHeight, ASSUMPTIONS.viewingRayStepKm);
+  if (solar.blocked || viewing.blocked) return { ...dark, reason: 'terrain-obstruction' };
+  const condition = { column: target.index, probability: target.cover, levels: target.levels };
+  const cloud = cloudTransmission([...solar.pieces, ...viewing.pieces], { overlap, condition });
+  const rgb = [680, 550, 440].map(wavelength => cloud * Math.exp(
+    -(solar.rayleigh + viewing.rayleigh) * (550 / wavelength) ** 4 -
+    (solar.aerosol + viewing.aerosol) * (550 / wavelength) ** ASSUMPTIONS.aerosolAngstromExponent));
+  const luminance = 0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[2];
+  const warmth = clamp((rgb[0] - rgb[2]) / Math.max(rgb[0], 0.00001));
+  return { strength: clamp(Math.sqrt(luminance) * warmth * 2.5) * target.cover, rgb,
+    bounded: solar.bounded && viewing.bounded, missingAerosol: solar.missingAerosol || viewing.missingAerosol,
+    reason: cloud < 0.05 ? 'cloud-obstruction' : 'illuminated' };
+}
+
+function frame(weather, aerosol, time, location, event, fanOffsets, aerosolHeight = 1.5, overlap = 'maximum') {
+  const sun = sunPosition(time, location.lat, location.lon);
+  const offset = angleDifference(sun.azimuth, event.azimuth);
+  const columns = prepareColumns(weather, aerosol, time, offset, fanOffsets);
+  const local = columns.find(c => c.x === 0), targets = [];
+  for (let i = 0; i < columns.length; i++) {
+    const column = columns[i];
+    if (Math.abs(column.x) > ASSUMPTIONS.maximumTargetDistanceKm) continue;
+    const width = ((columns[i + 1]?.x ?? column.x + 25) - (columns[i - 1]?.x ?? column.x - 25)) / 2;
+    for (const deck of cloudDecks(column.levels, column.ground)) {
+      const elevation = viewElevation(column.x, deck.base, local.ground);
+      if (elevation < ASSUMPTIONS.minimumViewElevationDegrees) continue;
+      const light = targetLight(columns, { ...deck, x: column.x, index: column.index }, sun.altitude, local.ground, aerosolHeight, overlap);
+      const weight = Math.min(1, width * Math.max(0.2, deck.base - local.ground) /
+        (column.x ** 2 + (deck.base - local.ground) ** 2)) / Math.PI;
+      targets.push({ x: column.x, baseKm: round(deck.base), topKm: round(deck.top), elevation: round(elevation),
+        cover: round(deck.cover), strength: round(light.strength, 4), weight, rgb: light.rgb,
+        reason: light.reason, bounded: light.bounded, missingAerosol: light.missingAerosol });
+    }
+  }
+  const integral = targets.reduce((sum, t) => sum + t.strength * t.weight, 0);
+  const localRow = weather[Math.floor(fanOffsets.length / 2) * DISTANCES.length + DISTANCES.indexOf(0)];
+  const rain = precedingAccumulation(localRow, 'precipitation', time), visibility = interpolate(localRow, 'visibility', time);
+  const localFactor = Math.exp(-Math.max(0, rain ?? 0) * 0.15) * (visibility === null ? 1 : clamp(visibility / 12000, 0.2, 1));
+  const score = 100 * (1 - Math.exp(-integral * 5)) * localFactor;
+  const directional = sign => 100 * (1 - Math.exp(-targets.filter(t => t.x * sign >= 0)
+    .reduce((sum, t) => sum + t.strength * t.weight * (t.x === 0 ? 0.5 : 1), 0) * 5)) * localFactor;
+  return { time: new Date(time).toISOString(), score: round(score, 1), solarAltitude: round(sun.altitude), bearing: sun.azimuth,
+    towardSun: round(directional(1), 1), oppositeSun: round(directional(-1), 1), targets, columns,
+    aod: local.aod, rain, visibility, bearingClipped: fanOffsets.length === 1 || offset < fanOffsets[0] || offset > fanOffsets.at(-1) };
+}
+
+export function computeForecast({ weather, aerosol = null, event, location, fanOffsets = [0] }) {
+  if (weather.length !== DISTANCES.length * fanOffsets.length || (aerosol && aerosol.length !== weather.length)) {
+    throw new AppError('SECTION_INCOMPLETE', '大气截面采样点缺失，请重新获取。');
+  }
+  const instant = Date.parse(event.time), timeline = [];
+  const at = (time, height = 1.5, overlap = 'maximum') => frame(weather, aerosol, time, location, event, fanOffsets, height, overlap);
+  for (let minutes = -40; minutes <= 40; minutes += ASSUMPTIONS.timelineStepMinutes) timeline.push(at(instant + minutes * 60000));
+  const maximum = timeline.reduce((a, b) => a.score >= b.score ? a : b);
+  const hasPeak = maximum.score > 0, peak = hasPeak ? maximum : timeline[Math.floor(timeline.length / 2)];
+  const peakIndex = timeline.indexOf(peak), missingAerosol = timeline.some(f => f.columns.some(c => c.aod === null) || f.targets.some(t => t.missingAerosol));
+  const sensitivity = missingAerosol ? [] : [0.8, 3].map(h => at(Date.parse(peak.time), h).score);
+  const randomScore = at(Date.parse(peak.time), 1.5, 'random-columns').score;
+  const threshold = Math.max(8, maximum.score * 0.6);
+  let left = peakIndex, right = peakIndex;
+  while (left > 0 && timeline[left - 1].score >= threshold) left--;
+  while (right < timeline.length - 1 && timeline[right + 1].score >= threshold) right++;
+  const range = maximum.score >= 8 ? { start: timeline[left].time, end: timeline[right].time,
+    resolutionMinutes: 5, clipped: left === 0 || right === timeline.length - 1 } : null;
+  const score = round(maximum.score), labels = score >= 65 ? ['较强观赏潜力', '模型显示较多受光云底，临近时结合云图观察'] : score >= 40 ?
+    ['中等观赏潜力', '模型显示部分受光云底，可留意天空变化'] : score >= 15 ? ['局部霞光潜力', '以临近云况为准'] : ['霞光条件偏弱', '留意临近日出日落的变化'];
+  const uncertainty = [
+    '云量代表出现面积，云内消光系数、云底重建及云层重叠方式采用情景假设；云水与冰含量仍待补充。',
+    '三方位插值形成随太阳转动的二维截面，细小云洞、云顶侧面受光与建筑遮挡需现场判断。',
+    '5 分钟曲线是天气场上的推算；GFS 原始资料约 1 小时、ECMWF 与 CAMS 约 3 小时，窗口精度受这些资料约束。',
+    '指数正在积累实测校准，当前表示模型观赏潜力。',
+  ];
+  if (missingAerosol) uncertainty.unshift('部分光路缺少 CAMS 气溶胶资料，缺失处按 AOD=0 计算，偏差方向与幅度待评估。');
+  if (peak.visibility === null) uncertainty.unshift('当前模式缺少能见度资料，视程修正系数暂取 1，雾与近地视程请结合现场判断。');
+  if (peak.rain === null) uncertainty.unshift('降水资料缺失，降水修正系数暂取 1。');
+  if (timeline.some(f => f.targets.some(t => !t.bounded))) uncertainty.unshift('部分低空光路超出采样边界，存在截面外遮挡风险。');
+  if (timeline.some(f => f.bearingClipped)) uncertainty.unshift('本次输入采用固定方位或超出扇面，太阳方位变化的空间信息受限。');
+  const illuminated = peak.targets.filter(t => t.strength > 0.05);
+  const minSensitivity = missingAerosol ? null : round(Math.min(peak.score, ...sensitivity));
+  const maxSensitivity = missingAerosol ? null : round(Math.max(peak.score, ...sensitivity));
+  const reasons = [
+    illuminated.length ? `参考时刻有 ${illuminated.length} 处采样云底具备可见受光条件。` : '采样云层的可见受光面积偏少。',
+    peak.aod === null ? '本地气溶胶分布待补充。' : `本地 AOD550 为 ${round(peak.aod)}，已按垂直分布假设纳入光路积分。`,
+    missingAerosol ? '气溶胶高度假设敏感性待资料齐备后评估。' : `参考时刻的气溶胶高度假设带来约 ${round(maxSensitivity - minSensitivity)} 分的变化。`,
+    `参考时刻的云层重叠情景给出 ${round(Math.min(peak.score, randomScore))}–${round(Math.max(peak.score, randomScore))} 分。`,
+  ];
+  return {
+    modelVersion: MODEL_VERSION, calibration: 'experimental', score, label: labels[0], advice: labels[1],
+    peakTime: hasPeak ? peak.time : null, window: range, towardSun: peak.towardSun, oppositeSun: peak.oppositeSun,
+    sensitivity: { minimum: minSensitivity, maximum: maxSensitivity, meaning: '参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备' },
+    cloudOverlapSensitivity: { minimum: round(Math.min(peak.score, randomScore)), maximum: round(Math.max(peak.score, randomScore)),
+      meaning: '参考时刻最大重叠与独立水平云柱情景范围' },
+    aod: peak.aod === null ? null : round(peak.aod, 3), visibilityKm: peak.visibility === null ? null : round(peak.visibility / 1000),
+    precipitationMm: peak.rain === null ? null : round(peak.rain), missingAerosol, reasons, uncertainty,
+    timeline: timeline.map(({ time, score, solarAltitude, towardSun, oppositeSun }) => ({ time, score, solarAltitude, towardSun, oppositeSun })),
+    section: { time: peak.time, bearing: round(peak.bearing), fanOffsetsDegrees: fanOffsets, distancesKm: DISTANCES,
+      rays: peak.targets.filter(t => t.strength > 0.05).sort((a, b) => b.strength - a.strength).slice(0, 4).map(t => {
+        const origin = sectionPoint(t.x, t.baseKm), altitude = peak.solarAltitude * RAD;
+        return Array.from({ length: 49 }, (_, i) => rayPoint(origin, [Math.cos(altitude), Math.sin(altitude)], i * 25))
+          .map(p => ({ distanceKm: round(p.x), heightKm: round(p.height) }));
+      }),
+      columns: peak.columns.map(c => ({ distanceKm: c.x, terrainKm: c.ground,
+        aod: c.aod === null ? null : round(c.aod, 3), levels: c.levels.map(l => ({ pressureHpa: l.pressure, heightKm: round(l.height), cloudCover: round(l.cover * 100, 1) })) })),
+      targets: peak.targets.map(({ weight, rgb, ...t }) => ({ ...t, color: '#' + rgb.map(c => Math.round(clamp(c / Math.max(...rgb, 0.001)) ** (1 / 2.2) * 255).toString(16).padStart(2, '0')).join('') })) },
+    assumptions: ASSUMPTIONS,
+  };
+}
+
+```
+
+材料 src/provider.mjs：
+```
+import { readFile, mkdir, writeFile, rename } from 'node:fs/promises';
+import { join } from 'node:path';
+import { AppError } from './errors.mjs';
+
+// Common actual pressure levels supported by both selected Open-Meteo models.
+export const LEVELS = [1000, 925, 850, 700, 600, 500, 400, 300, 250, 200, 150];
+export const WEATHER_FIELDS = [
+  'cloud_cover_low', 'cloud_cover_mid', 'cloud_cover_high', 'visibility',
+  'precipitation', 'relative_humidity_2m', 'wind_speed_10m',
+  ...LEVELS.flatMap(p => [`cloud_cover_${p}hPa`, `geopotential_height_${p}hPa`]),
+];
+
+export class WeatherProvider {
+  constructor({ cache, directory, now = () => Date.now(), fetcher = fetch,
+    timeout = 20000, dailyBudget = 1500, apiKey = '' }) {
+    Object.assign(this, { cache, directory, now, fetcher, timeout, dailyBudget, apiKey });
+    this.queue = Promise.resolve();
+    this.blockedUntil = 0;
+    this.requests = 0;
+    this.units = 0;
+  }
+  async budget(units) {
+    const day = new Date(this.now()).toISOString().slice(0, 10);
+    const file = join(this.directory, 'weather-budget.json');
+    let value;
+    try { value = JSON.parse(await readFile(file, 'utf8')); }
+    catch (error) {
+      if (error.code !== 'ENOENT') throw new AppError('BUDGET_STATE_INVALID', '天气额度记录需要检查，请查看服务日志。');
+    }
+    if (value !== undefined && (value === null || typeof value !== 'object' ||
+      !/^\d{4}-\d{2}-\d{2}$/.test(value.day) || !Number.isInteger(value.units) || value.units < 0 ||
+      (value.blockedUntil !== undefined && !Number.isFinite(value.blockedUntil)))) {
+      throw new AppError('BUDGET_STATE_INVALID', '天气额度记录需要检查，请查看服务日志。');
+    }
+    if (value?.blockedUntil > this.now()) {
+      this.blockedUntil = value.blockedUntil;
+      throw new AppError('UPSTREAM_COOLDOWN', '天气服务正在冷却，请稍后重试。', 503, { retryAt: new Date(this.blockedUntil).toISOString() });
+    }
+    if (!value || value.day !== day) value = { day, units: 0 };
+    if (value.units + units > this.dailyBudget) {
+      throw new AppError('DAILY_BUDGET', '今日天气请求预算已用完，缓存预报仍可查看；预算于 UTC 零点恢复。', 503);
+    }
+    value.units += units;
+    await mkdir(this.directory, { recursive: true });
+    await writeFile(file + '.tmp', JSON.stringify(value), { mode: 0o600 });
+    await rename(file + '.tmp', file);
+    this.units += units;
+  }
+  request(url, units) {
+    const operation = this.queue.then(async () => {
+      if (this.now() < this.blockedUntil) {
+        throw new AppError('UPSTREAM_COOLDOWN', '天气服务正在冷却，请稍后重试。', 503, { retryAt: new Date(this.blockedUntil).toISOString() });
+      }
+      await this.budget(units);
+      this.requests++;
+      let response;
+      try { response = await this.fetcher(url, { signal: AbortSignal.timeout(this.timeout), redirect: 'error' }); }
+      catch { throw new AppError('UPSTREAM_UNAVAILABLE', '天气数据暂时连接失败，请稍后重新获取。'); }
+      if (response.status === 429) {
+        const header = response.headers.get('retry-after');
+        const delay = header === null ? 300000 : Number.isFinite(Number(header)) ? Number(header) * 1000 : Date.parse(header) - this.now();
+        this.blockedUntil = this.now() + Math.max(60000, Math.min(3600000, Number.isFinite(delay) ? delay : 300000));
+        const file = join(this.directory, 'weather-budget.json');
+        const ledger = JSON.parse(await readFile(file, 'utf8'));
+        ledger.blockedUntil = this.blockedUntil;
+        await writeFile(file + '.tmp', JSON.stringify(ledger), { mode: 0o600 });
+        await rename(file + '.tmp', file);
+        throw new AppError('UPSTREAM_RATE_LIMIT', '天气数据额度暂时受限，请在冷却时间后重新获取。', 503, { retryAt: new Date(this.blockedUntil).toISOString() });
+      }
+      if (!response.ok) {
+        throw new AppError('UPSTREAM_HTTP', `天气服务返回 ${response.status}，请稍后重新获取。`, 503);
+      }
+      const body = await response.text();
+      if (body.length > 12 * 1024 * 1024) throw new AppError('UPSTREAM_SIZE', '天气响应超出容量限制。');
+      try { return JSON.parse(body); }
+      catch { throw new AppError('UPSTREAM_FORMAT', '天气服务返回了无法解析的数据，请稍后重新获取。'); }
+    });
+    this.queue = operation.catch(() => {});
+    return operation;
+  }
+  async weather(points, model, startDate, endDate) {
+    const url = new URL(`https://${this.apiKey ? 'customer-api' : 'api'}.open-meteo.com/v1/${model === 'gfs' ? 'gfs' : 'ecmwf'}`);
+    const parameters = {
+      latitude: points.map(p => p.lat).join(','), longitude: points.map(p => p.lon).join(','),
+      hourly: WEATHER_FIELDS.join(','), timezone: 'GMT', timeformat: 'unixtime',
+      start_date: startDate, end_date: endDate, cell_selection: 'nearest',
+      ...(model === 'ecmwf' ? { models: 'ecmwf_ifs025' } : {}),
+    };
+    for (const [k, v] of Object.entries(parameters)) url.searchParams.set(k, v);
+    const key = url.toString();
+    if (this.apiKey) url.searchParams.set('apikey', this.apiKey);
+    return this.cache.load(key, async () => {
+      const data = await this.request(url, points.length * Math.ceil(WEATHER_FIELDS.length / 10));
+      const rows = Array.isArray(data) ? data : [data];
+      if (rows.length !== points.length) throw new AppError('UPSTREAM_LOCATION_COUNT', '天气数据中的采样点数量发生变化，请重新获取。');
+      rows.forEach((row, index) => this.validate(row, points[index]));
+      return rows;
+    });
+  }
+  validate(row, point) {
+    const h = row.hourly, units = row.hourly_units;
+    if (!h || !Array.isArray(h.time) || h.time.length < 2 || units?.time !== 'unixtime' || row.utc_offset_seconds !== 0) {
+      throw new AppError('UPSTREAM_TIME', '天气数据时间格式与约定有差异，请检查供应商接口。');
+    }
+    if (!Number.isFinite(row.latitude) || !Number.isFinite(row.longitude) ||
+      Math.abs(row.latitude - point.lat) > 0.6 || Math.abs(row.longitude - point.lon) > 0.6) {
+      throw new AppError('UPSTREAM_LOCATION', '天气数据位置偏离请求采样点。');
+    }
+    if (h.time.some((v, i) => !Number.isFinite(v) || (i && v <= h.time[i - 1]))) {
+      throw new AppError('UPSTREAM_TIME', '天气数据时间序列需要检查。');
+    }
+    for (const p of LEVELS) {
+      for (const field of [`cloud_cover_${p}hPa`, `geopotential_height_${p}hPa`]) {
+        const expected = field.startsWith('cloud') ? '%' : 'm';
+        if (!Array.isArray(h[field]) || h[field].length !== h.time.length || units[field] !== expected) {
+          throw new AppError('UPSTREAM_PROFILE', '天气服务缺少计算所需的垂直云层数据。');
+        }
+      }
+    }
+    for (const [field, expected] of [['precipitation', 'mm'], ['visibility', 'm']]) {
+      const values = h[field];
+      if (values?.some(Number.isFinite) && (values.length !== h.time.length || units[field] !== expected || values.some(v => v !== null && (!Number.isFinite(v) || v < 0)))) {
+        throw new AppError('UPSTREAM_UNITS', '降水或能见度资料的单位与取值需要检查。');
+      }
+    }
+  }
+  async aerosol(points, startDate, endDate) {
+    const url = new URL(`https://${this.apiKey ? 'customer-air-quality-api' : 'air-quality-api'}.open-meteo.com/v1/air-quality`);
+    for (const [k, v] of Object.entries({
+      latitude: points.map(p => p.lat).join(','), longitude: points.map(p => p.lon).join(','),
+      hourly: 'aerosol_optical_depth', domains: 'cams_global', timezone: 'GMT', timeformat: 'unixtime',
+      start_date: startDate, end_date: endDate,
+    })) url.searchParams.set(k, v);
+    const key = url.toString();
+    if (this.apiKey) url.searchParams.set('apikey', this.apiKey);
+    return this.cache.load(key, async () => {
+      const data = await this.request(url, points.length);
+      const rows = Array.isArray(data) ? data : [data];
+      if (rows.length !== points.length || rows.some((row, i) =>
+        row.hourly_units?.time !== 'unixtime' || row.utc_offset_seconds !== 0 ||
+        !['', 'dimensionless'].includes(row.hourly_units?.aerosol_optical_depth) ||
+        !Number.isFinite(row.latitude) || !Number.isFinite(row.longitude) ||
+        Math.abs(row.latitude - points[i].lat) > 0.6 || Math.abs(row.longitude - points[i].lon) > 0.6 ||
+        !Array.isArray(row.hourly?.time) || row.hourly.time.length < 2 ||
+        row.hourly.time.some((v, j, t) => !Number.isFinite(v) || (j && v <= t[j - 1])) ||
+        !Array.isArray(row.hourly?.aerosol_optical_depth) ||
+        row.hourly.aerosol_optical_depth.length !== row.hourly.time.length ||
+        row.hourly.aerosol_optical_depth.some(v => v !== null && (!Number.isFinite(v) || v < 0)))) {
+        throw new AppError('UPSTREAM_AEROSOL', '气溶胶数据暂时缺失。');
+      }
+      return rows;
+    }, { ttl: 3 * 3600000, staleFor: 8 * 3600000 });
+  }
+}
+
+export function interpolate(row, field, instant) {
+  const h = row?.hourly, values = h?.[field], times = h?.time;
+  if (!values || !times) return null;
+  const time = +new Date(instant) / 1000;
+  let index = Math.floor((time - times[0]) / 3600);
+  index = Math.max(0, Math.min(times.length - 2, index));
+  while (index > 0 && times[index] > time) index--;
+  while (index < times.length - 2 && times[index + 1] < time) index++;
+  const a = values[index], b = values[index + 1];
+  if (time < times[index] || time > times[index + 1] || !Number.isFinite(a) || !Number.isFinite(b)) return null;
+  const weight = (time - times[index]) / (times[index + 1] - times[index]);
+  return a + (b - a) * weight;
+}
+
+// Open-Meteo precipitation is an accumulation over the hour ending at the
+// timestamp. Interior instants use that interval's total, rather than a blend
+// between totals belonging to different hours.
+export function precedingAccumulation(row, field, instant) {
+  const times = row?.hourly?.time, values = row?.hourly?.[field], seconds = +new Date(instant) / 1000;
+  if (!times || !values || seconds <= times[0] - 3600 || seconds > times.at(-1)) return null;
+  const index = times.findIndex(t => t >= seconds);
+  const value = values[index];
+  return Number.isFinite(value) && value >= 0 ? value : null;
+}
+
+```
+
+材料 src/service.mjs：
+```
+import { createHash } from 'node:crypto';
+import { civilDate, validDate, addDays, destination, solarEvent, round } from './astro.mjs';
+import { PRESETS } from './presets.mjs';
+import { DISTANCES, computeForecast, samplingOffsets } from './engine.mjs';
+import { AppError } from './errors.mjs';
+import { LEVELS } from './provider.mjs';
+
+export class ForecastService {
+  constructor({ provider, archive = null, now = () => Date.now() }) {
+    this.provider = provider;
+    this.archive = archive;
+    this.now = now;
+    this.pending = new Map();
+  }
+  validate(params) {
+    const cityId = params.get('city') ?? 'shanghai';
+    let location = PRESETS.find(p => p.id === cityId);
+    if (!location) throw new AppError('CITY_INVALID', '请选择支持的长三角城市。', 400);
+    if (params.has('lat') || params.has('lon')) {
+      const lat = Number(params.get('lat')), lon = Number(params.get('lon'));
+      if (!params.get('lat')?.trim() || !params.get('lon')?.trim() || !Number.isFinite(lat) ||
+        !Number.isFinite(lon) || lat < 27 || lat > 35 || lon < 116 || lon > 125) {
+        throw new AppError('COORDINATES_INVALID', '长三角坐标范围为北纬 27–35°、东经 116–125°。', 400);
+      }
+      location = { id: 'custom', name: '自选位置', lat: round(lat, 4), lon: round(lon, 4), timezone: 'Asia/Shanghai' };
+    }
+    const event = params.get('event') ?? 'sunset', model = params.get('model') ?? 'gfs';
+    if (!['sunrise', 'sunset'].includes(event)) throw new AppError('EVENT_INVALID', '请选择朝霞或晚霞。', 400);
+    if (!['gfs', 'ecmwf'].includes(model)) throw new AppError('MODEL_INVALID', '请选择 GFS 或 ECMWF。', 400);
+    const today = civilDate(this.now(), location.timezone), date = params.get('date') ?? today;
+    if (!validDate(date) || date < today || date > addDays(today, 2)) {
+      throw new AppError('DATE_INVALID', '请选择当地今天起三天内的有效日期。', 400);
+    }
+    return { location, event, model, date };
+  }
+  async forecast(params) {
+    const input = this.validate(params), key = JSON.stringify(input);
+    if (this.pending.has(key)) return this.pending.get(key);
+    if (this.pending.size >= 2) throw new AppError('BUSY', '正在计算其他预报，请稍后重新获取。', 429);
+    const task = this.compute(input);
+    this.pending.set(key, task);
+    try { return await task; } finally { this.pending.delete(key); }
+  }
+  async compute({ location, event: eventType, model, date }) {
+    const event = solarEvent(date, eventType, location.lat, location.lon, location.timezone);
+    if (!event) return { state: 'no_event', location, date, eventType, model };
+    const fanOffsets = samplingOffsets(event, location);
+    const points = fanOffsets.flatMap(offset => DISTANCES.map(distance => destination(location.lat, location.lon, event.azimuth + offset, distance)));
+    const utcDate = event.time.slice(0, 10), startDate = addDays(utcDate, -1), endDate = addDays(utcDate, 1);
+    const weather = await this.provider.weather(points, model, startDate, endDate);
+    let aerosol = null, aerosolError = null;
+    try { aerosol = await this.provider.aerosol(points, startDate, endDate); }
+    catch (error) { aerosolError = error.code ?? 'AEROSOL_UNAVAILABLE'; }
+    const forecast = computeForecast({ weather: weather.data, aerosol: aerosol?.data ?? null, event, location, fanOffsets });
+    const leadTimeHours = round((Date.parse(event.time) - this.now()) / 3600000, 1);
+    if (leadTimeHours > 36) forecast.uncertainty.unshift(`距离事件约 ${leadTimeHours} 小时，建议在 36 小时内再次查看最新云况。`);
+    if (leadTimeHours < 0) forecast.uncertainty.unshift('所选日出日落事件已发生，结果为当前资料下的回算。');
+    const identity = JSON.stringify({ location, date, eventType, model, weatherAt: weather.fetchedAt,
+      aerosolAt: aerosol?.fetchedAt, version: forecast.modelVersion });
+    const fetchedAt = new Date(weather.fetchedAt).toISOString();
+    const stale = weather.cache === 'stale' || aerosol?.cache === 'stale';
+    const result = {
+      state: stale ? 'stale' : aerosolError || forecast.missingAerosol ? 'partial' : 'ready',
+      id: createHash('sha256').update(identity).digest('hex').slice(0, 20),
+      generatedAt: new Date(this.now()).toISOString(), location, date, eventType,
+      event: { time: event.time, azimuth: round(event.azimuth, 1), altitude: round(event.altitude, 2) },
+      model, weatherModel: model === 'gfs' ? 'NCEP GFS (Open-Meteo GFS)' : 'ECMWF IFS 0.25°',
+      leadTimeHours,
+      data: { weather: { fetchedAt, cache: weather.cache, ageMinutes: round((this.now() - weather.fetchedAt) / 60000),
+        initializationTime: null, provider: 'Open-Meteo', sourceUrl: model === 'gfs' ? 'https://open-meteo.com/en/docs/gfs-api' : 'https://open-meteo.com/en/docs/ecmwf-api',
+        profile: 'Pressure-level cloud-cover diagnostic and geopotential height',
+        nativeTimeStepMinutes: model === 'gfs' ? 60 : 180, apiTimeStepMinutes: 60,
+        gridResolutionDegrees: 0.25, precipitationMeaning: 'mm accumulated over the preceding hour',
+        pointCount: points.length, pressureLevelCount: LEVELS.length, staleReason: weather.staleReason ?? null },
+      aerosol: { fetchedAt: aerosol ? new Date(aerosol.fetchedAt).toISOString() : null,
+        cache: aerosol?.cache ?? 'unavailable', provider: 'CAMS Global via Open-Meteo', wavelengthNm: 550,
+        nativeTimeStepMinutes: 180, gridResolutionDegrees: 0.4, initializationTime: null,
+        error: aerosolError, sourceUrl: 'https://open-meteo.com/en/docs/air-quality-api' } },
+      ...forecast,
+    };
+    result.retention = { state: 'disabled' };
+    if (this.archive) {
+      try { result.retention = await this.archive.save({ result, weather, aerosol, points, fanOffsets }); }
+      catch { result.retention = { state: 'unavailable' }; result.uncertainty.push('这次预报的本地留存写入失败，可先保存 JSON 并检查数据目录。'); }
+    }
+    return result;
+  }
+}
+
+```
+
+材料 src/archive.mjs：
+```
+import { DiskCache } from './cache.mjs';
+
+export class ForecastArchive {
+  constructor(directory, { now = () => Date.now(), maxEntries = 180 } = {}) {
+    this.cache = new DiskCache(directory, { now, maxEntries });
+    this.now = now;
+    this.maxEntries = maxEntries;
+    this.queue = Promise.resolve();
+  }
+  save({ result, ...inputs }) {
+    const operation = this.queue.then(async () => {
+      const previous = await this.cache.get(result.id);
+      const retainedAt = previous?.retainedAt ?? new Date(this.now()).toISOString();
+      if (!previous) await this.cache.put(result.id, {
+        schemaVersion: 1, fetchedAt: this.now(), retainedAt, result, inputs,
+      });
+      return { state: 'saved', retainedAt, limit: this.maxEntries };
+    });
+    this.queue = operation.catch(() => {});
+    return operation;
+  }
+}
+
+```
+
+材料 tests/engine.test.mjs：
+```
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { civilDate, solarEvent, sunPosition, earthBlocks, sectionPoint, RAD, validDate } from '../src/astro.mjs';
+import { computeForecast, DISTANCES, samplingOffsets } from '../src/engine.mjs';
+import { cloudTransmission } from '../src/cloud-optics.mjs';
+import { precedingAccumulation } from '../src/provider.mjs';
+import { LEVELS } from '../src/provider.mjs';
+
+import { LOCATION, EVENT, fixture } from './fixture.mjs';
+
+test('Shanghai event retains its civil date and matches the western sunset bearing', () => {
+  assert.equal(civilDate(EVENT.time, LOCATION.timezone), '2026-11-06');
+  const hour = new Intl.DateTimeFormat('en-GB', { timeZone: LOCATION.timezone, hour: '2-digit', minute: '2-digit' }).format(new Date(EVENT.time));
+  assert.ok(hour >= '16:45' && hour <= '17:10', hour);
+  assert.ok(EVENT.azimuth > 245 && EVENT.azimuth < 255);
+  assert.ok(Math.abs(sunPosition(EVENT.time, LOCATION.lat, LOCATION.lon).altitude + 0.833) < 0.4);
+});
+
+test('date and calendar behavior survives UTC midnight and a western timezone', () => {
+  assert.equal(civilDate('2026-11-05T17:00:00Z', 'Asia/Shanghai'), '2026-11-06');
+  const value = solarEvent('2026-06-21', 'sunset', 40.7128, -74.006, 'America/New_York');
+  assert.equal(civilDate(value.time, 'America/New_York'), '2026-06-21');
+  assert.equal(validDate('2026-02-30'), false);
+  assert.equal(validDate('2024-02-29'), true);
+});
+
+test('spherical Earth shadow separates low and high clouds at the same sun angle', () => {
+  const direction = [Math.cos(-2 * RAD), Math.sin(-2 * RAD)];
+  assert.equal(earthBlocks(sectionPoint(0, 2), direction), true);
+  assert.equal(earthBlocks(sectionPoint(0, 10), direction), false);
+});
+
+test('a cloud-free section has zero cloud colour potential', () => {
+  const result = computeForecast({ weather: fixture(), event: EVENT, location: LOCATION });
+  assert.equal(result.score, 0);
+  assert.equal(result.window, null);
+  assert.equal(result.peakTime, null);
+  assert.equal(result.section.time, EVENT.time);
+  assert.equal(result.section.targets.length, 0);
+});
+
+test('upstream low-cloud obstruction changes the result even with identical local high clouds', () => {
+  const clear = fixture({ clouds: (x, p) => p === 300 && x < 200 ? 60 : 0 });
+  const blocked = fixture({ clouds: (x, p) => p === 300 && x < 200 ? 60 : p >= 700 && x >= 25 && x <= 450 ? 100 : 0 });
+  const a = computeForecast({ weather: clear, event: EVENT, location: LOCATION });
+  const b = computeForecast({ weather: blocked, event: EVENT, location: LOCATION });
+  assert.ok(a.score > 0, JSON.stringify(a.timeline));
+  assert.ok(b.score < a.score, `${a.score} -> ${b.score}`);
+  assert.ok(a.timeline.every(t => Number.isFinite(t.score) && t.score >= 0 && t.score <= 100));
+  assert.equal(a.aod, null);
+  assert.equal(a.sensitivity.minimum, null);
+  assert.equal(a.sensitivity.maximum, null);
+  assert.ok(a.uncertainty.some(t => t.includes('偏差方向与幅度待评估')));
+});
+
+test('missing required cloud data rejects a forecast rather than assigning clear sky', () => {
+  const rows = fixture();
+  rows[0].hourly.cloud_cover_850hPa.fill(null);
+  assert.throws(() => computeForecast({ weather: rows, event: EVENT, location: LOCATION }), /垂直云层数据缺失/);
+});
+
+test('missing geopotential height has the same explicit failure as a missing cloud observation', () => {
+  const rows = fixture();
+  rows[4].hourly.geopotential_height_925hPa.fill(null);
+  assert.throws(() => computeForecast({ weather: rows, event: EVENT, location: LOCATION }), /垂直云层数据缺失/);
+});
+
+test('high aerosol extinction reduces illuminated cloud potential', () => {
+  const weather = fixture({ clouds: (x, p) => p === 300 && x < 200 ? 60 : 0 });
+  const aerosol = aod => weather.map(row => ({ hourly: { time: row.hourly.time,
+    aerosol_optical_depth: row.hourly.time.map(() => aod) } }));
+  const clean = computeForecast({ weather, aerosol: aerosol(0), event: EVENT, location: LOCATION });
+  const hazy = computeForecast({ weather, aerosol: aerosol(1), event: EVENT, location: LOCATION });
+  assert.ok(hazy.score < clean.score, `${clean.score} -> ${hazy.score}`);
+  assert.equal(hazy.aod, 1);
+  assert.ok(hazy.sensitivity.minimum <= hazy.score && hazy.sensitivity.maximum >= hazy.score);
+});
+
+test('ten-percent opaque cloud preserves its holes over a long cloudy path', () => {
+  const pieces = Array.from({ length: 20 }, () => ({ column: 0, level: 0, fraction: 0.1, depth: 2 }));
+  assert.ok(Math.abs(cloudTransmission(pieces) - 0.9) < 1e-10);
+  assert.ok(Math.abs(cloudTransmission(pieces, { overlap: 'random-columns' }) - 0.9) < 1e-10);
+  const two = [...pieces, ...pieces.map(p => ({ ...p, column: 1 }))];
+  assert.ok(Math.abs(cloudTransmission(two) - 0.9) < 1e-10);
+  assert.ok(Math.abs(cloudTransmission(two, { overlap: 'random-columns' }) - 0.81) < 1e-10);
+});
+
+test('light incident on a known cloudy target traverses its cloudy optical depth', () => {
+  const t = cloudTransmission([{ column: 0, level: 0, fraction: 0.1, depth: 3 }],
+    { condition: { column: 0, levels: [0], probability: 0.1 } });
+  assert.ok(Math.abs(t - Math.exp(-3)) < 1e-10);
+});
+
+test('a low-angle remote cloud base is retained and a rotating fan covers the event window', () => {
+  const fanOffsets = samplingOffsets(EVENT, LOCATION);
+  const weather = fixture({ fanCount: 3, clouds: (x, p) => x === 100 && p === 700 ? 80 : 0 });
+  const result = computeForecast({ weather, event: EVENT, location: LOCATION, fanOffsets });
+  assert.ok(result.section.targets.some(t => t.x === 100 && t.elevation >= 0.5 && t.elevation < 3));
+  assert.ok(!result.uncertainty.some(t => t.includes('固定方位')));
+  assert.ok(Math.abs(result.section.bearing - EVENT.azimuth) > 0.1);
+});
+
+test('rain totals keep their preceding-hour interval semantics', () => {
+  const row = { hourly: { time: [0, 3600, 7200], precipitation: [0, 10, 0] } };
+  assert.equal(precedingAccumulation(row, 'precipitation', 1800000), 10);
+  assert.equal(precedingAccumulation(row, 'precipitation', 3600000), 10);
+  assert.equal(precedingAccumulation(row, 'precipitation', 3600001), 0);
+});
+
+```
+
+材料 docs/model.md：
+```
+# Model: section-optics-0.2.0
+
+The model estimates relative cloud-colour viewing potential using actual
+weather forecasts and an independent optical approximation. The original
+author's tutorials and official provider documentation are indexed in
+[research](../research/README.md). The calibration status is experimental.
+
+## Inputs and geometry
+
+Pinned SunCalc 1.9.0 supplies event times and solar positions. The event's civil
+day resolves in `Asia/Shanghai`. Fourteen columns extend from 150 km antisunward
+to 800 km sunward, with denser spacing near the observer. Three bearings span
+the azimuths at event ±40 minutes with an additional two-degree margin. Each
+frame interpolates between its neighbouring bearings using the actual solar
+azimuth. This is a rotating two-dimensional approximation of a sampled fan.
+
+Eleven common pressure levels supply cloud cover and geopotential height.
+GFS pressure cloud cover is a model field; ECMWF IFS 0.25° pressure cloud cover
+is a humidity-derived provider diagnostic. Source differences affect model
+comparisons. Open-Meteo supplies hourly series; the selected global GFS has
+approximately hourly native data over this horizon, IFS 0.25° and CAMS Global
+approximately three-hourly. CAMS has a 0.4° grid, weather a 0.25° grid. Five-minute
+frames describe solar geometry on interpolated fields. Forecast initialization
+time is unknown in these responses and remains null, separate from fetch time.
+
+For arc distance x and height h, the Earth-centred point is
+`p = ((R+h) sin(x/R), (R+h) cos(x/R))`, R=6371 km. Straight Cartesian rays are
+tested against Earth shadow and coarse sampled terrain. Solar incidence and
+observer sightlines are separate paths; their cloud pieces combine for joint
+transmission under the selected overlap scenario. Target bases are inferred
+from a 15% cloud-profile threshold. Targets extend to 300 km sunward and 150 km
+antisunward, with a minimum apparent elevation of 0.5°. Cloud tops, side faces,
+multiple scattering, refraction and small cloud holes require richer geometry.
+
+## Occurrence and conditional opacity
+
+Cloud fraction f describes occurrence area. Inside a cloudy cell the chosen
+conditional extinction coefficients are 2/km below 3 km, 0.7/km at 3–8 km and
+0.2/km above 8 km. These are independent scenario assumptions pending cloud
+water/ice and optical-property data.
+
+Each horizontal column and nearest pressure-level band has one occupancy
+variable. A repeated ray integration step adds conditional optical depth to the
+same cell, preserving cloud holes. Within that cell, fraction is averaged with
+optical-depth weights. A single cloudy cell has expected transmission
+`(1-f) + f * exp(-tau_cloudy)`; an opaque 10% cloud cell therefore transmits
+approximately 90%, even along a long within-cell path.
+
+The central scenario shares a uniform occurrence variable across all cells
+(maximum overlap). The alternative shares it vertically inside each column and
+uses independent horizontal columns. Both are deliberate correlation scenarios.
+The calculation conditions on the target deck being cloudy and weights its
+contribution by the target fraction. This correlation/conditioning model and
+its cell scale remain assumptions; its two endpoints describe model sensitivity.
+Nearest-cell boundaries, sparse vertical levels and the 15% target threshold
+can still cause sensitivity to small cloud-field displacements.
+
+## Spectral proxy and index
+
+Molecular extinction at 550 nm is 0.012/km, density scale height 8 km and
+wavelength dependence `(550/lambda)^4`. Aerosol extinction is
+`(AOD550/H) exp(-h/H) (550/lambda)^1.2`. The author's preserved formula images
+support the molecular coefficient, exponential aerosol profile and typical
+1.2 exponent. H=1.5 km is the central choice; 0.8 and 3 km form a sensitivity
+comparison at the central reference time. Three wavelengths (680/550/440 nm)
+supply a brightness/warmth proxy. Normalized RGB is a transmission diagnostic.
+
+Target fraction and angular section weights aggregate using
+`100 * (1-exp(-5*integral))`, then local rain and visibility factors apply when
+available. The gain, extinction coefficients and 15/40/65 label thresholds are
+implementation heuristics requiring observation calibration. Directional
+indices split the overhead cell evenly. Section indices depend on sampling.
+
+## Time, missing data and interpretation
+
+The curve spans event ±40 minutes in five-minute increments. The window is the
+contiguous interval around the central peak exceeding `max(8, 0.6*peak)`; a
+clipped boundary is explicit. A curve with all zero values has `peakTime:null`
+and uses the event instant for its diagnostic section. An isolated qualifying
+sample can produce a zero-duration window at the available sample resolution.
+
+Precipitation uses the preceding-hour accumulated total for the containing
+interval; it is held over that interval rather than linearly blending totals.
+Missing rain or visibility leaves the optional factor at 1 and adds an explicit
+note. Missing AOD uses zero at affected path samples, with unquantified bias
+in score direction and magnitude. Its aerosol-height sensitivity is null.
+Required cloud-profile gaps stop scoring. Fresh/partial/stale states and exact
+source fetch times remain visible. Past events are labeled current-data
+recalculations; lead times beyond 36 hours invite another short-range check.
+
+Aerosol-height and cloud-overlap ranges evaluate assumptions at one reference
+time. They describe separate sensitivities. Statistical confidence, overall
+error coverage and forecast skill require paired observations.
+
+## Retention and next validation
+
+Runtime retains up to 180 unique forecast identities in `var/forecasts`, with
+exact weather/CAMS payloads, sampled coordinates, bearing offsets, fetch times
+and the first generated result. Unchanged source identities reuse their record.
+Atomic writes and bounded pruning keep this independent of provider caching.
+The API reports retention success or an actionable failure. Docker preserves it
+in the same named data volume. These records support observation pairing;
+retention of unknown model initialization time remains an explicit provenance
+limit. Export important study periods before the rolling bound is reached.
+
+Regression tests cover event/calendar geometry, Earth shadow, low-angle
+remote clouds, conditional cloud transmission and overlap, missing inputs,
+precipitation intervals, caching/cooldown and source retention. Captured public
+GFS/ECMWF/CAMS bundles replay offline. The next skill study should include weak
+and failed events, cloud-field spatial perturbations and a simple layered-cloud
+baseline, with held-out dates grouped by season and forecast lead time.
+
+```

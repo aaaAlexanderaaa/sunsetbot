@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+<title>晚霞分析与记录 | Rosy Cloud Analysis and Recording</title>
+
+    <meta name="description" content="火烧云分析数据可视化网站，提供全国主要城市的基于美国NCEP-GFS数值模式和欧洲CAMS大气组分模式的火烧云分析结果">
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/dark_custom.css" type="text/css">
+    <link rel="shortcut icon" href="/static/media/static_image/favicon.ico" type="image/icon">
+    <meta name="keywords" content="Evening Glow, Sunset, Sunrise, Cloud, Weather">
+</head>
+
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-lg navbar-dark custom-nav-bg-dark">
+        <div class="container-fluid">
+
+            <!-- 网站logo -->
+            
+            <a class="navbar-brand" href="/admin/login/">
+                <img src="/static/media/eveningGlow2021.jpg" alt="logo" style="height: 50px; width: 50px; border-radius: 5px;">
+            </a>
+            
+
+            <!-- 标题 -->
+            <span class="navbar-text me-3 nav-title" style="font-size: 1.75rem; font-weight: bold; color: #f5eec9;">
+                火烧云分析与记录
+            </span>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- 导航栏 -->
+              <!-- 获取当前路由的端点 -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto" style="font-size: 1.2rem; gap: 1rem;">
+                    <li class="nav-item">
+                        <a class="nav-link " href="/">主页</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/detailed/">详情页</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/map/">地图</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/camera/">摄像头</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/record/">记录</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/reanalysis/">准确率</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/knowledge/">知识</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/about//">关于</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 内容区域 -->
+    
+    <!-- 内容区域 -->
+    <div class="container-fluid mt-5">
+        <div class="row mt-4">
+            <div class="col">
+                <div class="card bg-dark text-light">
+                    <div class="card-body">
+                        <p class="card-text" style="font-size: 1.2rem;">火烧云分析用大气截面图（主要城市）。基于NCEP-GFS/ECMWF（云况信息）和 CAMS（霾分布）。GFS每天更新4次，大更新在7:30-8:30以及19:30-20:30，小更新（仅中东部、东北城市）出现在13:30和1:30。ECMWF 中东部每天也更新4次，分别在 4:00,10:00，16:00 和 22:00。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <!-- 前4个元素靠左 -->
+            <div class="col-auto">
+                <button class="btn btn-primary btn-lg" id="submit_btn">提交</button>
+            </div>
+
+            <div class="col-auto">
+                <select class="form-select form-select-lg" id="event">
+                    <option value="rise_1" >今天日出</option>
+                    <option value="set_1" selected>今天日落</option>
+                    <option value="rise_2" >明天日出</option>
+                    <option value="set_2" >明天日落</option>
+                </select>
+            </div>
+            <div class
+                         ="col-auto">
+                <select class="form-select form-select-lg" id="region">
+                    <option value="中东">地区：中东部</option>
+                    <option value="东北">地区：东北</option>
+                    <option value="西南">地区：西南</option>
+                    <option value="南海">地区：南海</option>
+                    <option value="西北">地区：西北</option>
+                    <option value="日本">海外：日韩</option>
+                </select>
+            </div>
+
+            <div class="col-auto">
+                <select class="form-select form-select-lg" id="model_selector">
+                    <option value="GFS" >数据源: GFS</option>
+                    <option value="EC" >数据源: EC</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col">
+                <div class="card bg-dark text-light">
+                    <div class="card-header border-secondary mt-0 mb-0">
+                        <h5 class="h5-card-header" id="map_des">  没有该地区的火烧云地图</h5>
+                    </div>
+                    <div class="card-body" id="map_panel">
+                        <img alt="map" id="map_img_src" style="width: 100%; height: auto;" src="/static/media/static_image/default_map.jpg" class="img-fluid" onload="enable_btn('submit_btn'); remove_class('map_img_src');">
+                        <div class="des_panel_ptr" style="display: none;" id="des_in"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col">
+                <div class="card bg-dark text-light">
+                    <div class="card-body">
+                        <h5 class="card-title">Windy Plugin (Cloud Cover, ECMWF)</h5>
+                        <iframe width="100%" height="600" src="https://embed.windy.com/embed.html?type=map&location=coordinates&metricRain=mm&metricTemp=°C&metricWind=m/s&zoom=5&overlay=satellite&product=satellite&level=surface&lat=31.608&lon=130.992&detailLat=31.015278981711266&detailLon=121.4208984375&marker=true&pressure=true&message=true" frameborder="0"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col">
+                <div class="card bg-dark text-light">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">火烧云鲜艳度（某种程度上表明火烧云质量）</h5>
+                        <p class="card-text">
+                            火烧云的鲜艳度的计算会考虑以下几个方面因素：火烧云的持续时间、火烧云的亮度与颜色、火烧云的云量（包括相态与含水量）、火烧云占据本地天空的面积、云底高度、不同层次云层之间的照明与遮挡关系，以及气溶胶光学厚度/大气浑浊度。<br>
+                            &emsp;- 0.001-0.05：微微烧，或者火烧云云况不典型没有预报出来；<br>
+                            &emsp;- 0.05~0.2：小烧，大气很通透的情况下才会比较好看；<br>
+                            &emsp;- 0.2~0.4：小烧到中等烧；<br>
+                            &emsp;- 0.4~0.6：中等烧，比较值得看的火烧云；<br>
+                            &emsp;- 0.6~0.8：中等烧到大烧程度的火烧云；<br>
+                            &emsp;- 0.8~1.0：不是很完美的大烧火烧云，例如云量没有最高、大气偏污、持续时间偏短、有低云遮挡等；<br>
+                            &emsp;- 1.0~1.5：典型的火烧云大烧；<br>
+                            &emsp;- 1.5~2.0：优质大烧，火烧云范围广、云量大（不一定满云量）、颜色明亮、持续时间长，且大气通透；<br>
+                            &emsp;- 2.0~2.5：世纪大烧，火烧云范围很广、接近满云量、颜色明亮鲜艳、持续时间长，且大气非常通透；
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col">
+                <div class="card bg-light text-dark">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">使用说明</h5>
+                        <p class="card-text">
+                            火烧云地图是一种补充性产品，用于展示非主要城市和地区的火烧云质量。地图仅仅展示最终的火烧云质量结果数字，不展示为什么火烧云的质量是这个数字，而且为了效率计算过程有所简化，所以提供的信息量较少而且可能不准（尤其是人口密度较低的区域）。数值模式进行火烧云预报的准确率不很令人满意，该结果仅供参考。<br>
+                            请注意日出和日落的日期。对于晚霞来说上午时次是比较新的预报，中午时次是最新的预报；而对朝霞来说傍晚时次是比较新的预报。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col">
+                <div class="card bg-dark text-light">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">支持我们</h5>
+                        <iframe src="https://afdian.com/leaflet?slug=sunsetbot" width="100%" height="250" frameborder="0" class="custom-iframe"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <!-- 悬浮按钮 -->
+    <button title="翻车了?" class="float-button position-fixed bottom-0 start-0 m-3" onclick="location.href='https://www.wjx.cn/vm/tU8rXXw.aspx'">
+        <b>翻车了?</b>
+    </button>
+    </div>
+
+
+
+    <!-- 页脚 -->
+    <footer class="footer-custom-dark text-white mt-4">
+        <div class="container py-4">
+            <div class="row">
+                <div class="col text-center">
+                    <p><b>火烧云预测与记录</b><br><b>Copyright &copy;sunsetbot team</b>. All Rights Reserved.</p>
+                </div>
+                <div class="col text-center">
+                    <p>最近一次编辑日期：2025-03-15 16:00:31<br><a target="_blank" href="https://beian.miit.gov.cn/" class="text-white">沪ICP备2023021092号</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 引入 Bootstrap JS 和依赖 -->
+    <script src="/static/js/lib/popper.min.js"></script>
+    <script src="/static/js/lib/bootstrap.min.js"></script>
+
+    <!-- 自定义JS -->
+    
+<script src="/static/js/lib/jquery-2.1.4.min.js"></script>
+<script type="text/javascript">
+    function update_map(){
+        var event = $("#event").val();
+        var region = $("#region").val();
+        var model = $("#model_selector").val();
+        var intend = "select_region";
+        var query_id = Math.floor((Math.random()*1000)+1).toString();
+        var info = {region, event, intend, query_id, model};
+        $.ajax({
+            url: "/map/",
+            type: "get",
+            data: info,
+            error : function(){alert("INTERNAL ERROR");},
+            success:function(res) {
+                if (res["status"] == "ok"){var a = 1;}
+                else if (res["status"] == "not_found"){alert("NO DATA"); }
+                $("#map_img_src").attr("src", res["map_img_src"]);
+                $("#map_des").text(res["map_des"]);
+            },
+        });
+    }
+    // map selection page
+    $(document).ready(function(){
+        $("#submit_btn").click(function(){update_map();});
+        $("#event").change(function(){update_map();});
+        $("#region").change(function(){update_map();});
+        $("#model_selector").change(function(){update_map();});
+    });
+</script>
+
+</body>
+
+</html>

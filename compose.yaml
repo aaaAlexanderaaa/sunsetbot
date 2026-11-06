@@ -1,0 +1,20 @@
+services:
+  sunsetbot:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "${BIND_ADDRESS:-127.0.0.1}:${PORT:-8787}:8787"
+    environment:
+      HOST: 0.0.0.0
+      PORT: 8787
+      DATA_DIR: /app/var
+      DAILY_WEATHER_BUDGET: ${DAILY_WEATHER_BUDGET:-1500}
+      UPSTREAM_TIMEOUT_MS: ${UPSTREAM_TIMEOUT_MS:-20000}
+      OPEN_METEO_API_KEY: ${OPEN_METEO_API_KEY:-}
+      HTTP_PROXY: ${SUNSETBOT_HTTP_PROXY:-}
+      HTTPS_PROXY: ${SUNSETBOT_HTTP_PROXY:-}
+      NO_PROXY: localhost,127.0.0.1
+    volumes:
+      - sunsetbot-data:/app/var
+volumes:
+  sunsetbot-data:

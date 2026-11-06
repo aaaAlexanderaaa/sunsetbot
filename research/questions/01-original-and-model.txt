@@ -1,0 +1,13 @@
+我在独立实现 sunsetbot.top，用户希望在长三角使用、上海优先，交付为可自托管网页、API和Docker。请像熟悉大气光学与数值天气预报的研究同行一样，调查原作者公开的预测算法资料，并建议一条真正接近原站能力、可逐步验证的独立实现路线。请直接使用你的检索与判断能力，给出可检查的来源链接。
+
+已经直接下载原站首页、about、knowledge、reanalysis页面。首页说使用NCEP-GFS/ECMWF云况和CAMS霾分布；鲜艳度考虑持续时间、亮度与颜色、格点云量/云相态/含水量、天空面积、云底高度、云层间照明和遮挡，以及AOD。首页还展示2022-06-24至2023-12-30上海ERA5再分析与观测的混淆矩阵。knowledge页把博客“天空的奇迹”链接到 https://www.sunsetbot.top/halo/。2026-11-06直接访问detailed页面返回HTTP 200，内容为Python异常字符串 'NoneType' object is not iterable；首页HTML仍可下载。网站页脚编辑日期2025-03-15仅用于页面版本识别，预测数据的新鲜度尚待检查。
+
+刚直接下载博客索引，找到原作者2026年三篇教程：
+https://www.sunsetbot.top/halo/posts/2026/huo-shao-yun-yu-bao-jiao-cheng-zhang-jie-yi/
+https://www.sunsetbot.top/halo/posts/2026/huo-shao-yun-yu-bao-jiao-cheng-zhang-jie-er-san/
+https://www.sunsetbot.top/halo/posts/2026/huo-shao-yun-yu-bao-jiao-cheng-zhang-jie-si/
+也直接读取了首页查询接口的上海今日日落GFS和EC响应：status均为ok，但img_summary均为“没有该时次的预报”，鲜艳度、事件时间、AOD全部为“-”。这是一项当前数据缺失观察，维护原因仍待核实。
+
+请重点研究：以上原作者教程及其他公开材料中是否存在更完整的计算推导、源代码、光路/截面图解释、数值指标定义及维护状态公告？若采用Open-Meteo免费GFS/ECMWF云量及CAMS AOD，哪些核心输入可获得，哪些需要NOAA GFS原始GRIB2或ECMWF/CAMS模型层数据来补足？使用层云量和代表高度的物理启发模型有哪些决定性误差，最值得优先补足什么数据或算法？请给出光路遮挡、地球阴影、正向与反太阳方向受光的可实现方法和可靠验证思路，明确官方/原作者事实与个人建模建议。请让重要的遗漏也能进入你的判断。用户愿意解决注册、免费额度和必要资源。
+
+材料全部为公开资料；你看不到本地文件或此前对话。请以文本回答并附来源链接。

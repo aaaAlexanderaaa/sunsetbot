@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+<title>晚霞分析与记录 | Rosy Cloud Analysis and Recording</title>
+
+    <meta name="description" content="火烧云分析数据可视化网站，提供全国主要城市的基于美国NCEP-GFS数值模式和欧洲CAMS大气组分模式的火烧云分析结果">
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/dark_custom.css" type="text/css">
+    <link rel="shortcut icon" href="/static/media/static_image/favicon.ico" type="image/icon">
+    <meta name="keywords" content="Evening Glow, Sunset, Sunrise, Cloud, Weather">
+</head>
+
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-lg navbar-dark custom-nav-bg-dark">
+        <div class="container-fluid">
+
+            <!-- 网站logo -->
+            
+            <a class="navbar-brand" href="/admin/login/">
+                <img src="/static/media/eveningGlow2021.jpg" alt="logo" style="height: 50px; width: 50px; border-radius: 5px;">
+            </a>
+            
+
+            <!-- 标题 -->
+            <span class="navbar-text me-3 nav-title" style="font-size: 1.75rem; font-weight: bold; color: #f5eec9;">
+                火烧云分析与记录
+            </span>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- 导航栏 -->
+              <!-- 获取当前路由的端点 -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto" style="font-size: 1.2rem; gap: 1rem;">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/">主页</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/detailed/">详情页</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/map/">地图</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/camera/">摄像头</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/record/">记录</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/reanalysis/">准确率</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/knowledge/">知识</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/about//">关于</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 内容区域 -->
+    
+    <!-- 内容区域 -->
+    <div class="container-fluid mt-5">
+        <div class="row mt-4">
+            <div class="col-auto">
+                <div class="card text-light">
+                    <div class="card-body card-body-rounded">
+                        <p class="card-text" style="font-size: 1.2rem;">火烧云分析用大气截面图（主要城市）。基于NCEP-GFS/ECMWF（云况信息）和 CAMS（霾分布）。GFS每天更新4次，大更新在7:30-8:30以及19:30-20:30，小更新（仅中东部、东北城市）出现在13:30和1:30。ECMWF 中东部每天也更新4次，分别在 4:00,10:00，16:00 和 22:00。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4 flex-nowrap">
+            <div class="col-auto">
+                <select class="form-select form-select-lg" id="event_selector">
+                    <option value="rise_1" >今天日出</option>
+                    <option value="set_1" selected>今天日落</option>
+                    <option value="rise_2" >明天日出</option>
+                    <option value="set_2" >明天日落</option>
+                </select>
+            </div>
+
+            <div class="col-auto">
+                <select class="form-select form-select-lg" id="model_selector">
+                    <option value="GFS" selected>数据源: GFS</option>
+                    <option value="EC" >数据源: EC</option>
+                </select>
+            </div>
+
+            <div class="col-auto d-flex gap-2">
+                <button class="btn btn-primary btn-lg" id="srch_btn">搜索</button>
+            </div>
+
+            <div class="col flex-grow-1 px-2"> <!-- px-2 添加左右内边距 -->
+                <input list="city_list" class="form-control form-control-lg" id="city_input" placeholder="上海" oninput="update_city_list();">
+                <datalist id="city_list"></datalist>
+            </div>
+
+            <div class="col-auto d-flex gap-2">
+                <button class="btn btn-custom-warning btn-lg" id="delete_btn">清除</button>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col">
+                <div class="card text-light">
+                    <!-- 1. 卡片头部：展示核心信息 -->
+                    <div class="card-header border-secondary mt-0 mb-0">
+                        <h5 class="h5-card-header">
+                            <!-- 城市和事件名 -->
+                            <span class="fw-bold fs-3" id="display_city_name_event_name"> </span>
+                            <!-- 日期放在右边 -->
+                            <span class="float-end fw-bold fs-3" id="tb_event_time">-</span>
+                        </h5>
+                    </div>
+
+                    <!-- 2. 卡片主体：使用无边框列表组展示详细数据 -->
+                    <div class="card-body p-2">
+                        <ul class="list-group list-group-flush">
+                            <!-- 使用 list-group-flush 去掉外边框，与卡片融为一体 -->
+                            <!-- d-flex 和 justify-content-between 实现左右布局 -->
+<!--                            边界颜色浅色-->
+                            <li class="list-group-item border-secondary custom-li-dark text-light d-flex justify-content-between align-items-center ">
+                                <span class="fw-bold" id="display_times_name"></span>
+                                <span class="fs-5" id="display_times_str"></span>
+                            </li>
+                            <li class="list-group-item border-secondary custom-li-dark text-light d-flex justify-content-between align-items-center">
+                                <span class="fw-bold">预报模型</span>
+                                <span class="fs-5" id="display_model"></span>
+                            </li>
+                            <li class="list-group-item border-secondary custom-li-dark text-light d-flex justify-content-between align-items-center">
+                                <span class="fw-bold">鲜艳度</span>
+                                <span class="fs-5" id="tb_quality">-</span>
+                            </li>
+                            <li class="list-group-item border-secondary custom-li-dark text-light d-flex justify-content-between align-items-center">
+                                <span class="fw-bold">气溶胶</span>
+                                <span class="fs-5" id="tb_aod">-</span>
+                            </li>
+                            <li class="list-group-item custom-li-dark text-light d-flex justify-content-between align-items-center">
+                                <span class="fw-bold">不确定性</span>
+                                <span class="text-muted">见专业版</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-4 mb-2 mb-md-0">  <!-- 响应式等宽 -->
+                <button class="btn btn-custom-primary btn-lg w-100" onclick="location.href='/detailed/'">详细预报</button>
+            </div>
+            <div class="col-md-4 mb-2 mb-md-0">
+                <button class="btn btn-custom-primary btn-lg w-100" id="custom_xsection" onclick="location.href='http://www.sunsetbot.top/static/media/static_image/default_rise.jpg'">大气截面</button>
+            </div>
+            <div class="col-md-4 mb-2">
+                <button class="btn btn-custom-primary btn-lg w-100" id="lab" onclick="location.href='/lab/'">悬日测试</button>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col">
+                <div class="card text-light">
+                    <div class="card-body card-body-rounded">
+
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="h5-card-header">准确率（Disclaimer）</h5>
+                            <button id="toggleAccuracyBtn" class="btn btn-sm btn-custom-primary" type="button" data-bs-toggle="collapse" data-bs-target="#accuracyDetails">
+                                展开
+                            </button>
+                        </div>
+
+                        <!-- 可折叠的内容区域 -->
+                        <div class="collapse" id="accuracyDetails">
+                            <div class="mt-1">
+
+                                <p class="card-text">
+                                    <br>火烧云预报结果仅供参考。以下图表为使用上海在 2022.6.24-2023.12.30 期间 ERA-5 再分析数据，根据当前算法统计的混淆矩阵。实际的 GFS 预测表现只会比这个更差，这是上限，可以感受一下。<br>
+                                    ● 左图按预报结果归一化，表格是竖着看的，即当预报质量为 XXX 时，实际观测到的火烧云质量概率为：不烧 XXX%，微烧 XXX%，小烧 XXX% ... 等；<br>
+                                    ● 右图按观测结果归一化，表格是横着看的，即当实际火烧云质量为 XXX 时，预报火烧云质量概率为：不烧 XXX%，微烧 XXX%，小烧 XXX% ... 等；
+                                </p>
+
+                                <div class="row mb-4">
+                                    <div class="col-md-6 mb-3 mb-md-0">
+                                        <div class="ratio ratio-1x1">
+                                            <img data-src="/static/media/static_image/CM_fcstnorm.jpg" alt="预报归一化" class="img-fluid rounded lazy-load">
+                                        </div>
+                                        <p class="text-center mt-2">按预报结果归一化的混淆矩阵</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="ratio ratio-1x1">
+                                            <img data-src="/static/media/static_image/CM_realnorm.jpg" alt="真实归一化" class="img-fluid rounded lazy-load">
+                                        </div>
+                                        <p class="text-center mt-2">按观测结果归一化的混淆矩阵</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row mt-4">
+            <div class="col">
+                <div class="card text-light">
+                    <div class="card-header border-secondary">
+                        <h5 class="h5-card-header">火烧云鲜艳度</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">火烧云的鲜艳度的计算会考虑以下几个方面因素：火烧云的持续时间、火烧云的亮度与颜色、火烧云的云量（包括格点云量、云相态与含水量）、火烧云占据本地天空的面积、云底高度、不同层次云层之间的照明与遮挡关系，以及气溶胶光学厚度/大气浑浊度（或者雾）。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col">
+                <div class="card text-light">
+                    <div class="card-header border-secondary">
+                        <h5 class="h5-card-header">AOD（气溶胶光学厚度/天空浑浊度）</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">AOD（气溶胶光学厚度/天空浑浊度）表明了气溶胶颗粒在垂直方向对光线的遮挡和散射效果。当气溶胶光学厚度较大的时候，天空中的光线在到达地面前会被气溶胶明显散射和吸收，导致天空颜色的饱和度与亮度下降，使得天空看起来污浊。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col">
+                <div class="card text-light">
+                    <div class="card-header border-secondary">
+                        <h5 class="card-title h5-card-header">支持我们</h5>
+                    </div>
+                    <div class="card-body">
+                        <iframe src="https://afdian.com/leaflet?slug=sunsetbot" width="100%" height="250" frameborder="0" class="custom-iframe"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 悬浮按钮 -->
+        <button title="翻车了?" class="float-button position-fixed bottom-0 start-0 m-3" onclick="location.href='https://www.wjx.cn/vm/tU8rXXw.aspx'">
+            <b>翻车了?</b>
+        </button>
+        <div id="qrcode-modal" class="position-fixed bottom-0 end-0 m-3 bg-white border shadow-lg rounded" style="z-index: 9999; heigth: 200px; width: 200px; padding: 15px;">
+            <button id="close-btn" class="btn-close position-absolute top-0 end-0 m-2" aria-label="Close"></button>
+            <a href="/static/media/static_image/qrcode.png" target="_blank">
+                <img src="/static/media/static_image/qrcode.png" style="margin-top: 30px;" alt="微信小程序二维码" class="img-fluid">
+            </a>
+            <p class="text-center mt-2 fs-7" style="color: #333; margin-bottom: 5px;">扫描二维码获取微信小程序</p>
+        </div>
+    </div>
+
+
+
+    <!-- 页脚 -->
+    <footer class="footer-custom-dark text-white mt-4">
+        <div class="container py-4">
+            <div class="row">
+                <div class="col text-center">
+                    <p><b>火烧云预测与记录</b><br><b>Copyright &copy;sunsetbot team</b>. All Rights Reserved.</p>
+                </div>
+                <div class="col text-center">
+                    <p>最近一次编辑日期：2025-03-15 16:00:31<br><a target="_blank" href="https://beian.miit.gov.cn/" class="text-white">沪ICP备2023021092号</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 引入 Bootstrap JS 和依赖 -->
+    <script src="/static/js/lib/popper.min.js"></script>
+    <script src="/static/js/lib/bootstrap.min.js"></script>
+
+    <!-- 自定义JS -->
+    
+    <script src="/static/js/lib/jquery-2.1.4.min.js"></script>
+    <script>
+      // 关闭按钮事件
+      document.getElementById('close-btn').addEventListener('click', () => {
+        document.getElementById('qrcode-modal').style.display = 'none';
+      });
+    </script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const collapseElement = document.getElementById('accuracyDetails');
+        const toggleButton = document.getElementById('toggleAccuracyBtn');
+
+        // 监听折叠展开事件
+        collapseElement.addEventListener('show.bs.collapse', function() {
+            toggleButton.textContent = '收起'; // 展开时改为"收起"
+        });
+
+        collapseElement.addEventListener('hide.bs.collapse', function() {
+            toggleButton.textContent = '展开'; // 折叠时恢复"展开"
+        });
+
+        // 动态加载图片的逻辑（可选）
+        collapseElement.addEventListener('shown.bs.collapse', function() {
+            const lazyImages = this.querySelectorAll('img.lazy-load');
+            lazyImages.forEach(img => {
+                if (!img.src) img.src = img.dataset.src;
+            });
+        });
+    });
+    </script>
+    <script type="text/javascript">
+
+		function rfa1d(fa, digits){
+			for(var i = 0; i < fa.length; i++) {fa[i] = fa[i].toFixed(digits);}
+			return fa;
+		}
+		function rfa2d(fa, digits) {
+			for(var i = 0; i < fa.length; i++){
+				for(var j = 0; j < fa[i].length; j++){
+					fa[i][j] = fa[i][j].toFixed(3);
+				}
+			}
+			return fa;
+		}
+
+		var query_id = "0";
+		function update_city_list(){
+			query_id = Math.floor((Math.random()*1000)+1).toString();
+			var city_name_incomplete = $("#city_input").val();
+			var intend = "change_city";
+			info = {query_id, intend, city_name_incomplete};
+			$.ajax(
+				{
+					url: "/",
+					type: "get",
+					data: info,
+					error: function(){
+						// alert("INTERNAL ERROR");
+					},
+					success: function(res){
+						if (res['query_id'] === query_id){
+							city_list_obj = document.querySelector('#city_list');
+							var sub = city_list_obj.childNodes;
+							for (var i = sub.length-1; i>=0 ; i--){
+								city_list_obj.removeChild(sub[i]);
+							}
+							max_length = 100;
+							json_data = res['city_list'];
+							if (max_length >= json_data.length){max_length=json_data.length;};
+							for (var i=0; i<max_length; i++){
+								var opt_obj = document.createElement("option");
+								opt_obj.value = json_data[i];
+								city_list_obj.appendChild(opt_obj);
+							}
+						}
+					}
+				}
+			)
+		}
+
+		function clear_input(){
+			$('#city_input').val('');
+		}
+
+		function update_graph(){
+			// 正常一般的请求
+			query_id = Math.floor((Math.random()*10000000)+1).toString();
+			var intend = "select_city";
+			var srch_btn = document.getElementById("srch_btn");
+			var event = $("#event_selector").val();
+			var query_city = $("#city_input").val();
+			var model = $("#model_selector").val();
+			var event_date = "None";
+			var times = "None";
+			var comma = ",";
+
+			info = {query_id, intend, query_city, event_date, event, times, model};
+			$.ajax({url: "/",
+				type: "get",
+				data: info,
+				error: function(){alert("INTERNAL ERROR");},
+				success: function(res){
+					if (res['status'] == 'not_found'){alert("NO DATA");}
+					if (res['query_id'] === query_id){
+
+						// update description
+						// var obj_fcst_des = document.getElementById("fcst_des");
+						// obj_fcst_des.setAttribute("href", res["img_href"]);
+						// obj_fcst_des.innerHTML = res["img_summary"];
+						var custom_xsection_btn = document.getElementById("custom_xsection");
+						custom_xsection_btn.setAttribute("onclick", "location.href='"+res["img_href"]+"'")
+
+						// update detailed table
+                        var display_city_name_event_name = document.getElementById("display_city_name_event_name");
+                        display_city_name_event_name.innerHTML = res['display_city_name'] + " " + res['display_event_name_cn'];
+                        var display_times_name = document.getElementById("display_times_name");
+                        display_times_name.innerHTML = res['display_times_name'];
+                        var display_times_str = document.getElementById("display_times_str");
+						display_times_str.innerHTML = res['display_times_str'];
+                        var display_model = document.getElementById("display_model");
+                        display_model.innerHTML = res['display_model'];
+
+						// update place-holder
+						var object_city_input = document.getElementById("city_input");
+						object_city_input.setAttribute("placeholder", res["place_holder"]);
+
+						// update table
+						var tb_event_time = document.getElementById("tb_event_time");
+						var tb_quality = document.getElementById("tb_quality");
+						var tb_aod = document.getElementById("tb_aod");
+						tb_event_time.innerHTML = res["tb_event_time"];
+						tb_quality.innerHTML = res["tb_quality"];
+						tb_aod.innerHTML = res["tb_aod"];
+
+						// 添加高亮效果
+                        tb_event_time.classList.add("highlight");
+                        tb_quality.classList.add("highlight");
+                        tb_aod.classList.add("highlight");
+
+                        // 1秒后移除高亮效果
+                        setTimeout(function() {
+                            tb_event_time.classList.remove("highlight");
+                            tb_quality.classList.remove("highlight");
+                            tb_aod.classList.remove("highlight");
+                        }, 1000);
+
+					}
+				},
+			});
+		}
+
+		// main selection
+		$(document).ready(function(){
+			$("#delete_btn").click(function(){clear_input();});
+			$("#srch_btn").click(function(){update_graph();});
+			$("#city_input").keypress(
+				function(event){
+					if(event.keyCode === 13){update_graph();}
+				}
+			);
+			$("#event_selector").change(function(){update_graph();});
+			$("#model_selector").change(function(){update_graph();});
+		});
+    </script>
+
+</body>
+
+</html>
