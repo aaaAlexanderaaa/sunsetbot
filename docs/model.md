@@ -158,3 +158,9 @@ fixed lead. ERA5 cloud/water/ice plus CAMS reanalysis can isolate the weather
 input error further; run/lead-preserving archives support prospective forecast
 skill evaluation. Source labels, missing dates and original-image provenance
 retain their limits in the historical evidence record.
+
+The [reanalysis access guide](reanalysis-access.md) now supplies the verified
+free CDS/ADS route, exact requests and three owner account steps. An anonymous
+ARCO cloud-object access probe and decoded grid are preserved. Official regional
+retrieval and the frozen ERA5 comparison follow account configuration; native
+cloud-water/scattering changes retain separate development ownership.

@@ -79,7 +79,7 @@ counting by location/variables. The application has its own smaller budget.
 
 ## Ask ChatGPT MCP
 
-Four self-contained, isolated questions use the owner's configured
+Six self-contained, isolated questions use the owner's configured
 `ask_chatgpt` MCP and account model/thinking settings. The actual questions,
 raw HTML/JSON responses and extracted reading copies are retained:
 
@@ -89,6 +89,8 @@ raw HTML/JSON responses and extracted reading copies are retained:
 | [Implementation review](questions/02-engine-review.txt) | [raw](chatgpt/02-engine-review.json), [reading copy](chatgpt/02-engine-review.md); cloud fraction/opacity conflation, fixed geometry and missing-data output issues |
 | [Revised-engine review](questions/03-revised-engine-review.txt) | [raw](chatgpt/03-revised-engine-review.json), [reading copy](chatgpt/03-revised-engine-review.md); incorrect target conditioning and cloud-base/opacity inconsistency |
 | [Focused probability review](questions/04-probability-review.txt) | [raw](chatgpt/04-probability-review.json), [reading copy](chatgpt/04-probability-review.md); confirms the stated conditional Markov integral and exposed-base areas, identifies threshold-merging and shortened-path risks |
+| [Historical validation review](questions/05-historical-validation.txt) | [raw](chatgpt/05-historical-validation.json), [reading copy](chatgpt/05-historical-validation.md); identifies cloud-target/scattering errors and a frozen historical evaluation route |
+| [Reanalysis data access](questions/06-data-acquisition.txt) | [raw](chatgpt/06-data-acquisition.json), [reading copy](chatgpt/06-data-acquisition.md); recommends official regional CDS/ADS retrieval and concrete account steps |
 
 The owner authorized relevant newly authored source for these assessments.
 Every question includes the required implementation/context. Model answers are
@@ -164,3 +166,20 @@ Original [map](sources/history-examples/2023-06-03-regional-map.jpg) and
 illustrate the planar versus vertical geometry. The linked section's run header
 says GFS 2025-05-01 20Z while its side panel says 2023-06-03. Its input provenance
 therefore remains unresolved; it serves only as layout evidence in this study.
+
+## Reanalysis access follow-up (2026-11-06)
+
+The [data-access guide](../docs/reanalysis-access.md) selects free official CDS
+ERA5 plus ADS CAMS EAC4, with exact regional request files and a resumable
+downloader. ECMWF confirms one shared account/token across both stores;
+each dataset's licence is accepted manually. A full first block has about
+253 MB of regional raw ERA5 values, plus AOD, before packing.
+
+An anonymous Google Research ARCO route was also verified against actual
+[metadata](sources/reanalysis-access/arco-zmetadata.json), decoded coordinates
+and a [cloud-object range receipt](reanalysis/arco-20230609T21Z-access-probe.json).
+This store chunks each variable/hour globally; the first cloud chunk is
+26.5 MB compressed. Slow actual local transfers led to a bounded access probe
+and the official regional route as the bulk recommendation. Full numerical
+cloud-array retrieval and authenticated official requests retain pending status
+until the account steps are completed. The model remains frozen at 0.3.1.

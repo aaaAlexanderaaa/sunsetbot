@@ -13,6 +13,9 @@ observed essentially no glow, index 46.3) and weaker ranking than a simple
 cloud-layer baseline. The complete 20-event returned slice has ranking AUC 0.667 versus 0.922
 for that baseline; it includes a labeled-zero sunrise given 83.1.
 See the [continuous historical pilot](research/backtests/shanghai-2023-06-all/report.md).
+The [reanalysis access guide](docs/reanalysis-access.md) includes verified free
+CDS/ADS sources, exact regional requests, an anonymous mirror access probe,
+and the three account steps needed for the next frozen-input comparison.
 Engineering regression/replay and empirical prediction skill retain separate
 evidence. Cloud-target reconstruction and cloud scattering require priority
 review before relying on the numerical index for outings.

@@ -46,3 +46,6 @@ effect separately, and keep unresolved work at its existing owner.
   missingness and model-run/lead provenance; engineering and mathematical
   regression evidence have their own coverage. Evaluate revised physics on
   held-out dates after using diagnostic failures for development.
+- Investigate resource access and prepare exact fields, request files and user
+  setup steps before requesting an account. Use substantive Ask ChatGPT
+  collaboration alongside primary-source verification and bounded real probes.

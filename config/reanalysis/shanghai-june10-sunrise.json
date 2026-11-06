@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "purpose": "Input acceptance for the 2023-06-10 Shanghai sunrise diagnostic failure. UTC samples bracket the event window; cloud optics remain frozen.",
+  "jobs": [
+    {
+      "id": "era5-shanghai-20230609-20-22utc",
+      "dataset": "reanalysis-era5-pressure-levels",
+      "request": {
+        "product_type": ["reanalysis"],
+        "variable": [
+          "fraction_of_cloud_cover",
+          "specific_cloud_liquid_water_content",
+          "specific_cloud_ice_water_content",
+          "temperature",
+          "geopotential"
+        ],
+        "year": ["2023"],
+        "month": ["06"],
+        "day": ["09"],
+        "time": ["20:00", "21:00", "22:00"],
+        "pressure_level": ["1000", "925", "850", "700", "600", "500", "400", "300", "250", "200", "150"],
+        "area": [38, 110, 26, 132],
+        "data_format": "grib",
+        "download_format": "unarchived"
+      }
+    },
+    {
+      "id": "eac4-shanghai-20230609-10",
+      "dataset": "cams-global-reanalysis-eac4",
+      "request": {
+        "variable": ["total_aerosol_optical_depth_550nm"],
+        "date": "2023-06-09/2023-06-10",
+        "time": ["00:00", "18:00", "21:00"],
+        "area": [38, 110, 26, 132],
+        "data_format": "grib"
+      }
+    }
+  ]
+}
