@@ -40,3 +40,9 @@ effect separately, and keep unresolved work at its existing owner.
   and relevant failure/recovery behavior before claiming a working delivery.
 - A score is a model index. Report calibration status and uncertainty next to
   it. Accuracy claims require held-out observations and preserved provenance.
+
+- Historical evaluation uses public observed labels, frozen parameters and a
+  simple baseline before asking the owner to collect new observations. Preserve
+  missingness and model-run/lead provenance; engineering and mathematical
+  regression evidence have their own coverage. Evaluate revised physics on
+  held-out dates after using diagnostic failures for development.

@@ -5,6 +5,18 @@ the Yangtze River Delta, starting with Shanghai. It uses actual Open-Meteo
 GFS/ECMWF weather forecasts and CAMS aerosol data, with a spherical-Earth
 illumination and viewing-path model.
 
+## Scientific status
+
+The current 0.3.1 index is a research diagnostic. A frozen six-event historical
+challenge already found a severe false positive (Shanghai sunset 2023-06-08:
+observed essentially no glow, index 46.3) and weaker ranking than a simple
+cloud-layer baseline. The complete 20-event returned slice has ranking AUC 0.667 versus 0.922
+for that baseline; it includes a labeled-zero sunrise given 83.1.
+See the [continuous historical pilot](research/backtests/shanghai-2023-06-all/report.md).
+Engineering regression/replay and empirical prediction skill retain separate
+evidence. Cloud-target reconstruction and cloud scattering require priority
+review before relying on the numerical index for outings.
+
 ## Run
 
 ```sh
@@ -87,6 +99,9 @@ forecast/source retention status are also exposed.
 npm test
 node scripts/replay.mjs gfs
 node scripts/replay.mjs ecmwf
+# Historical observation comparison; local replay uses preserved inputs:
+node scripts/backtest.mjs
+node scripts/backtest.mjs --all
 # Earlier single-bearing source captures are also preserved:
 node scripts/replay.mjs gfs --legacy
 docker compose logs --tail=100 sunsetbot

@@ -20,9 +20,11 @@ Its availability and proprietary forecast outputs are independent of runtime.
 - `src/cache.mjs`: bounded atomic disk cache and request coalescing.
 - `src/archive.mjs`: bounded forecast/source retention for observation pairing.
 - `src/service.mjs`: input validation, orchestration and API result ownership.
+- `src/evaluation.mjs`: observed-label integrity, case selection and ranking metrics.
 - `src/server.mjs`: HTTP routing, static assets and process lifecycle.
 - `web/`: Chinese interface projecting the API result.
-- `scripts/`: public-source capture, MCP research and verification commands.
+- `scripts/`: public-source capture, MCP research, frozen historical comparison
+  and offline verification commands.
 - `research/`: public snapshots, source manifest and source-grounded findings.
 - `var/`: local runtime cache and observations, excluded from version control.
 

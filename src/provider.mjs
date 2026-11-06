@@ -70,7 +70,9 @@ export class WeatherProvider {
       if (!response.ok) {
         throw new AppError('UPSTREAM_HTTP', `天气服务返回 ${response.status}，请稍后重新获取。`, 503);
       }
-      const body = await response.text();
+      let body;
+      try { body = await response.text(); }
+      catch { throw new AppError('UPSTREAM_UNAVAILABLE', '天气数据读取超时或中断，请稍后重新获取。'); }
       if (body.length > 12 * 1024 * 1024) throw new AppError('UPSTREAM_SIZE', '天气响应超出容量限制。');
       try { return JSON.parse(body); }
       catch { throw new AppError('UPSTREAM_FORMAT', '天气服务返回了无法解析的数据，请稍后重新获取。'); }
@@ -78,24 +80,28 @@ export class WeatherProvider {
     this.queue = operation.catch(() => {});
     return operation;
   }
-  async weather(points, model, startDate, endDate) {
-    const url = new URL(`https://${this.apiKey ? 'customer-api' : 'api'}.open-meteo.com/v1/${model === 'gfs' ? 'gfs' : 'ecmwf'}`);
+  async weather(points, model, startDate, endDate, { historical = false, startHour, endHour } = {}) {
+    const host = historical ? 'historical-forecast-api' : this.apiKey ? 'customer-api' : 'api';
+    const endpoint = historical ? 'forecast' : model === 'gfs' ? 'gfs' : 'ecmwf';
+    const url = new URL(`https://${host}.open-meteo.com/v1/${endpoint}`);
     const parameters = {
       latitude: points.map(p => p.lat).join(','), longitude: points.map(p => p.lon).join(','),
       hourly: WEATHER_FIELDS.join(','), timezone: 'GMT', timeformat: 'unixtime',
-      start_date: startDate, end_date: endDate, cell_selection: 'nearest',
-      ...(model === 'ecmwf' ? { models: 'ecmwf_ifs025' } : {}),
+      ...(historical && startHour && endHour ? { start_hour: startHour, end_hour: endHour } : { start_date: startDate, end_date: endDate }),
+      cell_selection: 'nearest',
+      ...(historical ? { models: model === 'gfs' ? 'gfs_global' : 'ecmwf_ifs025' } : model === 'ecmwf' ? { models: 'ecmwf_ifs025' } : {}),
     };
     for (const [k, v] of Object.entries(parameters)) url.searchParams.set(k, v);
     const key = url.toString();
-    if (this.apiKey) url.searchParams.set('apikey', this.apiKey);
+    // Research history requests use the documented public archive origin.
+    if (this.apiKey && !historical) url.searchParams.set('apikey', this.apiKey);
     return this.cache.load(key, async () => {
       const data = await this.request(url, points.length * Math.ceil(WEATHER_FIELDS.length / 10));
       const rows = Array.isArray(data) ? data : [data];
       if (rows.length !== points.length) throw new AppError('UPSTREAM_LOCATION_COUNT', '天气数据中的采样点数量发生变化，请重新获取。');
       rows.forEach((row, index) => this.validate(row, points[index]));
       return rows;
-    });
+    }, historical ? { ttl: 365 * 86400000, staleFor: 365 * 86400000 } : undefined);
   }
   validate(row, point) {
     const h = row.hourly, units = row.hourly_units;

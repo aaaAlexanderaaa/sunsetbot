@@ -1,0 +1,1059 @@
+{
+  "generatedAt": "2026-11-06T13:06:04.690Z",
+  "modelVersion": "section-optics-0.3.1",
+  "codeSha256": "f80a37d9a92cb2a421fda2599af9e336e2261d7b4a49980159a931be5e28e71f",
+  "selection": {
+    "selectedAt": "2026-11-06T12:54:33.137Z",
+    "modelVersion": "section-optics-0.3.1",
+    "codeSha256": "f80a37d9a92cb2a421fda2599af9e336e2261d7b4a49980159a931be5e28e71f",
+    "assumptions": {
+      "earthRadiusKm": 6371,
+      "molecularScaleHeightKm": 8,
+      "molecularExtinction550PerKm": 0.012,
+      "aerosolScaleHeightsKm": [
+        0.8,
+        1.5,
+        3
+      ],
+      "aerosolAngstromExponent": 1.2,
+      "conditionalCloudExtinctionPerKm": {
+        "low": 2,
+        "mid": 0.7,
+        "high": 0.2
+      },
+      "cloudOverlap": [
+        "decorrelated",
+        "maximum",
+        "random-columns"
+      ],
+      "cloudHorizontalCorrelationLengthKm": 50,
+      "profileCloudThreshold": 0.15,
+      "minimumViewElevationDegrees": 0.5,
+      "maximumTargetDistanceKm": 300,
+      "solarRayStepKm": 4,
+      "viewingRayStepKm": 0.5,
+      "timelineStepMinutes": 5,
+      "qualityScale": "independent heuristic 0–100",
+      "calibration": "experimental"
+    },
+    "labelSource": "research/sources/history/shanghai-2023-06-labels.json",
+    "labelSourceSha256": "91dee3b2a0102f37200af6dcc9b21e4b7bac68e63af45b57e04c22dd9a906e07",
+    "observedRows": 20,
+    "excludedRows": [],
+    "requestedRange": [
+      "2023-06-01",
+      "2023-06-30"
+    ],
+    "actualReturnedRange": [
+      "2023-06-01",
+      "2023-06-10"
+    ],
+    "design": "All 20 returned labels across the continuous 2023-06-01..2023-06-10 block, including all same-day sunrise/sunset controls. Model parameters remain frozen after the initial challenge.",
+    "evaluation": "Continuous returned-event pilot using stitched short-lead forecast archives; fixed-lead predictive skill remains separate.",
+    "baseline": "max(mid_cloud_percent,high_cloud_percent)*(1-low_cloud_percent/100) at the solar event instant",
+    "cases": [
+      {
+        "id": "2023-06-01-sunrise",
+        "date": "2023-06-01",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306010000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230601_rise.jpg"
+      },
+      {
+        "id": "2023-06-01-sunset",
+        "date": "2023-06-01",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306010000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230601_set.jpg"
+      },
+      {
+        "id": "2023-06-02-sunrise",
+        "date": "2023-06-02",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306020000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230602_rise.jpg"
+      },
+      {
+        "id": "2023-06-02-sunset",
+        "date": "2023-06-02",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306020000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230602_set.jpg"
+      },
+      {
+        "id": "2023-06-03-sunrise",
+        "date": "2023-06-03",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306030000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230603_rise.jpg"
+      },
+      {
+        "id": "2023-06-03-sunset",
+        "date": "2023-06-03",
+        "eventType": "sunset",
+        "observedGrade": 3,
+        "observedLabel": "小到中烧",
+        "observedCloud": "卷层云",
+        "observedColour": "橘红色",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "https://weibo.com/3169171125/N3DJwplJK",
+        "originalMap": "/static/media/ERA5/202306030000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230603_set.jpg"
+      },
+      {
+        "id": "2023-06-04-sunrise",
+        "date": "2023-06-04",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306040000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230604_rise.jpg"
+      },
+      {
+        "id": "2023-06-04-sunset",
+        "date": "2023-06-04",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306040000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230604_set.jpg"
+      },
+      {
+        "id": "2023-06-05-sunrise",
+        "date": "2023-06-05",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306050000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230605_rise.jpg"
+      },
+      {
+        "id": "2023-06-05-sunset",
+        "date": "2023-06-05",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306050000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230605_set.jpg"
+      },
+      {
+        "id": "2023-06-06-sunrise",
+        "date": "2023-06-06",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306060000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230606_rise.jpg"
+      },
+      {
+        "id": "2023-06-06-sunset",
+        "date": "2023-06-06",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306060000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230606_set.jpg"
+      },
+      {
+        "id": "2023-06-07-sunrise",
+        "date": "2023-06-07",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "微烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306070000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230607_rise.jpg"
+      },
+      {
+        "id": "2023-06-07-sunset",
+        "date": "2023-06-07",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306070000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230607_set.jpg"
+      },
+      {
+        "id": "2023-06-08-sunrise",
+        "date": "2023-06-08",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306080000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230608_rise.jpg"
+      },
+      {
+        "id": "2023-06-08-sunset",
+        "date": "2023-06-08",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "微烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306080000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230608_set.jpg"
+      },
+      {
+        "id": "2023-06-09-sunrise",
+        "date": "2023-06-09",
+        "eventType": "sunrise",
+        "observedGrade": 4,
+        "observedLabel": "中到大烧",
+        "observedCloud": "卷云",
+        "observedColour": "橘红色,橘色",
+        "originalPrediction": "小烧",
+        "evidenceUrls": "https://weibo.com/5538010841/N4rhsFnuZ",
+        "originalMap": "/static/media/ERA5/202306090000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230609_rise.jpg"
+      },
+      {
+        "id": "2023-06-09-sunset",
+        "date": "2023-06-09",
+        "eventType": "sunset",
+        "observedGrade": 3,
+        "observedLabel": "小到中烧",
+        "observedCloud": "卷云",
+        "observedColour": "橘黄色,橘色,橘红色",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "https://weibo.com/5538010841/N4x498V8i",
+        "originalMap": "/static/media/ERA5/202306090000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230609_set.jpg"
+      },
+      {
+        "id": "2023-06-10-sunrise",
+        "date": "2023-06-10",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "微烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306100000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230610_rise.jpg"
+      },
+      {
+        "id": "2023-06-10-sunset",
+        "date": "2023-06-10",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "小烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306100000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230610_set.jpg"
+      }
+    ]
+  },
+  "cases": [
+    {
+      "id": "2023-06-01-sunrise",
+      "date": "2023-06-01",
+      "eventType": "sunrise",
+      "observedGrade": 0,
+      "observedLabel": "基本不烧",
+      "observedCloud": "-",
+      "observedColour": "-",
+      "originalPrediction": "基本不烧",
+      "evidenceUrls": "-",
+      "originalMap": "/static/media/ERA5/202306010000_rise.jpg",
+      "originalSection": "/static/media/ERA5/上海市_20230601_rise.jpg",
+      "score": 0.6,
+      "baselineScore": 0,
+      "modelVersion": "section-optics-0.3.1",
+      "aod": 0.27,
+      "pathCoverage": "within-sampling",
+      "peakTime": "2023-05-31T21:32:21.020Z",
+      "aerosolSensitivity": {
+        "minimum": 0.6,
+        "maximum": 0.7,
+        "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+      },
+      "cloudOverlapSensitivity": {
+        "minimum": 0.6,
+        "maximum": 0.6,
+        "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+      },
+      "localCloud": {
+        "low": 100,
+        "mid": 0,
+        "high": 4.3625277777512865
+      },
+      "inputFile": "research/backtests/shanghai-2023-06-all/2023-06-01-sunrise.json",
+      "fixedLeadHours": null
+    },
+    {
+      "id": "2023-06-01-sunset",
+      "date": "2023-06-01",
+      "eventType": "sunset",
+      "observedGrade": 0,
+      "observedLabel": "基本不烧",
+      "observedCloud": "-",
+      "observedColour": "-",
+      "originalPrediction": "基本不烧",
+      "evidenceUrls": "-",
+      "originalMap": "/static/media/ERA5/202306010000_set.jpg",
+      "originalSection": "/static/media/ERA5/上海市_20230601_set.jpg",
+      "score": 0,
+      "baselineScore": 0,
+      "modelVersion": "section-optics-0.3.1",
+      "aod": 0.406,
+      "pathCoverage": "within-sampling",
+      "peakTime": null,
+      "aerosolSensitivity": {
+        "minimum": 0,
+        "maximum": 0,
+        "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+      },
+      "cloudOverlapSensitivity": {
+        "minimum": 0,
+        "maximum": 0,
+        "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+      },
+      "localCloud": {
+        "low": 11.058982222146458,
+        "mid": 0,
+        "high": 0
+      },
+      "inputFile": "research/backtests/shanghai-2023-06-all/2023-06-01-sunset.json",
+      "fixedLeadHours": null
+    },
+    {
+      "id": "2023-06-02-sunrise",
+      "date": "2023-06-02",
+      "eventType": "sunrise",
+      "observedGrade": 0,
+      "observedLabel": "基本不烧",
+      "observedCloud": "-",
+      "observedColour": "-",
+      "originalPrediction": "基本不烧",
+      "evidenceUrls": "-",
+      "originalMap": "/static/media/ERA5/202306020000_rise.jpg",
+      "originalSection": "/static/media/ERA5/上海市_20230602_rise.jpg",
+      "score": 0,
+      "baselineScore": 0,
+      "modelVersion": "section-optics-0.3.1",
+      "aod": 0.463,
+      "pathCoverage": "within-sampling",
+      "peakTime": null,
+      "aerosolSensitivity": {
+        "minimum": 0,
+        "maximum": 0,
+        "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+      },
+      "cloudOverlapSensitivity": {
+        "minimum": 0,
+        "maximum": 0,
+        "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+      },
+      "localCloud": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "inputFile": "research/backtests/shanghai-2023-06-all/2023-06-02-sunrise.json",
+      "fixedLeadHours": null
+    },
+    {
+      "id": "2023-06-02-sunset",
+      "date": "2023-06-02",
+      "eventType": "sunset",
+      "observedGrade": 0,
+      "observedLabel": "基本不烧",
+      "observedCloud": "-",
+      "observedColour": "-",
+      "originalPrediction": "基本不烧",
+      "evidenceUrls": "-",
+      "originalMap": "/static/media/ERA5/202306020000_set.jpg",
+      "originalSection": "/static/media/ERA5/上海市_20230602_set.jpg",
+      "score": 0,
+      "baselineScore": 4.56,
+      "modelVersion": "section-optics-0.3.1",
+      "aod": 1.151,
+      "pathCoverage": "extrapolated",
+      "peakTime": null,
+      "aerosolSensitivity": {
+        "minimum": 0,
+        "maximum": 0,
+        "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+      },
+      "cloudOverlapSensitivity": {
+        "minimum": 0,
+        "maximum": 0,
+        "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+      },
+      "localCloud": {
+        "low": 0,
+        "mid": 0,
+        "high": 4.564844444394112
+      },
+      "inputFile": "research/backtests/shanghai-2023-06/2023-06-02-sunset.json",
+      "fixedLeadHours": null
+    },
+    {
+      "id": "2023-06-03-sunrise",
+      "date": "2023-06-03",
+      "eventType": "sunrise",
+      "observedGrade": 0,
+      "observedLabel": "基本不烧",
+      "observedCloud": "-",
+      "observedColour": "-",
+      "originalPrediction": "基本不烧",
+      "evidenceUrls": "-",
+      "originalMap": "/static/media/ERA5/202306030000_rise.jpg",
+      "originalSection": "/static/media/ERA5/上海市_20230603_rise.jpg",
+      "score": 0.7,
+      "baselineScore": 72.61,
+      "modelVersion": "section-optics-0.3.1",
+      "aod": 1.346,
+      "pathCoverage": "within-sampling",
+      "peakTime": "2023-06-02T21:31:51.646Z",
+      "aerosolSensitivity": {
+        "minimum": 0.3,
+        "maximum": 0.9,
+        "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+      },
+      "cloudOverlapSensitivity": {
+        "minimum": 0.7,
+        "maximum": 0.7,
+        "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+      },
+      "localCloud": {
+        "low": 16.643461110856798,
+        "mid": 87.11288055313959,
+        "high": 0
+      },
+      "inputFile": "research/backtests/shanghai-2023-06-all/2023-06-03-sunrise.json",
+      "fixedLeadHours": null
+    },
+    {
+      "id": "2023-06-03-sunset",
+      "date": "2023-06-03",
+      "eventType": "sunset",
+      "observedGrade": 3,
+      "observedLabel": "小到中烧",
+      "observedCloud": "卷层云",
+      "observedColour": "橘红色",
+      "originalPrediction": "基本不烧",
+      "evidenceUrls": "https://weibo.com/3169171125/N3DJwplJK",
+      "originalMap": "/static/media/ERA5/202306030000_set.jpg",
+      "originalSection": "/static/media/ERA5/上海市_20230603_set.jpg",
+      "score": 36.4,
+      "baselineScore": 100,
+      "modelVersion": "section-optics-0.3.1",
+      "aod": 0.58,
+      "pathCoverage": "extrapolated",
+      "peakTime": "2023-06-03T10:15:19.202Z",
+      "aerosolSensitivity": {
+        "minimum": 35.6,
+        "maximum": 36.5,
+        "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+      },
+      "cloudOverlapSensitivity": {
+        "minimum": 36.4,
+        "maximum": 36.4,
+        "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+      },
+      "localCloud": {
+        "low": 0,
+        "mid": 4.6100027776426735,
+        "high": 100
+      },
+      "inputFile": "research/backtests/shanghai-2023-06/2023-06-03-sunset.json",
+      "fixedLeadHours": null
+    },
+    {
+      "id": "2023-06-04-sunrise",
+      "date": "2023-06-04",
+      "eventType": "sunrise",
+      "observedGrade": 0,
+      "observedLabel": "基本不烧",
+      "observedCloud": "-",
+      "observedColour": "-",
+      "originalPrediction": "基本不烧",
+      "evidenceUrls": "-",
+      "originalMap": "/static/media/ERA5/202306040000_rise.jpg",
+      "originalSection": "/static/media/ERA5/上海市_20230604_rise.jpg",
+      "score": 43.5,
+      "baselineScore": 100,
+      "modelVersion": "section-optics-0.3.1",
+      "aod": 0.972,
+      "pathCoverage": "extrapolated",
+      "peakTime": "2023-06-03T20:51:39.080Z",
+      "aerosolSensitivity": {
+        "minimum": 11.5,
+        "maximum": 58.6,
+        "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+      },
+      "cloudOverlapSensitivity": {
+        "minimum": 41.3,
+        "maximum": 47.8,
+        "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+      },
+      "localCloud": {
+        "low": 0,
+        "mid": 53.0167888879776,
+        "high": 100
+      },
+      "inputFile": "research/backtests/shanghai-2023-06-all/2023-06-04-sunrise.json",
+      "fixedLeadHours": null
+    },
+    {
+      "id": "2023-06-04-sunset",
+      "date": "2023-06-04",
+      "eventType": "sunset",
+      "observedGrade": 0,
+      "observedLabel": "基本不烧",
+      "observedCloud": "-",
+      "observedColour": "-",
+      "originalPrediction": "基本不烧",
+      "evidenceUrls": "-",
+      "originalMap": "/static/media/ERA5/202306040000_set.jpg",
+      "originalSection": "/static/media/ERA5/上海市_20230604_set.jpg",
+      "score": 65.3,
+      "baselineScore": 79.81,
+      "modelVersion": "section-optics-0.3.1",
+      "aod": 0.784,
+      "pathCoverage": "within-sampling",
+      "peakTime": "2023-06-04T10:55:50.934Z",
+      "aerosolSensitivity": {
+        "minimum": 22,
+        "maximum": 69.3,
+        "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+      },
+      "cloudOverlapSensitivity": {
+        "minimum": 61.5,
+        "maximum": 71.7,
+        "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+      },
+      "localCloud": {
+        "low": 14.893040000067817,
+        "mid": 5,
+        "high": 93.77335000038147
+      },
+      "inputFile": "research/backtests/shanghai-2023-06-all/2023-06-04-sunset.json",
+      "fixedLeadHours": null
+    },
+    {
+      "id": "2023-06-05-sunrise",
+      "date": "2023-06-05",
+      "eventType": "sunrise",
+      "observedGrade": 0,
+      "observedLabel": "基本不烧",
+      "observedCloud": "-",
+      "observedColour": "-",
+      "originalPrediction": "基本不烧",
+      "evidenceUrls": "-",
+      "originalMap": "/static/media/ERA5/202306050000_rise.jpg",
+      "originalSection": "/static/media/ERA5/上海市_20230605_rise.jpg",
+      "score": 57.2,
+      "baselineScore": 0,
+      "modelVersion": "section-optics-0.3.1",
+      "aod": 1.046,
+      "pathCoverage": "extrapolated",
+      "peakTime": "2023-06-04T20:51:27.928Z",
+      "aerosolSensitivity": {
+        "minimum": 32.8,
+        "maximum": 58.6,
+        "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+      },
+      "cloudOverlapSensitivity": {
+        "minimum": 55.2,
+        "maximum": 57.2,
+        "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+      },
+      "localCloud": {
+        "low": 100,
+        "mid": 0,
+        "high": 26.232831111749007
+      },
+      "inputFile": "research/backtests/shanghai-2023-06-all/2023-06-05-sunrise.json",
+      "fixedLeadHours": null
+    },
+    {
+      "id": "2023-06-05-sunset",
+      "date": "2023-06-05",
+      "eventType": "sunset",
+      "observedGrade": 0,
+      "observedLabel": "基本不烧",
+      "observedCloud": "-",
+      "observedColour": "-",
+      "originalPrediction": "基本不烧",
+      "evidenceUrls": "-",
+      "originalMap": "/static/media/ERA5/202306050000_set.jpg",
+      "originalSection": "/static/media/ERA5/上海市_20230605_set.jpg",
+      "score": 2.1,
+      "baselineScore": 17.21,
+      "modelVersion": "section-optics-0.3.1",
+      "aod": 0.787,
+      "pathCoverage": "extrapolated",
+      "peakTime": "2023-06-05T10:51:21.853Z",
+      "aerosolSensitivity": {
+        "minimum": 1.4,
+        "maximum": 2.2,
+        "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+      },
+      "cloudOverlapSensitivity": {
+        "minimum": 0,
+        "maximum": 2.1,
+        "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+      },
+      "localCloud": {
+        "low": 27.999680834015212,
+        "mid": 5,
+        "high": 23.908307501673704
+      },
+      "inputFile": "research/backtests/shanghai-2023-06-all/2023-06-05-sunset.json",
+      "fixedLeadHours": null
+    },
+    {
+      "id": "2023-06-06-sunrise",
+      "date": "2023-06-06",
+      "eventType": "sunrise",
+      "observedGrade": 0,
+      "observedLabel": "基本不烧",
+      "observedCloud": "-",
+      "observedColour": "-",
+      "originalPrediction": "基本不烧",
+      "evidenceUrls": "-",
+      "originalMap": "/static/media/ERA5/202306060000_rise.jpg",
+      "originalSection": "/static/media/ERA5/上海市_20230606_rise.jpg",
+      "score": 3.1,
+      "baselineScore": 0,
+      "modelVersion": "section-optics-0.3.1",
+      "aod": 0.443,
+      "pathCoverage": "within-sampling",
+      "peakTime": "2023-06-05T20:51:18.187Z",
+      "aerosolSensitivity": {
+        "minimum": 0.9,
+        "maximum": 5.2,
+        "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+      },
+      "cloudOverlapSensitivity": {
+        "minimum": 1.7,
+        "maximum": 3.2,
+        "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+      },
+      "localCloud": {
+        "low": 100,
+        "mid": 90.43342833399774,
+        "high": 87.17422083318233
+      },
+      "inputFile": "research/backtests/shanghai-2023-06-all/2023-06-06-sunrise.json",
+      "fixedLeadHours": null
+    },
+    {
+      "id": "2023-06-06-sunset",
+      "date": "2023-06-06",
+      "eventType": "sunset",
+      "observedGrade": 0,
+      "observedLabel": "基本不烧",
+      "observedCloud": "-",
+      "observedColour": "-",
+      "originalPrediction": "基本不烧",
+      "evidenceUrls": "-",
+      "originalMap": "/static/media/ERA5/202306060000_set.jpg",
+      "originalSection": "/static/media/ERA5/上海市_20230606_set.jpg",
+      "score": 38.9,
+      "baselineScore": 42.32,
+      "modelVersion": "section-optics-0.3.1",
+      "aod": 0.579,
+      "pathCoverage": "extrapolated",
+      "peakTime": "2023-06-06T11:01:51.926Z",
+      "aerosolSensitivity": {
+        "minimum": 6.8,
+        "maximum": 52.7,
+        "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+      },
+      "cloudOverlapSensitivity": {
+        "minimum": 38.5,
+        "maximum": 38.9,
+        "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+      },
+      "localCloud": {
+        "low": 0,
+        "mid": 0,
+        "high": 42.320843889315924
+      },
+      "inputFile": "research/backtests/shanghai-2023-06-all/2023-06-06-sunset.json",
+      "fixedLeadHours": null
+    },
+    {
+      "id": "2023-06-07-sunrise",
+      "date": "2023-06-07",
+      "eventType": "sunrise",
+      "observedGrade": 0,
+      "observedLabel": "基本不烧",
+      "observedCloud": "-",
+      "observedColour": "-",
+      "originalPrediction": "微烧",
+      "evidenceUrls": "-",
+      "originalMap": "/static/media/ERA5/202306070000_rise.jpg",
+      "originalSection": "/static/media/ERA5/上海市_20230607_rise.jpg",
+      "score": 18.3,
+      "baselineScore": 86.01,
+      "modelVersion": "section-optics-0.3.1",
+      "aod": 0.593,
+      "pathCoverage": "extrapolated",
+      "peakTime": "2023-06-06T21:31:09.854Z",
+      "aerosolSensitivity": {
+        "minimum": 17.7,
+        "maximum": 18.4,
+        "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+      },
+      "cloudOverlapSensitivity": {
+        "minimum": 15.1,
+        "maximum": 22.1,
+        "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+      },
+      "localCloud": {
+        "low": 0,
+        "mid": 0,
+        "high": 86.0100361135271
+      },
+      "inputFile": "research/backtests/shanghai-2023-06-all/2023-06-07-sunrise.json",
+      "fixedLeadHours": null
+    },
+    {
+      "id": "2023-06-07-sunset",
+      "date": "2023-06-07",
+      "eventType": "sunset",
+      "observedGrade": 0,
+      "observedLabel": "基本不烧",
+      "observedCloud": "-",
+      "observedColour": "-",
+      "originalPrediction": "基本不烧",
+      "evidenceUrls": "-",
+      "originalMap": "/static/media/ERA5/202306070000_set.jpg",
+      "originalSection": "/static/media/ERA5/上海市_20230607_set.jpg",
+      "score": 0,
+      "baselineScore": 0,
+      "modelVersion": "section-optics-0.3.1",
+      "aod": 0.7,
+      "pathCoverage": "extrapolated",
+      "peakTime": null,
+      "aerosolSensitivity": {
+        "minimum": 0,
+        "maximum": 0,
+        "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+      },
+      "cloudOverlapSensitivity": {
+        "minimum": 0,
+        "maximum": 0,
+        "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+      },
+      "localCloud": {
+        "low": 100,
+        "mid": 14.558672222163942,
+        "high": 13.823468888865577
+      },
+      "inputFile": "research/backtests/shanghai-2023-06-all/2023-06-07-sunset.json",
+      "fixedLeadHours": null
+    },
+    {
+      "id": "2023-06-08-sunrise",
+      "date": "2023-06-08",
+      "eventType": "sunrise",
+      "observedGrade": 0,
+      "observedLabel": "基本不烧",
+      "observedCloud": "-",
+      "observedColour": "-",
+      "originalPrediction": "基本不烧",
+      "evidenceUrls": "-",
+      "originalMap": "/static/media/ERA5/202306080000_rise.jpg",
+      "originalSection": "/static/media/ERA5/上海市_20230608_rise.jpg",
+      "score": 0.3,
+      "baselineScore": 27.5,
+      "modelVersion": "section-optics-0.3.1",
+      "aod": 0.537,
+      "pathCoverage": "extrapolated",
+      "peakTime": "2023-06-07T21:26:02.926Z",
+      "aerosolSensitivity": {
+        "minimum": 0.3,
+        "maximum": 0.4,
+        "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+      },
+      "cloudOverlapSensitivity": {
+        "minimum": 0.2,
+        "maximum": 0.4,
+        "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+      },
+      "localCloud": {
+        "low": 72.49632833520572,
+        "mid": 96.27031944526567,
+        "high": 100
+      },
+      "inputFile": "research/backtests/shanghai-2023-06/2023-06-08-sunrise.json",
+      "fixedLeadHours": null
+    },
+    {
+      "id": "2023-06-08-sunset",
+      "date": "2023-06-08",
+      "eventType": "sunset",
+      "observedGrade": 0,
+      "observedLabel": "基本不烧",
+      "observedCloud": "-",
+      "observedColour": "-",
+      "originalPrediction": "微烧",
+      "evidenceUrls": "-",
+      "originalMap": "/static/media/ERA5/202306080000_set.jpg",
+      "originalSection": "/static/media/ERA5/上海市_20230608_set.jpg",
+      "score": 46.3,
+      "baselineScore": 96.55,
+      "modelVersion": "section-optics-0.3.1",
+      "aod": 1.182,
+      "pathCoverage": "extrapolated",
+      "peakTime": "2023-06-08T10:52:49.411Z",
+      "aerosolSensitivity": {
+        "minimum": 29.9,
+        "maximum": 47.4,
+        "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+      },
+      "cloudOverlapSensitivity": {
+        "minimum": 40.2,
+        "maximum": 51.2,
+        "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+      },
+      "localCloud": {
+        "low": 0,
+        "mid": 0,
+        "high": 96.55390138924122
+      },
+      "inputFile": "research/backtests/shanghai-2023-06/2023-06-08-sunset.json",
+      "fixedLeadHours": null
+    },
+    {
+      "id": "2023-06-09-sunrise",
+      "date": "2023-06-09",
+      "eventType": "sunrise",
+      "observedGrade": 4,
+      "observedLabel": "中到大烧",
+      "observedCloud": "卷云",
+      "observedColour": "橘红色,橘色",
+      "originalPrediction": "小烧",
+      "evidenceUrls": "https://weibo.com/5538010841/N4rhsFnuZ",
+      "originalMap": "/static/media/ERA5/202306090000_rise.jpg",
+      "originalSection": "/static/media/ERA5/上海市_20230609_rise.jpg",
+      "score": 41.9,
+      "baselineScore": 100,
+      "modelVersion": "section-optics-0.3.1",
+      "aod": 0.659,
+      "pathCoverage": "extrapolated",
+      "peakTime": "2023-06-08T21:25:57.397Z",
+      "aerosolSensitivity": {
+        "minimum": 40.8,
+        "maximum": 42,
+        "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+      },
+      "cloudOverlapSensitivity": {
+        "minimum": 41.9,
+        "maximum": 41.9,
+        "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+      },
+      "localCloud": {
+        "low": 0,
+        "mid": 0,
+        "high": 100
+      },
+      "inputFile": "research/backtests/shanghai-2023-06/2023-06-09-sunrise.json",
+      "fixedLeadHours": null
+    },
+    {
+      "id": "2023-06-09-sunset",
+      "date": "2023-06-09",
+      "eventType": "sunset",
+      "observedGrade": 3,
+      "observedLabel": "小到中烧",
+      "observedCloud": "卷云",
+      "observedColour": "橘黄色,橘色,橘红色",
+      "originalPrediction": "基本不烧",
+      "evidenceUrls": "https://weibo.com/5538010841/N4x498V8i",
+      "originalMap": "/static/media/ERA5/202306090000_set.jpg",
+      "originalSection": "/static/media/ERA5/上海市_20230609_set.jpg",
+      "score": 23.8,
+      "baselineScore": 97.59,
+      "modelVersion": "section-optics-0.3.1",
+      "aod": 1.273,
+      "pathCoverage": "within-sampling",
+      "peakTime": "2023-06-09T10:58:16.762Z",
+      "aerosolSensitivity": {
+        "minimum": 12.2,
+        "maximum": 24.7,
+        "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+      },
+      "cloudOverlapSensitivity": {
+        "minimum": 23.6,
+        "maximum": 24.3,
+        "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+      },
+      "localCloud": {
+        "low": 0,
+        "mid": 0,
+        "high": 97.59111333529154
+      },
+      "inputFile": "research/backtests/shanghai-2023-06/2023-06-09-sunset.json",
+      "fixedLeadHours": null
+    },
+    {
+      "id": "2023-06-10-sunrise",
+      "date": "2023-06-10",
+      "eventType": "sunrise",
+      "observedGrade": 0,
+      "observedLabel": "基本不烧",
+      "observedCloud": "-",
+      "observedColour": "-",
+      "originalPrediction": "微烧",
+      "evidenceUrls": "-",
+      "originalMap": "/static/media/ERA5/202306100000_rise.jpg",
+      "originalSection": "/static/media/ERA5/上海市_20230610_rise.jpg",
+      "score": 83.1,
+      "baselineScore": 100,
+      "modelVersion": "section-optics-0.3.1",
+      "aod": 0.512,
+      "pathCoverage": "extrapolated",
+      "peakTime": "2023-06-09T20:50:53.261Z",
+      "aerosolSensitivity": {
+        "minimum": 69.8,
+        "maximum": 83.5,
+        "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+      },
+      "cloudOverlapSensitivity": {
+        "minimum": 82.6,
+        "maximum": 84.2,
+        "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+      },
+      "localCloud": {
+        "low": 0,
+        "mid": 0,
+        "high": 100
+      },
+      "inputFile": "research/backtests/shanghai-2023-06-all/2023-06-10-sunrise.json",
+      "fixedLeadHours": null
+    },
+    {
+      "id": "2023-06-10-sunset",
+      "date": "2023-06-10",
+      "eventType": "sunset",
+      "observedGrade": 0,
+      "observedLabel": "基本不烧",
+      "observedCloud": "-",
+      "observedColour": "-",
+      "originalPrediction": "小烧",
+      "evidenceUrls": "-",
+      "originalMap": "/static/media/ERA5/202306100000_set.jpg",
+      "originalSection": "/static/media/ERA5/上海市_20230610_set.jpg",
+      "score": 0,
+      "baselineScore": 2.09,
+      "modelVersion": "section-optics-0.3.1",
+      "aod": 0.891,
+      "pathCoverage": "within-sampling",
+      "peakTime": null,
+      "aerosolSensitivity": {
+        "minimum": 0,
+        "maximum": 0,
+        "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+      },
+      "cloudOverlapSensitivity": {
+        "minimum": 0,
+        "maximum": 0,
+        "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+      },
+      "localCloud": {
+        "low": 2.13486111164093,
+        "mid": 2.13486111164093,
+        "high": 0
+      },
+      "inputFile": "research/backtests/shanghai-2023-06-all/2023-06-10-sunset.json",
+      "fixedLeadHours": null
+    }
+  ],
+  "modelRanking": {
+    "evaluatedCases": 20,
+    "missingScores": 0,
+    "positiveControlPairs": 51,
+    "correctlyOrderedPairs": 34,
+    "tiedPairs": 0,
+    "pairwiseAuc": 0.6666666666666666,
+    "ordinalSpearman": 0.21347337597995777
+  },
+  "baselineRanking": {
+    "evaluatedCases": 20,
+    "missingScores": 0,
+    "positiveControlPairs": 51,
+    "correctlyOrderedPairs": 45,
+    "tiedPairs": 4,
+    "pairwiseAuc": 0.9215686274509803,
+    "ordinalSpearman": 0.5326916207913593
+  },
+  "currentProcessReservedUnits": 2184,
+  "interpretation": "Twenty continuously returned labeled events supply a short June pilot, with only three observed-positive events. Stitched archives evaluate near-analysis reconstruction, with original model initialization and fixed forecast lead unknown."
+}

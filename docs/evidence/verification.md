@@ -105,3 +105,12 @@ water/ice, cloud optical properties, vertical overlap, sideward cloud geometry,
 sub-hour evolution and aerosol-height distribution remain scientific work.
 Source HTML retains some remote assets; key equations and reading text are
 saved locally. The original site's specific maintenance cause remains open.
+
+## Historical follow-up
+
+The 2026-11-06 owner follow-up triggered actual historical comparison. Thirty
+regressions pass, while the 20-event original-label pilot exposes empirical
+ranking weakness: model AUC 0.667 versus baseline 0.922. Its scope and provenance
+are in [the historical evidence](historical-validation.md). The numerical model
+remains frozen at 0.3.1; the webpage now explicitly presents it as a research
+diagnostic. Engineering checks and empirical quality retain separate verdicts.

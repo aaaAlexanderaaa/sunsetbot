@@ -121,3 +121,46 @@ observations including uneventful/failed sunsets. Separate physics checks,
 held-out ordinal-quality evaluation and probability calibration. The current
 service supplies an experimental index; its live-operation evidence and future
 field-skill evidence have separate status.
+
+## Historical validation follow-up (2026-11-06)
+
+The owner's question exposed the missing empirical step in the initial
+implementation. Public observations were already accessible through the
+original reanalysis UI and its documented query structure. The captured
+[query response](sources/history/shanghai-2023-06-labels.json) requested June
+2023 and returned 20 labels for June 1–10, with 3 observed-positive events and
+17 labeled essentially no glow. Dates June 11–30 remain missing. Annual
+calendar zeros are excluded as a truth source because their observation
+coverage is ambiguous.
+
+- [Frozen matched six-event challenge](backtests/shanghai-2023-06/report.md)
+- [Complete returned-event pilot](backtests/shanghai-2023-06-all/report.md)
+- [Source inputs and hashes](backtests/shanghai-2023-06-all/manifest.json)
+- [Detailed interpretation](../docs/evidence/historical-validation.md)
+- [Fifth Ask ChatGPT question](questions/05-historical-validation.txt),
+  [raw answer](chatgpt/05-historical-validation.json),
+  [reading copy](chatgpt/05-historical-validation.md)
+
+The model stays at 0.3.1 with parameters frozen. Historical GFS pressure-level
+fields and CAMS AOD are actually available for these dates. The 20-event model
+ranking AUC is 0.667, compared with 0.922 for a prespecified cloud-layer
+baseline; ordinal Spearman values are 0.213 and 0.533. The result supports
+prioritizing model structure before relying on the numerical index. It has the
+scope of this small curator-labeled June slice; negative-label observation
+coverage still requires independent confirmation.
+
+The [historical forecast documentation](sources/history/historical-forecast.html)
+describes short-lead model runs stitched into a series. Fixed-lead and fixed-run
+assessment use the separately preserved
+[previous-runs](sources/history-methods/previous-runs.html) and
+[single-runs](sources/history-methods/single-runs.html) routes with verified field
+coverage. The present pilot has no known fixed lead and uses GFS rather than
+ERA5. The official [ERA5 pressure-level catalogue](sources/history-copernicus/era5-pressure-levels.html)
+and [CAMS EAC4 catalogue](sources/history-copernicus/cams-eac4.html) identify the
+next native reanalysis route.
+
+Original [map](sources/history-examples/2023-06-03-regional-map.jpg) and
+[section](sources/history-examples/2023-06-03-shanghai-section.jpg) examples
+illustrate the planar versus vertical geometry. The linked section's run header
+says GFS 2025-05-01 20Z while its side panel says 2023-06-03. Its input provenance
+therefore remains unresolved; it serves only as layout evidence in this study.

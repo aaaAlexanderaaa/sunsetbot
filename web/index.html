@@ -17,7 +17,7 @@
     </header>
 
     <main>
-      <section class="intro"><p class="eyebrow">SUNRISE & SUNSET OBSERVATORY</p><h1>把下一场霞光，<br class="mobile-break">放进你的计划。</h1><p>从云层、光路与大气通透度，看看值得等待的天空。</p></section>
+      <section class="intro"><p class="eyebrow">SUNRISE & SUNSET OBSERVATORY</p><h1>沿着光路，<br class="mobile-break">看看霞光条件。</h1><p>从云层、光路与大气通透度，检验朝晚霞的形成条件。</p></section>
 
       <form id="forecast-form" class="query-panel">
         <div class="query-fields">
@@ -38,7 +38,7 @@
           <div class="summary">
             <p class="eyebrow" id="result-context"></p><h2 id="result-title"></h2>
             <div class="score-line"><strong id="score"></strong><span>/ 100<small>霞光截面指数 · 实验模型</small></span></div>
-            <p class="verdict" id="verdict"></p><p id="advice" class="secondary"></p><p id="summary-range" class="secondary"></p>
+            <p class="verdict" id="verdict"></p><p id="advice" class="secondary"></p><p id="summary-range" class="secondary"></p><p class="secondary" id="validation-status">历史对照已发现明显错排，当前用于研究诊断。</p>
             <div class="conditions"><span>AOD550 <b id="aod"></b></span><span>能见度 <b id="visibility"></b></span><span>模型 <b id="model-value"></b></span></div>
           </div>
           <div class="observing">
@@ -72,7 +72,7 @@
         </section>
         <div class="export-line"><button id="download" class="secondary-button" type="button">保存这次预报 JSON ↓</button><span id="forecast-id"></span></div>
       </div>
-      <details class="method panel"><summary>关于这套预测</summary><p>Sunsetbot 使用 GFS / ECMWF 的等压面云量与位势高度、CAMS 气溶胶资料，沿球面地球上的光路计算云层受光和视线遮挡。指数表示这套独立模型的相对观赏潜力，正在积累实测校准。</p><p>本地时间统一采用 Asia/Shanghai。云的液水、冰含量及细小云洞仍有资料缺口，临近卫星云图与现场观察能帮助判断变化。</p><p>公开研究参考：<a href="https://www.sunsetbot.top/halo/" target="_blank" rel="noopener noreferrer">原作者技术博客</a> · 数据：<a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo</a> / NOAA / ECMWF / CAMS。</p></details>
+      <details class="method panel"><summary>关于这套预测</summary><p>Sunsetbot 使用 GFS / ECMWF 的等压面云量与位势高度、CAMS 气溶胶资料，沿球面地球上的光路计算云层受光和视线遮挡。指数当前用于研究诊断。历史对照已发现明显错排，模型结构正在依据回测审查。</p><p>本地时间统一采用 Asia/Shanghai。云的液水、冰含量及细小云洞仍有资料缺口，临近卫星云图与现场观察能帮助判断变化。</p><p>公开研究参考：<a href="https://www.sunsetbot.top/halo/" target="_blank" rel="noopener noreferrer">原作者技术博客</a> · 数据：<a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo</a> / NOAA / ECMWF / CAMS。</p></details>
     </main>
     <footer><span>sunsetbot <span class="muted">/</span> 为每一次抬头做准备</span><span>独立实现 · 长三角观测</span></footer>
   </div>

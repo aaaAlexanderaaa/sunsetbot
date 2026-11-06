@@ -94,7 +94,7 @@ function render(data) {
   const eventName = data.eventType === 'sunrise' ? '日出' : '日落';
   text('result-context', `${data.date} / ${data.eventType === 'sunrise' ? 'MORNING GLOW' : 'EVENING GLOW'}`);
   text('result-title', `${data.location.name} · ${data.eventType === 'sunrise' ? '朝霞' : '晚霞'}预报`);
-  text('summary-range', `云层情景 ${data.cloudOverlapSensitivity.minimum}–${data.cloudOverlapSensitivity.maximum} 分 · 待实测校准`);
+  text('summary-range', `云层情景 ${data.cloudOverlapSensitivity.minimum}–${data.cloudOverlapSensitivity.maximum} 分 · 研究模型`);
   text('score', data.score); text('verdict', data.label); text('advice', data.advice);
   text('aod', data.aod === null ? '待补充' : data.aod.toFixed(3));
   text('visibility', data.visibilityKm === null ? '待补充' : `${data.visibilityKm} km`);

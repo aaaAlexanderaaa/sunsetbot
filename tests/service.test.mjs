@@ -44,6 +44,20 @@ test('an upstream rate limit opens the circuit without a second request', async 
   } finally { await rm(directory, { recursive: true, force: true }); }
 });
 
+test('a response-body timeout keeps a stable upstream error and the spent request debit', async () => {
+  const directory = await mkdtemp(join(tmpdir(), 'sunset-body-'));
+  let calls = 0;
+  try {
+    const provider = new WeatherProvider({ directory, fetcher: async () => {
+      calls++;
+      return { ok: true, status: 200, text: async () => { throw new DOMException('body timeout', 'TimeoutError'); } };
+    } });
+    await assert.rejects(provider.request('https://example.test', 1), e => e.code === 'UPSTREAM_UNAVAILABLE' && e.status === 503);
+    assert.equal(calls, 1);
+    assert.equal(JSON.parse(await readFile(join(directory, 'weather-budget.json'), 'utf8')).units, 1);
+  } finally { await rm(directory, { recursive: true, force: true }); }
+});
+
 test('invalid date, coordinates and model stop before provider effects', async () => {
   let calls = 0;
   const service = new ForecastService({ now: () => Date.parse('2026-11-06T07:00:00Z'), provider: { weather() { calls++; } } });
@@ -118,4 +132,22 @@ test('captured ECMWF protocol accepts its actual common pressure levels and abse
   const broken = structuredClone(row);
   broken.hourly_units.geopotential_height_925hPa = 'undefined';
   assert.throws(() => provider.validate(broken, { lat: row.latitude, lon: row.longitude }), e => e.code === 'UPSTREAM_PROFILE');
+});
+
+test('historical profiles use the public archive, fixed model and bounded UTC hours', async () => {
+  const directory = await mkdtemp(join(tmpdir(), 'sunset-history-'));
+  let requested;
+  try {
+    const provider = new WeatherProvider({ directory, cache: new DiskCache(join(directory, 'cache')), apiKey: 'test-private-key',
+      fetcher: async url => { requested = new URL(url); return Response.json(fixture()[0]); } });
+    const result = await provider.weather([{ lat: 31.2304, lon: 121.4737 }], 'gfs', '2026-11-05', '2026-11-07',
+      { historical: true, startHour: '2026-11-06T08:00', endHour: '2026-11-06T10:00' });
+    assert.equal(result.data.length, 1);
+    assert.equal(requested.hostname, 'historical-forecast-api.open-meteo.com');
+    assert.equal(requested.searchParams.get('models'), 'gfs_global');
+    assert.equal(requested.searchParams.get('start_hour'), '2026-11-06T08:00');
+    assert.equal(requested.searchParams.get('start_date'), null);
+    assert.equal(requested.searchParams.get('apikey'), null);
+    assert.ok(requested.searchParams.get('hourly').includes('geopotential_height_300hPa'));
+  } finally { await rm(directory, { recursive: true, force: true }); }
 });

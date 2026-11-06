@@ -131,3 +131,30 @@ precipitation intervals, caching/cooldown and source retention. Captured public
 GFS/ECMWF/CAMS bundles replay offline. The next skill study should include weak
 and failed events, cloud-field spatial perturbations and a simple layered-cloud
 baseline, with held-out dates grouped by season and forecast lead time.
+
+## Historical findings and development priority (2026-11-06)
+
+The frozen 0.3.1 engine has now been run against the original curator's actual
+Shanghai observation labels using archived GFS profiles and CAMS AOD. The
+initial six-event matched challenge preserves parameters, source hashes and
+selection. It gives index 46.3 to an observed-zero sunset (2023-06-08), above
+all three observed-positive events. Its pairwise ranking AUC is 0.667 against
+1.0 for the prespecified cloud-layer baseline. This small matched sample
+provides a concrete failure case; the continuous returned-event study also gives AUC 0.667 for the model
+versus 0.922 for the baseline (3 positive and 17 zero labels). Its highest
+index, 83.1, occurs on a labeled-zero sunrise on 2023-06-10.
+
+The scientific assessment identifies priority hypotheses: target generation
+suppresses upper cloud bases using overhead vertical overlap before testing
+oblique visibility; the brightness proxy has transmission without an explicit
+cloud scattering source term; angular-area quadrature and maximum-only time
+aggregation can distort quality ordering. These are model-structure questions.
+Future revisions should be developed on these diagnostic cases and judged on
+separate held-out dates, before tuning extinction coefficients or thresholds.
+
+Historical Forecast archives stitch short-lead model output. The current study
+evaluates reconstruction using those fields, with unknown initialization and
+fixed lead. ERA5 cloud/water/ice plus CAMS reanalysis can isolate the weather
+input error further; run/lead-preserving archives support prospective forecast
+skill evaluation. Source labels, missing dates and original-image provenance
+retain their limits in the historical evidence record.

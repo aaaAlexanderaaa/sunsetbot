@@ -1,0 +1,133 @@
+{
+  "selectedAt": "2026-11-06T12:41:58.259Z",
+  "modelVersion": "section-optics-0.3.1",
+  "codeSha256": "f80a37d9a92cb2a421fda2599af9e336e2261d7b4a49980159a931be5e28e71f",
+  "assumptions": {
+    "earthRadiusKm": 6371,
+    "molecularScaleHeightKm": 8,
+    "molecularExtinction550PerKm": 0.012,
+    "aerosolScaleHeightsKm": [
+      0.8,
+      1.5,
+      3
+    ],
+    "aerosolAngstromExponent": 1.2,
+    "conditionalCloudExtinctionPerKm": {
+      "low": 2,
+      "mid": 0.7,
+      "high": 0.2
+    },
+    "cloudOverlap": [
+      "decorrelated",
+      "maximum",
+      "random-columns"
+    ],
+    "cloudHorizontalCorrelationLengthKm": 50,
+    "profileCloudThreshold": 0.15,
+    "minimumViewElevationDegrees": 0.5,
+    "maximumTargetDistanceKm": 300,
+    "solarRayStepKm": 4,
+    "viewingRayStepKm": 0.5,
+    "timelineStepMinutes": 5,
+    "qualityScale": "independent heuristic 0–100",
+    "calibration": "experimental"
+  },
+  "labelSource": "research/sources/history/shanghai-2023-06-labels.json",
+  "labelSourceSha256": "91dee3b2a0102f37200af6dcc9b21e4b7bac68e63af45b57e04c22dd9a906e07",
+  "observedRows": 20,
+  "excludedRows": [],
+  "requestedRange": [
+    "2023-06-01",
+    "2023-06-30"
+  ],
+  "actualReturnedRange": [
+    "2023-06-01",
+    "2023-06-10"
+  ],
+  "design": "First three observed-positive events, each matched to nearest available same-event observed-zero control; ties prefer earlier dates. Selection frozen before forecast retrieval.",
+  "evaluation": "Exploratory matched challenge using stitched short-lead forecast archives; fixed-lead predictive skill remains separate.",
+  "baseline": "max(mid_cloud_percent,high_cloud_percent)*(1-low_cloud_percent/100) at the solar event instant",
+  "cases": [
+    {
+      "id": "2023-06-02-sunset",
+      "date": "2023-06-02",
+      "eventType": "sunset",
+      "observedGrade": 0,
+      "observedLabel": "基本不烧",
+      "observedCloud": "-",
+      "observedColour": "-",
+      "originalPrediction": "基本不烧",
+      "evidenceUrls": "-",
+      "originalMap": "/static/media/ERA5/202306020000_set.jpg",
+      "originalSection": "/static/media/ERA5/上海市_20230602_set.jpg",
+      "matchedTo": "2023-06-03-sunset"
+    },
+    {
+      "id": "2023-06-03-sunset",
+      "date": "2023-06-03",
+      "eventType": "sunset",
+      "observedGrade": 3,
+      "observedLabel": "小到中烧",
+      "observedCloud": "卷层云",
+      "observedColour": "橘红色",
+      "originalPrediction": "基本不烧",
+      "evidenceUrls": "https://weibo.com/3169171125/N3DJwplJK",
+      "originalMap": "/static/media/ERA5/202306030000_set.jpg",
+      "originalSection": "/static/media/ERA5/上海市_20230603_set.jpg"
+    },
+    {
+      "id": "2023-06-08-sunrise",
+      "date": "2023-06-08",
+      "eventType": "sunrise",
+      "observedGrade": 0,
+      "observedLabel": "基本不烧",
+      "observedCloud": "-",
+      "observedColour": "-",
+      "originalPrediction": "基本不烧",
+      "evidenceUrls": "-",
+      "originalMap": "/static/media/ERA5/202306080000_rise.jpg",
+      "originalSection": "/static/media/ERA5/上海市_20230608_rise.jpg",
+      "matchedTo": "2023-06-09-sunrise"
+    },
+    {
+      "id": "2023-06-08-sunset",
+      "date": "2023-06-08",
+      "eventType": "sunset",
+      "observedGrade": 0,
+      "observedLabel": "基本不烧",
+      "observedCloud": "-",
+      "observedColour": "-",
+      "originalPrediction": "微烧",
+      "evidenceUrls": "-",
+      "originalMap": "/static/media/ERA5/202306080000_set.jpg",
+      "originalSection": "/static/media/ERA5/上海市_20230608_set.jpg",
+      "matchedTo": "2023-06-09-sunset"
+    },
+    {
+      "id": "2023-06-09-sunrise",
+      "date": "2023-06-09",
+      "eventType": "sunrise",
+      "observedGrade": 4,
+      "observedLabel": "中到大烧",
+      "observedCloud": "卷云",
+      "observedColour": "橘红色,橘色",
+      "originalPrediction": "小烧",
+      "evidenceUrls": "https://weibo.com/5538010841/N4rhsFnuZ",
+      "originalMap": "/static/media/ERA5/202306090000_rise.jpg",
+      "originalSection": "/static/media/ERA5/上海市_20230609_rise.jpg"
+    },
+    {
+      "id": "2023-06-09-sunset",
+      "date": "2023-06-09",
+      "eventType": "sunset",
+      "observedGrade": 3,
+      "observedLabel": "小到中烧",
+      "observedCloud": "卷云",
+      "observedColour": "橘黄色,橘色,橘红色",
+      "originalPrediction": "基本不烧",
+      "evidenceUrls": "https://weibo.com/5538010841/N4x498V8i",
+      "originalMap": "/static/media/ERA5/202306090000_set.jpg",
+      "originalSection": "/static/media/ERA5/上海市_20230609_set.jpg"
+    }
+  ]
+}
