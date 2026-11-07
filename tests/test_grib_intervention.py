@@ -106,6 +106,22 @@ class OfficialSampleChecks(unittest.TestCase):
             for field in ("time", "precipitation", "visibility"):
                 self.assertEqual(original["hourly"].get(field), new["hourly"].get(field))
 
+    def test_streamed_point_retention_matches_the_full_grid_exactly(self):
+        paths = [ROOT / "research/sources/reanalysis-acceptance" / r["file"] for r in self.archive.receipts]
+        hours = {when for _, when, _ in self.archive.fields}
+        requests = {when: self.source["points"] for when in hours}
+        with redirect_stdout(io.StringIO()):
+            sampled = GribArchive(paths, {p: hours for p in PARAMETERS}, sample_points_by_time=requests)
+        for (param, when, level), (_, values) in sampled.fields.items():
+            self.assertEqual(values.shape, (42,))
+            expected, grid = self.archive.sample(param, when, level, self.source["points"])
+            actual, selected = sampled.sample(param, when, level, self.source["points"])
+            np.testing.assert_array_equal(actual, expected)
+            self.assertEqual(selected, grid)
+        key = next(iter(sampled.fields))
+        with self.assertRaisesRegex(ValueError, "different point set"):
+            sampled.sample(*key, [{"lat": 31.23, "lon": 121.47}])
+
 
 class McpFailureChecks(unittest.TestCase):
     def test_remote_tool_error_is_archived_and_propagated(self):

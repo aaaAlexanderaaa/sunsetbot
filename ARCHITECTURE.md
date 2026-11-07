@@ -16,11 +16,15 @@ Its availability and proprietary forecast outputs are independent of runtime.
 - `src/engine.mjs`: cloud illumination, sightline attenuation, aerosol and
   weather factors, event scoring, explanations and model version.
 - `src/cloud-optics.mjs`: cloud-occurrence overlap and conditional transmission.
+- `src/cloud-column.mjs`: isolated research cloud-base eligibility; its target
+  threshold is supplied by the frozen engine assumptions.
 - `src/provider.mjs`: Open-Meteo requests, units, strict validation and metadata.
 - `src/cache.mjs`: bounded atomic disk cache and request coalescing.
 - `src/archive.mjs`: bounded forecast/source retention for observation pairing.
 - `src/service.mjs`: input validation, orchestration and API result ownership.
 - `src/evaluation.mjs`: observed-label integrity, case selection and ranking metrics.
+- `src/model-evidence.mjs` and `src/evidence/`: published historical evidence
+  matched to its model version, generated from preserved study results.
 - `src/server.mjs`: HTTP routing, static assets and process lifecycle.
 - `web/`: Chinese interface projecting the API result.
 - `scripts/`: public-source capture, MCP research, frozen historical comparison

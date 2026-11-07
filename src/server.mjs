@@ -8,6 +8,7 @@ import { ForecastService } from './service.mjs';
 import { ForecastArchive } from './archive.mjs';
 import { PRESETS } from './presets.mjs';
 import { MODEL_VERSION } from './engine.mjs';
+import { evidenceForModel } from './model-evidence.mjs';
 import { civilDate, addDays } from './astro.mjs';
 import { AppError } from './errors.mjs';
 import { fetch as networkFetch, EnvHttpProxyAgent } from 'undici';
@@ -30,6 +31,7 @@ export function createApp({ service, now = () => Date.now() }) {
         return send(405, { error: { code: 'METHOD', message: '此接口使用 GET 请求。' } });
       }
       if (url.pathname === '/healthz') return send(200, { status: 'ok', modelVersion: MODEL_VERSION });
+      if (url.pathname === '/api/v1/evaluation') return send(200, { modelVersion: MODEL_VERSION, evidence: evidenceForModel(MODEL_VERSION) });
       if (url.pathname === '/api/v1/locations') {
         const today = civilDate(now());
         return send(200, { locations: PRESETS, timezone: 'Asia/Shanghai', today,

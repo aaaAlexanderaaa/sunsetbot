@@ -167,6 +167,17 @@ substantially; height-only replacement changes at most 0.1 points. At the June 3
 positive snapshot a 37-level profile finds 56.25% cloud at the omitted 225 hPa
 level while the current eleven-level maximum is 12.5%. The June 10 negative
 snapshot also gains substantial cloud at 225 hPa, making both label classes
-essential controls. Cloud-base eligibility and denser sampling have priority in
-the [representation experiment](plans/cloud-column-representation.md), followed
-by independently controlled vertical-overlap and scattering work.
+essential controls.
+
+The completed [representation experiment](evidence/cloud-column-validation.md)
+freezes a candidate before new-date labels and scores all 164 Shanghai events
+from June 11 through August 31. Original-model AUC is 0.716, dense/cumulative
+0.727, dense/adjacent 0.707, and the native ERA5 layer baseline 0.660.
+Primary candidate minus original is −0.00934 with a paired three-day-block
+95% interval [−0.04648,+0.02620]. Density-only difference is +0.01100 with
+interval [−0.02278,+0.04815]. The original production model is retained.
+These temporally independent source-label results preserve all 108 source-only
+zero labels and distinguish 46 linked positive records from ten source-only
+positive records. Their observation coverage and retrospective input semantics
+remain explicit. Controlled vertical-overlap, scattering and sky-aggregation
+work follows this preserved result.

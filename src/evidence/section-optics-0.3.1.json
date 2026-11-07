@@ -1,0 +1,126 @@
+{
+  "modelVersion": "section-optics-0.3.1",
+  "modelSourceSha256": "f80a37d9a92cb2a421fda2599af9e336e2261d7b4a49980159a931be5e28e71f",
+  "status": "experimental",
+  "evaluatedAt": "2026-11-07T09:46:06.497Z",
+  "study": {
+    "location": "Shanghai",
+    "dates": [
+      "2023-06-11",
+      "2023-08-31"
+    ],
+    "events": 164,
+    "positiveSourceLabels": 56,
+    "input": "ERA5 pressure-level cloud/geopotential and terrain; CAMS EAC4 AOD550; historical GFS observer precipitation/visibility",
+    "scope": "Retrospective structural reconstruction against original-curator labels",
+    "evidenceCounts": {
+      "sourceOnlyNegative": 108,
+      "linkedPositive": 46,
+      "sourceOnlyPositive": 10
+    },
+    "fixedLeadEstablished": false,
+    "independentlyVettedObservations": false,
+    "probabilityCalibrated": false,
+    "labelSource": "https://sunsetbot.top/reanalysis/",
+    "summarySha256": "3f706269c43c1894f7c6ae471d32d8b946e4f53f2247bda1759468785bc2149f",
+    "modelSnapshotManifestSha256": "a5b29979e4f32bcc1c5e30e648c37ded70df3877b9921bc08f130755f6d2beb8"
+  },
+  "original": {
+    "ranking": {
+      "evaluatedCases": 164,
+      "missingScores": 0,
+      "positiveControlPairs": 6048,
+      "correctlyOrderedPairs": 4271,
+      "tiedPairs": 124,
+      "pairwiseAuc": 0.7164351851851852,
+      "ordinalSpearman": 0.372519702417374
+    },
+    "topBudget": {
+      "budget": 20,
+      "selected": 20,
+      "positive": 14,
+      "precision": 0.7
+    },
+    "nativeLayerBaseline": {
+      "evaluatedCases": 164,
+      "missingScores": 0,
+      "positiveControlPairs": 6048,
+      "correctlyOrderedPairs": 3990,
+      "tiedPairs": 6,
+      "pairwiseAuc": 0.660218253968254,
+      "ordinalSpearman": 0.26876906804438977
+    },
+    "baselineTopBudget": {
+      "budget": 20,
+      "selected": 20,
+      "positive": 9,
+      "precision": 0.45
+    }
+  },
+  "researchVariants": {
+    "rankings": {
+      "coarse_cumulative": {
+        "evaluatedCases": 164,
+        "missingScores": 0,
+        "positiveControlPairs": 6048,
+        "correctlyOrderedPairs": 4271,
+        "tiedPairs": 124,
+        "pairwiseAuc": 0.7164351851851852,
+        "ordinalSpearman": 0.372519702417374
+      },
+      "coarse_adjacent": {
+        "evaluatedCases": 164,
+        "missingScores": 0,
+        "positiveControlPairs": 6048,
+        "correctlyOrderedPairs": 4141,
+        "tiedPairs": 122,
+        "pairwiseAuc": 0.6947751322751323,
+        "ordinalSpearman": 0.3378749032167511
+      },
+      "dense_cumulative": {
+        "evaluatedCases": 164,
+        "missingScores": 0,
+        "positiveControlPairs": 6048,
+        "correctlyOrderedPairs": 4375,
+        "tiedPairs": 49,
+        "pairwiseAuc": 0.7274305555555556,
+        "ordinalSpearman": 0.38914944780176486
+      },
+      "dense_adjacent": {
+        "evaluatedCases": 164,
+        "missingScores": 0,
+        "positiveControlPairs": 6048,
+        "correctlyOrderedPairs": 4255,
+        "tiedPairs": 43,
+        "pairwiseAuc": 0.707093253968254,
+        "ordinalSpearman": 0.3546624580036026
+      }
+    },
+    "primaryComparison": {
+      "difference": -0.009341931216931276,
+      "interval95": [
+        -0.04647687395337002,
+        0.026202361100432333
+      ],
+      "replicates": 1000,
+      "validReplicates": 1000,
+      "blockDays": 3,
+      "seed": 20230611,
+      "sampling": "paired circular moving blocks of whole calendar days"
+    },
+    "densityComparison": {
+      "difference": 0.01099537037037035,
+      "interval95": [
+        -0.022783798615600006,
+        0.04814685949287754
+      ],
+      "replicates": 1000,
+      "validReplicates": 1000,
+      "blockDays": 3,
+      "seed": 20230611,
+      "sampling": "paired circular moving blocks of whole calendar days"
+    },
+    "decision": "Retain original production engine; paired representation-change intervals span zero"
+  },
+  "summaryZh": "上海 164 场历史重建：分数最高 20 场中 14 场有霞标签，排序 AUC 0.716。采用 ERA5/CAMS 资料及原站标签；观测覆盖、预报提前量和概率校准仍待核实。"
+}

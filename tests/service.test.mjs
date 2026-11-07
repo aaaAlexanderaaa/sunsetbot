@@ -100,6 +100,11 @@ test('real HTTP path reports partial aerosol data and preserves error codes', as
     assert.equal(data.location.id, 'shanghai');
     assert.equal(data.date, '2026-11-06');
     assert.equal(data.retention.state, 'unavailable');
+    assert.equal(data.evaluation.study.events, 164);
+    assert.equal(data.evaluation.modelVersion, data.modelVersion);
+    const evaluation = await fetch(base + '/api/v1/evaluation');
+    assert.equal(evaluation.status, 200);
+    assert.deepEqual((await evaluation.json()).evidence, data.evaluation);
     assert.ok(data.uncertainty.some(s => s.includes('留存写入失败')));
     const invalid = await fetch(base + '/api/v1/forecast?model=unknown');
     assert.equal(invalid.status, 400);

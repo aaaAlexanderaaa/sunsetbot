@@ -1,0 +1,510 @@
+{
+  "generatedAt": "2026-11-07T01:58:15.779Z",
+  "design": "Pressure density x cumulative/adjacent cloud-base discovery; original coefficients, 15% threshold, global maximum vertical overlap, AOD and all other inputs frozen.",
+  "models": {
+    "coarse_cumulative": {
+      "identity": "452ffa0c65eb338064fb63a60e06f63a7e827499c2caa06d3ee58b75afcd1ea9",
+      "recipe": {
+        "base": "f80a37d9a92cb2a421fda2599af9e336e2261d7b4a49980159a931be5e28e71f",
+        "dependencies": [
+          {
+            "file": "engine.mjs",
+            "source": "src/engine.mjs",
+            "sha256": "bb57d43a8687f58a3c2342a7806c1011b404cf3da52b5e6c423b71ca68deb09a"
+          },
+          {
+            "file": "cloud-optics.mjs",
+            "source": "src/cloud-optics.mjs",
+            "sha256": "74d100c6fabaa45c7095221fa642c1d2ce1cf483f366e5a87e0712cb09584c3b"
+          },
+          {
+            "file": "astro.mjs",
+            "source": "src/astro.mjs",
+            "sha256": "0662f77dfef70869dfe1912234bf5c45fe64de00bcc6bab634629928c5d21b8d"
+          },
+          {
+            "file": "provider.mjs",
+            "source": "src/provider.mjs",
+            "sha256": "beef2d788599f4b82da2895416a104fc5fe30ea4e43d402733a8690f80f60abd"
+          },
+          {
+            "file": "errors.mjs",
+            "source": "src/errors.mjs",
+            "sha256": "10b2b9b102779e01e897bddf8642263ced90add38f4ce3e39ef2e9b6bcb1eeef"
+          },
+          {
+            "file": "evaluation.mjs",
+            "source": "src/evaluation.mjs",
+            "sha256": "00050bd9742b83d6ce61f241c50da07f132226dbe3966a30ff9cfb9c0f2a254f"
+          }
+        ],
+        "factorySha256": "d548c06793f60c9cf559ac59e3ea1697d398c2c62700dabbcc9f58a0556a0f1a",
+        "levelsHpa": [
+          1000,
+          925,
+          850,
+          700,
+          600,
+          500,
+          400,
+          300,
+          250,
+          200,
+          150
+        ],
+        "representation": "cumulative",
+        "packageLockSha256": "e99c3274b12262ef68d348e7f212672fe150d416ab14d809d8e20f4d1af1c9f0",
+        "adjacentSourceSha256": null,
+        "opticalPolicy": "unchanged section-optics-0.3.1 coefficients, threshold, overlap, geometry and score aggregation"
+      }
+    },
+    "coarse_adjacent": {
+      "identity": "f09432edfe071e6faebbf2658ba91b96ea6b003f4cb059ea7c8bc8cd36e720b5",
+      "recipe": {
+        "base": "f80a37d9a92cb2a421fda2599af9e336e2261d7b4a49980159a931be5e28e71f",
+        "dependencies": [
+          {
+            "file": "engine.mjs",
+            "source": "src/engine.mjs",
+            "sha256": "bb57d43a8687f58a3c2342a7806c1011b404cf3da52b5e6c423b71ca68deb09a"
+          },
+          {
+            "file": "cloud-optics.mjs",
+            "source": "src/cloud-optics.mjs",
+            "sha256": "74d100c6fabaa45c7095221fa642c1d2ce1cf483f366e5a87e0712cb09584c3b"
+          },
+          {
+            "file": "astro.mjs",
+            "source": "src/astro.mjs",
+            "sha256": "0662f77dfef70869dfe1912234bf5c45fe64de00bcc6bab634629928c5d21b8d"
+          },
+          {
+            "file": "provider.mjs",
+            "source": "src/provider.mjs",
+            "sha256": "beef2d788599f4b82da2895416a104fc5fe30ea4e43d402733a8690f80f60abd"
+          },
+          {
+            "file": "errors.mjs",
+            "source": "src/errors.mjs",
+            "sha256": "10b2b9b102779e01e897bddf8642263ced90add38f4ce3e39ef2e9b6bcb1eeef"
+          },
+          {
+            "file": "evaluation.mjs",
+            "source": "src/evaluation.mjs",
+            "sha256": "00050bd9742b83d6ce61f241c50da07f132226dbe3966a30ff9cfb9c0f2a254f"
+          }
+        ],
+        "factorySha256": "d548c06793f60c9cf559ac59e3ea1697d398c2c62700dabbcc9f58a0556a0f1a",
+        "levelsHpa": [
+          1000,
+          925,
+          850,
+          700,
+          600,
+          500,
+          400,
+          300,
+          250,
+          200,
+          150
+        ],
+        "representation": "adjacent",
+        "packageLockSha256": "e99c3274b12262ef68d348e7f212672fe150d416ab14d809d8e20f4d1af1c9f0",
+        "adjacentSourceSha256": "e1c0aade13adeb33252179d6e6233ed86aebddc7a291104637bbe68db8cbc8d6",
+        "opticalPolicy": "unchanged section-optics-0.3.1 coefficients, threshold, overlap, geometry and score aggregation"
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "2023-06-01-sunrise",
+      "observedGrade": 0,
+      "scores": {
+        "coarse_cumulative": {
+          "score": 0,
+          "peakTime": null,
+          "targetsAtPeak": 1
+        },
+        "coarse_adjacent": {
+          "score": 0,
+          "peakTime": null,
+          "targetsAtPeak": 1
+        }
+      },
+      "era5BaselineScore": 1.287999013921151,
+      "sourceSha256": "0c50ea775b06b2ba7adda4a8fa961bf383950629bde1494e8f95792d05c92ba0"
+    },
+    {
+      "id": "2023-06-01-sunset",
+      "observedGrade": 0,
+      "scores": {
+        "coarse_cumulative": {
+          "score": 0,
+          "peakTime": null,
+          "targetsAtPeak": 3
+        },
+        "coarse_adjacent": {
+          "score": 0,
+          "peakTime": null,
+          "targetsAtPeak": 3
+        }
+      },
+      "era5BaselineScore": 17.63616100383275,
+      "sourceSha256": "b4ff7ab97e91d7e994c730bba66028fe5e70fc2f966e28b89f7774cb48f9bcf1"
+    },
+    {
+      "id": "2023-06-02-sunrise",
+      "observedGrade": 0,
+      "scores": {
+        "coarse_cumulative": {
+          "score": 0,
+          "peakTime": null,
+          "targetsAtPeak": 0
+        },
+        "coarse_adjacent": {
+          "score": 0,
+          "peakTime": null,
+          "targetsAtPeak": 0
+        }
+      },
+      "era5BaselineScore": 0,
+      "sourceSha256": "163a24763a8d9a83863ea958bf48ebb75aa30fc75f944d85c7c1c651c1973a00"
+    },
+    {
+      "id": "2023-06-02-sunset",
+      "observedGrade": 0,
+      "scores": {
+        "coarse_cumulative": {
+          "score": 0,
+          "peakTime": null,
+          "targetsAtPeak": 6
+        },
+        "coarse_adjacent": {
+          "score": 0,
+          "peakTime": null,
+          "targetsAtPeak": 6
+        }
+      },
+      "era5BaselineScore": 28.169436411614893,
+      "sourceSha256": "83521f5dc39a995bfea86b8c316a9f391cef41a3c1536069fe22d8e574147be7"
+    },
+    {
+      "id": "2023-06-03-sunrise",
+      "observedGrade": 0,
+      "scores": {
+        "coarse_cumulative": {
+          "score": 0.8,
+          "peakTime": "2023-06-02T21:31:51.646Z",
+          "targetsAtPeak": 8
+        },
+        "coarse_adjacent": {
+          "score": 0.8,
+          "peakTime": "2023-06-02T21:31:51.646Z",
+          "targetsAtPeak": 8
+        }
+      },
+      "era5BaselineScore": 76.39277529269586,
+      "sourceSha256": "a3d5e34f1d6e679d6e32bb153ca81be74976a571c0491e2081f9115da05e9be8"
+    },
+    {
+      "id": "2023-06-03-sunset",
+      "observedGrade": 3,
+      "scores": {
+        "coarse_cumulative": {
+          "score": 2.7,
+          "peakTime": "2023-06-03T10:15:19.202Z",
+          "targetsAtPeak": 8
+        },
+        "coarse_adjacent": {
+          "score": 2.7,
+          "peakTime": "2023-06-03T10:15:19.202Z",
+          "targetsAtPeak": 8
+        }
+      },
+      "era5BaselineScore": 80.70850111593649,
+      "sourceSha256": "f98d64e2160b7980ee99771dad9307efe698dfe39f469fe79ae85dac764f6bb6"
+    },
+    {
+      "id": "2023-06-04-sunrise",
+      "observedGrade": 0,
+      "scores": {
+        "coarse_cumulative": {
+          "score": 7.8,
+          "peakTime": "2023-06-03T21:31:39.080Z",
+          "targetsAtPeak": 13
+        },
+        "coarse_adjacent": {
+          "score": 13.8,
+          "peakTime": "2023-06-03T21:31:39.080Z",
+          "targetsAtPeak": 15
+        }
+      },
+      "era5BaselineScore": 34.65442758757191,
+      "sourceSha256": "1916aa378e5a095dfe1cf6c2ae0dab57c745dffee5a325f2322afb521ea20a20"
+    },
+    {
+      "id": "2023-06-04-sunset",
+      "observedGrade": 0,
+      "scores": {
+        "coarse_cumulative": {
+          "score": 1,
+          "peakTime": "2023-06-04T10:50:50.934Z",
+          "targetsAtPeak": 15
+        },
+        "coarse_adjacent": {
+          "score": 7,
+          "peakTime": "2023-06-04T10:15:50.934Z",
+          "targetsAtPeak": 16
+        }
+      },
+      "era5BaselineScore": 70.6118464032183,
+      "sourceSha256": "62254ead15063f1eb91376599a34f3bdc899e9afd4fbe4254a0c410b08e83940"
+    },
+    {
+      "id": "2023-06-05-sunrise",
+      "observedGrade": 0,
+      "scores": {
+        "coarse_cumulative": {
+          "score": 27.8,
+          "peakTime": "2023-06-04T20:51:27.928Z",
+          "targetsAtPeak": 14
+        },
+        "coarse_adjacent": {
+          "score": 27.8,
+          "peakTime": "2023-06-04T20:51:27.928Z",
+          "targetsAtPeak": 18
+        }
+      },
+      "era5BaselineScore": 77.7939050883591,
+      "sourceSha256": "1c647fcea74c9521c973511318cf11dc2a690c556559f605f8af390d43cdd5ef"
+    },
+    {
+      "id": "2023-06-05-sunset",
+      "observedGrade": 0,
+      "scores": {
+        "coarse_cumulative": {
+          "score": 0.1,
+          "peakTime": "2023-06-05T10:16:21.853Z",
+          "targetsAtPeak": 8
+        },
+        "coarse_adjacent": {
+          "score": 0.6,
+          "peakTime": "2023-06-05T11:01:21.853Z",
+          "targetsAtPeak": 20
+        }
+      },
+      "era5BaselineScore": 19.709340670547356,
+      "sourceSha256": "991fda746649bdcb2b53205ee8549b4f44960d9c89fead0dd66a268b57c8199e"
+    },
+    {
+      "id": "2023-06-06-sunrise",
+      "observedGrade": 0,
+      "scores": {
+        "coarse_cumulative": {
+          "score": 10.2,
+          "peakTime": "2023-06-05T21:31:18.187Z",
+          "targetsAtPeak": 16
+        },
+        "coarse_adjacent": {
+          "score": 18.8,
+          "peakTime": "2023-06-05T20:51:18.187Z",
+          "targetsAtPeak": 27
+        }
+      },
+      "era5BaselineScore": 0.44517447265353144,
+      "sourceSha256": "01cc17c0dfa36e88da7f188be17974bc4d22940b36882b8601ab14cf3bc9202d"
+    },
+    {
+      "id": "2023-06-06-sunset",
+      "observedGrade": 0,
+      "scores": {
+        "coarse_cumulative": {
+          "score": 0,
+          "peakTime": null,
+          "targetsAtPeak": 1
+        },
+        "coarse_adjacent": {
+          "score": 0,
+          "peakTime": null,
+          "targetsAtPeak": 1
+        }
+      },
+      "era5BaselineScore": 1.176928497334302,
+      "sourceSha256": "461a62006684117b3452ca70bc0cdf5cbfb8c86ad1197e619c83f9ccd1948182"
+    },
+    {
+      "id": "2023-06-07-sunrise",
+      "observedGrade": 0,
+      "scores": {
+        "coarse_cumulative": {
+          "score": 11.9,
+          "peakTime": "2023-06-06T20:51:09.854Z",
+          "targetsAtPeak": 13
+        },
+        "coarse_adjacent": {
+          "score": 12.3,
+          "peakTime": "2023-06-06T20:51:09.854Z",
+          "targetsAtPeak": 13
+        }
+      },
+      "era5BaselineScore": 49.245398232828784,
+      "sourceSha256": "952874cbb28591ed3a90b45534633fe9c2b926b1b87f686a63632ac559dd9277"
+    },
+    {
+      "id": "2023-06-07-sunset",
+      "observedGrade": 0,
+      "scores": {
+        "coarse_cumulative": {
+          "score": 0,
+          "peakTime": null,
+          "targetsAtPeak": 12
+        },
+        "coarse_adjacent": {
+          "score": 0.9,
+          "peakTime": "2023-06-07T10:52:21.122Z",
+          "targetsAtPeak": 19
+        }
+      },
+      "era5BaselineScore": 98.60111749434189,
+      "sourceSha256": "6734b060e44e43964271e88c4978d3dbfd5e2afa6e9e497705907c69c98ebbc2"
+    },
+    {
+      "id": "2023-06-08-sunrise",
+      "observedGrade": 0,
+      "scores": {
+        "coarse_cumulative": {
+          "score": 1.6,
+          "peakTime": "2023-06-07T21:11:02.926Z",
+          "targetsAtPeak": 21
+        },
+        "coarse_adjacent": {
+          "score": 2.4,
+          "peakTime": "2023-06-07T20:51:02.926Z",
+          "targetsAtPeak": 23
+        }
+      },
+      "era5BaselineScore": 71.21526419988236,
+      "sourceSha256": "c39c795d92cdf1f082848f2efafdefc817592217ec0d93ccd8f78a07a660e485"
+    },
+    {
+      "id": "2023-06-08-sunset",
+      "observedGrade": 0,
+      "scores": {
+        "coarse_cumulative": {
+          "score": 35.9,
+          "peakTime": "2023-06-08T10:22:49.411Z",
+          "targetsAtPeak": 11
+        },
+        "coarse_adjacent": {
+          "score": 35.9,
+          "peakTime": "2023-06-08T10:22:49.411Z",
+          "targetsAtPeak": 11
+        }
+      },
+      "era5BaselineScore": 93.27605915263085,
+      "sourceSha256": "996abc5574611fa5db86305f973e8096588c042172637d16a5b782abe254873f"
+    },
+    {
+      "id": "2023-06-09-sunrise",
+      "observedGrade": 4,
+      "scores": {
+        "coarse_cumulative": {
+          "score": 38,
+          "peakTime": "2023-06-08T20:50:57.397Z",
+          "targetsAtPeak": 11
+        },
+        "coarse_adjacent": {
+          "score": 38,
+          "peakTime": "2023-06-08T20:50:57.397Z",
+          "targetsAtPeak": 11
+        }
+      },
+      "era5BaselineScore": 83.51624567935444,
+      "sourceSha256": "58782c554ff07d610e82d64c0546d76e7b87a69815b31a8ff324c9f4c347150f"
+    },
+    {
+      "id": "2023-06-09-sunset",
+      "observedGrade": 3,
+      "scores": {
+        "coarse_cumulative": {
+          "score": 0.1,
+          "peakTime": "2023-06-09T10:53:16.762Z",
+          "targetsAtPeak": 12
+        },
+        "coarse_adjacent": {
+          "score": 0.1,
+          "peakTime": "2023-06-09T10:53:16.762Z",
+          "targetsAtPeak": 12
+        }
+      },
+      "era5BaselineScore": 30.02242385494837,
+      "sourceSha256": "8529600e0c2c02ef9969aa0661da5b855d4c3f6d1037b77073b9f07d16e2cd91"
+    },
+    {
+      "id": "2023-06-10-sunrise",
+      "observedGrade": 0,
+      "scores": {
+        "coarse_cumulative": {
+          "score": 14.4,
+          "peakTime": "2023-06-09T21:30:53.261Z",
+          "targetsAtPeak": 12
+        },
+        "coarse_adjacent": {
+          "score": 14.4,
+          "peakTime": "2023-06-09T21:30:53.261Z",
+          "targetsAtPeak": 12
+        }
+      },
+      "era5BaselineScore": 68.07233449262544,
+      "sourceSha256": "7c4ac9015dc14e8dfce463de45445d9ad827e46a78f249fe04261ef236d81c32"
+    },
+    {
+      "id": "2023-06-10-sunset",
+      "observedGrade": 0,
+      "scores": {
+        "coarse_cumulative": {
+          "score": 47,
+          "peakTime": "2023-06-10T10:58:43.145Z",
+          "targetsAtPeak": 13
+        },
+        "coarse_adjacent": {
+          "score": 47.7,
+          "peakTime": "2023-06-10T10:58:43.145Z",
+          "targetsAtPeak": 13
+        }
+      },
+      "era5BaselineScore": 88.8883638763291,
+      "sourceSha256": "48ea66b7717e9cd94eb06ba518ba652d563cfff63c2dba49f315c81e083fbd19"
+    }
+  ],
+  "rankings": {
+    "coarse_cumulative": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 32,
+      "tiedPairs": 1,
+      "pairwiseAuc": 0.6372549019607843,
+      "ordinalSpearman": 0.19453755167938713
+    },
+    "coarse_adjacent": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 30,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.5882352941176471,
+      "ordinalSpearman": 0.13540311276443034
+    }
+  },
+  "baselineRanking": {
+    "evaluatedCases": 20,
+    "missingScores": 0,
+    "positiveControlPairs": 51,
+    "correctlyOrderedPairs": 35,
+    "tiedPairs": 0,
+    "pairwiseAuc": 0.6862745098039216,
+    "ordinalSpearman": 0.24212826643591376
+  },
+  "scope": "Known twenty-event development slice; candidate source is frozen before the independent validation calendar is read or scored."
+}

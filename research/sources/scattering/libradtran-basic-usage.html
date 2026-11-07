@@ -1,0 +1,637 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Basic Usage [libradtran]</title>
+    <meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="basic_usage"/>
+<link type="text/css" rel="stylesheet" href="/lib/tpl/mikio/css.php?css=assets/mikio.less"/>
+<link type="text/css" rel="stylesheet" href="/lib/tpl/mikio/icons/fontawesome/css/all.min.css"/>
+<link rel="search" type="application/opensearchdescription+xml" href="/lib/exe/opensearch.php" title="libradtran"/>
+<link rel="start" href="/"/>
+<link rel="contents" href="/doku.php?id=basic_usage&amp;do=index" title="Sitemap"/>
+<link rel="manifest" href="/lib/exe/manifest.php" crossorigin="use-credentials"/>
+<link rel="alternate" type="application/rss+xml" title="Recent Changes" href="/feed.php"/>
+<link rel="alternate" type="text/html" title="Plain HTML" href="/doku.php?do=export_xhtml&amp;id=basic_usage"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup" href="/doku.php?do=export_raw&amp;id=basic_usage"/>
+<link rel="canonical" href="https://libradtran.org/doku.php?id=basic_usage"/>
+<link rel="stylesheet" href="/lib/exe/css.php?t=mikio&amp;tseed=455bdf4673edc1fd46d22ff984afafae"/>
+<script >var NS='';var JSINFO = {"id":"basic_usage","namespace":"","ACT":"show","useHeadingNavigation":0,"useHeadingContent":0};(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>
+<script src="/lib/exe/jquery.php?tseed=8faf3dc90234d51a499f4f428a0eae43" defer="defer"></script>
+<script src="/lib/exe/js.php?t=mikio&amp;tseed=455bdf4673edc1fd46d22ff984afafae" defer="defer"></script>
+<script type="text/javascript" src="/lib/tpl/mikio/assets/mikio-typeahead.js" defer="defer"></script>
+<script type="text/javascript" src="/lib/tpl/mikio/assets/mikio.js" defer="defer"></script>
+<link rel="shortcut icon" href="/lib/tpl/mikio/images/favicon.ico" />
+<link rel="apple-touch-icon" href="/lib/tpl/mikio/images/apple-touch-icon.png" />
+</head>
+<body class="mikio">
+<div id="dokuwiki__site">
+    <div id="dokuwiki__top" class="site dokuwiki mode_show tpl_mikio    showSidebar hasSidebar"><nav class="mikio-navbar mikio-sticky"><div class="mikio-container"><a class="mikio-navbar-brand" href="/doku.php?id=start" accesskey="h" title="Home [h]"><img src="/lib/exe/fetch.php?media=wiki:logo.png" alt="libradtran logo" class="mikio-navbar-brand-image" style="height:80px;max-width:none;max-height:none;"></a><div class="mikio-navbar-toggle"><span class="icon"></span></div><div class="mikio-navbar-collapse"><div class="mikio-nav-item"><form action="/doku.php?id=start" method="get" role="search" class="search doku_form mikio-search" id="dw__search" accept-charset="utf-8"><input type="hidden" name="do" value="search"><input type="hidden" name="id" value="basic_usage"><div class="no"><input name="q" type="text" class="edit search_typeahead" title="[F]" accesskey="f" placeholder="Search" autocomplete="on" id="qsearch__in" value=""><button value="1" type="submit" title="Search"><svg xmlns="http://www.w3.org/2000/svg" class="mikio-iicon" viewbox="0 0 32 32" aria-hidden="true" style="fill:currentColor"><path d="M27 24.57l-5.647-5.648a8.895 8.895 0 0 0 1.522-4.984C22.875 9.01 18.867 5 13.938 5 9.01 5 5 9.01 5 13.938c0 4.929 4.01 8.938 8.938 8.938a8.887 8.887 0 0 0 4.984-1.522L24.568 27 27 24.57zm-13.062-4.445a6.194 6.194 0 0 1-6.188-6.188 6.195 6.195 0 0 1 6.188-6.188 6.195 6.195 0 0 1 6.188 6.188 6.195 6.195 0 0 1-6.188 6.188z"></path></svg></button><div id="qsearch__out" class="ajax_qsearch JSpopup"></div></div></form></div><ul class="mikio-nav"><li id="dokuwiki__usertools" class="mikio-nav-dropdown"><a id="mikio_dropdown_usertools" class="nav-link dropdown-toggle" href="#" role="button"
+    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><svg class="mikio-iicon" xmlns="http://www.w3.org/2000/svg"
+viewBox="0 -256 1792 1792" style="fill:currentColor"><g transform="matrix(1,0,0,-1,197.42373,1300.6102)"><path d="M
+1408,131 Q 1408,11 1335,-58.5 1262,-128 1141,-128 H 267 Q 146,-128 73,-58.5 0,11 0,131 0,184 3.5,234.5 7,285 17.5,343.5
+28,402 44,452 q 16,50 43,97.5 27,47.5 62,81 35,33.5 85.5,53.5 50.5,20 111.5,20 9,0 42,-21.5 33,-21.5 74.5,-48 41.5,
+-26.5 108,-48 Q 637,565 704,565 q 67,0 133.5,21.5 66.5,21.5 108,48 41.5,26.5 74.5,48 33,21.5 42,21.5 61,0 111.5,-20
+50.5,-20 85.5,-53.5 35,-33.5 62,-81 27,-47.5 43,-97.5 16,-50 26.5,-108.5 10.5,-58.5 14,-109 Q 1408,184 1408,131 z m
+-320,893 Q 1088,865 975.5,752.5 863,640 704,640 545,640 432.5,752.5 320,865 320,1024 320,1183 432.5,1295.5 545,1408 704,
+1408 863,1408 975.5,1295.5 1088,1183 1088,1024 z"/></g></svg><span class="mikio-small-only">User Tools</span></a><div class="mikio-dropdown closed"><a class="mikio-nav-link mikio-dropdown-item login" href="/doku.php?id=basic_usage&do=login&sectok=" title="Log In"><span class="mikio-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 17.25V14H3v-4h7V6.75L15.25 12 10 17.25M8 2h9a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-4h2v4h9V4H8v4H6V4a2 2 0 0 1 2-2z"/></svg></span><span>Log In</span></a></div></li></ul></div></div></nav><a name="dokuwiki__top" id="dokuwiki__top"></a><main class="mikio-page"><div class="mikio-container"><aside class="mikio-sidebar mikio-sidebar-left"><a class="mikio-sidebar-toggle closed" href="#">Sidebar <span class="icon"></span></a><div class="mikio-sidebar-collapse mikio-sidebar-sticky"><div class="mikio-sidebar-content"><ul>
+<li class="level1"><div class="li"> <a href="/doku.php?id=start" class="wikilink1" title="start" data-wiki-id="start">Home</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="/doku.php?id=download" class="wikilink1" title="download" data-wiki-id="download">Download</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="/doku.php?id=documentation" class="wikilink1" title="documentation" data-wiki-id="documentation">Documentation</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="/doku.php?id=publications" class="wikilink1" title="publications" data-wiki-id="publications">Publications</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="/doku.php?id=basic_usage" class="wikilink1" title="basic_usage" data-wiki-id="basic_usage">Basic usage</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="/doku.php?id=newsletters" class="wikilink1" title="newsletters" data-wiki-id="newsletters">Newsletters</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="/doku.php?id=contact" class="wikilink1" title="contact" data-wiki-id="contact">Contact</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="/doku.php?id=faq" class="wikilink1" title="faq" data-wiki-id="faq">FAQ</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="/doku.php?id=known_bugs" class="wikilink1" title="known_bugs" data-wiki-id="known_bugs">Known Bugs</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="/doku.php?id=internal_area" class="wikilink1" title="internal_area" data-wiki-id="internal_area">Internal Area</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="/doku.php?id=user_area:user_area" class="wikilink1" title="user_area:user_area" data-wiki-id="user_area:user_area">User Area</a></div>
+</li>
+</ul></div><form action="/doku.php?id=start" method="get" role="search" class="search doku_form mikio-search" id="dw__search" accept-charset="utf-8"><input type="hidden" name="do" value="search"><input type="hidden" name="id" value="basic_usage"><div class="no"><input name="q" type="text" class="edit search_typeahead" title="[F]" accesskey="f" placeholder="Search" autocomplete="on" id="qsearch__in" value=""><button value="1" type="submit" title="Search"><svg xmlns="http://www.w3.org/2000/svg" class="mikio-iicon" viewbox="0 0 32 32" aria-hidden="true" style="fill:currentColor"><path d="M27 24.57l-5.647-5.648a8.895 8.895 0 0 0 1.522-4.984C22.875 9.01 18.867 5 13.938 5 9.01 5 5 9.01 5 13.938c0 4.929 4.01 8.938 8.938 8.938a8.887 8.887 0 0 0 4.984-1.522L24.568 27 27 24.57zm-13.062-4.445a6.194 6.194 0 0 1-6.188-6.188 6.195 6.195 0 0 1 6.188-6.188 6.195 6.195 0 0 1 6.188 6.188 6.195 6.195 0 0 1-6.188 6.188z"></path></svg></button><div id="qsearch__out" class="ajax_qsearch JSpopup"></div></div></form></div></aside><div class="mikio-content" id="dokuwiki__content"><article class="mikio-article"><div class="mikio-toc"><!-- TOC START -->
+<div id="dw__toc" class="dw__toc">
+<h3 class="toggle"><svg class="mikio-iicon hamburger" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
+style="fill:currentColor"><path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0
+76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16
+16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16
+16v40c0 8.837 7.163 16 16 16z"/></svg>Table of Contents<svg class="mikio-iicon down-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"
+aria-hidden="true" style="fill:currentColor"><path d="M16.003 18.626l7.081-7.081L25 13.46l-8.997 8.998-9.003-9
+1.917-1.916z"/></svg></h3>
+<div>
+
+<ul class="toc">
+<li class="level2"><div class="li"><a href="#basic_usage">Basic Usage</a></div></li>
+<li class="level2"><div class="li"><a href="#how_to_setup_an_input_file_for_your_problem_checklist">How to setup an input file for your problem (checklist)</a></div></li>
+<li class="level2"><div class="li"><a href="#play_around_with_mystic">Play around with MYSTIC</a></div></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+</div><div class="mikio-article-content"><div class="mikio-tags"></div><h2 class="sectionedit1" id="basic_usage">Basic Usage</h2>
+<div class="level2">
+
+<p>
+Those users who are not familiar with the predecessor of libRadtran,
+uvspec, please note the following: The central program of the
+package is an executable called uvspec which can be found in the
+bin directory. If you are interested in a user-friendly program
+for radiative transfer calculations, uvspec is the software you
+want to become familiar with. A description of uvspec is provided
+in the first part of the
+<a href="http://www.libradtran.org/doku.php?id=documentation" class="urlextern" title="http://www.libradtran.org/doku.php?id=documentation" rel="ugc nofollow">manual</a>. Examples
+of its use, including various input files and corresponding output
+files for different atmospheric conditions, are provided in the
+examples directory. For a quick try of uvspec go to the examples
+directory and run 
+</p>
+<pre class="code">  ../bin/uvspec &lt; UVSPEC_CLEAR.INP &gt; test.out</pre>
+
+<p>
+For the format of the input and output files please refer to the manual.
+</p>
+
+<p>
+The bin directory also provides related utilities, like e.g. a mie
+program (mie), some utilities for the calculation of the position of
+the sun (zenith, noon, sza2time), a few tools for interpolation,
+convolution, and integration (spline, conv, integrate), and some other
+small tools. 
+</p>
+
+</div>
+
+<h2 class="sectionedit2" id="how_to_setup_an_input_file_for_your_problem_checklist">How to setup an input file for your problem (checklist)</h2>
+<div class="level2">
+
+<p>
+There are several steps to consider when setting up an input file for
+your specific problem. First of all we strongly recommend that you
+read a radiative transfer textbook to become familiar with what is
+required for your problem. After defining your problem you may in
+principle find all information for setting up the input file and
+understanding the contents of the output file in the manual (but who
+reads manuals anyway?). Below is a short checklist including the steps
+you need to consider <em class="u">for each problem</em>: 
+</p>
+
+</div>
+
+<h4 id="wavelength_grid_band_parameterization">1. Wavelength grid / band parameterization</h4>
+<div class="level4">
+
+<p>
+First you need to think about the spectral range and spectral
+resolution required for your calculation. Per default the REPTRAN absorption parameterization is used which is available for the full spectral range from the UV to the far IR. In the ultraviolet or the lower visible spectral range molecular absorption varies smoothly with
+wavelength in this range and a calculation with 0.5 or 1nm step width
+should be sufficient. Above 500nm, however, absorption by water
+vapour, oxygen, and other trace gases starts; these absorption lines
+are very narrow, and a spectral calculation which resolves all lines
+is not feasible for most applications (such a <em>line-by-line</em>
+calculation is possible, however, if you provide your own spectral
+absorption cross sections). For most applications you have to use a
+parameterization for molecular absorption, for example the
+representative wavelengths parameterization, e.g. <strong>mol_abs_param
+reptran</strong> which is used by default and which allows pseudo-spectral calculations (meaning that you
+still can calculate
+radiation at any wavelength you want, but the gas absorption is
+provided only at limited resolution - if you select the wavelengths
+too close, you will see the steps in your spectrum). For a spectral or
+pseudo-spectral calculation, you may define your own wavelength grid
+with <strong>wavelength_grid_file</strong> and we recommend to do that because
+otherwise you get the default 1nm step which might be too expensive
+for your application. Finally, in order to calculate integrated
+shortwave or integrated longwave radiation, please choose one of the
+pre-defined correlated-k distributions, e.g. <strong>mol_abs_param kato2</strong> or
+<strong>mol_abs_param fu</strong> because these are not only much more accurate but
+also much faster than a pseudo-spectral calculation. Please read the
+respective sections in the manual to become familiar with the
+<strong>mol_abs_param</strong> options.  
+</p>
+
+</div>
+
+<h4 id="quantities">2. Quantities</h4>
+<div class="level4">
+
+<p>
+The next point one needs to consider is the desired radiation
+quantity. Per default, uvspec provides direct, diffuse downward and
+diffuse upward solar irradiance and actinic flux at the
+surface. Thermal quantities can be calculated with <strong>source thermal</strong>
+- please note that uvspec currently does either solar or thermal, but
+not both at the same time. If both components are needed (e.g. for
+calculations around 3&mu;m) then uvspec needs to be
+called twice. To calculate radiances in addition to the irradiances,
+simply define <strong>umu</strong>, <strong>phi</strong>, and <strong>phi0</strong> (see next section).  
+</p>
+
+</div>
+
+<h4 id="geometry">3. Geometry</h4>
+<div class="level4">
+
+<p>
+Geometry includes the location of the sun which is defined with
+<strong>sza</strong> (solar zenith angle) and <strong>phi</strong> (azimuth). The azimuth is
+only required for radiance calculations. Please note that not only the
+solar zenith angle but also the sun-earth-distance change in the
+course of the year which may be considered with <strong>day_of_year</strong>
+(alternatively, <strong>latitude</strong>, <strong>longitude</strong>, and <strong>time</strong> may be
+used). The altitude of the location may be defined with <strong>altitude</strong>
+which modifies the profiles accordingly. Radiation at locations
+different from the surface may be calculated with “zout” which gives
+the sensor altitude above the ground. For satellites use “zout TOA”
+(top of atmosphere). For radiance calculations define the cosine of
+the viewing zenith angle <strong>umu</strong> and the sensor azimuth <strong>phi</strong> and
+don&#039;t forget to also specify the solar azimuth <strong>phi0</strong>. umu&gt;0 means
+sensor looking downward (e.g. a satellite), umu&lt;0 means looking
+upward. phi = phi0 indicates that the sensor looks into the direction
+of the sun, phi-phi0 = 180&deg; means that the sun is in
+the back of the sensor. 
+</p>
+
+</div>
+
+<h4 id="what_do_you_need_to_setup_the_atmosphere">4. What do you need to setup the atmosphere?</h4>
+<div class="level4">
+
+<p>
+To define an atmosphere, you need at least an <strong>atmosphere_file</strong>
+which usually contains profiles of pressure, temperature, air density,
+and concentrations of ozone, oxygen, water vapour, carbon dioxide, and
+nitrogen dioxide. The set of six standard atmospheres provided with
+libRadtran is usually a good start: afglms (mid-latitude summer),
+afglmw (mid-latitude winter), afglss (sub-arctic summer), afglsw
+(sub-arctic winter), afglt (tropical), and afglus (US standard). If
+you don&#039;t define anything else, you have an atmosphere with Rayleigh
+scattering and molecular absorption, but neither clouds, nor aerosol. 
+</p>
+
+</div>
+
+<h5 id="a_trace_gases">4a. Trace gases?</h5>
+<div class="level5">
+
+<p>
+Trace gases are already there, as stated above. But sometimes you
+might want to modify the amount. There is a variety of options to do
+that, e.g. <strong>mol_modify O3</strong> which modifies the ozone column, or
+<strong>mixing_ratio CO2</strong>, …  
+</p>
+
+</div>
+
+<h5 id="b_aerosols">4b. Aerosols?</h5>
+<div class="level5">
+
+<p>
+If you want aerosol, switch it on with <strong>aerosol_default</strong> and use
+either the default aerosol or one of the many <strong>aerosol_</strong> options to
+setup whatever you need. 
+</p>
+
+</div>
+
+<h5 id="c_clouds">4c. Clouds?</h5>
+<div class="level5">
+
+<p>
+uvspec allows water and ice clouds. Define them with <strong>wc_file</strong> and
+<strong>ic_file</strong> and use one of the many <strong>wc_</strong> or <strong>ic_</strong> options to
+define what you need. Please note that for water and ice clouds you
+also have a choice of different parameterizations,
+e.g. <strong>ic_properties</strong> fu, yang, baum, … - these are used to
+translate from liquid/ice water content and droplet/particle radius to
+optical properties. You need some experience with clouds to define
+something reasonable. Here are two typical choices for a <strong>wc_file</strong> 
+</p>
+<pre class="code"> 2   0  0
+ 1 0.1 10  </pre>
+
+<p>
+and an <strong>ic_file</strong>
+</p>
+<pre class="code">10      0  0
+ 9  0.015 20  </pre>
+
+<p>
+The first is a water cloud with effective droplet radius of
+10&mu;m between 1 and 2km, and an optical thickness of
+around 15; the second is an ice cloud with effective particle radius
+20&mu;m between 9 and 10km and an optical thickness of
+about 1. 
+</p>
+
+</div>
+
+<h5 id="d_surface_properties">4d. Surface properties?</h5>
+<div class="level5">
+
+<p>
+Per default, the surface albedo is zero - the surface absorbs all
+radiation. Define your own monochromatic <strong>albedo</strong> or spectral
+<strong>albedo_file</strong> or a BRDF, e.g. for a water surface which is mainly
+determined by the wind speed <strong>cox_and_munk_u10</strong>. 
+</p>
+
+</div>
+
+<h4 id="choice_of_the_radiative_transfer_equation_rte_solver">5. Choice of the radiative transfer equation (rte) solver</h4>
+<div class="level4">
+
+<p>
+The rte-solver is the engine, or heart, in any radiative transfer
+code. All rte-solvers involve some approximations to the radiative
+transfer equations, or the solution has some uncertainties due to the
+computational demands  of the solution method. The choice of
+rte-solver depends on your problem. For example, if your calculations
+involves a low sun you should not use a plane-parallel solver, but one
+which somehow accounts for the spherical shape of the Earth. You may
+choose between many rte-solvers in uvspec. The default solution method
+to the radiative transfer is the discrete ordinate solver disort
+which is the method of choice for most applications. There are other
+solvers like <strong>rte_solver twostr</strong> (faster but less accurate),
+<strong>rte_solver mystic</strong> and <strong>mc_polarisation</strong> (polarization included), or
+<strong>rte_solver disort</strong> and and <strong>pseudospherical</strong> to get
+pseudo-spherical geometry.  
+</p>
+
+</div>
+
+<h4 id="postprocessing">6. Postprocessing</h4>
+<div class="level4">
+
+<p>
+The spectral grid of the output is defined by the extraterrestrial
+spectrum. If you want spectrally integrated results, use either
+<strong>correlated_k kato2/fu</strong> and <strong>output_process sum</strong> or <strong>correlated_k
+reptran</strong> (= the default) and <strong>output_process integrate</strong>. Check also other options like
+<strong>filter_function_file</strong>, <strong>output_quantity brightness</strong>, etc. Instead
+of calibrated spectral quantities you might also want
+<strong>output_quantity transmittance</strong> or
+<strong>output_quantity reflectivity</strong>. 
+</p>
+
+</div>
+
+<h4 id="check_your_input">7. Check your input</h4>
+<div class="level4">
+
+<p>
+Last but not least, make always sure that uvspec actually does what
+you want it to do! A good way to do that is to use <strong>verbose</strong> which
+produces a lot of output. To reduce the amount, it is a good idea to
+do only a monochromatic calculation. Close to the end of the verbose
+output you will find profiles of the optical properties (optical
+thickness, asymmetry parameter, single scattering albedo) which give
+you a pretty good idea e.g. if the clouds which you defined are
+already there, where the aerosol is, etc. As a general rule, never
+trust your input, but always check, play around, and improve. For if
+thou thinkest it cannot happen to me and why bother to use the
+<strong>verbose</strong> option, the gods shall surely punish thee for thy
+arrogance!  
+</p>
+
+</div>
+
+<h2 class="sectionedit3" id="play_around_with_mystic">Play around with MYSTIC</h2>
+<div class="level2">
+
+<p>
+The Monte Carlo code for the physically correct tracing of photons in
+cloudy atmospheres (MYSTIC) is fundamentally different from other
+solvers in the sense that it determines the result by random tracing
+of individual photons through the atmosphere. For a simple description
+of the technique see the publication by Mayer (2009) and the other
+papers listed
+<a href="http://www.meteo.physik.uni-muenchen.de/dokuwiki/doku.php?id=lsmayer:monte_carlo_modell_mystic" class="urlextern" title="http://www.meteo.physik.uni-muenchen.de/dokuwiki/doku.php?id=lsmayer:monte_carlo_modell_mystic" rel="ugc nofollow">here</a>. In
+the following, we show how to play around and explore MYSTIC.  
+</p>
+
+<p>
+First, try a simple uvspec input file:
+</p>
+<pre class="code">atmosphere_file ../data/atmmod/afglus.dat
+source solar    ../data/solar_flux/atlas_plus_modtran
+
+wavelength 450</pre>
+
+<p>
+In this example the default solver (disort) is used and uvspec will provide familar output like
+</p>
+<pre class="code">450.000  1.670252e+03  2.048350e+02 -2.314766e-13  1.329144e+02  4.177456e+01  6.935632e-14 </pre>
+
+<p>
+If you repeat the simulation, you will get an identical result over and over again. Now let&#039;s try MYSTIC by simply adding 
+</p>
+<pre class="code">rte_solver mystic</pre>
+
+<p>
+to the above input and run uvspec 10 times. You might get 
+</p>
+<pre class="code">450.000  1.643995e+03  1.997293e+02  0.000000e+00  1.308250e+02  4.676865e+01  0.000000e+00 
+450.000  1.673167e+03  1.852792e+02  0.000000e+00  1.331464e+02  3.027929e+01  0.000000e+00 
+450.000  1.704421e+03  1.832073e+02  0.000000e+00  1.356335e+02  4.074436e+01  0.000000e+00 
+450.000  1.712756e+03  1.977188e+02  0.000000e+00  1.362968e+02  3.850349e+01  0.000000e+00 
+450.000  1.679417e+03  1.977593e+02  0.000000e+00  1.336438e+02  3.629829e+01  0.000000e+00 
+450.000  1.652330e+03  1.954993e+02  0.000000e+00  1.314883e+02  3.828460e+01  0.000000e+00 
+450.000  1.662748e+03  2.040408e+02  0.000000e+00  1.323173e+02  3.629640e+01  0.000000e+00 
+450.000  1.675250e+03  2.247512e+02  0.000000e+00  1.333122e+02  4.490242e+01  0.000000e+00 
+450.000  1.681501e+03  2.247862e+02  0.000000e+00  1.338096e+02  4.674322e+01  0.000000e+00 
+450.000  1.681501e+03  1.811337e+02  0.000000e+00  1.338096e+02  3.694756e+01  0.000000e+00 </pre>
+
+<p>
+The result is close to disort, but obviously different each time you
+run uvspec. The difference is caused by the photon noise. You may
+compute the noise by calculating the standard deviation of the 10
+individual results. For the direct irradiance (column 2) we obtain
+1676.7&plusmn;20.0 and for the diffuse downward
+199.4&plusmn;14.6. In most cases the noise is Gaussian
+which implies that 68% of the model runs lie within
+&plusmn;1 standard deviation and 95% within 2 standard
+deviations. That way you can always determine the statistical noise
+of your result. The noise is of course determined by the number of
+photons run in the simulation. Try increasing the number of photons
+to 100,000 (the default was 1,000 in the above example) by adding  
+</p>
+<pre class="code">mc_photons 100000</pre>
+
+<p>
+to the input file. Now we pbtain
+1671.1&plusmn;2.4 for the direct and
+203.8&plusmn;1.9 for the diffuse irradiance. The noise
+has decreased roughly by a factor of 10. In fact, the noise is
+proportional to 1 / sqrt (mc_photons) which means, if you want to
+reduce the noise by a factor of 10 you need to increase the number
+of photons and thus the computational time by a factor of
+100. Please note that in both calculations the disort result lies
+within &plusmn;2 standard deviations.  
+</p>
+
+<p>
+Now let&#039;s try something more complicated: Calculate integrated thermal irradiance using the following input file:
+</p>
+<pre class="code">atmosphere_file ../data/atmmod/afglus.dat
+
+source thermal
+mol_abs_param fu
+wavelength_index 7 18
+output_process sum
+
+rte_solver mystic
+
+mc_photons 100000</pre>
+
+<p>
+For the diffuse downward irradiance we obtain
+267.7&plusmn;27.6 W/m2 which is unacceptably noisy. When
+you read the above mentioned publications, you will find that thermal
+irradiance should rather be calculated in “backward” mode. Add  
+</p>
+<pre class="code">mc_backward</pre>
+
+<p>
+to the input file and repeat the calculation. You will obtain
+something like 283.3&plusmn;0.5 W/m2. Noise and also
+computational time have decreased dramatically. The respective disort
+result is 283.6 W/m2 and the disort computational time is only a
+factor of 3 faster compared to MYSTIC (the latter was 0.3 s for
+integrated longwave irradiance). Please note that in backward mode,
+only one quantity is calculated at a time. The default is diffuse
+downward irradiance. If you need diffuse upward instead, please try  
+</p>
+<pre class="code">mc_backward_output eup</pre>
+
+<p>
+Now let&#039;s try radiances with the following input file:
+</p>
+<pre class="code">atmosphere_file ../data/atmmod/afglus.dat
+source solar  ../data/solar_flux/atlas_plus_modtran
+
+wavelength 400 
+
+sza 45
+
+rte_solver mystic
+mc_photons 100000</pre>
+<pre class="code">umu -1
+phi 0</pre>
+
+<p>
+Here we are looking straight upward from the surface in the blue (400
+nm). With the default solver disort you get the result directly to
+stdout while MYSTIC does not provide the radiances there. The latter
+are found in mc.rad.spc (see documentation). Here we obtain
+56.68&plusmn;0.18 for the radiance. The respective disort
+result is 56.53 - again both agree within &plusmn;2
+standard deviations. 
+</p>
+
+<p>
+Now something special: Try calculating radiances for several directions by replacing the umu line with 
+</p>
+<pre class="code">umu -1.0 -0.9 -0.8</pre>
+
+<p>
+You will notice that MYSTIC does the calculation only for the first
+umu value. In contrast to disort each angle pair (umu, phi) has to
+be calculated separately for which reason we haven&#039;t implemented the
+option to calculate several angles at the same time.  
+</p>
+
+<p>
+So far we have only calculated things which could also have been
+calculated with disort - usually faster and without noise. Now let&#039;s
+do something which cannot be done with disort. Try the following: 
+</p>
+<pre class="code">atmosphere_file ../data/atmmod/afglus.dat
+source solar ../data/solar_flux/atlas_plus_modtran</pre>
+<pre class="code">wavelength 400</pre>
+<pre class="code">sza 88</pre>
+
+<p>
+As you know, the plane-parallel approximation in disort is not very
+accurate for low sun (here: SZA 88 degrees). With the default solver
+we obtain 22.01 for the diffuse downward irradiance. Using the
+pseudospherical disort version
+</p>
+<pre class="code">pseudospherical  </pre>
+
+<p>
+we obtain 34.72 instead which is considerably different. Now add the following to the input file:
+</p>
+<pre class="code">rte_solver mystic
+mc_spherical 1D
+mc_photons 100000</pre>
+
+<p>
+in order to obtain 34.47&plusmn;0.36. MYSTIC includes a
+fully spherical solver which is invoked with mc_spherical. Here the
+results of MYSTIC and disort disagree by more than 2 standard
+deviations. Let&#039;s repeat the experiment and increase the number of
+photons to 1000000 in order to obtain
+34.50&plusmn;0.09. The result differ in fact. Here you
+should better trust MYSTIC because MYSTIC is a fully spherical solver
+without approximations while the pseudospherical approximation is
+obviously an approximation. Now let&#039;s try a really spherical case: Use  
+</p>
+<pre class="code">sza 96 </pre>
+
+<p>
+instead of 88 degrees. 96 degrees is the onset of nautical twilight
+(during nautical twilight, sailors can take reliable star sightings of
+well-known stars). You shouldn&#039;t trust the pseudo-spherical
+approximation anymore for such low sun, but spherical MYSTIC provides
+a reliable result of 0.091&plusmn;0.006 (the
+pseudospherical disort
+result was 0.058 in that case which is still the correct order of
+magnitude, but we know that the pseudospherical approximation may
+provide complete nonsense for such SZAs for certain circumstances). 
+</p>
+
+<p>
+Using spherical MYSTIC you may safely compute radiances and
+irradiances for any SZA between 0 and 180 degrees. Also, radiances
+for low viewing angles are correctly computed while those are not
+handled correctly with the plane-parallel or pseudo-spherical
+approximationss. Please note that spherical MYSTIC automatically
+activates backward mode. If you need quantities other than diffuse
+downward irradiance please use
+mc_backward_output …
+</p>
+
+<p>
+MYSTIC also includes a fully vectorized (polarization-dependent) solver. Try 
+</p>
+<pre class="code">atmosphere_file ../data/atmmod/afglus.dat
+source solar ../data/solar_flux/atlas_plus_modtran
+
+wavelength 300
+
+sza 30
+
+rte_solver mystic
+mc_photons 1000000</pre>
+
+<p>
+to obtain 1.224&plusmn;0.002 for the diffuse downward irradiance (disort: 1.224). Now add
+</p>
+<pre class="code">mc_polarisation</pre>
+
+<p>
+and obtain 1.234&plusmn;0.002 which is 1% higher. The
+neglect of polarization may cause errors in the radiance of up to
+10% according to Mishchenko et al. (1994) while errors in the
+irradiance are probably much smaller, as shown in this
+example. However, the real virtue of the vectorized MYSTIC is the
+possibility to calculate the full Stokes Vector, required e.g. for a
+number of modern remote sensing instruments like POLDER, PARASOL,
+GOSAT, etc. Simply add  
+</p>
+<pre class="code">umu -1 
+phi 0</pre>
+
+<p>
+to the above example and check mc.rad.spc:
+</p>
+<pre class="code">300.00000    0    0    0 0.433473
+300.00000    0    0    0 -0.0461689
+300.00000    0    0    0 -0.000196948
+300.00000    0    0    0 0</pre>
+
+<p>
+These are the four components of the Stokes Vector (I,Q,U,V) for the chosen wavelength and geometry.
+</p>
+
+<p>
+These examples should be enough to get you started with MYSTIC. It is
+immediately clear that the required number of photons (and hence the
+computational time) depends strongly on the problem. Also, some
+problems are better solved in forward mode while some (e.g. thermal
+irradiance) should rather be done in backward mode. Strongly peaked
+scattering phase functions of aerosol and water clouds and in
+particular of ice clouds may cause spikes which can be removed by
+switching on 
+</p>
+<pre class="code">mc_vroom</pre>
+
+<p>
+It is important to note that all these switches only affect the noise,
+but not the absolute value since MYSTIC is “physically correct” by
+definition. The only exception is 
+</p>
+<pre class="code">mc_delta_scaling</pre>
+
+<p>
+which truncates the phase function and may introduce some systematic uncertainty. It&#039;s usually not required - use 
+</p>
+<pre class="code">mc_vroom </pre>
+
+<p>
+instead. If you plan to use MYSTIC for your work, make sure you get familiar with the options and check the above mentioned literature!
+</p>
+
+</div>
+
+<h4 id="references">References</h4>
+<div class="level4">
+
+<p>
+Mishchenko, M.I., A.A. Lacis, and L.D. Travis, 1994. Errors induced by the neglect of polarization in radiance calculations for Rayleigh-scattering atmospheres. JQSRT 51, 491-510.
+</p>
+
+</div><div style="clear:both"></div></div></article></div></div></main><div class="mikio-page-fill"><div class="mikio-content" style="padding:0"></div></div><footer class="mikio-footer"><div class="doc"><bdi>basic_usage.txt</bdi> · Last modified: 2026/08/09 14:31</div><div class="license"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="license"><img src="/lib/images/license/badge/cc-by-nc-sa.png" alt="CC Attribution-Noncommercial-Share Alike 4.0 International" /></a> Except where otherwise noted, content on this wiki is licensed under the following license: <bdi><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="license" class="urlextern">CC Attribution-Noncommercial-Share Alike 4.0 International</a></bdi></div></footer>    <div class="no"><img src="/lib/exe/taskrunner.php?id=basic_usage&amp;1794045289" width="2" height="1" alt="" /></div>
+</div>
+</body>
+</html>

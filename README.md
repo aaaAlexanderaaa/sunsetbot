@@ -18,9 +18,13 @@ includes all twenty cases with both input factors: ERA5+EAC4 gives ranking AUC
 0.637 versus 0.686 for the native ERA5 cloud-layer baseline. Dense diagnostic
 profiles reveal omitted 225 hPa cloud. The [data-access guide](docs/reanalysis-access.md)
 documents the working free official sources and reproducible acquisition.
-Engineering regression/replay and empirical prediction skill retain separate
-evidence. Cloud-target reconstruction and cloud scattering require priority
-review before relying on the numerical index for outings.
+The [independent 164-event calendar](docs/evidence/cloud-column-validation.md)
+now gives original-model AUC 0.716 versus 0.660 for that baseline. Dense sampling
+gives 0.727; the frozen dense/adjacent candidate gives 0.707. Their paired
+change intervals span zero, so production retains the original engine.
+Source-label evidence coverage, run/lead provenance and probability calibration
+remain explicit in the report. Engineering replay and empirical prediction
+skill retain their respective scope.
 
 ## Run
 
@@ -79,6 +83,7 @@ Its calibration status accompanies every result; field skill remains to be measu
 ```text
 GET /healthz
 GET /api/v1/locations
+GET /api/v1/evaluation
 GET /api/v1/forecast?city=shanghai&event=sunset&model=gfs
 ```
 
@@ -97,6 +102,9 @@ Fetch time and numerical-model initialization time have separate fields.
 An all-zero curve has `peakTime:null`. Missing aerosol has a null aerosol-height
 sensitivity range. Source resolution, cloud-overlap sensitivity and local
 forecast/source retention status are also exposed.
+Every forecast includes its matching retrospective evaluation summary. The
+evaluation endpoint supplies ranking metrics, source-label coverage and the
+independent-calendar representation decision without downloading weather data.
 
 ## Evidence and development
 
@@ -107,6 +115,9 @@ node scripts/replay.mjs ecmwf
 # Historical observation comparison; local replay uses preserved inputs:
 node scripts/backtest.mjs
 node scripts/backtest.mjs --all
+# Frozen cloud-representation experiment and independent calendar:
+node scripts/experiment-cloud-columns.mjs --dense
+node scripts/validate_cloud_columns.mjs
 # Earlier single-bearing source captures are also preserved:
 node scripts/replay.mjs gfs --legacy
 docker compose logs --tail=100 sunsetbot
@@ -125,7 +136,8 @@ See [model details](docs/model.md), [architecture](ARCHITECTURE.md),
 Cloud liquid/ice content, phase-dependent optical properties, vertical
 resolution, cross-section spacing, sideward cloud holes and sub-hour cloud
 motion determine the next accuracy gains. Native GFS GRIB2 cloud-water/ice
-fields and satellite nowcasting are the next data upgrades. A dated observation
-set including ordinary and failed sunsets is needed for calibration and held-out
-evaluation. Each downloaded forecast already preserves a reproducible identity
-and explanatory samples for that work.
+fields and satellite nowcasting are possible data upgrades. The preserved
+184-event development/validation calendar supplies source labels and reproducible
+inputs. Independently covered ordinary and failed events, with known forecast
+lead, are needed for field calibration. Each downloaded forecast already
+preserves a reproducible identity and explanatory samples for that work.

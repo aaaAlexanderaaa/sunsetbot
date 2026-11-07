@@ -4,6 +4,7 @@ import { PRESETS } from './presets.mjs';
 import { DISTANCES, computeForecast, samplingOffsets } from './engine.mjs';
 import { AppError } from './errors.mjs';
 import { LEVELS } from './provider.mjs';
+import { evidenceForModel } from './model-evidence.mjs';
 
 export class ForecastService {
   constructor({ provider, archive = null, now = () => Date.now() }) {
@@ -77,6 +78,7 @@ export class ForecastService {
         nativeTimeStepMinutes: 180, gridResolutionDegrees: 0.4, initializationTime: null,
         error: aerosolError, sourceUrl: 'https://open-meteo.com/en/docs/air-quality-api' } },
       ...forecast,
+      evaluation: evidenceForModel(forecast.modelVersion),
     };
     result.retention = { state: 'disabled' };
     if (this.archive) {

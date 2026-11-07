@@ -56,8 +56,11 @@ class Grid:
 
 
 class GribArchive:
-    def __init__(self, paths, wanted_times):
+    def __init__(self, paths, wanted_times, *, sample_points_by_time=None, full_grid_parameters=()):
         self.fields, self.grids, self.receipts = {}, {}, []
+        self.sample_points_by_time = sample_points_by_time or {}
+        self.full_grid_parameters = set(full_grid_parameters)
+        self.sampled_keys = set()
         for path in sorted(map(Path, paths)):
             count = retained = duplicates = 0
             with path.open("rb") as stream:
@@ -68,8 +71,9 @@ class GribArchive:
                         if param not in PARAMETERS:
                             raise ValueError(f"unexpected parameter {param} in {path.name}")
                         short, units, level_type = PARAMETERS[param]
-                        if (ec.codes_get(handle, "shortName"), ec.codes_get(handle, "units"),
-                                ec.codes_get(handle, "typeOfLevel")) != (short, units, level_type):
+                        actual_type = ec.codes_get(handle, "typeOfLevel")
+                        allowed_types = {level_type} if param != 129 else {"isobaricInhPa", "surface"}
+                        if (ec.codes_get(handle, "shortName"), ec.codes_get(handle, "units")) != (short, units) or actual_type not in allowed_types:
                             raise ValueError(f"parameter identity or units changed: {path.name} / {param}")
                         day = str(ec.codes_get(handle, "validityDate"))
                         hour = f"{ec.codes_get(handle, 'validityTime'):04d}"
@@ -90,6 +94,10 @@ class GribArchive:
                         if param in (246, 247, 210207) and values.min() < 0:
                             raise ValueError(f"negative water/ice/AOD: {path.name} / {param}")
                         key = (param, when, int(ec.codes_get(handle, "level")))
+                        if when in self.sample_points_by_time and (param, key[2]) not in self.full_grid_parameters:
+                            li, lj, _ = self.grids[grid_key].select(self.sample_points_by_time[when])
+                            values = values[li, lj].copy()
+                            self.sampled_keys.add(key)
                         if key in self.fields:
                             old_grid, old_values = self.fields[key]
                             if grid_key != old_grid or not np.array_equal(values, old_values):
@@ -109,5 +117,9 @@ class GribArchive:
             grid_key, values = self.fields[(param, when, pressure)]
         except KeyError as error:
             raise ValueError(f"required GRIB field missing: parameter={param}, UTC={datetime.fromtimestamp(when, timezone.utc).isoformat()}, pressure={pressure}") from error
+        if (param, when, pressure) in self.sampled_keys:
+            if points != self.sample_points_by_time[when]:
+                raise ValueError("point-sampled GRIB field requested at a different point set")
+            return values, self.grids[grid_key].select(points)[2]
         lat_i, lon_i, selected = self.grids[grid_key].select(points)
         return values[lat_i, lon_i], selected

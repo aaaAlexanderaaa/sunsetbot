@@ -4,7 +4,7 @@ status: current
 authority: normative
 implementation: implemented
 verification_status: partial
-last_reconciled: 2026-11-06
+last_reconciled: 2026-11-07
 ---
 
 # Forecast behavior
@@ -41,6 +41,11 @@ cloudy path. A horizontal distance-decaying correlation scenario supplies the ce
 result; fully correlated and independent-column scenarios expose sensitivity.
 Vertical maximum overlap and exact exposed-base conditioning preserve the
 input fractions.
+Published retrospective evidence accompanies forecasts and is available at
+`/api/v1/evaluation`, tied to its model version. It reports the source-label
+calendar, data reconstruction, ranking metrics, observation coverage and
+calibration scope. A different model version has unavailable evidence until
+a matching study is published.
 Three solar bearings cover the event's changing azimuth; visible cloud bases
 extend to 300 km toward the Sun at elevations of at least 0.5 degrees.
 An all-zero curve has no peak time. Absent aerosol has an unquantified bias and

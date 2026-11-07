@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<!-- ======================================================================= -->
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+		<!-- Loading Bootstrap -->
+		<link href="../../css/vendor/bootstrap/css/bootstrap-msc.min.css" rel="stylesheet">
+		<!-- Loading css -->
+		<link href="../../css/honoka.min.css" rel="stylesheet">
+		<link rel="icon" type="image/png" href="/mscweb/lib/fig/jma.png">
+		<!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+		<!--[if lt IE 9]>
+			<script src="../js/vendor/html5shiv.js"></script>
+			<script src="../js/vendor/respond.min.js"></script>
+		<![endif]-->
+		<link href="../../css/new_msc.css" rel="stylesheet">
+		<!-- =================================================================== -->
+		<!--【要変更：タイトル：始】-->
+		<title>Meteorological Satellite Center (MSC) | Himawari-8/9 Imager (AHI)</title>
+		<!--【要変更：タイトル：終】-->
+	</head>
+<!-- ======================================================================= -->
+<!-- タグ構造メモ
+	<body>
+		<div class="container">
+			<div class="row">
+				<div id="head"></div>
+			</div>
+			<div class="row">
+				<div id="sub_menu" class="col-sm-4 col-sm-push-8"></div>
+				<div class="col-sm-8 col-sm-pull-4">
+					<div id="pan"></div>
+					<article></article>
+				</div>
+			</div> 
+			<div class="row">
+				<div id="footer"></div>
+			</div>
+		</div>
+	</body>
+-->
+<!-- ======================================================================= -->
+	<body>
+		<div class="container">
+<!-- ======================================================================= -->
+			<div class="row">
+				<!-- ヘッダ部分(jQueryで外部ファイルを読み込む) -->
+				<div id="head"></div>
+			</div> <!-- row -->
+<!-- ======================================================================= -->
+			<div class="row flex-row-reverse">
+				<!-- サイドメニュー部分 (4/12の大きさ,push-8で左揃え)-->
+				<div id="sub_menu" class="col-sm-4 col-xs-12 d-flex flex-fill flex-column order-first order-sm-first align-self-start"></div>
+<!-- ======================================================================= -->
+				<!-- メインコンテンツ (8/12の大きさ,pull-4で右揃え)-->
+				<div class="d-flex flex-column col-sm-8 col-xs-12 align-top">
+<!-- ======================================================================= -->
+					<!-- パンくずリスト (jQueryで設定を書き込む）-->
+					<div id="pan">
+						<ol id="breadcrumb_list" class="breadcrumb"></ol>
+					</div>
+<!-- ======================================================================= -->
+<!-- メインコンテンツはここから -->
+<article>
+	<h1 id="top">Contents</h1>
+	<ul>
+	  <li><a href="#band">Imaging bands</a></li>
+	  <li><a href="#srf">Spectral Response Functions</a></li>
+	  <li><a href="#testresults">Test results</a></li>
+	  <li><a href="#obs">Observing area and its time interval</a></li>
+	  <li><a href="#photo">Photographs</a></li>
+	</ul>
+
+
+	<a name="band"></a>
+	<h1>Imaging bands</h1>
+
+	<p class="text-e">
+	Himawari-8 and Himawari-9 have a new payload called the Advanced Himawari Imager (AHI) for dedicated meteorological mission.
+	</p>
+
+	<p class="text-e">
+	Table 1 shows the AHI observation bands. The functions and specifications are notably improved from those of the imagers on board MTSATs, 
+	and the AHI contributes to better nowcasting, improved numerical weather prediction accuracy and enhanced environmental monitoring. 
+	Color images are derived by compositing three visible band (<span style="color:blue">blue:&nbsp;0.47&nbsp;&micro;m</span>; 
+	<span style="color:green">green:&nbsp;0.51&nbsp;&micro;m</span>; <span style="color:red">red:&nbsp;0.64&nbsp;&micro;m</span>).
+	</p>
+
+	<p class="text-e" style="font-size:90%;"><i>
+	<sup>*</sup> The Himawari-8/9 band corresponding to the MTSAT-1R/2 IR1 band was changed from 11.2 &micro;m to 10.4 &micro;m on 31 October, 2013.
+	</i></p>
+	<br />
+
+	<figcaption><i>Table 1: Imager specifications.</i></figcaption>
+	<div class="table table-responsive">
+	<table class="table  table-condenced table-hover table-responsive text-center" style="background-color:#ffffff;">
+	  <thead>
+		<tr>
+			<th style="vertical-align:middle;" rowspan="3" width="12%">Wave length [&micro;m]</th>
+			<th style="vertical-align:middle;" colspan="4">Himawari-8/9</th>
+			<th style="vertical-align:middle;" colspan="2">MTSAT-1R/2</th>
+		</tr>
+		<tr>
+			<th style="vertical-align:middle;" rowspan="2" width="12%">Band number</th>
+			<th style="vertical-align:middle;" rowspan="2" width="12%">Spatial resolution at SSP [km]</th>
+			<th style="vertical-align:middle;" colspan="2" width="42%">Central wave length [&micro;m]</th>
+			<th style="vertical-align:middle;" rowspan="2" width="12%">Channel name</th>
+			<th style="vertical-align:middle;" rowspan="2" width="12%">Spatial resolution at SSP [km]</th>
+		</tr>
+		<tr>
+			<th style="vertical-align:middle;">AHI-8 (Himawari-8)</th>
+			<th style="vertical-align:middle;">AHI-9 (Himawari-9)</th>
+		</tr>
+	  </thead>
+	  <tbody>
+	    	<tr>
+			<td style="background-color:blue; color:white;">0.47</td>
+			<td>1</td>
+			<td>1</td>
+			<td>0.47063</td>
+			<td>0.47059</td>
+			<td style="background-color: #c0c0c0">-</td>
+			<td style="background-color: #c0c0c0">-</td>
+		</tr>
+		<tr>
+			<td style="background-color:green; color:white;">0.51</td>
+			<td>2</td>
+			<td>1</td>
+			<td>0.51000</td>
+			<td>0.50993</td>
+			<td style="background-color: #c0c0c0">-</td>
+			<td style="background-color: #c0c0c0">-</td>
+		</tr>
+		<tr>
+			<td style="background-color:red; color:white;">0.64</td>
+			<td>3</td>
+			<td>0.5</td>
+			<td>0.63914</td>
+			<td>0.63972</td>
+			<td>VIS</td>
+			<td>1</td>
+		</tr>
+		<tr>
+			<td>0.86</td>
+			<td>4</td>
+			<td>1</td>
+			<td>0.85670</td>
+			<td>0.85668</td>
+			<td style="background-color: #c0c0c0">-</td>
+			<td style="background-color: #c0c0c0">-</td>
+		</tr>
+		<tr>
+			<td>1.6</td>
+			<td>5</td>
+			<td>2</td>
+			<td>1.6101</td>
+			<td>1.6065</td>
+			<td style="background-color: #c0c0c0">-</td>
+			<td style="background-color: #c0c0c0">-</td>
+		</tr>
+		<tr>
+			<td>2.3</td>
+			<td>6</td>
+			<td>2</td>
+			<td>2.2568</td>
+			<td>2.2570</td>
+			<td style="background-color: #c0c0c0">-</td>
+			<td style="background-color: #c0c0c0">-</td>
+		</tr>
+		<tr>
+			<td>3.9</td>
+			<td>7</td>
+			<td>2</td>
+			<td>3.8853</td>
+			<td>3.8289</td>
+			<td>IR4</td>
+			<td>4</td>
+		</tr>
+		<tr>
+			<td>6.2</td>
+			<td>8</td>
+			<td>2</td>
+			<td>6.2429</td>
+			<td>6.2479</td>
+			<td>IR3</td>
+			<td>4</td>
+		</tr>
+		<tr>
+			<td>6.9</td>
+			<td>9</td>
+			<td>2</td>
+			<td>6.9410</td>
+			<td>6.9555</td>
+			<td style="background-color: #c0c0c0">-</td>
+			<td style="background-color: #c0c0c0">-</td>
+		</tr>
+		<tr>
+			<td>7.3</td>
+			<td>10</td>
+			<td>2</td>
+			<td>7.3467</td>
+			<td>7.3437</td>
+			<td style="background-color: #c0c0c0">-</td>
+			<td style="background-color: #c0c0c0">-</td>
+		</tr>
+		<tr>
+			<td>8.6</td>
+			<td>11</td>
+			<td>2</td>
+			<td>8.5926</td>
+			<td>8.5936</td>
+			<td style="background-color: #c0c0c0">-</td>
+			<td style="background-color: #c0c0c0">-</td>
+		</tr>
+		<tr>
+			<td>9.6</td>
+			<td>12</td>
+			<td>2</td>
+			<td>9.6372</td>
+			<td>9.6274</td>
+			<td style="background-color: #c0c0c0">-</td>
+			<td style="background-color: #c0c0c0">-</td>
+		</tr>
+		<tr>
+			<td>10.4</td>
+			<td>13</td>
+			<td>2</td>
+			<td>10.4073</td>
+			<td>10.4074</td>
+			<td>IR1</td>
+			<td>4</td>
+		</tr>
+		<tr>
+			<td>11.2</td>
+			<td>14</td>
+			<td>2</td>
+			<td>11.2395</td>
+			<td>11.2080</td>
+			<td style="background-color: #c0c0c0">-</td>
+			<td style="background-color: #c0c0c0">-</td>
+		</tr>
+		<tr>
+			<td>12.4</td>
+			<td>15</td>
+			<td>2</td>
+			<td>12.3806</td>
+			<td>12.3648</td>
+			<td>IR2</td>
+			<td>4</td>
+		</tr>
+		<tr>
+			<td>13.3</td>
+			<td>16</td>
+			<td>2</td>
+			<td>13.2807</td>
+			<td>13.3107</td>
+			<td style="background-color: #c0c0c0">-</td>
+			<td style="background-color: #c0c0c0">-</td>
+		</tr>
+	</tbody>
+	<tfoot>
+	    	<tr>
+			<td colspan="8" align="left">
+			SSP: sub satellite point
+			</td>
+		</tr>
+	</tfoot>
+	</table>
+	</div>
+
+
+	<a name="srf"></a>
+	<h1>Spectral Response Functions</h1>
+
+	<p class="text-e">
+	The figures below show the SRFs (Spectral Response Functions) of the AHIs on board Himawari-8 (as of September 2013) and -9 (as of October 2013). Microsoft Excel workbooks (zip files) of the SRFs for AHIs on Himawari-8 and -9 can also be downloaded from the hyperlinks below.
+	</p>
+
+	<div class="row">
+		<div class="col-xs-10 col-sm-6 col-md-6 col-xs-offset-1 col-sm-offset-0 col-md-offset-0">
+			<figure>
+				<a href="./img/AHI8_SRF_VNIR_201309.png" target="_blank"><img src="./img/AHI8_SRF_VNIR_s_201309.png" alt="AHI SRF (VIS, NIR)" class="img-responsive" width="100%"></a>
+			</figure>
+		</div>
+		<div class="col-xs-10 col-sm-6 col-md-6 col-xs-offset-1 col-sm-offset-0 col-md-offset-0">
+			<figure>
+				<a href="./img/AHI8_SRF_IR_201309.png" target="_blank"><img src="./img/AHI8_SRF_IR_s_201309.png" alt="AHI SRF (IR)" class="img-responsive" width="100%"></a>
+			</figure>
+		</div><br clear="both">
+		<div class="col-sm-12">
+			<figcaption><i>Figure 1-1: Himawari-8/AHI SRFs. [Left: VIS and NIR, Right: IR (Click figure to enlarge.)]</i></figcaption>
+		</div>
+<!--	</div> -->
+		<br clear="both">
+
+<!--	<div class="row"> -->
+		<div class="col-xs-10 col-sm-6 col-md-6 col-xs-offset-1 col-sm-offset-0 col-md-offset-0">
+			<figure>
+				<a href="./img/AHI9_SRF_VNIR_201310.png" target="_blank"><img src="./img/AHI9_SRF_VNIR_s_201310.png" alt="AHI SRF (VIS, NIR)" class="img-responsive" width="100%"></a></a>
+			</figure>
+		</div>
+		<div class="col-xs-10 col-sm-6 col-md-6 col-xs-offset-1 col-sm-offset-0 col-md-offset-0">
+			<figure>
+				<a href="./img/AHI9_SRF_IR_201310.png" target="_blank"><img src="./img/AHI9_SRF_IR_s_201310.png" style="border:0" alt="AHI SRF (IR)" class="img-responsive" width="100%"></a>
+			</figure>
+		</div><br clear="both">
+		<div class="col-sm-12">
+			<figcaption><i>Figure 1-2: Himawari-9/AHI SRFs. [Left: VIS and NIR, Right: IR (Click figure to enlarge.)]</i></figcaption>
+		</div>
+	</div>
+	<br />
+
+	<ul>
+		<li>
+			<a href="./fig/SRF_AHI8Sep2013_AHI9Oct2013.png">Comparison of Spectral Response Functions between AHI-8 and -9 (PNG, 250 KB)</a>
+		</li>
+		<li>
+			<a href="./srf_201309/AHI-08_SpectralResponsivity.zip">AHI-8_SpectralResponsivity.zip (1.1 MB)</a>
+			(update September 2013; provided by ITT Exelis)
+		</li>
+		<li>
+			<a href="./srf_201310/AHI-09_SpectralResponsivity.zip">AHI-9_SpectralResponsivity.zip (1.1 MB)</a>
+			(update October 2013; provided by ITT Exelis)
+		</li>
+	</ul>
+
+
+	<a name="testresults"></a>
+	<h1>Test results</h1>
+
+	<p class="text-e">
+	The performance of the AHI on board Himawari-8 is evaluated in ground testing. The test results, including data on the center wavelength, bandwidth, bits, SNR, dynamic range, radiometric calibration accuracy, internal calibration target (ICT) emissivity and out-of-band response, can be accessed via the following link:
+	</p>
+	<ul>
+		<li><a href="./fig/AHI8_performance_test_en.pdf" target="_blank">AHI-8_performance_test_en.pdf (100 kB)</a></li>
+	</ul>
+
+
+	<a name="obs"></a>
+	<h1>Observation area and periodicity</h1>
+
+	<p class="text-e">
+	Himawari-8 and -9 AHI scanning is conducted in the categories of Full Disk (whole-earth images), Japan Areas (Regions 1 and 2), 
+	Target Area (Region 3) and Landmark Areas (Regions 4 and 5). The Full Disk and Japan Area scan ranges are fixed, 
+	while those for Target Area and Landmark Area scanning are set in prompt response to changes in meteorological conditions.
+	<p class="text-e">
+	Landmark Area scanning data are used only for Himawari-8 navigation, and are not intended for use as satellite products. 
+	JMA plans to use Region 5 for observation of rapidly developing cumulonimbus cloud enabling provision of data to users. 
+	Each 10-minute period incorporates one Full Disk scan, four Japan Area and Target Area scans, and twenty scans for each Landmark Area. 
+	This 10-minute sequence is a basic unit of the observation schedule timeline. In Himawari-8 and -9 baseline observations, 
+	the timeline is repeated every 10 minutes except during housekeeping operation. 
+	Observation areas and frequencies are shown in Table 2, timeline-based scan images are shown in Figure 2, 
+	the Japan Area is shown in Figure 3, and observation areas/pixel numbers are shown in Table 3 (subject to in-orbit-test in regional observation). 
+	</p>
+	<p class="text-e">
+	The following animation shows the concept of the AHI observation sequence on a 10-minute timeline:
+	</p>
+
+	<div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-2">
+		<video controls preload="none" poster="./img/ahi_seq.png" width="100%">
+			<source src="//www.data.jma.go.jp/video/data/sat/ahi_scan_concept.mp4" type="video/mp4">
+			<p>Your browser does not support the video tag.</p>
+		</video>
+	</div>
+	</div>
+	<br clear="both">
+
+
+	<div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-2">
+		<figure>
+			<a href="./img/ahi_obs.png" target="_blank"><img src="./img/ahi_obs_s.png" alt="AHI observation areas" class="img-responsive" width="100%"></a>
+		</figure>
+		<figcaption><i>Figure 2:  AHI observation sequence within a 10-minute time frame (Click figure to enlarge.)</i></figcaption>
+	</div>
+	</div><br />
+
+	<div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-2">
+		<figure>
+		<a href="./img/japan_area.png" target="_blank"><img src="./img/japan_area.png" alt="AHI observation areas" class="img-responsive" width="100%"></a>
+		</figure>
+		<figcaption><i>Figure 3: Coverage of the Japan Area <br />
+			(Subject to slight changes based on the results of in-orbit testing after launch)</i></efigcaption>
+	</div>
+	</div><br />
+
+	<br />
+	<figcaption><i>Table 2: Himawari-8 and -9 observation areas and frequencies</i></figcaption>
+	<div class="table table-responsive">
+	<table class="table  table-condenced table-hover table-responsive text-center" style="background-color:#ffffff;">
+	  <thead>
+		<tr>
+			<th></th>
+			<th>Observations per timeline</th>
+			<th>Time cycle [min.]</th>
+			<th>Observations per day</th>
+		</tr>
+	  </thead>
+	  <tbody>
+		<tr>
+			<th>Full Disk (Fixed)</th>
+			<td style="vertical-align:middle;">1</td>
+			<td style="vertical-align:middle;">10</td>
+			<td style="vertical-align:middle;">144</td>
+		</tr>
+		<tr>
+			<th style="vertical-align:middle;">Japan Area (Fixed)<br />(Region 1 + Region 2)</th>
+			<td style="vertical-align:middle;">4</td>
+			<td style="vertical-align:middle;">2.5</td>
+			<td style="vertical-align:middle;">576</td>
+		</tr>
+		<tr>
+			<th style="vertical-align:middle;">Target Area (Flexible)<br />(Region 3)</th>
+			<td style="vertical-align:middle;">4</td>
+			<td style="vertical-align:middle;">2.5</td>
+			<td style="vertical-align:middle;">576</td>
+		</tr>
+		<tr>
+			<th style="vertical-align:middle;">Landmark Area (Flexible)<br />(Region 4)</th>
+			<td style="vertical-align:middle;">20</td>
+			<td style="vertical-align:middle;">0.5</td>
+			<td style="vertical-align:middle;">2,880</td>
+		</tr>
+		<tr>
+			<th style="vertical-align:middle;">Landmark Area (Flexible)<br />(Region 5)</th>
+			<td style="vertical-align:middle;">20</td>
+			<td style="vertical-align:middle;">0.5</td>
+			<td style="vertical-align:middle;">2,880</td>
+		</tr>
+	</tbody>
+	</table>
+	</div>
+
+	<figcaption><i>Table 3. Himawari-8 and -9 observation areas and numbers of pixels</i></figcaption>
+	<div class="table table-responsive">
+	<table class="table  table-condenced table-hover table-responsive text-center" style="background-color:#ffffff;">
+	  <thead>
+		<tr>
+			<th style="vertical-align:middle;" rowspan="2" width="20%">Observation area</th>
+			<th style="vertical-align:middle;" rowspan="2" width="20%">Band number<br />(see Table 1)</th>
+			<th style="vertical-align:middle;" rowspan="2" width="20%">Spatial resolution at SSP<br />(sub satellite point)[km] </th>
+			<th style="vertical-align:middle;" colspan="2" width="40%">Numbers of pixels</th>
+		</tr>
+		<tr>
+			<th style="vertical-align:middle;">East-west direction</th>
+			<th style="vertical-align:middle;">North-south direction</th>
+		</tr>
+	  </thead>
+	  <tbody>
+		<tr>
+			<th style="vertical-align:middle;" rowspan="3">Full Disk</th>
+			<td>3</td>
+			<td>0.5</td>
+			<td>22,000</td>
+			<td>22,000</td>
+		</tr>
+		<tr>
+			<td>1,2,4</td>
+			<td>1</td>
+			<td>11,000</td>
+			<td>11,000</td>
+		</tr>
+		<tr>
+			<td>5-16</td>
+			<td>2</td>
+			<td>5,500</td>
+			<td>5,500</td>
+		</tr>
+		<tr>
+			<th style="vertical-align:middle;" rowspan="3">Japan Area <br />(Region 1 + Region 2)</th>
+			<td>3</td>
+			<td>0.5</td>
+			<td>6,000</td>
+			<td>4,800</td>
+		</tr>
+		<tr>
+			<td>1,2,4</td>
+			<td>1</td>
+			<td>3,000</td>
+			<td>2,400</td>
+		</tr>
+		<tr>
+			<td>5-16</td>
+			<td>2</td>
+			<td>1,500</td>
+			<td>1,200</td>
+		</tr>
+		<tr>
+			<th style="vertical-align:middle;" rowspan="3">Target Area <br />(Region 3)</th>
+			<td>3</td>
+			<td>0.5</td>
+			<td>2,000</td>
+			<td>2,000</td>
+		</tr>
+		<tr>
+			<td>1,2,4</td>
+			<td>1</td>
+			<td>1,000</td>
+			<td>1,000</td>
+		</tr>
+		<tr>
+			<td>5-16</td>
+			<td>2</td>
+			<td>500</td>
+			<td>500</td>
+		</tr>
+		<tr>
+			<th style="vertical-align:middle;" rowspan="3">Landmark Area <br />(Region 4)</th>
+			<td>3</td>
+			<td>0.5</td>
+			<td>2,000</td>
+			<td>1,000</td>
+		</tr>
+		<tr>
+			<td>1,2,4</td>
+			<td>1</td>
+			<td>1,000</td>
+			<td>500</td>
+		</tr>
+		<tr>
+			<td>5-16</td>
+			<td>2</td>
+			<td>500</td>
+			<td>250</td>
+		</tr>
+		<tr>
+			<th style="vertical-align:middle;" rowspan="3">Landmark Area <br />(Region 5)</th>
+			<td>3</td>
+			<td>0.5</td>
+			<td>2,000</td>
+			<td>1,000</td>
+		</tr>
+		<tr>
+			<td>1,2,4</td>
+			<td>1</td>
+			<td>1,000</td>
+			<td>500</td>
+		</tr>
+		<tr>
+			<td>5-16</td>
+			<td>2</td>
+			<td>500</td>
+			<td>250</td>
+		</tr>
+	</tbody>
+	</table>
+	</div>
+	<br />
+
+	<a name="photo"></a>
+	<h1>Photographs (Click figure to enlarge.)</h1>
+
+	<p class="text-e">
+	The AHI unit to be installed on the Himawari-8 satellite is under manufacture. &nbsp;(Photos &copy; ITT Exelis)
+	</p>
+
+	<div class="row">
+	<div class="col-sm-12">
+		<hr style="margin:1%; height:1px; background-color:#9ba8ca;" />
+	</div>
+	<div class="col-sm-6">
+		<figure>
+			<a href="./img/ahi_sensor_unit1.jpg" target="_blank"><img src="./img/ahi_sensor_unit1_s.jpg" alt="Sensor Unit" class="img-responsive" width="100%" align="center" style="margin: 5% 0 5% 0;"></a>
+		</figure>
+	</div>
+	<div class="col-sm-6">
+		<figure>
+			<a href="./img/ahi_sensor_unit2.jpg" target="_blank"><img src="./img/ahi_sensor_unit2_s.jpg" alt="Sensor Unit" class="img-responsive" width="100%" align="center"></a>
+		</figure>
+	</div>
+	<div class="col-sm-12">
+		<hr style="margin:1%; height:1px; background-color:#9ba8ca;" />
+		<figcaption><i>Sensor unit</i></figcaption>
+	</div>
+	</div>
+	<br />
+
+	<div class="row">
+	<div class="col-sm-12">
+		<hr style="margin:1%; height:1px; background-color:#9ba8ca;" />
+	</div>
+	<div class="col-sm-6">
+		<figure>
+			<a href="./img/ahi_cryocooler_electronics2.jpg" target="_blank"><img src="./img/ahi_cryocooler_electronics2_s.jpg" alt="Cryocooler Electronics" class="img-responsive" width="100%" align="center" style="margin: 5% 0 5% 0;"></a>
+		</figure>
+	</div>
+	<div class="col-sm-6">
+		<figure>
+			<a href="./img/ahi_cryocooler_electronics1.jpg" target="_blank"><img src="./img/ahi_cryocooler_electronics1_s.jpg" alt="Cryocooler Electronics" class="img-responsive" width="100%" align="center"></a>
+		</figure>
+	</div>
+	<div class="col-sm-12">
+		<hr style="margin:1%; height:1px; background-color:#9ba8ca;" />
+		<figcaption><i>Cryocooler electronics</i></figcaption>
+	</div>
+	</div>
+	<br />
+
+	<div class="row">
+	<div class="col-sm-12">
+		<hr style="margin:1%; height:1px; background-color:#9ba8ca;" />
+	</div>
+	<div class="col-sm-6">
+		<figure>
+			<a href="./img/ahi_electronics_unit2.jpg" target="_blank"><img src="./img/ahi_electronics_unit2_s.jpg" alt="Electronics Unit" class="img-responsive" width="100%" align="center" style="margin: 8% 0 8% 0;"></a>
+		</figure>
+	</div>
+	<div class="col-sm-6">
+		<figure>
+			<a href="./img/ahi_electronics_unit1.jpg" target="_blank"><img src="./img/ahi_electronics_unit1_s.jpg" alt="Electronics Unit" class="img-responsive" width="100%" align="center"></a>
+		</figure>
+	</div>
+	<div class="col-sm-12">
+		<hr style="margin:1%; height:1px; background-color:#9ba8ca;" />
+		<figcaption><i>Electronics unit</i></figcaption>
+	</div>
+	</div>
+
+</article>
+<!-- メインコンテンツはここまで -->
+<!-- ======================================================================= -->
+</div>　<!-- <div class="col-sm-8 col-sm-pull-4"> -->
+<!-- ======================================================================= -->
+			</div> <!-- row -->
+<!-- ======================================================================= -->
+			<!-- フッター部分 -->			<div class="row">
+				<div id="footer"></div>
+			</div> <!-- row -->
+<!-- ======================================================================= -->
+		</div> <!-- container -->
+<!-- ======================================================================= -->
+		<script src="../../js/vendor/jquery-msc.min.js"></script>
+		<script src="../../js/vendor/video.js"></script>
+		<script src="../../js/bootstrap-msc.min.js"></script>
+		<script src="../../js/msc.js"></script>
+		<script type="text/javascript">
+			/* =================================================================== */
+			/* ページの各種設定 */
+			var gnav_id="information";/* グローバルナビのactive項目の設定 */
+			var url_top="../../../en/himawari89/head_spsg.html";
+			var url_menu="../../../en/himawari89/menu_spsg.html";
+			var url_footer="../../../en/footer.html";  /* フッターファイル */
+			var breadList = [		/* パンくずリスト */
+				"HOME",
+				"Himawari User's Guide",
+				"Imager (AHI)",
+			];
+			/* =================================================================== */
+			$(function(){
+				/* ヘッダーの読み込みと現在位置の指定 (<div id="head">に読み込む)*/
+				insert_top(url_top,gnav_id);
+				/* サイドメニューの読み込み (<div id="sub_menu">に読み込む) */
+				insert_menu(url_menu,gnav_id);
+				/* フッターの読み込み (<div id="footer">に読み込む) */
+				insert_footer(url_footer);
+				/* 画面スクロールでページャーの表示・非表示の切り替え */
+				toTop();
+				/* パンくずリスト 項目の追加*/
+				add_breadcrumb(breadList,gnav_id);
+			});
+			/* =================================================================== */
+		</script>
+	</body>
+</html>

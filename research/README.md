@@ -92,6 +92,7 @@ raw HTML/JSON responses and extracted reading copies are retained:
 | [Historical validation review](questions/05-historical-validation.txt) | [raw](chatgpt/05-historical-validation.json), [reading copy](chatgpt/05-historical-validation.md); identifies cloud-target/scattering errors and a frozen historical evaluation route |
 | [Reanalysis data access](questions/06-data-acquisition.txt) | [raw](chatgpt/06-data-acquisition.json), [reading copy](chatgpt/06-data-acquisition.md); recommends official regional CDS/ADS retrieval and concrete account steps |
 | [Priority after complete ERA5/EAC4 replay](questions/08-model-priority-after-era5.txt) | [raw](chatgpt/08-model-priority-after-era5.json), [reading copy](chatgpt/08-model-priority-after-era5.md); prioritizes vertical representation, paired ablations and independent dates; server reported 222 s thinking |
+| [Physics after independent-calendar validation](questions/09-next-physics-after-independent-validation.txt) | [raw](chatgpt/09-next-physics-after-independent-validation.json), [reading copy](chatgpt/09-next-physics-after-independent-validation.md); full frozen source and all 164 scores; prioritizes directional scattering and angular integration; server reported 332 s thinking |
 
 The owner authorized relevant newly authored source for these assessments.
 Every question includes the required implementation/context. Model answers are
@@ -182,8 +183,9 @@ and a [cloud-object range receipt](reanalysis/arco-20230609T21Z-access-probe.jso
 This store chunks each variable/hour globally; the first cloud chunk is
 26.5 MB compressed. Slow actual local transfers led to a bounded access probe
 and the official regional route as the bulk recommendation. Full numerical
-cloud-array retrieval and authenticated official requests retain pending status
-until the account steps are completed. The model remains frozen at 0.3.1.
+cloud-array retrieval was bounded at the probe stage. Authenticated official
+requests subsequently completed, as recorded below. The model remains frozen
+at 0.3.1.
 
 ## Complete official input comparison (2026-11-07)
 
@@ -198,8 +200,8 @@ attribution and exact offline replay.
 
 A [37-level diagnostic](reanalysis/vertical-resolution.json) reveals a 225 hPa
 cloud band omitted by the eleven-level input representation in both an
-observed-positive sunset and a source-labelled zero sunrise. The next
-[representation experiment](../docs/plans/cloud-column-representation.md)
+observed-positive sunset and a source-labelled zero sunrise. The completed
+[representation experiment](../docs/evidence/cloud-column-validation.md)
 keeps optics fixed and specifies independent calendar dates before scoring.
 Official current-IFS cloud concepts support the distinction between layer
 cover integrated across model levels and pressure-level samples; the actual
@@ -210,3 +212,26 @@ a [pre-dispatch compatibility error](chatgpt/07-era5-experiment-design.json).
 The fresh eighth question completed with full local facts/code and the finished
 experiment. The client now propagates MCP tool errors after preserving their
 raw response, preventing a failed assessment from being counted as complete.
+
+## Independent calendar validation (2026-11-07)
+
+The exact 0.3.1 model source and a dense/adjacent research candidate were frozen
+before retrieving the new-date labels. A same-source 2×2 experiment compares
+11/37 pressure levels and cumulative/adjacent cloud-base discovery. The
+twenty-event development block and all 164 events from June 11 through August
+31 replay from public normalized inputs. Original-model ranking AUC is 0.716,
+dense/cumulative 0.727, dense/adjacent 0.707, and native ERA5 layer baseline
+0.660. Both primary candidate and density-only paired change intervals span
+zero; the original production engine is retained.
+
+[The detailed report](../docs/evidence/cloud-column-validation.md) records the
+freeze, date-block statistics, raw input hashes and observation evidence.
+Fifty-six source-positive events include 46 linked records; all 108 zero labels
+have source-only evidence. A bounded public-link probe records guest pages
+and an accessible photo post while retaining the need to verify capture time,
+location and negative observation coverage. The ninth self-contained MCP
+question supplies all scores, actual code and exact diagnostic profiles and
+completed with 332 seconds of reported thinking. Its physical recommendations
+are checked against the saved libRadtran, ECMWF ecRad and JMA primary sources.
+The [next implementation plan](../docs/plans/directional-scattering.md) owns
+directional scattering, angular integration and independent acceptance.
