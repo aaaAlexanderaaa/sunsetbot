@@ -2,7 +2,7 @@
 doc_type: plan
 status: active
 authority: planning
-last_reconciled: 2026-11-07
+last_reconciled: 2026-11-08
 ---
 
 # Directional cloud-scattering experiment
@@ -87,6 +87,15 @@ fixed-lead operational skill have distinct acceptance evidence.
 
 ## Execution state
 
-Primary sources are preserved and their relevant claims checked. The completed
-representation study is exposed in the self-hosted forecast/API. Directional
-scattering implementation and benchmark comparison remain at this plan's owner.
+The prototype now computes actual ERA5/EAC4 source radiance and passes the
+mathematical kernel checks. Twenty events at both pressure resolutions and
+six fixed-medium refinement experiments reveal significant source/angle
+aliasing. The exact initial and transitional adaptive-source versions are
+preserved. [Numerical evidence](../evidence/directional-scattering-numerics.md)
+records the failed acceptance, completed independent assessments and the
+specific next solver changes. Source/angle convergence, candidate source
+freeze and new-date observation evaluation remain at this plan's owner.
+
+Weather-only retrieval for the declared 122-event Sep/Oct calendar has been
+submitted through five official tasks. Existing August/terrain archives are
+reused. New-date observation labels remain unrequested during numerical work.

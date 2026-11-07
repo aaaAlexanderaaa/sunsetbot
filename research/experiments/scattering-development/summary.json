@@ -1,0 +1,4557 @@
+{
+  "computedAt": "2026-11-07T16:09:11.346Z",
+  "signature": "26441cb55ae66bc9f2ab4b195c7fbd9d892f0d1c39e3111bed8ed91db6b01986",
+  "codeIdentity": {
+    "sha256": "ef69fb913601385f75498d6ae52d36b013107507ac7ac8dd6064ea6a3518ba3d",
+    "files": [
+      {
+        "file": "src/scattering-engine.mjs",
+        "sha256": "6d11d3c017abfd7333603fc70b6321847b8dade6136c01f106cfcdc3fe387519"
+      },
+      {
+        "file": "src/radiance.mjs",
+        "sha256": "eae7ad9d3b601cda5ac9ba3e370227ca4443ff09f9cc6b31b2f6f275fa35b3f0"
+      },
+      {
+        "file": "src/radiative-geometry.mjs",
+        "sha256": "4d8fde9f6641ab067bf82b4de6700e2cec0572bff98022bb9aa09dc9c6eaa15a"
+      },
+      {
+        "file": "src/section-medium.mjs",
+        "sha256": "39b58f5c3cbeedf2235db4a0bac0dad67e1e0b8c081d6494a61652a86556f6da"
+      },
+      {
+        "file": "src/astro.mjs",
+        "sha256": "0662f77dfef70869dfe1912234bf5c45fe64de00bcc6bab634629928c5d21b8d"
+      },
+      {
+        "file": "src/cloud-optics.mjs",
+        "sha256": "74d100c6fabaa45c7095221fa642c1d2ce1cf483f366e5a87e0712cb09584c3b"
+      },
+      {
+        "file": "src/provider.mjs",
+        "sha256": "beef2d788599f4b82da2895416a104fc5fe30ea4e43d402733a8690f80f60abd"
+      },
+      {
+        "file": "package-lock.json",
+        "sha256": "e99c3274b12262ef68d348e7f212672fe150d416ab14d809d8e20f4d1af1c9f0"
+      },
+      {
+        "file": "scripts/diagnose_scattering.mjs",
+        "sha256": "02ae75ca0a32f7e1473f4778140ca1912193db6e3b17da44a6995a863435467f"
+      },
+      {
+        "file": "research/model-snapshots/section-optics-0.3.1/engine.mjs",
+        "sha256": "bb57d43a8687f58a3c2342a7806c1011b404cf3da52b5e6c423b71ca68deb09a"
+      },
+      {
+        "file": "research/model-snapshots/section-optics-0.3.1/provider.mjs",
+        "sha256": "beef2d788599f4b82da2895416a104fc5fe30ea4e43d402733a8690f80f60abd"
+      }
+    ]
+  },
+  "cohort": "pilot",
+  "mesh": "base",
+  "minuteOffsets": [
+    -40,
+    -35,
+    -30,
+    -25,
+    -20,
+    -15,
+    -10,
+    -5,
+    0,
+    5,
+    10,
+    15,
+    20,
+    25,
+    30,
+    35,
+    40
+  ],
+  "cases": [
+    {
+      "id": "2023-06-01-sunrise",
+      "density": "coarse",
+      "mesh": "base",
+      "cohort": "pilot",
+      "observedCase": {
+        "id": "2023-06-01-sunrise",
+        "date": "2023-06-01",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306010000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230601_rise.jpg"
+      },
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-01-sunrise.json",
+          "sha256": "0c50ea775b06b2ba7adda4a8fa961bf383950629bde1494e8f95792d05c92ba0"
+        }
+      ],
+      "minuteOffsets": [
+        -40,
+        -35,
+        -30,
+        -25,
+        -20,
+        -15,
+        -10,
+        -5,
+        0,
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        35,
+        40
+      ],
+      "options": {},
+      "measures": {
+        "0": {
+          "eventRed": 0.000001170643832291252,
+          "eventCoveredRed": 0.000001170643832291252,
+          "referenceRed": 4.4012886831767937e-7,
+          "referenceCoveredRed": 4.4012886831767937e-7,
+          "maximumRed": 0.0000752750415421321,
+          "maximumTime": "2023-05-31T21:32:21.020Z",
+          "maximumSunAltitude": 7.184388996434102,
+          "maximumRedExcess": 0.00006207153839376282,
+          "maximumExcessTime": "2023-05-31T21:32:21.020Z"
+        },
+        "0.75": {
+          "eventRed": 1.0070125416117245e-7,
+          "eventCoveredRed": 1.0070125416117245e-7,
+          "referenceRed": 3.968928547095202e-8,
+          "referenceCoveredRed": 3.968928547095202e-8,
+          "maximumRed": 0.000054733904914574845,
+          "maximumTime": "2023-05-31T21:32:21.020Z",
+          "maximumSunAltitude": 7.184388996434102,
+          "maximumRedExcess": 0.00004375983671868965,
+          "maximumExcessTime": "2023-05-31T21:32:21.020Z"
+        },
+        "0.85": {
+          "eventRed": 5.518033913841703e-8,
+          "eventCoveredRed": 5.518033913841703e-8,
+          "referenceRed": 2.3321672673467608e-8,
+          "referenceCoveredRed": 2.3321672673467608e-8,
+          "maximumRed": 0.00007381646051754712,
+          "maximumTime": "2023-05-31T21:32:21.020Z",
+          "maximumSunAltitude": 7.184388996434102,
+          "maximumRedExcess": 0.00006176390357599388,
+          "maximumExcessTime": "2023-05-31T21:32:21.020Z"
+        },
+        "0.9": {
+          "eventRed": 3.525279918013114e-8,
+          "eventCoveredRed": 3.525279918013114e-8,
+          "referenceRed": 1.6109105655231785e-8,
+          "referenceCoveredRed": 1.6109105655231785e-8,
+          "maximumRed": 0.00008403828752709947,
+          "maximumTime": "2023-05-31T21:32:21.020Z",
+          "maximumSunAltitude": 7.184388996434102,
+          "maximumRedExcess": 0.00007233222784392062,
+          "maximumExcessTime": "2023-05-31T21:32:21.020Z"
+        }
+      },
+      "reference": {
+        "time": "2023-05-31T20:51:20.389Z",
+        "targetAltitude": -0.833,
+        "actualAltitude": -0.8330021496839107,
+        "offsetSeconds": -60.631
+      },
+      "wallSeconds": 18.174481916999998,
+      "scope": "Previously inspected source-label development diagnostics; relative spectral cloud radiance, uncalibrated"
+    },
+    {
+      "id": "2023-06-01-sunrise",
+      "density": "dense",
+      "mesh": "base",
+      "cohort": "pilot",
+      "observedCase": {
+        "id": "2023-06-01-sunrise",
+        "date": "2023-06-01",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306010000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230601_rise.jpg"
+      },
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-01-sunrise.json",
+          "sha256": "0c50ea775b06b2ba7adda4a8fa961bf383950629bde1494e8f95792d05c92ba0"
+        },
+        {
+          "file": "research/experiments/cloud-column-dense-inputs/2023-06-01-sunrise.json",
+          "sha256": "938c191531b80d53f3847904aebe5151f415e20408716b55c8805d6b70f6ba80"
+        }
+      ],
+      "minuteOffsets": [
+        -40,
+        -35,
+        -30,
+        -25,
+        -20,
+        -15,
+        -10,
+        -5,
+        0,
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        35,
+        40
+      ],
+      "options": {},
+      "measures": {
+        "0": {
+          "eventRed": 9.137388223809587e-8,
+          "eventCoveredRed": 9.137388223809587e-8,
+          "referenceRed": 3.581395729744405e-8,
+          "referenceCoveredRed": 3.581395729744405e-8,
+          "maximumRed": 0.0005241291970676282,
+          "maximumTime": "2023-05-31T21:32:21.020Z",
+          "maximumSunAltitude": 7.184388996434102,
+          "maximumRedExcess": 0.0004813805052785112,
+          "maximumExcessTime": "2023-05-31T21:32:21.020Z"
+        },
+        "0.75": {
+          "eventRed": 1.2732173643714267e-8,
+          "eventCoveredRed": 1.2732173643714267e-8,
+          "referenceRed": 8.93538283737902e-9,
+          "referenceCoveredRed": 8.93538283737902e-9,
+          "maximumRed": 0.002171528977851606,
+          "maximumTime": "2023-05-31T21:32:21.020Z",
+          "maximumSunAltitude": 7.184388996434102,
+          "maximumRedExcess": 0.002010825755313294,
+          "maximumExcessTime": "2023-05-31T21:32:21.020Z"
+        },
+        "0.85": {
+          "eventRed": 9.28847385783681e-9,
+          "eventCoveredRed": 9.28847385783681e-9,
+          "referenceRed": 7.849203399653118e-9,
+          "referenceCoveredRed": 7.849203399653118e-9,
+          "maximumRed": 0.003228193178906747,
+          "maximumTime": "2023-05-31T21:32:21.020Z",
+          "maximumSunAltitude": 7.184388996434102,
+          "maximumRedExcess": 0.0029989591426030945,
+          "maximumExcessTime": "2023-05-31T21:32:21.020Z"
+        },
+        "0.9": {
+          "eventRed": 6.814332332203992e-9,
+          "eventCoveredRed": 6.814332332203992e-9,
+          "referenceRed": 6.3191702797673565e-9,
+          "referenceCoveredRed": 6.3191702797673565e-9,
+          "maximumRed": 0.003766073951370493,
+          "maximumTime": "2023-05-31T21:32:21.020Z",
+          "maximumSunAltitude": 7.184388996434102,
+          "maximumRedExcess": 0.003505724545652379,
+          "maximumExcessTime": "2023-05-31T21:32:21.020Z"
+        }
+      },
+      "reference": {
+        "time": "2023-05-31T20:51:20.389Z",
+        "targetAltitude": -0.833,
+        "actualAltitude": -0.8330021496839107,
+        "offsetSeconds": -60.631
+      },
+      "wallSeconds": 38.783698208000004,
+      "scope": "Previously inspected source-label development diagnostics; relative spectral cloud radiance, uncalibrated"
+    },
+    {
+      "id": "2023-06-01-sunset",
+      "density": "coarse",
+      "mesh": "base",
+      "cohort": "pilot",
+      "observedCase": {
+        "id": "2023-06-01-sunset",
+        "date": "2023-06-01",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306010000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230601_set.jpg"
+      },
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-01-sunset.json",
+          "sha256": "b4ff7ab97e91d7e994c730bba66028fe5e70fc2f966e28b89f7774cb48f9bcf1"
+        }
+      ],
+      "minuteOffsets": [
+        -40,
+        -35,
+        -30,
+        -25,
+        -20,
+        -15,
+        -10,
+        -5,
+        0,
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        35,
+        40
+      ],
+      "options": {},
+      "measures": {
+        "0": {
+          "eventRed": 1.699284570910966e-13,
+          "eventCoveredRed": 1.699284570910966e-13,
+          "referenceRed": 7.68182629065218e-12,
+          "referenceCoveredRed": 7.68182629065218e-12,
+          "maximumRed": 0.00002330279226341081,
+          "maximumTime": "2023-06-01T10:14:13.424Z",
+          "maximumSunAltitude": 6.7887677307812195,
+          "maximumRedExcess": 0.00002164232516600434,
+          "maximumExcessTime": "2023-06-01T10:14:13.424Z"
+        },
+        "0.75": {
+          "eventRed": 1.6733793548895316e-14,
+          "eventCoveredRed": 1.6733793548895316e-14,
+          "referenceRed": 6.964309146323714e-13,
+          "referenceCoveredRed": 6.964309146323714e-13,
+          "maximumRed": 0.0001183938235777675,
+          "maximumTime": "2023-06-01T10:14:13.424Z",
+          "maximumSunAltitude": 6.7887677307812195,
+          "maximumRedExcess": 0.00010809227962727288,
+          "maximumExcessTime": "2023-06-01T10:14:13.424Z"
+        },
+        "0.85": {
+          "eventRed": 1.1470453370067434e-14,
+          "eventCoveredRed": 1.1470453370067434e-14,
+          "referenceRed": 4.3279917616726904e-13,
+          "referenceCoveredRed": 4.3279917616726904e-13,
+          "maximumRed": 0.00017880205618690632,
+          "maximumTime": "2023-06-01T10:14:13.424Z",
+          "maximumSunAltitude": 6.7887677307812195,
+          "maximumRedExcess": 0.00016334137852796581,
+          "maximumExcessTime": "2023-06-01T10:14:13.424Z"
+        },
+        "0.9": {
+          "eventRed": 9.549765989440357e-15,
+          "eventCoveredRed": 9.549765989440357e-15,
+          "referenceRed": 3.26030330579566e-13,
+          "referenceCoveredRed": 3.26030330579566e-13,
+          "maximumRed": 0.0001847863697093057,
+          "maximumTime": "2023-06-01T10:14:13.424Z",
+          "maximumSunAltitude": 6.7887677307812195,
+          "maximumRedExcess": 0.00016885170100736755,
+          "maximumExcessTime": "2023-06-01T10:14:13.424Z"
+        }
+      },
+      "reference": {
+        "time": "2023-06-01T10:53:17.755Z",
+        "targetAltitude": -0.833,
+        "actualAltitude": -0.8330147588540348,
+        "offsetSeconds": -55.669
+      },
+      "wallSeconds": 12.135678500000001,
+      "scope": "Previously inspected source-label development diagnostics; relative spectral cloud radiance, uncalibrated"
+    },
+    {
+      "id": "2023-06-01-sunset",
+      "density": "dense",
+      "mesh": "base",
+      "cohort": "pilot",
+      "observedCase": {
+        "id": "2023-06-01-sunset",
+        "date": "2023-06-01",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306010000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230601_set.jpg"
+      },
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-01-sunset.json",
+          "sha256": "b4ff7ab97e91d7e994c730bba66028fe5e70fc2f966e28b89f7774cb48f9bcf1"
+        },
+        {
+          "file": "research/experiments/cloud-column-dense-inputs/2023-06-01-sunset.json",
+          "sha256": "6b091d0a87fe37bd4382edc1361f737b229163c87a3411cb7dfe6773601c3bec"
+        }
+      ],
+      "minuteOffsets": [
+        -40,
+        -35,
+        -30,
+        -25,
+        -20,
+        -15,
+        -10,
+        -5,
+        0,
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        35,
+        40
+      ],
+      "options": {},
+      "measures": {
+        "0": {
+          "eventRed": 1.2963951684525116e-10,
+          "eventCoveredRed": 1.2963951684525116e-10,
+          "referenceRed": 4.6274400666930243e-10,
+          "referenceCoveredRed": 4.6274400666930243e-10,
+          "maximumRed": 0.00002562382494861217,
+          "maximumTime": "2023-06-01T10:14:13.424Z",
+          "maximumSunAltitude": 6.7887677307812195,
+          "maximumRedExcess": 0.000022438085324573298,
+          "maximumExcessTime": "2023-06-01T10:14:13.424Z"
+        },
+        "0.75": {
+          "eventRed": 8.282476766145295e-10,
+          "eventCoveredRed": 8.282476766145295e-10,
+          "referenceRed": 1.6958657315367927e-9,
+          "referenceCoveredRed": 1.6958657315367927e-9,
+          "maximumRed": 0.00006870207971340807,
+          "maximumTime": "2023-06-01T10:14:13.424Z",
+          "maximumSunAltitude": 6.7887677307812195,
+          "maximumRedExcess": 0.00006253056674518958,
+          "maximumExcessTime": "2023-06-01T10:14:13.424Z"
+        },
+        "0.85": {
+          "eventRed": 8.08613967127564e-10,
+          "eventCoveredRed": 8.08613967127564e-10,
+          "referenceRed": 1.6618479881737553e-9,
+          "referenceCoveredRed": 1.6618479881737553e-9,
+          "maximumRed": 0.00009293898551499704,
+          "maximumTime": "2023-06-01T10:14:13.424Z",
+          "maximumSunAltitude": 6.7887677307812195,
+          "maximumRedExcess": 0.00008581115464734871,
+          "maximumExcessTime": "2023-06-01T10:14:13.424Z"
+        },
+        "0.9": {
+          "eventRed": 6.352737246067158e-10,
+          "eventCoveredRed": 6.352737246067158e-10,
+          "referenceRed": 1.3097822247951161e-9,
+          "referenceCoveredRed": 1.3097822247951161e-9,
+          "maximumRed": 0.0001007038466657199,
+          "maximumTime": "2023-06-01T10:14:13.424Z",
+          "maximumSunAltitude": 6.7887677307812195,
+          "maximumRedExcess": 0.00009379244671266668,
+          "maximumExcessTime": "2023-06-01T10:14:13.424Z"
+        }
+      },
+      "reference": {
+        "time": "2023-06-01T10:53:17.755Z",
+        "targetAltitude": -0.833,
+        "actualAltitude": -0.8330147588540348,
+        "offsetSeconds": -55.669
+      },
+      "wallSeconds": 27.852148417,
+      "scope": "Previously inspected source-label development diagnostics; relative spectral cloud radiance, uncalibrated"
+    },
+    {
+      "id": "2023-06-02-sunrise",
+      "density": "coarse",
+      "mesh": "base",
+      "cohort": "pilot",
+      "observedCase": {
+        "id": "2023-06-02-sunrise",
+        "date": "2023-06-02",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306020000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230602_rise.jpg"
+      },
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-02-sunrise.json",
+          "sha256": "163a24763a8d9a83863ea958bf48ebb75aa30fc75f944d85c7c1c651c1973a00"
+        }
+      ],
+      "minuteOffsets": [
+        -40,
+        -35,
+        -30,
+        -25,
+        -20,
+        -15,
+        -10,
+        -5,
+        0,
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        35,
+        40
+      ],
+      "options": {},
+      "measures": {
+        "0": {
+          "eventRed": 0,
+          "eventCoveredRed": 0,
+          "referenceRed": 0,
+          "referenceCoveredRed": 0,
+          "maximumRed": 0,
+          "maximumTime": "2023-06-01T20:12:05.625Z",
+          "maximumSunAltitude": -8.102564853861644,
+          "maximumRedExcess": 0,
+          "maximumExcessTime": "2023-06-01T20:12:05.625Z"
+        },
+        "0.75": {
+          "eventRed": 0,
+          "eventCoveredRed": 0,
+          "referenceRed": 0,
+          "referenceCoveredRed": 0,
+          "maximumRed": 0,
+          "maximumTime": "2023-06-01T20:12:05.625Z",
+          "maximumSunAltitude": -8.102564853861644,
+          "maximumRedExcess": 0,
+          "maximumExcessTime": "2023-06-01T20:12:05.625Z"
+        },
+        "0.85": {
+          "eventRed": 0,
+          "eventCoveredRed": 0,
+          "referenceRed": 0,
+          "referenceCoveredRed": 0,
+          "maximumRed": 0,
+          "maximumTime": "2023-06-01T20:12:05.625Z",
+          "maximumSunAltitude": -8.102564853861644,
+          "maximumRedExcess": 0,
+          "maximumExcessTime": "2023-06-01T20:12:05.625Z"
+        },
+        "0.9": {
+          "eventRed": 0,
+          "eventCoveredRed": 0,
+          "referenceRed": 0,
+          "referenceCoveredRed": 0,
+          "maximumRed": 0,
+          "maximumTime": "2023-06-01T20:12:05.625Z",
+          "maximumSunAltitude": -8.102564853861644,
+          "maximumRedExcess": 0,
+          "maximumExcessTime": "2023-06-01T20:12:05.625Z"
+        }
+      },
+      "reference": {
+        "time": "2023-06-01T20:51:04.646Z",
+        "targetAltitude": -0.833,
+        "actualAltitude": -0.8330028761604693,
+        "offsetSeconds": -60.979
+      },
+      "wallSeconds": 0.1978583340000041,
+      "scope": "Previously inspected source-label development diagnostics; relative spectral cloud radiance, uncalibrated"
+    },
+    {
+      "id": "2023-06-02-sunrise",
+      "density": "dense",
+      "mesh": "base",
+      "cohort": "pilot",
+      "observedCase": {
+        "id": "2023-06-02-sunrise",
+        "date": "2023-06-02",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306020000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230602_rise.jpg"
+      },
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-02-sunrise.json",
+          "sha256": "163a24763a8d9a83863ea958bf48ebb75aa30fc75f944d85c7c1c651c1973a00"
+        },
+        {
+          "file": "research/experiments/cloud-column-dense-inputs/2023-06-02-sunrise.json",
+          "sha256": "15907391a9f915deeceeb3feb24625cf2203b791a3b240e45b6a1fd69e18e835"
+        }
+      ],
+      "minuteOffsets": [
+        -40,
+        -35,
+        -30,
+        -25,
+        -20,
+        -15,
+        -10,
+        -5,
+        0,
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        35,
+        40
+      ],
+      "options": {},
+      "measures": {
+        "0": {
+          "eventRed": 0,
+          "eventCoveredRed": 0,
+          "referenceRed": 0,
+          "referenceCoveredRed": 0,
+          "maximumRed": 7.553717919868614e-9,
+          "maximumTime": "2023-06-01T21:32:05.625Z",
+          "maximumSunAltitude": 7.1749449624820025,
+          "maximumRedExcess": 7.500028007633247e-9,
+          "maximumExcessTime": "2023-06-01T21:32:05.625Z"
+        },
+        "0.75": {
+          "eventRed": 0,
+          "eventCoveredRed": 0,
+          "referenceRed": 0,
+          "referenceCoveredRed": 0,
+          "maximumRed": 1.571875135871443e-7,
+          "maximumTime": "2023-06-01T21:32:05.625Z",
+          "maximumSunAltitude": 7.1749449624820025,
+          "maximumRedExcess": 1.5607026458492898e-7,
+          "maximumExcessTime": "2023-06-01T21:32:05.625Z"
+        },
+        "0.85": {
+          "eventRed": 0,
+          "eventCoveredRed": 0,
+          "referenceRed": 0,
+          "referenceCoveredRed": 0,
+          "maximumRed": 2.829907229834766e-7,
+          "maximumTime": "2023-06-01T21:32:05.625Z",
+          "maximumSunAltitude": 7.1749449624820025,
+          "maximumRedExcess": 2.809792966578467e-7,
+          "maximumExcessTime": "2023-06-01T21:32:05.625Z"
+        },
+        "0.9": {
+          "eventRed": 0,
+          "eventCoveredRed": 0,
+          "referenceRed": 0,
+          "referenceCoveredRed": 0,
+          "maximumRed": 3.3439098244775684e-7,
+          "maximumTime": "2023-06-01T21:32:05.625Z",
+          "maximumSunAltitude": 7.1749449624820025,
+          "maximumRedExcess": 3.320142161069467e-7,
+          "maximumExcessTime": "2023-06-01T21:32:05.625Z"
+        }
+      },
+      "reference": {
+        "time": "2023-06-01T20:51:04.646Z",
+        "targetAltitude": -0.833,
+        "actualAltitude": -0.8330028761604693,
+        "offsetSeconds": -60.979
+      },
+      "wallSeconds": 0.607140916999997,
+      "scope": "Previously inspected source-label development diagnostics; relative spectral cloud radiance, uncalibrated"
+    },
+    {
+      "id": "2023-06-02-sunset",
+      "density": "coarse",
+      "mesh": "base",
+      "cohort": "pilot",
+      "observedCase": {
+        "id": "2023-06-02-sunset",
+        "date": "2023-06-02",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306020000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230602_set.jpg",
+        "matchedTo": "2023-06-03-sunset"
+      },
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-02-sunset.json",
+          "sha256": "83521f5dc39a995bfea86b8c316a9f391cef41a3c1536069fe22d8e574147be7"
+        }
+      ],
+      "minuteOffsets": [
+        -40,
+        -35,
+        -30,
+        -25,
+        -20,
+        -15,
+        -10,
+        -5,
+        0,
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        35,
+        40
+      ],
+      "options": {},
+      "measures": {
+        "0": {
+          "eventRed": 6.840669268139308e-17,
+          "eventCoveredRed": 6.840669268139308e-17,
+          "referenceRed": 1.1143915118357758e-17,
+          "referenceCoveredRed": 1.1143915118357758e-17,
+          "maximumRed": 0.000012498884797530873,
+          "maximumTime": "2023-06-02T10:14:46.688Z",
+          "maximumSunAltitude": 6.778692667955026,
+          "maximumRedExcess": 0.00001145828082131187,
+          "maximumExcessTime": "2023-06-02T10:14:46.688Z"
+        },
+        "0.75": {
+          "eventRed": 1.5215155725573738e-15,
+          "eventCoveredRed": 1.5215155725573738e-15,
+          "referenceRed": 2.323422519521924e-17,
+          "referenceCoveredRed": 2.323422519521924e-17,
+          "maximumRed": 0.000046274745687858884,
+          "maximumTime": "2023-06-02T10:14:46.688Z",
+          "maximumSunAltitude": 6.778692667955026,
+          "maximumRedExcess": 0.00004469567811050263,
+          "maximumExcessTime": "2023-06-02T10:14:46.688Z"
+        },
+        "0.85": {
+          "eventRed": 2.997144819787866e-15,
+          "eventCoveredRed": 2.997144819787866e-15,
+          "referenceRed": 1.6450489405793357e-17,
+          "referenceCoveredRed": 1.6450489405793357e-17,
+          "maximumRed": 0.00006401792759533181,
+          "maximumTime": "2023-06-02T10:14:46.688Z",
+          "maximumSunAltitude": 6.778692667955026,
+          "maximumRedExcess": 0.0000622566568606379,
+          "maximumExcessTime": "2023-06-02T10:14:46.688Z"
+        },
+        "0.9": {
+          "eventRed": 3.872508449680931e-15,
+          "eventCoveredRed": 3.872508449680931e-15,
+          "referenceRed": 1.1430887492229346e-17,
+          "referenceCoveredRed": 1.1430887492229346e-17,
+          "maximumRed": 0.00006437419415721586,
+          "maximumTime": "2023-06-02T10:14:46.688Z",
+          "maximumSunAltitude": 6.778692667955026,
+          "maximumRedExcess": 0.00006272663630182454,
+          "maximumExcessTime": "2023-06-02T10:14:46.688Z"
+        }
+      },
+      "reference": {
+        "time": "2023-06-02T10:53:50.909Z",
+        "targetAltitude": -0.833,
+        "actualAltitude": -0.8329869081398642,
+        "offsetSeconds": -55.779
+      },
+      "wallSeconds": 3.3722834589999984,
+      "scope": "Previously inspected source-label development diagnostics; relative spectral cloud radiance, uncalibrated"
+    },
+    {
+      "id": "2023-06-02-sunset",
+      "density": "dense",
+      "mesh": "base",
+      "cohort": "pilot",
+      "observedCase": {
+        "id": "2023-06-02-sunset",
+        "date": "2023-06-02",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306020000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230602_set.jpg",
+        "matchedTo": "2023-06-03-sunset"
+      },
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-02-sunset.json",
+          "sha256": "83521f5dc39a995bfea86b8c316a9f391cef41a3c1536069fe22d8e574147be7"
+        },
+        {
+          "file": "research/experiments/cloud-column-dense-inputs/2023-06-02-sunset.json",
+          "sha256": "16a34a14fa7d1253822dd9f5adf4b59b74cf69931a1a478a73e295471eea673c"
+        }
+      ],
+      "minuteOffsets": [
+        -40,
+        -35,
+        -30,
+        -25,
+        -20,
+        -15,
+        -10,
+        -5,
+        0,
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        35,
+        40
+      ],
+      "options": {},
+      "measures": {
+        "0": {
+          "eventRed": 2.452954457932731e-9,
+          "eventCoveredRed": 2.452954457932731e-9,
+          "referenceRed": 2.4330093507849537e-9,
+          "referenceCoveredRed": 2.4330093507849537e-9,
+          "maximumRed": 0.0000436453862746767,
+          "maximumTime": "2023-06-02T10:14:46.688Z",
+          "maximumSunAltitude": 6.778692667955026,
+          "maximumRedExcess": 0.000040137059593590335,
+          "maximumExcessTime": "2023-06-02T10:14:46.688Z"
+        },
+        "0.75": {
+          "eventRed": 2.017720104741177e-10,
+          "eventCoveredRed": 2.017720104741177e-10,
+          "referenceRed": 2.004205790921005e-10,
+          "referenceCoveredRed": 2.004205790921005e-10,
+          "maximumRed": 0.00008698671959704507,
+          "maximumTime": "2023-06-02T10:14:46.688Z",
+          "maximumSunAltitude": 6.778692667955026,
+          "maximumRedExcess": 0.00008250749126824928,
+          "maximumExcessTime": "2023-06-02T10:14:46.688Z"
+        },
+        "0.85": {
+          "eventRed": 1.083439981687883e-10,
+          "eventCoveredRed": 1.083439981687883e-10,
+          "referenceRed": 1.0765100974966568e-10,
+          "referenceCoveredRed": 1.0765100974966568e-10,
+          "maximumRed": 0.00008932785304721344,
+          "maximumTime": "2023-06-02T10:14:46.688Z",
+          "maximumSunAltitude": 6.778692667955026,
+          "maximumRedExcess": 0.00008565468372171182,
+          "maximumExcessTime": "2023-06-02T10:14:46.688Z"
+        },
+        "0.9": {
+          "eventRed": 6.84805811575483e-11,
+          "eventCoveredRed": 6.84805811575483e-11,
+          "referenceRed": 6.804983237069168e-11,
+          "referenceCoveredRed": 6.804983237069168e-11,
+          "maximumRed": 0.00007953454597510141,
+          "maximumTime": "2023-06-02T10:14:46.688Z",
+          "maximumSunAltitude": 6.778692667955026,
+          "maximumRedExcess": 0.00007665588098416708,
+          "maximumExcessTime": "2023-06-02T10:14:46.688Z"
+        }
+      },
+      "reference": {
+        "time": "2023-06-02T10:53:50.909Z",
+        "targetAltitude": -0.833,
+        "actualAltitude": -0.8329869081398642,
+        "offsetSeconds": -55.779
+      },
+      "wallSeconds": 12.472154291999999,
+      "scope": "Previously inspected source-label development diagnostics; relative spectral cloud radiance, uncalibrated"
+    },
+    {
+      "id": "2023-06-03-sunrise",
+      "density": "coarse",
+      "mesh": "base",
+      "cohort": "pilot",
+      "observedCase": {
+        "id": "2023-06-03-sunrise",
+        "date": "2023-06-03",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306030000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230603_rise.jpg"
+      },
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-03-sunrise.json",
+          "sha256": "a3d5e34f1d6e679d6e32bb153ca81be74976a571c0491e2081f9115da05e9be8"
+        }
+      ],
+      "minuteOffsets": [
+        -40,
+        -35,
+        -30,
+        -25,
+        -20,
+        -15,
+        -10,
+        -5,
+        0,
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        35,
+        40
+      ],
+      "options": {},
+      "measures": {
+        "0": {
+          "eventRed": 1.1760552624801464e-7,
+          "eventCoveredRed": 1.1760552624801464e-7,
+          "referenceRed": 6.657070941732023e-8,
+          "referenceCoveredRed": 6.657070941732023e-8,
+          "maximumRed": 0.00011872297564238655,
+          "maximumTime": "2023-06-02T21:31:51.646Z",
+          "maximumSunAltitude": 7.165719583162707,
+          "maximumRedExcess": 0.0001049250323170019,
+          "maximumExcessTime": "2023-06-02T21:31:51.646Z"
+        },
+        "0.75": {
+          "eventRed": 3.1318223647464557e-7,
+          "eventCoveredRed": 3.1318223647464557e-7,
+          "referenceRed": 1.6963713199222636e-7,
+          "referenceCoveredRed": 1.6963713199222636e-7,
+          "maximumRed": 0.0001521697756420572,
+          "maximumTime": "2023-06-02T21:31:51.646Z",
+          "maximumSunAltitude": 7.165719583162707,
+          "maximumRedExcess": 0.00013904906961729338,
+          "maximumExcessTime": "2023-06-02T21:31:51.646Z"
+        },
+        "0.85": {
+          "eventRed": 2.1236140550329823e-7,
+          "eventCoveredRed": 2.1236140550329823e-7,
+          "referenceRed": 1.147056096060205e-7,
+          "referenceCoveredRed": 1.147056096060205e-7,
+          "maximumRed": 0.00011707677664298101,
+          "maximumTime": "2023-06-02T21:31:51.646Z",
+          "maximumSunAltitude": 7.165719583162707,
+          "maximumRedExcess": 0.00010800998082116206,
+          "maximumExcessTime": "2023-06-02T21:31:51.646Z"
+        },
+        "0.9": {
+          "eventRed": 1.4416394054091536e-7,
+          "eventCoveredRed": 1.4416394054091536e-7,
+          "referenceRed": 7.7792625714585e-8,
+          "referenceCoveredRed": 7.7792625714585e-8,
+          "maximumRed": 0.00008724308993341714,
+          "maximumTime": "2023-06-02T21:31:51.646Z",
+          "maximumSunAltitude": 7.165719583162707,
+          "maximumRedExcess": 0.00008094564655562355,
+          "maximumExcessTime": "2023-06-02T21:31:51.646Z"
+        }
+      },
+      "reference": {
+        "time": "2023-06-02T20:50:50.383Z",
+        "targetAltitude": -0.833,
+        "actualAltitude": -0.8329843745927653,
+        "offsetSeconds": -61.263
+      },
+      "wallSeconds": 9.127753166000002,
+      "scope": "Previously inspected source-label development diagnostics; relative spectral cloud radiance, uncalibrated"
+    },
+    {
+      "id": "2023-06-03-sunrise",
+      "density": "dense",
+      "mesh": "base",
+      "cohort": "pilot",
+      "observedCase": {
+        "id": "2023-06-03-sunrise",
+        "date": "2023-06-03",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306030000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230603_rise.jpg"
+      },
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-03-sunrise.json",
+          "sha256": "a3d5e34f1d6e679d6e32bb153ca81be74976a571c0491e2081f9115da05e9be8"
+        },
+        {
+          "file": "research/experiments/cloud-column-dense-inputs/2023-06-03-sunrise.json",
+          "sha256": "2079d6f7d90dc38a2b92810aea292bd0f19e3c9ad637e66c65ee8204828f985c"
+        }
+      ],
+      "minuteOffsets": [
+        -40,
+        -35,
+        -30,
+        -25,
+        -20,
+        -15,
+        -10,
+        -5,
+        0,
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        35,
+        40
+      ],
+      "options": {},
+      "measures": {
+        "0": {
+          "eventRed": 6.546095009163949e-8,
+          "eventCoveredRed": 6.546095009163949e-8,
+          "referenceRed": 3.403222892776558e-8,
+          "referenceCoveredRed": 3.403222892776558e-8,
+          "maximumRed": 0.00021396385424779347,
+          "maximumTime": "2023-06-02T21:31:51.646Z",
+          "maximumSunAltitude": 7.165719583162707,
+          "maximumRedExcess": 0.00019349168736612548,
+          "maximumExcessTime": "2023-06-02T21:31:51.646Z"
+        },
+        "0.75": {
+          "eventRed": 1.7299902822601427e-7,
+          "eventCoveredRed": 1.7299902822601427e-7,
+          "referenceRed": 8.38817476652923e-8,
+          "referenceCoveredRed": 8.38817476652923e-8,
+          "maximumRed": 0.0002960727456375534,
+          "maximumTime": "2023-06-02T21:31:51.646Z",
+          "maximumSunAltitude": 7.165719583162707,
+          "maximumRedExcess": 0.0002758508140325924,
+          "maximumExcessTime": "2023-06-02T21:31:51.646Z"
+        },
+        "0.85": {
+          "eventRed": 1.1728365578349575e-7,
+          "eventCoveredRed": 1.1728365578349575e-7,
+          "referenceRed": 5.66842535568396e-8,
+          "referenceCoveredRed": 5.66842535568396e-8,
+          "maximumRed": 0.0002449522755793777,
+          "maximumTime": "2023-06-02T21:31:51.646Z",
+          "maximumSunAltitude": 7.165719583162707,
+          "maximumRedExcess": 0.00023065762307704932,
+          "maximumExcessTime": "2023-06-02T21:31:51.646Z"
+        },
+        "0.9": {
+          "eventRed": 7.960583690201681e-8,
+          "eventCoveredRed": 7.960583690201681e-8,
+          "referenceRed": 3.8433063941075536e-8,
+          "referenceCoveredRed": 3.8433063941075536e-8,
+          "maximumRed": 0.00019276891815047628,
+          "maximumTime": "2023-06-02T21:31:51.646Z",
+          "maximumSunAltitude": 7.165719583162707,
+          "maximumRedExcess": 0.0001826678148552585,
+          "maximumExcessTime": "2023-06-02T21:31:51.646Z"
+        }
+      },
+      "reference": {
+        "time": "2023-06-02T20:50:50.383Z",
+        "targetAltitude": -0.833,
+        "actualAltitude": -0.8329843745927653,
+        "offsetSeconds": -61.263
+      },
+      "wallSeconds": 20.838538082999992,
+      "scope": "Previously inspected source-label development diagnostics; relative spectral cloud radiance, uncalibrated"
+    },
+    {
+      "id": "2023-06-03-sunset",
+      "density": "coarse",
+      "mesh": "base",
+      "cohort": "pilot",
+      "observedCase": {
+        "id": "2023-06-03-sunset",
+        "date": "2023-06-03",
+        "eventType": "sunset",
+        "observedGrade": 3,
+        "observedLabel": "小到中烧",
+        "observedCloud": "卷层云",
+        "observedColour": "橘红色",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "https://weibo.com/3169171125/N3DJwplJK",
+        "originalMap": "/static/media/ERA5/202306030000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230603_set.jpg"
+      },
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-03-sunset.json",
+          "sha256": "f98d64e2160b7980ee99771dad9307efe698dfe39f469fe79ae85dac764f6bb6"
+        }
+      ],
+      "minuteOffsets": [
+        -40,
+        -35,
+        -30,
+        -25,
+        -20,
+        -15,
+        -10,
+        -5,
+        0,
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        35,
+        40
+      ],
+      "options": {},
+      "measures": {
+        "0": {
+          "eventRed": 0.0000028506152388568703,
+          "eventCoveredRed": 0.0000028506152388568703,
+          "referenceRed": 0.0000026701832328783325,
+          "referenceCoveredRed": 0.0000026701832328783325,
+          "maximumRed": 0.0003579766592167864,
+          "maximumTime": "2023-06-03T10:15:19.202Z",
+          "maximumSunAltitude": 6.7691899347124025,
+          "maximumRedExcess": 0.0002394063724723692,
+          "maximumExcessTime": "2023-06-03T10:15:19.202Z"
+        },
+        "0.75": {
+          "eventRed": 0.000003495942875859727,
+          "eventCoveredRed": 0.000003495942875859727,
+          "referenceRed": 0.0000021015723809101675,
+          "referenceCoveredRed": 0.0000021015723809101675,
+          "maximumRed": 0.0009844931362009456,
+          "maximumTime": "2023-06-03T10:15:19.202Z",
+          "maximumSunAltitude": 6.7691899347124025,
+          "maximumRedExcess": 0.0008004371148142167,
+          "maximumExcessTime": "2023-06-03T10:15:19.202Z"
+        },
+        "0.85": {
+          "eventRed": 0.00000283811068143343,
+          "eventCoveredRed": 0.00000283811068143343,
+          "referenceRed": 0.0000014452905490266304,
+          "referenceCoveredRed": 0.0000014452905490266304,
+          "maximumRed": 0.0013769847563161312,
+          "maximumTime": "2023-06-03T10:15:19.202Z",
+          "maximumSunAltitude": 6.7691899347124025,
+          "maximumRedExcess": 0.0011812223768552274,
+          "maximumExcessTime": "2023-06-03T10:15:19.202Z"
+        },
+        "0.9": {
+          "eventRed": 0.0000021273239334302964,
+          "eventCoveredRed": 0.0000021273239334302964,
+          "referenceRed": 0.0000010120316371130136,
+          "referenceCoveredRed": 0.0000010120316371130136,
+          "maximumRed": 0.0015250179661367518,
+          "maximumTime": "2023-06-03T10:15:19.202Z",
+          "maximumSunAltitude": 6.7691899347124025,
+          "maximumRedExcess": 0.0013423161185784091,
+          "maximumExcessTime": "2023-06-03T10:15:19.202Z"
+        }
+      },
+      "reference": {
+        "time": "2023-06-03T10:54:23.378Z",
+        "targetAltitude": -0.833,
+        "actualAltitude": -0.8330059962740642,
+        "offsetSeconds": -55.824
+      },
+      "wallSeconds": 5.669493083000001,
+      "scope": "Previously inspected source-label development diagnostics; relative spectral cloud radiance, uncalibrated"
+    },
+    {
+      "id": "2023-06-03-sunset",
+      "density": "dense",
+      "mesh": "base",
+      "cohort": "pilot",
+      "observedCase": {
+        "id": "2023-06-03-sunset",
+        "date": "2023-06-03",
+        "eventType": "sunset",
+        "observedGrade": 3,
+        "observedLabel": "小到中烧",
+        "observedCloud": "卷层云",
+        "observedColour": "橘红色",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "https://weibo.com/3169171125/N3DJwplJK",
+        "originalMap": "/static/media/ERA5/202306030000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230603_set.jpg"
+      },
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-03-sunset.json",
+          "sha256": "f98d64e2160b7980ee99771dad9307efe698dfe39f469fe79ae85dac764f6bb6"
+        },
+        {
+          "file": "research/experiments/cloud-column-dense-inputs/2023-06-03-sunset.json",
+          "sha256": "fe496c8a75392ca0eee01f728fa78208455f6bdc2a809f9705e2addccb818d5a"
+        }
+      ],
+      "minuteOffsets": [
+        -40,
+        -35,
+        -30,
+        -25,
+        -20,
+        -15,
+        -10,
+        -5,
+        0,
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        35,
+        40
+      ],
+      "options": {},
+      "measures": {
+        "0": {
+          "eventRed": 0.000005409587079383219,
+          "eventCoveredRed": 0.000005409587079383219,
+          "referenceRed": 0.000011667233291676466,
+          "referenceCoveredRed": 0.000011667233291676466,
+          "maximumRed": 0.0016500837547332875,
+          "maximumTime": "2023-06-03T10:15:19.202Z",
+          "maximumSunAltitude": 6.7691899347124025,
+          "maximumRedExcess": 0.0011042162791623077,
+          "maximumExcessTime": "2023-06-03T10:15:19.202Z"
+        },
+        "0.75": {
+          "eventRed": 0.000003937328560434313,
+          "eventCoveredRed": 0.000003937328560434313,
+          "referenceRed": 0.000009018497159995612,
+          "referenceCoveredRed": 0.000009018497159995612,
+          "maximumRed": 0.004287349671191112,
+          "maximumTime": "2023-06-03T10:15:19.202Z",
+          "maximumSunAltitude": 6.7691899347124025,
+          "maximumRedExcess": 0.0032924936602454803,
+          "maximumExcessTime": "2023-06-03T10:15:19.202Z"
+        },
+        "0.85": {
+          "eventRed": 0.0000030193895681037536,
+          "eventCoveredRed": 0.0000030193895681037536,
+          "referenceRed": 0.000005546225017566,
+          "referenceCoveredRed": 0.000005546225017566,
+          "maximumRed": 0.004901528583398966,
+          "maximumTime": "2023-06-03T10:15:19.202Z",
+          "maximumSunAltitude": 6.7691899347124025,
+          "maximumRedExcess": 0.003965779059844538,
+          "maximumExcessTime": "2023-06-03T10:15:19.202Z"
+        },
+        "0.9": {
+          "eventRed": 0.000002223180892689767,
+          "eventCoveredRed": 0.000002223180892689767,
+          "referenceRed": 0.0000036830183784932854,
+          "referenceCoveredRed": 0.0000036830183784932854,
+          "maximumRed": 0.004717204785705626,
+          "maximumTime": "2023-06-03T10:15:19.202Z",
+          "maximumSunAltitude": 6.7691899347124025,
+          "maximumRedExcess": 0.003922125626555056,
+          "maximumExcessTime": "2023-06-03T10:15:19.202Z"
+        }
+      },
+      "reference": {
+        "time": "2023-06-03T10:54:23.378Z",
+        "targetAltitude": -0.833,
+        "actualAltitude": -0.8330059962740642,
+        "offsetSeconds": -55.824
+      },
+      "wallSeconds": 9.496915250000006,
+      "scope": "Previously inspected source-label development diagnostics; relative spectral cloud radiance, uncalibrated"
+    },
+    {
+      "id": "2023-06-04-sunrise",
+      "density": "coarse",
+      "mesh": "base",
+      "cohort": "pilot",
+      "observedCase": {
+        "id": "2023-06-04-sunrise",
+        "date": "2023-06-04",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306040000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230604_rise.jpg"
+      },
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-04-sunrise.json",
+          "sha256": "1916aa378e5a095dfe1cf6c2ae0dab57c745dffee5a325f2322afb521ea20a20"
+        }
+      ],
+      "minuteOffsets": [
+        -40,
+        -35,
+        -30,
+        -25,
+        -20,
+        -15,
+        -10,
+        -5,
+        0,
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        35,
+        40
+      ],
+      "options": {},
+      "measures": {
+        "0": {
+          "eventRed": 0.000017145824518373264,
+          "eventCoveredRed": 0.000017145824518373264,
+          "referenceRed": 0.000016133292505949644,
+          "referenceCoveredRed": 0.000016133292505949644,
+          "maximumRed": 0.0003852207817632385,
+          "maximumTime": "2023-06-03T21:31:39.080Z",
+          "maximumSunAltitude": 7.156718745241594,
+          "maximumRedExcess": 0.0002956576741656424,
+          "maximumExcessTime": "2023-06-03T21:31:39.080Z"
+        },
+        "0.75": {
+          "eventRed": 0.000002414458796739697,
+          "eventCoveredRed": 0.000002414458796739697,
+          "referenceRed": 0.0000024075556267862124,
+          "referenceCoveredRed": 0.0000024075556267862124,
+          "maximumRed": 0.0004914020275608306,
+          "maximumTime": "2023-06-03T21:31:39.080Z",
+          "maximumSunAltitude": 7.156718745241594,
+          "maximumRedExcess": 0.0004065989763354334,
+          "maximumExcessTime": "2023-06-03T21:31:39.080Z"
+        },
+        "0.85": {
+          "eventRed": 0.0000017913928771127217,
+          "eventCoveredRed": 0.0000017913928771127217,
+          "referenceRed": 0.0000017741118828464938,
+          "referenceCoveredRed": 0.0000017741118828464938,
+          "maximumRed": 0.0005254734050689392,
+          "maximumTime": "2023-06-03T21:31:39.080Z",
+          "maximumSunAltitude": 7.156718745241594,
+          "maximumRedExcess": 0.0004559112845519416,
+          "maximumExcessTime": "2023-06-03T21:31:39.080Z"
+        },
+        "0.9": {
+          "eventRed": 0.000001404238130844796,
+          "eventCoveredRed": 0.000001404238130844796,
+          "referenceRed": 0.0000013762932518210056,
+          "referenceCoveredRed": 0.0000013762932518210056,
+          "maximumRed": 0.0004864865348722989,
+          "maximumTime": "2023-06-03T21:31:39.080Z",
+          "maximumSunAltitude": 7.156718745241594,
+          "maximumRedExcess": 0.0004310514554731163,
+          "maximumExcessTime": "2023-06-03T21:31:39.080Z"
+        }
+      },
+      "reference": {
+        "time": "2023-06-03T20:50:37.579Z",
+        "targetAltitude": -0.833,
+        "actualAltitude": -0.8330119415512418,
+        "offsetSeconds": -61.501
+      },
+      "wallSeconds": 12.683459667000003,
+      "scope": "Previously inspected source-label development diagnostics; relative spectral cloud radiance, uncalibrated"
+    },
+    {
+      "id": "2023-06-04-sunrise",
+      "density": "dense",
+      "mesh": "base",
+      "cohort": "pilot",
+      "observedCase": {
+        "id": "2023-06-04-sunrise",
+        "date": "2023-06-04",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306040000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230604_rise.jpg"
+      },
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-04-sunrise.json",
+          "sha256": "1916aa378e5a095dfe1cf6c2ae0dab57c745dffee5a325f2322afb521ea20a20"
+        },
+        {
+          "file": "research/experiments/cloud-column-dense-inputs/2023-06-04-sunrise.json",
+          "sha256": "e3286c2d33cfe22b2bb6825534fff23102a223bd2f2f63e7478889f080a62314"
+        }
+      ],
+      "minuteOffsets": [
+        -40,
+        -35,
+        -30,
+        -25,
+        -20,
+        -15,
+        -10,
+        -5,
+        0,
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        35,
+        40
+      ],
+      "options": {},
+      "measures": {
+        "0": {
+          "eventRed": 0.00002107530627825222,
+          "eventCoveredRed": 0.00002107530627825222,
+          "referenceRed": 0.0000199516063137024,
+          "referenceCoveredRed": 0.0000199516063137024,
+          "maximumRed": 0.000447174374225773,
+          "maximumTime": "2023-06-03T21:31:39.080Z",
+          "maximumSunAltitude": 7.156718745241594,
+          "maximumRedExcess": 0.0003493367464100092,
+          "maximumExcessTime": "2023-06-03T21:31:39.080Z"
+        },
+        "0.75": {
+          "eventRed": 0.0000030849530800872683,
+          "eventCoveredRed": 0.0000030849530800872683,
+          "referenceRed": 0.00000304290560828021,
+          "referenceCoveredRed": 0.00000304290560828021,
+          "maximumRed": 0.0005948262060093542,
+          "maximumTime": "2023-06-03T21:31:39.080Z",
+          "maximumSunAltitude": 7.156718745241594,
+          "maximumRedExcess": 0.0004975367059058432,
+          "maximumExcessTime": "2023-06-03T21:31:39.080Z"
+        },
+        "0.85": {
+          "eventRed": 0.0000019247417440369342,
+          "eventCoveredRed": 0.0000019247417440369342,
+          "referenceRed": 0.0000019132605918425016,
+          "referenceCoveredRed": 0.0000019132605918425016,
+          "maximumRed": 0.0005916894629916337,
+          "maximumTime": "2023-06-03T21:31:39.080Z",
+          "maximumSunAltitude": 7.156718745241594,
+          "maximumRedExcess": 0.0005142510460720328,
+          "maximumExcessTime": "2023-06-03T21:31:39.080Z"
+        },
+        "0.9": {
+          "eventRed": 0.000001302610166394402,
+          "eventCoveredRed": 0.000001302610166394402,
+          "referenceRed": 0.0000012973488991685616,
+          "referenceCoveredRed": 0.0000012973488991685616,
+          "maximumRed": 0.0005271041388274379,
+          "maximumTime": "2023-06-03T21:31:39.080Z",
+          "maximumSunAltitude": 7.156718745241594,
+          "maximumRedExcess": 0.0004670274440645384,
+          "maximumExcessTime": "2023-06-03T21:31:39.080Z"
+        }
+      },
+      "reference": {
+        "time": "2023-06-03T20:50:37.579Z",
+        "targetAltitude": -0.833,
+        "actualAltitude": -0.8330119415512418,
+        "offsetSeconds": -61.501
+      },
+      "wallSeconds": 27.29823254200001,
+      "scope": "Previously inspected source-label development diagnostics; relative spectral cloud radiance, uncalibrated"
+    },
+    {
+      "id": "2023-06-04-sunset",
+      "density": "coarse",
+      "mesh": "base",
+      "cohort": "pilot",
+      "observedCase": {
+        "id": "2023-06-04-sunset",
+        "date": "2023-06-04",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306040000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230604_set.jpg"
+      },
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-04-sunset.json",
+          "sha256": "62254ead15063f1eb91376599a34f3bdc899e9afd4fbe4254a0c410b08e83940"
+        }
+      ],
+      "minuteOffsets": [
+        -40,
+        -35,
+        -30,
+        -25,
+        -20,
+        -15,
+        -10,
+        -5,
+        0,
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        35,
+        40
+      ],
+      "options": {},
+      "measures": {
+        "0": {
+          "eventRed": 1.6724820132082064e-7,
+          "eventCoveredRed": 1.6724820132082064e-7,
+          "referenceRed": 1.9260639393984806e-7,
+          "referenceCoveredRed": 1.9260639393984806e-7,
+          "maximumRed": 0.00014355046843411877,
+          "maximumTime": "2023-06-04T10:15:50.934Z",
+          "maximumSunAltitude": 6.760268202255625,
+          "maximumRedExcess": 0.00010981697193398926,
+          "maximumExcessTime": "2023-06-04T10:15:50.934Z"
+        },
+        "0.75": {
+          "eventRed": 1.6584840680047092e-7,
+          "eventCoveredRed": 1.6584840680047092e-7,
+          "referenceRed": 2.4197701253412597e-7,
+          "referenceCoveredRed": 2.4197701253412597e-7,
+          "maximumRed": 0.0005534633713082837,
+          "maximumTime": "2023-06-04T10:15:50.934Z",
+          "maximumSunAltitude": 6.760268202255625,
+          "maximumRedExcess": 0.0004720508202540169,
+          "maximumExcessTime": "2023-06-04T10:15:50.934Z"
+        },
+        "0.85": {
+          "eventRed": 1.2318347033686157e-7,
+          "eventCoveredRed": 1.2318347033686157e-7,
+          "referenceRed": 1.918078199220135e-7,
+          "referenceCoveredRed": 1.918078199220135e-7,
+          "maximumRed": 0.0006426132410308412,
+          "maximumTime": "2023-06-04T10:15:50.934Z",
+          "maximumSunAltitude": 6.760268202255625,
+          "maximumRedExcess": 0.0005668008867882441,
+          "maximumExcessTime": "2023-06-04T10:15:50.934Z"
+        },
+        "0.9": {
+          "eventRed": 8.847608578230303e-8,
+          "eventCoveredRed": 8.847608578230303e-8,
+          "referenceRed": 1.4721056797167842e-7,
+          "referenceCoveredRed": 1.4721056797167842e-7,
+          "maximumRed": 0.0006196747122133457,
+          "maximumTime": "2023-06-04T10:15:50.934Z",
+          "maximumSunAltitude": 6.760268202255625,
+          "maximumRedExcess": 0.0005562482369210448,
+          "maximumExcessTime": "2023-06-04T10:15:50.934Z"
+        }
+      },
+      "reference": {
+        "time": "2023-06-04T10:54:55.110Z",
+        "targetAltitude": -0.833,
+        "actualAltitude": -0.8330117885454643,
+        "offsetSeconds": -55.824
+      },
+      "wallSeconds": 11.289589416999995,
+      "scope": "Previously inspected source-label development diagnostics; relative spectral cloud radiance, uncalibrated"
+    },
+    {
+      "id": "2023-06-04-sunset",
+      "density": "dense",
+      "mesh": "base",
+      "cohort": "pilot",
+      "observedCase": {
+        "id": "2023-06-04-sunset",
+        "date": "2023-06-04",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306040000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230604_set.jpg"
+      },
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-04-sunset.json",
+          "sha256": "62254ead15063f1eb91376599a34f3bdc899e9afd4fbe4254a0c410b08e83940"
+        },
+        {
+          "file": "research/experiments/cloud-column-dense-inputs/2023-06-04-sunset.json",
+          "sha256": "32edf9b12d322e90aa236865997d6b598e79235060aa99c6335fb8b9edeeb32f"
+        }
+      ],
+      "minuteOffsets": [
+        -40,
+        -35,
+        -30,
+        -25,
+        -20,
+        -15,
+        -10,
+        -5,
+        0,
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        35,
+        40
+      ],
+      "options": {},
+      "measures": {
+        "0": {
+          "eventRed": 1.6362801140638677e-7,
+          "eventCoveredRed": 1.6362801140638677e-7,
+          "referenceRed": 1.8500239677334816e-7,
+          "referenceCoveredRed": 1.8500239677334816e-7,
+          "maximumRed": 0.00026934364272142926,
+          "maximumTime": "2023-06-04T10:15:50.934Z",
+          "maximumSunAltitude": 6.760268202255625,
+          "maximumRedExcess": 0.00020845802009132597,
+          "maximumExcessTime": "2023-06-04T10:15:50.934Z"
+        },
+        "0.75": {
+          "eventRed": 2.134565387814508e-7,
+          "eventCoveredRed": 2.134565387814508e-7,
+          "referenceRed": 2.3533451644616198e-7,
+          "referenceCoveredRed": 2.3533451644616198e-7,
+          "maximumRed": 0.0009157308983324906,
+          "maximumTime": "2023-06-04T10:15:50.934Z",
+          "maximumSunAltitude": 6.760268202255625,
+          "maximumRedExcess": 0.0007858107194257776,
+          "maximumExcessTime": "2023-06-04T10:15:50.934Z"
+        },
+        "0.85": {
+          "eventRed": 1.7003276041355992e-7,
+          "eventCoveredRed": 1.7003276041355992e-7,
+          "referenceRed": 1.8730443155104133e-7,
+          "referenceCoveredRed": 1.8730443155104133e-7,
+          "maximumRed": 0.0010685739818079103,
+          "maximumTime": "2023-06-04T10:15:50.934Z",
+          "maximumSunAltitude": 6.760268202255625,
+          "maximumRedExcess": 0.000947706417082459,
+          "maximumExcessTime": "2023-06-04T10:15:50.934Z"
+        },
+        "0.9": {
+          "eventRed": 1.2546308074785133e-7,
+          "eventCoveredRed": 1.2546308074785133e-7,
+          "referenceRed": 1.3942169108553331e-7,
+          "referenceCoveredRed": 1.3942169108553331e-7,
+          "maximumRed": 0.0010342430370026627,
+          "maximumTime": "2023-06-04T10:15:50.934Z",
+          "maximumSunAltitude": 6.760268202255625,
+          "maximumRedExcess": 0.0009328797396238109,
+          "maximumExcessTime": "2023-06-04T10:15:50.934Z"
+        }
+      },
+      "reference": {
+        "time": "2023-06-04T10:54:55.110Z",
+        "targetAltitude": -0.833,
+        "actualAltitude": -0.8330117885454643,
+        "offsetSeconds": -55.824
+      },
+      "wallSeconds": 25.732378666000002,
+      "scope": "Previously inspected source-label development diagnostics; relative spectral cloud radiance, uncalibrated"
+    },
+    {
+      "id": "2023-06-05-sunrise",
+      "density": "coarse",
+      "mesh": "base",
+      "cohort": "pilot",
+      "observedCase": {
+        "id": "2023-06-05-sunrise",
+        "date": "2023-06-05",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306050000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230605_rise.jpg"
+      },
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-05-sunrise.json",
+          "sha256": "1c647fcea74c9521c973511318cf11dc2a690c556559f605f8af390d43cdd5ef"
+        }
+      ],
+      "minuteOffsets": [
+        -40,
+        -35,
+        -30,
+        -25,
+        -20,
+        -15,
+        -10,
+        -5,
+        0,
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        35,
+        40
+      ],
+      "options": {},
+      "measures": {
+        "0": {
+          "eventRed": 0.000022310029094821002,
+          "eventCoveredRed": 0.000022310029094821002,
+          "referenceRed": 0.00001892641662769338,
+          "referenceCoveredRed": 0.00001892641662769338,
+          "maximumRed": 0.0006694750876621601,
+          "maximumTime": "2023-06-04T21:31:27.928Z",
+          "maximumSunAltitude": 7.1479652833450835,
+          "maximumRedExcess": 0.0005110296473016869,
+          "maximumExcessTime": "2023-06-04T21:31:27.928Z"
+        },
+        "0.75": {
+          "eventRed": 0.0000684466959778143,
+          "eventCoveredRed": 0.0000684466959778143,
+          "referenceRed": 0.00006477101990462143,
+          "referenceCoveredRed": 0.00006477101990462143,
+          "maximumRed": 0.0017539995058664408,
+          "maximumTime": "2023-06-04T21:31:27.928Z",
+          "maximumSunAltitude": 7.1479652833450835,
+          "maximumRedExcess": 0.0014985367988501258,
+          "maximumExcessTime": "2023-06-04T21:31:27.928Z"
+        },
+        "0.85": {
+          "eventRed": 0.00006329648482142724,
+          "eventCoveredRed": 0.00006329648482142724,
+          "referenceRed": 0.00006038550599030526,
+          "referenceCoveredRed": 0.00006038550599030526,
+          "maximumRed": 0.0019230155603086468,
+          "maximumTime": "2023-06-04T21:31:27.928Z",
+          "maximumSunAltitude": 7.1479652833450835,
+          "maximumRedExcess": 0.001701869519973801,
+          "maximumExcessTime": "2023-06-04T21:31:27.928Z"
+        },
+        "0.9": {
+          "eventRed": 0.00004932634116101491,
+          "eventCoveredRed": 0.00004932634116101491,
+          "referenceRed": 0.00004715163198207416,
+          "referenceCoveredRed": 0.00004715163198207416,
+          "maximumRed": 0.0017743153474879345,
+          "maximumTime": "2023-06-04T21:31:27.928Z",
+          "maximumSunAltitude": 7.1479652833450835,
+          "maximumRedExcess": 0.0015957045805206867,
+          "maximumExcessTime": "2023-06-04T21:31:27.928Z"
+        }
+      },
+      "reference": {
+        "time": "2023-06-04T20:50:26.263Z",
+        "targetAltitude": -0.833,
+        "actualAltitude": -0.8329879396584376,
+        "offsetSeconds": -61.665
+      },
+      "wallSeconds": 16.323119125000012,
+      "scope": "Previously inspected source-label development diagnostics; relative spectral cloud radiance, uncalibrated"
+    },
+    {
+      "id": "2023-06-05-sunrise",
+      "density": "dense",
+      "mesh": "base",
+      "cohort": "pilot",
+      "observedCase": {
+        "id": "2023-06-05-sunrise",
+        "date": "2023-06-05",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306050000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230605_rise.jpg"
+      },
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-05-sunrise.json",
+          "sha256": "1c647fcea74c9521c973511318cf11dc2a690c556559f605f8af390d43cdd5ef"
+        },
+        {
+          "file": "research/experiments/cloud-column-dense-inputs/2023-06-05-sunrise.json",
+          "sha256": "0e7f8ee4886d7d2bdb1459b0acf504e531c764dc68d2e638183abb14a2fdf6f6"
+        }
+      ],
+      "minuteOffsets": [
+        -40,
+        -35,
+        -30,
+        -25,
+        -20,
+        -15,
+        -10,
+        -5,
+        0,
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        35,
+        40
+      ],
+      "options": {},
+      "measures": {
+        "0": {
+          "eventRed": 0.000009638876762293919,
+          "eventCoveredRed": 0.000009638876762293919,
+          "referenceRed": 0.00000765470147677215,
+          "referenceCoveredRed": 0.00000765470147677215,
+          "maximumRed": 0.0005457692182320329,
+          "maximumTime": "2023-06-04T21:31:27.928Z",
+          "maximumSunAltitude": 7.1479652833450835,
+          "maximumRedExcess": 0.0004181904863358343,
+          "maximumExcessTime": "2023-06-04T21:31:27.928Z"
+        },
+        "0.75": {
+          "eventRed": 0.000028230674738529314,
+          "eventCoveredRed": 0.000028230674738529314,
+          "referenceRed": 0.0000189384085140939,
+          "referenceCoveredRed": 0.0000189384085140939,
+          "maximumRed": 0.0013869505951745393,
+          "maximumTime": "2023-06-04T21:31:27.928Z",
+          "maximumSunAltitude": 7.1479652833450835,
+          "maximumRedExcess": 0.001187972563377094,
+          "maximumExcessTime": "2023-06-04T21:31:27.928Z"
+        },
+        "0.85": {
+          "eventRed": 0.000026910537426140094,
+          "eventCoveredRed": 0.000026910537426140094,
+          "referenceRed": 0.00001776272449270514,
+          "referenceCoveredRed": 0.00001776272449270514,
+          "maximumRed": 0.0015362665170903227,
+          "maximumTime": "2023-06-04T21:31:27.928Z",
+          "maximumSunAltitude": 7.1479652833450835,
+          "maximumRedExcess": 0.0013642393519568128,
+          "maximumExcessTime": "2023-06-04T21:31:27.928Z"
+        },
+        "0.9": {
+          "eventRed": 0.000021172275622092454,
+          "eventCoveredRed": 0.000021172275622092454,
+          "referenceRed": 0.000013923614632811857,
+          "referenceCoveredRed": 0.000013923614632811857,
+          "maximumRed": 0.0014392972306739992,
+          "maximumTime": "2023-06-04T21:31:27.928Z",
+          "maximumSunAltitude": 7.1479652833450835,
+          "maximumRedExcess": 0.0013002809403852376,
+          "maximumExcessTime": "2023-06-04T21:31:27.928Z"
+        }
+      },
+      "reference": {
+        "time": "2023-06-04T20:50:26.263Z",
+        "targetAltitude": -0.833,
+        "actualAltitude": -0.8329879396584376,
+        "offsetSeconds": -61.665
+      },
+      "wallSeconds": 38.379788292000015,
+      "scope": "Previously inspected source-label development diagnostics; relative spectral cloud radiance, uncalibrated"
+    },
+    {
+      "id": "2023-06-05-sunset",
+      "density": "coarse",
+      "mesh": "base",
+      "cohort": "pilot",
+      "observedCase": {
+        "id": "2023-06-05-sunset",
+        "date": "2023-06-05",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306050000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230605_set.jpg"
+      },
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-05-sunset.json",
+          "sha256": "991fda746649bdcb2b53205ee8549b4f44960d9c89fead0dd66a268b57c8199e"
+        }
+      ],
+      "minuteOffsets": [
+        -40,
+        -35,
+        -30,
+        -25,
+        -20,
+        -15,
+        -10,
+        -5,
+        0,
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        35,
+        40
+      ],
+      "options": {},
+      "measures": {
+        "0": {
+          "eventRed": 8.262551182048162e-10,
+          "eventCoveredRed": 8.262551182048162e-10,
+          "referenceRed": 3.6102924332665733e-9,
+          "referenceCoveredRed": 3.6102924332665733e-9,
+          "maximumRed": 0.000021974403911317868,
+          "maximumTime": "2023-06-05T10:16:21.853Z",
+          "maximumSunAltitude": 6.751932077990122,
+          "maximumRedExcess": 0.00001958727582093262,
+          "maximumExcessTime": "2023-06-05T10:16:21.853Z"
+        },
+        "0.75": {
+          "eventRed": 2.385410541528511e-9,
+          "eventCoveredRed": 2.385410541528511e-9,
+          "referenceRed": 7.535898279332311e-9,
+          "referenceCoveredRed": 7.535898279332311e-9,
+          "maximumRed": 0.00007478266033189961,
+          "maximumTime": "2023-06-05T10:16:21.853Z",
+          "maximumSunAltitude": 6.751932077990122,
+          "maximumRedExcess": 0.00007029654222683741,
+          "maximumExcessTime": "2023-06-05T10:16:21.853Z"
+        },
+        "0.85": {
+          "eventRed": 3.185624316777806e-9,
+          "eventCoveredRed": 3.185624316777806e-9,
+          "referenceRed": 9.062704733778208e-9,
+          "referenceCoveredRed": 9.062704733778208e-9,
+          "maximumRed": 0.00009473752762098051,
+          "maximumTime": "2023-06-05T10:16:21.853Z",
+          "maximumSunAltitude": 6.751932077990122,
+          "maximumRedExcess": 0.00009038897206229958,
+          "maximumExcessTime": "2023-06-05T10:16:21.853Z"
+        },
+        "0.9": {
+          "eventRed": 3.107630628525615e-9,
+          "eventCoveredRed": 3.107630628525615e-9,
+          "referenceRed": 8.39059087284811e-9,
+          "referenceCoveredRed": 8.39059087284811e-9,
+          "maximumRed": 0.00009314029180861895,
+          "maximumTime": "2023-06-05T10:16:21.853Z",
+          "maximumSunAltitude": 6.751932077990122,
+          "maximumRedExcess": 0.00008942457762624229,
+          "maximumExcessTime": "2023-06-05T10:16:21.853Z"
+        }
+      },
+      "reference": {
+        "time": "2023-06-05T10:55:26.074Z",
+        "targetAltitude": -0.833,
+        "actualAltitude": -0.8330105531719745,
+        "offsetSeconds": -55.779
+      },
+      "wallSeconds": 11.022546416000012,
+      "scope": "Previously inspected source-label development diagnostics; relative spectral cloud radiance, uncalibrated"
+    },
+    {
+      "id": "2023-06-05-sunset",
+      "density": "dense",
+      "mesh": "base",
+      "cohort": "pilot",
+      "observedCase": {
+        "id": "2023-06-05-sunset",
+        "date": "2023-06-05",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306050000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230605_set.jpg"
+      },
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-05-sunset.json",
+          "sha256": "991fda746649bdcb2b53205ee8549b4f44960d9c89fead0dd66a268b57c8199e"
+        },
+        {
+          "file": "research/experiments/cloud-column-dense-inputs/2023-06-05-sunset.json",
+          "sha256": "6259e49454d0766203b11954f414d00a4abfbd13a1de1148cb30a398d774f31f"
+        }
+      ],
+      "minuteOffsets": [
+        -40,
+        -35,
+        -30,
+        -25,
+        -20,
+        -15,
+        -10,
+        -5,
+        0,
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        35,
+        40
+      ],
+      "options": {},
+      "measures": {
+        "0": {
+          "eventRed": 8.457774872046797e-10,
+          "eventCoveredRed": 8.457774872046797e-10,
+          "referenceRed": 4.410717890515396e-9,
+          "referenceCoveredRed": 4.410717890515396e-9,
+          "maximumRed": 0.000024001585976247444,
+          "maximumTime": "2023-06-05T10:16:21.853Z",
+          "maximumSunAltitude": 6.751932077990122,
+          "maximumRedExcess": 0.000021474486422652935,
+          "maximumExcessTime": "2023-06-05T10:16:21.853Z"
+        },
+        "0.75": {
+          "eventRed": 1.5872492594877679e-9,
+          "eventCoveredRed": 1.5872492594877679e-9,
+          "referenceRed": 6.759229763152087e-9,
+          "referenceCoveredRed": 6.759229763152087e-9,
+          "maximumRed": 0.00007147033076828194,
+          "maximumTime": "2023-06-05T10:16:21.853Z",
+          "maximumSunAltitude": 6.751932077990122,
+          "maximumRedExcess": 0.0000668798579527025,
+          "maximumExcessTime": "2023-06-05T10:16:21.853Z"
+        },
+        "0.85": {
+          "eventRed": 2.012270069694834e-9,
+          "eventCoveredRed": 2.012270069694834e-9,
+          "referenceRed": 8.324490272488925e-9,
+          "referenceCoveredRed": 8.324490272488925e-9,
+          "maximumRed": 0.00008583587360710928,
+          "maximumTime": "2023-06-05T10:16:21.853Z",
+          "maximumSunAltitude": 6.751932077990122,
+          "maximumRedExcess": 0.00008162564378299884,
+          "maximumExcessTime": "2023-06-05T10:16:21.853Z"
+        },
+        "0.9": {
+          "eventRed": 1.9302386712369984e-9,
+          "eventCoveredRed": 1.9302386712369984e-9,
+          "referenceRed": 7.911575141334904e-9,
+          "referenceCoveredRed": 7.911575141334904e-9,
+          "maximumRed": 0.00008301198146171005,
+          "maximumTime": "2023-06-05T10:16:21.853Z",
+          "maximumSunAltitude": 6.751932077990122,
+          "maximumRedExcess": 0.00007952446011493826,
+          "maximumExcessTime": "2023-06-05T10:16:21.853Z"
+        }
+      },
+      "reference": {
+        "time": "2023-06-05T10:55:26.074Z",
+        "targetAltitude": -0.833,
+        "actualAltitude": -0.8330105531719745,
+        "offsetSeconds": -55.779
+      },
+      "wallSeconds": 31.213256041000015,
+      "scope": "Previously inspected source-label development diagnostics; relative spectral cloud radiance, uncalibrated"
+    },
+    {
+      "id": "2023-06-06-sunrise",
+      "density": "coarse",
+      "mesh": "base",
+      "cohort": "pilot",
+      "observedCase": {
+        "id": "2023-06-06-sunrise",
+        "date": "2023-06-06",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306060000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230606_rise.jpg"
+      },
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-06-sunrise.json",
+          "sha256": "01cc17c0dfa36e88da7f188be17974bc4d22940b36882b8601ab14cf3bc9202d"
+        }
+      ],
+      "minuteOffsets": [
+        -40,
+        -35,
+        -30,
+        -25,
+        -20,
+        -15,
+        -10,
+        -5,
+        0,
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        35,
+        40
+      ],
+      "options": {},
+      "measures": {
+        "0": {
+          "eventRed": 0.000007066089311825855,
+          "eventCoveredRed": 0.000007066089311825855,
+          "referenceRed": 0.000005026289849981416,
+          "referenceCoveredRed": 0.000005026289849981416,
+          "maximumRed": 0.0007125567723603286,
+          "maximumTime": "2023-06-05T21:31:18.187Z",
+          "maximumSunAltitude": 7.1394719410928635,
+          "maximumRedExcess": 0.0004879346127427078,
+          "maximumExcessTime": "2023-06-05T21:31:18.187Z"
+        },
+        "0.75": {
+          "eventRed": 0.000027835411817468504,
+          "eventCoveredRed": 0.000027835411817468504,
+          "referenceRed": 0.000016824269949233282,
+          "referenceCoveredRed": 0.000016824269949233282,
+          "maximumRed": 0.0033699979637364214,
+          "maximumTime": "2023-06-05T21:31:18.187Z",
+          "maximumSunAltitude": 7.1394719410928635,
+          "maximumRedExcess": 0.0025986870492192135,
+          "maximumExcessTime": "2023-06-05T21:31:18.187Z"
+        },
+        "0.85": {
+          "eventRed": 0.000028703627056142548,
+          "eventCoveredRed": 0.000028703627056142548,
+          "referenceRed": 0.000017138417177459303,
+          "referenceCoveredRed": 0.000017138417177459303,
+          "maximumRed": 0.004387366120917748,
+          "maximumTime": "2023-06-05T21:31:18.187Z",
+          "maximumSunAltitude": 7.1394719410928635,
+          "maximumRedExcess": 0.003510891466074768,
+          "maximumExcessTime": "2023-06-05T21:31:18.187Z"
+        },
+        "0.9": {
+          "eventRed": 0.000023968098887856835,
+          "eventCoveredRed": 0.000023968098887856835,
+          "referenceRed": 0.000014337493685375061,
+          "referenceCoveredRed": 0.000014337493685375061,
+          "maximumRed": 0.0044482284785067935,
+          "maximumTime": "2023-06-05T21:31:18.187Z",
+          "maximumSunAltitude": 7.1394719410928635,
+          "maximumRedExcess": 0.0036255810623066725,
+          "maximumExcessTime": "2023-06-05T21:31:18.187Z"
+        }
+      },
+      "reference": {
+        "time": "2023-06-05T20:50:16.403Z",
+        "targetAltitude": -0.833,
+        "actualAltitude": -0.8330048280348776,
+        "offsetSeconds": -61.784
+      },
+      "wallSeconds": 19.92759125,
+      "scope": "Previously inspected source-label development diagnostics; relative spectral cloud radiance, uncalibrated"
+    },
+    {
+      "id": "2023-06-06-sunrise",
+      "density": "dense",
+      "mesh": "base",
+      "cohort": "pilot",
+      "observedCase": {
+        "id": "2023-06-06-sunrise",
+        "date": "2023-06-06",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306060000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230606_rise.jpg"
+      },
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-06-sunrise.json",
+          "sha256": "01cc17c0dfa36e88da7f188be17974bc4d22940b36882b8601ab14cf3bc9202d"
+        },
+        {
+          "file": "research/experiments/cloud-column-dense-inputs/2023-06-06-sunrise.json",
+          "sha256": "db72994f133fd3abc75aa89e10f613a64ce8bf5a0048fa87323cdff5a2dee1fb"
+        }
+      ],
+      "minuteOffsets": [
+        -40,
+        -35,
+        -30,
+        -25,
+        -20,
+        -15,
+        -10,
+        -5,
+        0,
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        35,
+        40
+      ],
+      "options": {},
+      "measures": {
+        "0": {
+          "eventRed": 0.0000025232876884600506,
+          "eventCoveredRed": 0.0000025232876884600506,
+          "referenceRed": 0.000002314737731859026,
+          "referenceCoveredRed": 0.000002314737731859026,
+          "maximumRed": 0.0003840871769300957,
+          "maximumTime": "2023-06-05T21:31:18.187Z",
+          "maximumSunAltitude": 7.1394719410928635,
+          "maximumRedExcess": 0.000308465781364305,
+          "maximumExcessTime": "2023-06-05T21:31:18.187Z"
+        },
+        "0.75": {
+          "eventRed": 0.0000047686989467541685,
+          "eventCoveredRed": 0.0000047686989467541685,
+          "referenceRed": 0.0000027869676575345274,
+          "referenceCoveredRed": 0.0000027869676575345274,
+          "maximumRed": 0.001069585429732742,
+          "maximumTime": "2023-06-05T21:31:18.187Z",
+          "maximumSunAltitude": 7.1394719410928635,
+          "maximumRedExcess": 0.000893138022994315,
+          "maximumExcessTime": "2023-06-05T21:31:18.187Z"
+        },
+        "0.85": {
+          "eventRed": 0.000004590527027866429,
+          "eventCoveredRed": 0.000004590527027866429,
+          "referenceRed": 0.0000025842943967781946,
+          "referenceCoveredRed": 0.0000025842943967781946,
+          "maximumRed": 0.0012668287998825855,
+          "maximumTime": "2023-06-05T21:31:18.187Z",
+          "maximumSunAltitude": 7.1394719410928635,
+          "maximumRedExcess": 0.0010846719004261702,
+          "maximumExcessTime": "2023-06-05T21:31:18.187Z"
+        },
+        "0.9": {
+          "eventRed": 0.0000036834856930283596,
+          "eventCoveredRed": 0.0000036834856930283596,
+          "referenceRed": 0.0000020511259897386465,
+          "referenceCoveredRed": 0.0000020511259897386465,
+          "maximumRed": 0.0012690419331815187,
+          "maximumTime": "2023-06-05T21:31:18.187Z",
+          "maximumSunAltitude": 7.1394719410928635,
+          "maximumRedExcess": 0.0011039408901189203,
+          "maximumExcessTime": "2023-06-05T21:31:18.187Z"
+        }
+      },
+      "reference": {
+        "time": "2023-06-05T20:50:16.403Z",
+        "targetAltitude": -0.833,
+        "actualAltitude": -0.8330048280348776,
+        "offsetSeconds": -61.784
+      },
+      "wallSeconds": 44.88714879199999,
+      "scope": "Previously inspected source-label development diagnostics; relative spectral cloud radiance, uncalibrated"
+    },
+    {
+      "id": "2023-06-06-sunset",
+      "density": "coarse",
+      "mesh": "base",
+      "cohort": "pilot",
+      "observedCase": {
+        "id": "2023-06-06-sunset",
+        "date": "2023-06-06",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306060000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230606_set.jpg"
+      },
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-06-sunset.json",
+          "sha256": "461a62006684117b3452ca70bc0cdf5cbfb8c86ad1197e619c83f9ccd1948182"
+        }
+      ],
+      "minuteOffsets": [
+        -40,
+        -35,
+        -30,
+        -25,
+        -20,
+        -15,
+        -10,
+        -5,
+        0,
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        35,
+        40
+      ],
+      "options": {},
+      "measures": {
+        "0": {
+          "eventRed": 1.975199529615517e-7,
+          "eventCoveredRed": 1.975199529615517e-7,
+          "referenceRed": 2.007584567168251e-7,
+          "referenceCoveredRed": 2.007584567168251e-7,
+          "maximumRed": 0.000002162459373817134,
+          "maximumTime": "2023-06-06T10:16:51.926Z",
+          "maximumSunAltitude": 6.744192508163619,
+          "maximumRedExcess": 0.0000019583779541725034,
+          "maximumExcessTime": "2023-06-06T10:16:51.926Z"
+        },
+        "0.75": {
+          "eventRed": 0.0000016991990064039512,
+          "eventCoveredRed": 0.0000016991990064039512,
+          "referenceRed": 0.0000014167857614955999,
+          "referenceCoveredRed": 0.0000014167857614955999,
+          "maximumRed": 0.000021609287325879607,
+          "maximumTime": "2023-06-06T10:16:51.926Z",
+          "maximumSunAltitude": 6.744192508163619,
+          "maximumRedExcess": 0.00001968180116688022,
+          "maximumExcessTime": "2023-06-06T10:16:51.926Z"
+        },
+        "0.85": {
+          "eventRed": 0.0000019679644654455167,
+          "eventCoveredRed": 0.0000019679644654455167,
+          "referenceRed": 0.0000016272475384846578,
+          "referenceCoveredRed": 0.0000016272475384846578,
+          "maximumRed": 0.000037467938334916324,
+          "maximumTime": "2023-06-06T10:16:51.926Z",
+          "maximumSunAltitude": 6.744192508163619,
+          "maximumRedExcess": 0.00003445828603040386,
+          "maximumExcessTime": "2023-06-06T10:16:51.926Z"
+        },
+        "0.9": {
+          "eventRed": 0.0000017774035094512712,
+          "eventCoveredRed": 0.0000017774035094512712,
+          "referenceRed": 0.000001485253403172624,
+          "referenceCoveredRed": 0.000001485253403172624,
+          "maximumRed": 0.00004568642946759704,
+          "maximumTime": "2023-06-06T10:16:51.926Z",
+          "maximumSunAltitude": 6.744192508163619,
+          "maximumRedExcess": 0.00004243769698499589,
+          "maximumExcessTime": "2023-06-06T10:16:51.926Z"
+        }
+      },
+      "reference": {
+        "time": "2023-06-06T10:55:56.239Z",
+        "targetAltitude": -0.833,
+        "actualAltitude": -0.8330089714412137,
+        "offsetSeconds": -55.687
+      },
+      "wallSeconds": 4.219747499999998,
+      "scope": "Previously inspected source-label development diagnostics; relative spectral cloud radiance, uncalibrated"
+    },
+    {
+      "id": "2023-06-06-sunset",
+      "density": "dense",
+      "mesh": "base",
+      "cohort": "pilot",
+      "observedCase": {
+        "id": "2023-06-06-sunset",
+        "date": "2023-06-06",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306060000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230606_set.jpg"
+      },
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-06-sunset.json",
+          "sha256": "461a62006684117b3452ca70bc0cdf5cbfb8c86ad1197e619c83f9ccd1948182"
+        },
+        {
+          "file": "research/experiments/cloud-column-dense-inputs/2023-06-06-sunset.json",
+          "sha256": "7ad3b52ffb6db5e536038f3476fff8f0f4040602b2f3842443177ac83307e90c"
+        }
+      ],
+      "minuteOffsets": [
+        -40,
+        -35,
+        -30,
+        -25,
+        -20,
+        -15,
+        -10,
+        -5,
+        0,
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        35,
+        40
+      ],
+      "options": {},
+      "measures": {
+        "0": {
+          "eventRed": 1.4501704983555433e-7,
+          "eventCoveredRed": 1.4501704983555433e-7,
+          "referenceRed": 1.2889953482469997e-7,
+          "referenceCoveredRed": 1.2889953482469997e-7,
+          "maximumRed": 0.000004251054220826712,
+          "maximumTime": "2023-06-06T10:16:51.926Z",
+          "maximumSunAltitude": 6.744192508163619,
+          "maximumRedExcess": 0.000003778825299367499,
+          "maximumExcessTime": "2023-06-06T10:16:51.926Z"
+        },
+        "0.75": {
+          "eventRed": 0.0000014945040442169466,
+          "eventCoveredRed": 0.0000014945040442169466,
+          "referenceRed": 0.000001191617989916842,
+          "referenceCoveredRed": 0.000001191617989916842,
+          "maximumRed": 0.00003068416887210266,
+          "maximumTime": "2023-06-06T10:16:51.926Z",
+          "maximumSunAltitude": 6.744192508163619,
+          "maximumRedExcess": 0.000028052110605761876,
+          "maximumExcessTime": "2023-06-06T10:16:51.926Z"
+        },
+        "0.85": {
+          "eventRed": 0.0000017562622333197278,
+          "eventCoveredRed": 0.0000017562622333197278,
+          "referenceRed": 0.0000014538453316232093,
+          "referenceCoveredRed": 0.0000014538453316232093,
+          "maximumRed": 0.0000513429287357449,
+          "maximumTime": "2023-06-06T10:16:51.926Z",
+          "maximumSunAltitude": 6.744192508163619,
+          "maximumRedExcess": 0.00004753612531191655,
+          "maximumExcessTime": "2023-06-06T10:16:51.926Z"
+        },
+        "0.9": {
+          "eventRed": 0.0000015842375237374928,
+          "eventCoveredRed": 0.0000015842375237374928,
+          "referenceRed": 0.0000013522839862861166,
+          "referenceCoveredRed": 0.0000013522839862861166,
+          "maximumRed": 0.0000625568409937364,
+          "maximumTime": "2023-06-06T10:16:51.926Z",
+          "maximumSunAltitude": 6.744192508163619,
+          "maximumRedExcess": 0.0000585181479304321,
+          "maximumExcessTime": "2023-06-06T10:16:51.926Z"
+        }
+      },
+      "reference": {
+        "time": "2023-06-06T10:55:56.239Z",
+        "targetAltitude": -0.833,
+        "actualAltitude": -0.8330089714412137,
+        "offsetSeconds": -55.687
+      },
+      "wallSeconds": 6.725933999999979,
+      "scope": "Previously inspected source-label development diagnostics; relative spectral cloud radiance, uncalibrated"
+    },
+    {
+      "id": "2023-06-07-sunrise",
+      "density": "coarse",
+      "mesh": "base",
+      "cohort": "pilot",
+      "observedCase": {
+        "id": "2023-06-07-sunrise",
+        "date": "2023-06-07",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "微烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306070000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230607_rise.jpg"
+      },
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-07-sunrise.json",
+          "sha256": "952874cbb28591ed3a90b45534633fe9c2b926b1b87f686a63632ac559dd9277"
+        }
+      ],
+      "minuteOffsets": [
+        -40,
+        -35,
+        -30,
+        -25,
+        -20,
+        -15,
+        -10,
+        -5,
+        0,
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        35,
+        40
+      ],
+      "options": {},
+      "measures": {
+        "0": {
+          "eventRed": 0.00001212484882536804,
+          "eventCoveredRed": 0.00001212484882536804,
+          "referenceRed": 0.000006400375074730087,
+          "referenceCoveredRed": 0.000006400375074730087,
+          "maximumRed": 0.00019052253501962606,
+          "maximumTime": "2023-06-06T21:26:09.854Z",
+          "maximumSunAltitude": 6.143806836335415,
+          "maximumRedExcess": 0.00015293964382267588,
+          "maximumExcessTime": "2023-06-06T21:21:09.854Z"
+        },
+        "0.75": {
+          "eventRed": 0.000017482299760428888,
+          "eventCoveredRed": 0.000017482299760428888,
+          "referenceRed": 0.00000755188155124531,
+          "referenceCoveredRed": 0.00000755188155124531,
+          "maximumRed": 0.0006113158953376178,
+          "maximumTime": "2023-06-06T21:31:09.854Z",
+          "maximumSunAltitude": 7.1312552395795,
+          "maximumRedExcess": 0.0005324515341939108,
+          "maximumExcessTime": "2023-06-06T21:31:09.854Z"
+        },
+        "0.85": {
+          "eventRed": 0.000012635388025565838,
+          "eventCoveredRed": 0.000012635388025565838,
+          "referenceRed": 0.0000056454910095473835,
+          "referenceCoveredRed": 0.0000056454910095473835,
+          "maximumRed": 0.0008170043483987633,
+          "maximumTime": "2023-06-06T21:31:09.854Z",
+          "maximumSunAltitude": 7.1312552395795,
+          "maximumRedExcess": 0.0007353283436959595,
+          "maximumExcessTime": "2023-06-06T21:31:09.854Z"
+        },
+        "0.9": {
+          "eventRed": 0.00000894570851560237,
+          "eventCoveredRed": 0.00000894570851560237,
+          "referenceRed": 0.000004085611635882711,
+          "referenceCoveredRed": 0.000004085611635882711,
+          "maximumRed": 0.0008844046040745206,
+          "maximumTime": "2023-06-06T21:31:09.854Z",
+          "maximumSunAltitude": 7.1312552395795,
+          "maximumRedExcess": 0.000810619886865421,
+          "maximumExcessTime": "2023-06-06T21:31:09.854Z"
+        }
+      },
+      "reference": {
+        "time": "2023-06-06T20:50:08.015Z",
+        "targetAltitude": -0.833,
+        "actualAltitude": -0.8329983212006163,
+        "offsetSeconds": -61.839
+      },
+      "wallSeconds": 10.329588833000017,
+      "scope": "Previously inspected source-label development diagnostics; relative spectral cloud radiance, uncalibrated"
+    },
+    {
+      "id": "2023-06-07-sunrise",
+      "density": "dense",
+      "mesh": "base",
+      "cohort": "pilot",
+      "observedCase": {
+        "id": "2023-06-07-sunrise",
+        "date": "2023-06-07",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "微烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306070000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230607_rise.jpg"
+      },
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-07-sunrise.json",
+          "sha256": "952874cbb28591ed3a90b45534633fe9c2b926b1b87f686a63632ac559dd9277"
+        },
+        {
+          "file": "research/experiments/cloud-column-dense-inputs/2023-06-07-sunrise.json",
+          "sha256": "eca33ffd8aeaddecd1942cae314cc7686abd7178d1f0788cefbb06feea761c32"
+        }
+      ],
+      "minuteOffsets": [
+        -40,
+        -35,
+        -30,
+        -25,
+        -20,
+        -15,
+        -10,
+        -5,
+        0,
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        35,
+        40
+      ],
+      "options": {},
+      "measures": {
+        "0": {
+          "eventRed": 0.000005010488266996202,
+          "eventCoveredRed": 0.000005010488266996202,
+          "referenceRed": 0.0000038470778599484146,
+          "referenceCoveredRed": 0.0000038470778599484146,
+          "maximumRed": 0.0001891804553109254,
+          "maximumTime": "2023-06-06T21:26:09.854Z",
+          "maximumSunAltitude": 6.143806836335415,
+          "maximumRedExcess": 0.00015177337797439298,
+          "maximumExcessTime": "2023-06-06T21:26:09.854Z"
+        },
+        "0.75": {
+          "eventRed": 0.0000056735481077356575,
+          "eventCoveredRed": 0.0000056735481077356575,
+          "referenceRed": 0.000003867743526979426,
+          "referenceCoveredRed": 0.000003867743526979426,
+          "maximumRed": 0.0006469563747485205,
+          "maximumTime": "2023-06-06T21:31:09.854Z",
+          "maximumSunAltitude": 7.1312552395795,
+          "maximumRedExcess": 0.0005695191483017277,
+          "maximumExcessTime": "2023-06-06T21:31:09.854Z"
+        },
+        "0.85": {
+          "eventRed": 0.000004627022619059195,
+          "eventCoveredRed": 0.000004627022619059195,
+          "referenceRed": 0.000002972704851498815,
+          "referenceCoveredRed": 0.000002972704851498815,
+          "maximumRed": 0.0008957565649139016,
+          "maximumTime": "2023-06-06T21:31:09.854Z",
+          "maximumSunAltitude": 7.1312552395795,
+          "maximumRedExcess": 0.000812440451073496,
+          "maximumExcessTime": "2023-06-06T21:31:09.854Z"
+        },
+        "0.9": {
+          "eventRed": 0.000003640670935981007,
+          "eventCoveredRed": 0.000003640670935981007,
+          "referenceRed": 0.0000022009628036041272,
+          "referenceCoveredRed": 0.0000022009628036041272,
+          "maximumRed": 0.0009855688438313271,
+          "maximumTime": "2023-06-06T21:31:09.854Z",
+          "maximumSunAltitude": 7.1312552395795,
+          "maximumRedExcess": 0.0009086466754634453,
+          "maximumExcessTime": "2023-06-06T21:31:09.854Z"
+        }
+      },
+      "reference": {
+        "time": "2023-06-06T20:50:08.015Z",
+        "targetAltitude": -0.833,
+        "actualAltitude": -0.8329983212006163,
+        "offsetSeconds": -61.839
+      },
+      "wallSeconds": 21.855291499999993,
+      "scope": "Previously inspected source-label development diagnostics; relative spectral cloud radiance, uncalibrated"
+    },
+    {
+      "id": "2023-06-07-sunset",
+      "density": "coarse",
+      "mesh": "base",
+      "cohort": "pilot",
+      "observedCase": {
+        "id": "2023-06-07-sunset",
+        "date": "2023-06-07",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306070000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230607_set.jpg"
+      },
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-07-sunset.json",
+          "sha256": "6734b060e44e43964271e88c4978d3dbfd5e2afa6e9e497705907c69c98ebbc2"
+        }
+      ],
+      "minuteOffsets": [
+        -40,
+        -35,
+        -30,
+        -25,
+        -20,
+        -15,
+        -10,
+        -5,
+        0,
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        35,
+        40
+      ],
+      "options": {},
+      "measures": {
+        "0": {
+          "eventRed": 0.0000012993166484465609,
+          "eventCoveredRed": 0.0000012993166484465609,
+          "referenceRed": 0.000001897336968646876,
+          "referenceCoveredRed": 0.000001897336968646876,
+          "maximumRed": 0.000029314396055272932,
+          "maximumTime": "2023-06-07T10:17:21.122Z",
+          "maximumSunAltitude": 6.737053305093931,
+          "maximumRedExcess": 0.000025217044550547783,
+          "maximumExcessTime": "2023-06-07T10:17:21.122Z"
+        },
+        "0.75": {
+          "eventRed": 2.602611291563777e-7,
+          "eventCoveredRed": 2.602611291563777e-7,
+          "referenceRed": 3.486577911938224e-7,
+          "referenceCoveredRed": 3.486577911938224e-7,
+          "maximumRed": 0.000023381279665369786,
+          "maximumTime": "2023-06-07T10:17:21.122Z",
+          "maximumSunAltitude": 6.737053305093931,
+          "maximumRedExcess": 0.00002033186944794617,
+          "maximumExcessTime": "2023-06-07T10:17:21.122Z"
+        },
+        "0.85": {
+          "eventRed": 1.5386711380685208e-7,
+          "eventCoveredRed": 1.5386711380685208e-7,
+          "referenceRed": 2.0368688680090276e-7,
+          "referenceCoveredRed": 2.0368688680090276e-7,
+          "maximumRed": 0.000020397732590667906,
+          "maximumTime": "2023-06-07T10:17:21.122Z",
+          "maximumSunAltitude": 6.737053305093931,
+          "maximumRedExcess": 0.000018190766855333032,
+          "maximumExcessTime": "2023-06-07T10:17:21.122Z"
+        },
+        "0.9": {
+          "eventRed": 1.005975657802874e-7,
+          "eventCoveredRed": 1.005975657802874e-7,
+          "referenceRed": 1.324968178983767e-7,
+          "referenceCoveredRed": 1.324968178983767e-7,
+          "maximumRed": 0.000016774385025505516,
+          "maximumTime": "2023-06-07T10:17:21.122Z",
+          "maximumSunAltitude": 6.737053305093931,
+          "maximumRedExcess": 0.000015182205145391618,
+          "maximumExcessTime": "2023-06-07T10:17:21.122Z"
+        }
+      },
+      "reference": {
+        "time": "2023-06-07T10:56:25.572Z",
+        "targetAltitude": -0.833,
+        "actualAltitude": -0.8330069404869842,
+        "offsetSeconds": -55.55
+      },
+      "wallSeconds": 10.676766957999993,
+      "scope": "Previously inspected source-label development diagnostics; relative spectral cloud radiance, uncalibrated"
+    },
+    {
+      "id": "2023-06-07-sunset",
+      "density": "dense",
+      "mesh": "base",
+      "cohort": "pilot",
+      "observedCase": {
+        "id": "2023-06-07-sunset",
+        "date": "2023-06-07",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306070000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230607_set.jpg"
+      },
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-07-sunset.json",
+          "sha256": "6734b060e44e43964271e88c4978d3dbfd5e2afa6e9e497705907c69c98ebbc2"
+        },
+        {
+          "file": "research/experiments/cloud-column-dense-inputs/2023-06-07-sunset.json",
+          "sha256": "dbf2fdc60eb3515e89b73d8b6d8922655d0546f8fc2565f245ee679689c6fe7e"
+        }
+      ],
+      "minuteOffsets": [
+        -40,
+        -35,
+        -30,
+        -25,
+        -20,
+        -15,
+        -10,
+        -5,
+        0,
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        35,
+        40
+      ],
+      "options": {},
+      "measures": {
+        "0": {
+          "eventRed": 0.0000012458575958257888,
+          "eventCoveredRed": 0.0000012458575958257888,
+          "referenceRed": 0.000001846471637353405,
+          "referenceCoveredRed": 0.000001846471637353405,
+          "maximumRed": 0.00011422573252945488,
+          "maximumTime": "2023-06-07T10:17:21.122Z",
+          "maximumSunAltitude": 6.737053305093931,
+          "maximumRedExcess": 0.00009929012570949672,
+          "maximumExcessTime": "2023-06-07T10:17:21.122Z"
+        },
+        "0.75": {
+          "eventRed": 3.100723290370992e-7,
+          "eventCoveredRed": 3.100723290370992e-7,
+          "referenceRed": 3.062725059958071e-7,
+          "referenceCoveredRed": 3.062725059958071e-7,
+          "maximumRed": 0.00014997499809676584,
+          "maximumTime": "2023-06-07T10:17:21.122Z",
+          "maximumSunAltitude": 6.737053305093931,
+          "maximumRedExcess": 0.00013502387527222624,
+          "maximumExcessTime": "2023-06-07T10:17:21.122Z"
+        },
+        "0.85": {
+          "eventRed": 2.3889409872508094e-7,
+          "eventCoveredRed": 2.3889409872508094e-7,
+          "referenceRed": 2.026309482244156e-7,
+          "referenceCoveredRed": 2.026309482244156e-7,
+          "maximumRed": 0.00013348554448550437,
+          "maximumTime": "2023-06-07T10:17:21.122Z",
+          "maximumSunAltitude": 6.737053305093931,
+          "maximumRedExcess": 0.00012240316220316348,
+          "maximumExcessTime": "2023-06-07T10:17:21.122Z"
+        },
+        "0.9": {
+          "eventRed": 1.770153222894846e-7,
+          "eventCoveredRed": 1.770153222894846e-7,
+          "referenceRed": 1.4027906327929048e-7,
+          "referenceCoveredRed": 1.4027906327929048e-7,
+          "maximumRed": 0.00011083071910531783,
+          "maximumTime": "2023-06-07T10:17:21.122Z",
+          "maximumSunAltitude": 6.737053305093931,
+          "maximumRedExcess": 0.00010273190744383603,
+          "maximumExcessTime": "2023-06-07T10:17:21.122Z"
+        }
+      },
+      "reference": {
+        "time": "2023-06-07T10:56:25.572Z",
+        "targetAltitude": -0.833,
+        "actualAltitude": -0.8330069404869842,
+        "offsetSeconds": -55.55
+      },
+      "wallSeconds": 28.534567540999998,
+      "scope": "Previously inspected source-label development diagnostics; relative spectral cloud radiance, uncalibrated"
+    },
+    {
+      "id": "2023-06-08-sunrise",
+      "density": "coarse",
+      "mesh": "base",
+      "cohort": "pilot",
+      "observedCase": {
+        "id": "2023-06-08-sunrise",
+        "date": "2023-06-08",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306080000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230608_rise.jpg",
+        "matchedTo": "2023-06-09-sunrise"
+      },
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-08-sunrise.json",
+          "sha256": "c39c795d92cdf1f082848f2efafdefc817592217ec0d93ccd8f78a07a660e485"
+        }
+      ],
+      "minuteOffsets": [
+        -40,
+        -35,
+        -30,
+        -25,
+        -20,
+        -15,
+        -10,
+        -5,
+        0,
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        35,
+        40
+      ],
+      "options": {},
+      "measures": {
+        "0": {
+          "eventRed": 0.000006942960140652813,
+          "eventCoveredRed": 0.000006942960140652813,
+          "referenceRed": 0.000004794935987948266,
+          "referenceCoveredRed": 0.000004794935987948266,
+          "maximumRed": 0.00031438042436140415,
+          "maximumTime": "2023-06-07T21:31:02.926Z",
+          "maximumSunAltitude": 7.123335196715124,
+          "maximumRedExcess": 0.000241115759554249,
+          "maximumExcessTime": "2023-06-07T21:31:02.926Z"
+        },
+        "0.75": {
+          "eventRed": 8.130424296342096e-7,
+          "eventCoveredRed": 8.130424296342096e-7,
+          "referenceRed": 6.798925367746964e-7,
+          "referenceCoveredRed": 6.798925367746964e-7,
+          "maximumRed": 0.0005374046981260637,
+          "maximumTime": "2023-06-07T21:31:02.926Z",
+          "maximumSunAltitude": 7.123335196715124,
+          "maximumRedExcess": 0.00043381008064532686,
+          "maximumExcessTime": "2023-06-07T21:31:02.926Z"
+        },
+        "0.85": {
+          "eventRed": 4.731160850820754e-7,
+          "eventCoveredRed": 4.731160850820754e-7,
+          "referenceRed": 4.002718228228357e-7,
+          "referenceCoveredRed": 4.002718228228357e-7,
+          "maximumRed": 0.0005159429283501143,
+          "maximumTime": "2023-06-07T21:31:02.926Z",
+          "maximumSunAltitude": 7.123335196715124,
+          "maximumRedExcess": 0.00043230230659875314,
+          "maximumExcessTime": "2023-06-07T21:31:02.926Z"
+        },
+        "0.9": {
+          "eventRed": 3.115090089281363e-7,
+          "eventCoveredRed": 3.115090089281363e-7,
+          "referenceRed": 2.6215672494246385e-7,
+          "referenceCoveredRed": 2.6215672494246385e-7,
+          "maximumRed": 0.0004693002369048588,
+          "maximumTime": "2023-06-07T21:31:02.926Z",
+          "maximumSunAltitude": 7.123335196715124,
+          "maximumRedExcess": 0.0004056293184414712,
+          "maximumExcessTime": "2023-06-07T21:31:02.926Z"
+        }
+      },
+      "reference": {
+        "time": "2023-06-07T20:50:01.087Z",
+        "targetAltitude": -0.833,
+        "actualAltitude": -0.8329890929558521,
+        "offsetSeconds": -61.839
+      },
+      "wallSeconds": 20.23987400000001,
+      "scope": "Previously inspected source-label development diagnostics; relative spectral cloud radiance, uncalibrated"
+    },
+    {
+      "id": "2023-06-08-sunrise",
+      "density": "dense",
+      "mesh": "base",
+      "cohort": "pilot",
+      "observedCase": {
+        "id": "2023-06-08-sunrise",
+        "date": "2023-06-08",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306080000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230608_rise.jpg",
+        "matchedTo": "2023-06-09-sunrise"
+      },
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-08-sunrise.json",
+          "sha256": "c39c795d92cdf1f082848f2efafdefc817592217ec0d93ccd8f78a07a660e485"
+        },
+        {
+          "file": "research/experiments/cloud-column-dense-inputs/2023-06-08-sunrise.json",
+          "sha256": "4d2d31ad4e7e54df6af979c712c4565ef2625489f050758e826606221470d8d5"
+        }
+      ],
+      "minuteOffsets": [
+        -40,
+        -35,
+        -30,
+        -25,
+        -20,
+        -15,
+        -10,
+        -5,
+        0,
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        35,
+        40
+      ],
+      "options": {},
+      "measures": {
+        "0": {
+          "eventRed": 0.000008075936959426735,
+          "eventCoveredRed": 0.000008075936959426735,
+          "referenceRed": 0.0000060701462487411595,
+          "referenceCoveredRed": 0.0000060701462487411595,
+          "maximumRed": 0.0003244474354109347,
+          "maximumTime": "2023-06-07T21:31:02.926Z",
+          "maximumSunAltitude": 7.123335196715124,
+          "maximumRedExcess": 0.00024873509689920707,
+          "maximumExcessTime": "2023-06-07T21:31:02.926Z"
+        },
+        "0.75": {
+          "eventRed": 0.0000013543658867339985,
+          "eventCoveredRed": 0.0000013543658867339985,
+          "referenceRed": 0.0000010911409754660823,
+          "referenceCoveredRed": 0.0000010911409754660823,
+          "maximumRed": 0.000434855180907562,
+          "maximumTime": "2023-06-07T21:31:02.926Z",
+          "maximumSunAltitude": 7.123335196715124,
+          "maximumRedExcess": 0.0003612902864687927,
+          "maximumExcessTime": "2023-06-07T21:31:02.926Z"
+        },
+        "0.85": {
+          "eventRed": 8.179418679980327e-7,
+          "eventCoveredRed": 8.179418679980327e-7,
+          "referenceRed": 6.502419554202763e-7,
+          "referenceCoveredRed": 6.502419554202763e-7,
+          "maximumRed": 0.0004907671886073379,
+          "maximumTime": "2023-06-07T21:31:02.926Z",
+          "maximumSunAltitude": 7.123335196715124,
+          "maximumRedExcess": 0.00042765241071087746,
+          "maximumExcessTime": "2023-06-07T21:31:02.926Z"
+        },
+        "0.9": {
+          "eventRed": 5.443537906366911e-7,
+          "eventCoveredRed": 5.443537906366911e-7,
+          "referenceRed": 4.2833654826335547e-7,
+          "referenceCoveredRed": 4.2833654826335547e-7,
+          "maximumRed": 0.0004926933311290107,
+          "maximumTime": "2023-06-07T21:31:02.926Z",
+          "maximumSunAltitude": 7.123335196715124,
+          "maximumRedExcess": 0.0004411096252076169,
+          "maximumExcessTime": "2023-06-07T21:31:02.926Z"
+        }
+      },
+      "reference": {
+        "time": "2023-06-07T20:50:01.087Z",
+        "targetAltitude": -0.833,
+        "actualAltitude": -0.8329890929558521,
+        "offsetSeconds": -61.839
+      },
+      "wallSeconds": 40.12488145799996,
+      "scope": "Previously inspected source-label development diagnostics; relative spectral cloud radiance, uncalibrated"
+    },
+    {
+      "id": "2023-06-08-sunset",
+      "density": "coarse",
+      "mesh": "base",
+      "cohort": "pilot",
+      "observedCase": {
+        "id": "2023-06-08-sunset",
+        "date": "2023-06-08",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "微烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306080000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230608_set.jpg",
+        "matchedTo": "2023-06-09-sunset"
+      },
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-08-sunset.json",
+          "sha256": "996abc5574611fa5db86305f973e8096588c042172637d16a5b782abe254873f"
+        }
+      ],
+      "minuteOffsets": [
+        -40,
+        -35,
+        -30,
+        -25,
+        -20,
+        -15,
+        -10,
+        -5,
+        0,
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        35,
+        40
+      ],
+      "options": {},
+      "measures": {
+        "0": {
+          "eventRed": 0.000004065653019311288,
+          "eventCoveredRed": 0.000004065653019311288,
+          "referenceRed": 0.000004234023767902183,
+          "referenceCoveredRed": 0.000004234023767902183,
+          "maximumRed": 0.0012654056198677615,
+          "maximumTime": "2023-06-08T10:17:49.411Z",
+          "maximumSunAltitude": 6.730515331671041,
+          "maximumRedExcess": 0.0008856268027615335,
+          "maximumExcessTime": "2023-06-08T10:17:49.411Z"
+        },
+        "0.75": {
+          "eventRed": 0.00001362589278599279,
+          "eventCoveredRed": 0.00001362589278599279,
+          "referenceRed": 0.000012264685487251809,
+          "referenceCoveredRed": 0.000012264685487251809,
+          "maximumRed": 0.00405105494454543,
+          "maximumTime": "2023-06-08T10:17:49.411Z",
+          "maximumSunAltitude": 6.730515331671041,
+          "maximumRedExcess": 0.003284473727199722,
+          "maximumExcessTime": "2023-06-08T10:17:49.411Z"
+        },
+        "0.85": {
+          "eventRed": 0.000012958934496841024,
+          "eventCoveredRed": 0.000012958934496841024,
+          "referenceRed": 0.00001165581672475788,
+          "referenceCoveredRed": 0.00001165581672475788,
+          "maximumRed": 0.004681449226606614,
+          "maximumTime": "2023-06-08T10:17:49.411Z",
+          "maximumSunAltitude": 6.730515331671041,
+          "maximumRedExcess": 0.003972137289764163,
+          "maximumExcessTime": "2023-06-08T10:17:49.411Z"
+        },
+        "0.9": {
+          "eventRed": 0.00001031826254449036,
+          "eventCoveredRed": 0.00001031826254449036,
+          "referenceRed": 0.000009286981693278084,
+          "referenceCoveredRed": 0.000009286981693278084,
+          "maximumRed": 0.0045383205539029125,
+          "maximumTime": "2023-06-08T10:17:49.411Z",
+          "maximumSunAltitude": 6.730515331671041,
+          "maximumRedExcess": 0.003943170153553107,
+          "maximumExcessTime": "2023-06-08T10:17:49.411Z"
+        }
+      },
+      "reference": {
+        "time": "2023-06-08T10:56:54.035Z",
+        "targetAltitude": -0.833,
+        "actualAltitude": -0.8329880098470571,
+        "offsetSeconds": -55.376
+      },
+      "wallSeconds": 3.209396874999977,
+      "scope": "Previously inspected source-label development diagnostics; relative spectral cloud radiance, uncalibrated"
+    },
+    {
+      "id": "2023-06-08-sunset",
+      "density": "dense",
+      "mesh": "base",
+      "cohort": "pilot",
+      "observedCase": {
+        "id": "2023-06-08-sunset",
+        "date": "2023-06-08",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "微烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306080000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230608_set.jpg",
+        "matchedTo": "2023-06-09-sunset"
+      },
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-08-sunset.json",
+          "sha256": "996abc5574611fa5db86305f973e8096588c042172637d16a5b782abe254873f"
+        },
+        {
+          "file": "research/experiments/cloud-column-dense-inputs/2023-06-08-sunset.json",
+          "sha256": "b356539fe2806ad0cf6e5ac6f090477df88166d89c422bb55bfa64ad10461fea"
+        }
+      ],
+      "minuteOffsets": [
+        -40,
+        -35,
+        -30,
+        -25,
+        -20,
+        -15,
+        -10,
+        -5,
+        0,
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        35,
+        40
+      ],
+      "options": {},
+      "measures": {
+        "0": {
+          "eventRed": 0.000004271847308027153,
+          "eventCoveredRed": 0.000004271847308027153,
+          "referenceRed": 0.000003924999714065055,
+          "referenceCoveredRed": 0.000003924999714065055,
+          "maximumRed": 0.0011735568562220163,
+          "maximumTime": "2023-06-08T10:17:49.411Z",
+          "maximumSunAltitude": 6.730515331671041,
+          "maximumRedExcess": 0.0008186335111129649,
+          "maximumExcessTime": "2023-06-08T10:17:49.411Z"
+        },
+        "0.75": {
+          "eventRed": 0.000012898708867380785,
+          "eventCoveredRed": 0.000012898708867380785,
+          "referenceRed": 0.000012523387030616254,
+          "referenceCoveredRed": 0.000012523387030616254,
+          "maximumRed": 0.0037469068598320046,
+          "maximumTime": "2023-06-08T10:17:49.411Z",
+          "maximumSunAltitude": 6.730515331671041,
+          "maximumRedExcess": 0.0030256406474112917,
+          "maximumExcessTime": "2023-06-08T10:17:49.411Z"
+        },
+        "0.85": {
+          "eventRed": 0.000012267526699651607,
+          "eventCoveredRed": 0.000012267526699651607,
+          "referenceRed": 0.000012208649602834129,
+          "referenceCoveredRed": 0.000012208649602834129,
+          "maximumRed": 0.004271759419365901,
+          "maximumTime": "2023-06-08T10:17:49.411Z",
+          "maximumSunAltitude": 6.730515331671041,
+          "maximumRedExcess": 0.0036086715692377463,
+          "maximumExcessTime": "2023-06-08T10:17:49.411Z"
+        },
+        "0.9": {
+          "eventRed": 0.00000972769106850982,
+          "eventCoveredRed": 0.00000972769106850982,
+          "referenceRed": 0.000009847773299751003,
+          "referenceCoveredRed": 0.000009847773299751003,
+          "maximumRed": 0.004102376356304062,
+          "maximumTime": "2023-06-08T10:17:49.411Z",
+          "maximumSunAltitude": 6.730515331671041,
+          "maximumRedExcess": 0.0035493165498241405,
+          "maximumExcessTime": "2023-06-08T10:17:49.411Z"
+        }
+      },
+      "reference": {
+        "time": "2023-06-08T10:56:54.035Z",
+        "targetAltitude": -0.833,
+        "actualAltitude": -0.8329880098470571,
+        "offsetSeconds": -55.376
+      },
+      "wallSeconds": 6.005909291999997,
+      "scope": "Previously inspected source-label development diagnostics; relative spectral cloud radiance, uncalibrated"
+    },
+    {
+      "id": "2023-06-09-sunrise",
+      "density": "coarse",
+      "mesh": "base",
+      "cohort": "pilot",
+      "observedCase": {
+        "id": "2023-06-09-sunrise",
+        "date": "2023-06-09",
+        "eventType": "sunrise",
+        "observedGrade": 4,
+        "observedLabel": "中到大烧",
+        "observedCloud": "卷云",
+        "observedColour": "橘红色,橘色",
+        "originalPrediction": "小烧",
+        "evidenceUrls": "https://weibo.com/5538010841/N4rhsFnuZ",
+        "originalMap": "/static/media/ERA5/202306090000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230609_rise.jpg"
+      },
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-09-sunrise.json",
+          "sha256": "58782c554ff07d610e82d64c0546d76e7b87a69815b31a8ff324c9f4c347150f"
+        }
+      ],
+      "minuteOffsets": [
+        -40,
+        -35,
+        -30,
+        -25,
+        -20,
+        -15,
+        -10,
+        -5,
+        0,
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        35,
+        40
+      ],
+      "options": {},
+      "measures": {
+        "0": {
+          "eventRed": 0.00003009630874263235,
+          "eventCoveredRed": 0.00003009630874263235,
+          "referenceRed": 0.00003156449317942445,
+          "referenceCoveredRed": 0.00003156449317942445,
+          "maximumRed": 0.0009816220571151535,
+          "maximumTime": "2023-06-08T21:30:57.397Z",
+          "maximumSunAltitude": 7.11572524434232,
+          "maximumRedExcess": 0.0007148927756536084,
+          "maximumExcessTime": "2023-06-08T21:30:57.397Z"
+        },
+        "0.75": {
+          "eventRed": 0.000083273181389388,
+          "eventCoveredRed": 0.000083273181389388,
+          "referenceRed": 0.00006652070095113186,
+          "referenceCoveredRed": 0.00006652070095113186,
+          "maximumRed": 0.0024466462526755483,
+          "maximumTime": "2023-06-08T21:30:57.397Z",
+          "maximumSunAltitude": 7.11572524434232,
+          "maximumRedExcess": 0.0020114531053363337,
+          "maximumExcessTime": "2023-06-08T21:30:57.397Z"
+        },
+        "0.85": {
+          "eventRed": 0.00008052355767475216,
+          "eventCoveredRed": 0.00008052355767475216,
+          "referenceRed": 0.00006282578509117807,
+          "referenceCoveredRed": 0.00006282578509117807,
+          "maximumRed": 0.002819035735969376,
+          "maximumTime": "2023-06-08T21:30:57.397Z",
+          "maximumSunAltitude": 7.11572524434232,
+          "maximumRedExcess": 0.002417061752920308,
+          "maximumExcessTime": "2023-06-08T21:30:57.397Z"
+        },
+        "0.9": {
+          "eventRed": 0.00006474143011078635,
+          "eventCoveredRed": 0.00006474143011078635,
+          "referenceRed": 0.00005002810494150223,
+          "referenceCoveredRed": 0.00005002810494150223,
+          "maximumRed": 0.0027074519633021273,
+          "maximumTime": "2023-06-08T21:30:57.397Z",
+          "maximumSunAltitude": 7.11572524434232,
+          "maximumRedExcess": 0.002367854889479091,
+          "maximumExcessTime": "2023-06-08T21:30:57.397Z"
+        }
+      },
+      "reference": {
+        "time": "2023-06-08T20:49:55.603Z",
+        "targetAltitude": -0.833,
+        "actualAltitude": -0.8330065332857169,
+        "offsetSeconds": -61.794
+      },
+      "wallSeconds": 3.2433092920000197,
+      "scope": "Previously inspected source-label development diagnostics; relative spectral cloud radiance, uncalibrated"
+    },
+    {
+      "id": "2023-06-09-sunrise",
+      "density": "dense",
+      "mesh": "base",
+      "cohort": "pilot",
+      "observedCase": {
+        "id": "2023-06-09-sunrise",
+        "date": "2023-06-09",
+        "eventType": "sunrise",
+        "observedGrade": 4,
+        "observedLabel": "中到大烧",
+        "observedCloud": "卷云",
+        "observedColour": "橘红色,橘色",
+        "originalPrediction": "小烧",
+        "evidenceUrls": "https://weibo.com/5538010841/N4rhsFnuZ",
+        "originalMap": "/static/media/ERA5/202306090000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230609_rise.jpg"
+      },
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-09-sunrise.json",
+          "sha256": "58782c554ff07d610e82d64c0546d76e7b87a69815b31a8ff324c9f4c347150f"
+        },
+        {
+          "file": "research/experiments/cloud-column-dense-inputs/2023-06-09-sunrise.json",
+          "sha256": "078a320d256ed64f436ab115b8f9a6f50e99ffd728985d256d4475c8f01cbccf"
+        }
+      ],
+      "minuteOffsets": [
+        -40,
+        -35,
+        -30,
+        -25,
+        -20,
+        -15,
+        -10,
+        -5,
+        0,
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        35,
+        40
+      ],
+      "options": {},
+      "measures": {
+        "0": {
+          "eventRed": 0.00003419489858566243,
+          "eventCoveredRed": 0.00003419489858566243,
+          "referenceRed": 0.000033438139502132936,
+          "referenceCoveredRed": 0.000033438139502132936,
+          "maximumRed": 0.0010035946959045343,
+          "maximumTime": "2023-06-08T21:30:57.397Z",
+          "maximumSunAltitude": 7.11572524434232,
+          "maximumRedExcess": 0.0007332189852137988,
+          "maximumExcessTime": "2023-06-08T21:30:57.397Z"
+        },
+        "0.75": {
+          "eventRed": 0.00010085873023300887,
+          "eventCoveredRed": 0.00010085873023300887,
+          "referenceRed": 0.00008514480186271078,
+          "referenceCoveredRed": 0.00008514480186271078,
+          "maximumRed": 0.002636055228630191,
+          "maximumTime": "2023-06-08T21:30:57.397Z",
+          "maximumSunAltitude": 7.11572524434232,
+          "maximumRedExcess": 0.0021760778857689922,
+          "maximumExcessTime": "2023-06-08T21:30:57.397Z"
+        },
+        "0.85": {
+          "eventRed": 0.00009910268441324208,
+          "eventCoveredRed": 0.00009910268441324208,
+          "referenceRed": 0.0000823104608319541,
+          "referenceCoveredRed": 0.0000823104608319541,
+          "maximumRed": 0.0030927535453589825,
+          "maximumTime": "2023-06-08T21:30:57.397Z",
+          "maximumSunAltitude": 7.11572524434232,
+          "maximumRedExcess": 0.002661955913599781,
+          "maximumExcessTime": "2023-06-08T21:30:57.397Z"
+        },
+        "0.9": {
+          "eventRed": 0.00008043476478873668,
+          "eventCoveredRed": 0.00008043476478873668,
+          "referenceRed": 0.00006623698936175215,
+          "referenceCoveredRed": 0.00006623698936175215,
+          "maximumRed": 0.003009291829685246,
+          "maximumTime": "2023-06-08T21:30:57.397Z",
+          "maximumSunAltitude": 7.11572524434232,
+          "maximumRedExcess": 0.0026425624376244443,
+          "maximumExcessTime": "2023-06-08T21:30:57.397Z"
+        }
+      },
+      "reference": {
+        "time": "2023-06-08T20:49:55.603Z",
+        "targetAltitude": -0.833,
+        "actualAltitude": -0.8330065332857169,
+        "offsetSeconds": -61.794
+      },
+      "wallSeconds": 6.429385667000024,
+      "scope": "Previously inspected source-label development diagnostics; relative spectral cloud radiance, uncalibrated"
+    },
+    {
+      "id": "2023-06-09-sunset",
+      "density": "coarse",
+      "mesh": "base",
+      "cohort": "pilot",
+      "observedCase": {
+        "id": "2023-06-09-sunset",
+        "date": "2023-06-09",
+        "eventType": "sunset",
+        "observedGrade": 3,
+        "observedLabel": "小到中烧",
+        "observedCloud": "卷云",
+        "observedColour": "橘黄色,橘色,橘红色",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "https://weibo.com/5538010841/N4x498V8i",
+        "originalMap": "/static/media/ERA5/202306090000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230609_set.jpg"
+      },
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-09-sunset.json",
+          "sha256": "8529600e0c2c02ef9969aa0661da5b855d4c3f6d1037b77073b9f07d16e2cd91"
+        }
+      ],
+      "minuteOffsets": [
+        -40,
+        -35,
+        -30,
+        -25,
+        -20,
+        -15,
+        -10,
+        -5,
+        0,
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        35,
+        40
+      ],
+      "options": {},
+      "measures": {
+        "0": {
+          "eventRed": 6.902382165415477e-7,
+          "eventCoveredRed": 6.902382165415477e-7,
+          "referenceRed": 6.660652522973869e-7,
+          "referenceCoveredRed": 6.660652522973869e-7,
+          "maximumRed": 0.000022572348206938845,
+          "maximumTime": "2023-06-09T10:18:16.762Z",
+          "maximumSunAltitude": 6.724582655303667,
+          "maximumRedExcess": 0.0000204110378532388,
+          "maximumExcessTime": "2023-06-09T10:18:16.762Z"
+        },
+        "0.75": {
+          "eventRed": 5.282443338085251e-7,
+          "eventCoveredRed": 5.282443338085251e-7,
+          "referenceRed": 2.746771225271492e-7,
+          "referenceCoveredRed": 2.746771225271492e-7,
+          "maximumRed": 0.00010970148075224566,
+          "maximumTime": "2023-06-09T10:18:16.762Z",
+          "maximumSunAltitude": 6.724582655303667,
+          "maximumRedExcess": 0.00010442354870264734,
+          "maximumExcessTime": "2023-06-09T10:18:16.762Z"
+        },
+        "0.85": {
+          "eventRed": 4.872626903379846e-7,
+          "eventCoveredRed": 4.872626903379846e-7,
+          "referenceRed": 2.4325663895259057e-7,
+          "referenceCoveredRed": 2.4325663895259057e-7,
+          "maximumRed": 0.00015826983255103194,
+          "maximumTime": "2023-06-09T10:18:16.762Z",
+          "maximumSunAltitude": 6.724582655303667,
+          "maximumRedExcess": 0.00015154194219376308,
+          "maximumExcessTime": "2023-06-09T10:18:16.762Z"
+        },
+        "0.9": {
+          "eventRed": 3.831186157810057e-7,
+          "eventCoveredRed": 3.831186157810057e-7,
+          "referenceRed": 1.9350101229701292e-7,
+          "referenceCoveredRed": 1.9350101229701292e-7,
+          "maximumRed": 0.00016216388715672016,
+          "maximumTime": "2023-06-09T10:18:16.762Z",
+          "maximumSunAltitude": 6.724582655303667,
+          "maximumRedExcess": 0.00015557709718199572,
+          "maximumExcessTime": "2023-06-09T10:18:16.762Z"
+        }
+      },
+      "reference": {
+        "time": "2023-06-09T10:57:21.615Z",
+        "targetAltitude": -0.833,
+        "actualAltitude": -0.8330139601448501,
+        "offsetSeconds": -55.147
+      },
+      "wallSeconds": 5.1267229159999985,
+      "scope": "Previously inspected source-label development diagnostics; relative spectral cloud radiance, uncalibrated"
+    },
+    {
+      "id": "2023-06-09-sunset",
+      "density": "dense",
+      "mesh": "base",
+      "cohort": "pilot",
+      "observedCase": {
+        "id": "2023-06-09-sunset",
+        "date": "2023-06-09",
+        "eventType": "sunset",
+        "observedGrade": 3,
+        "observedLabel": "小到中烧",
+        "observedCloud": "卷云",
+        "observedColour": "橘黄色,橘色,橘红色",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "https://weibo.com/5538010841/N4x498V8i",
+        "originalMap": "/static/media/ERA5/202306090000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230609_set.jpg"
+      },
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-09-sunset.json",
+          "sha256": "8529600e0c2c02ef9969aa0661da5b855d4c3f6d1037b77073b9f07d16e2cd91"
+        },
+        {
+          "file": "research/experiments/cloud-column-dense-inputs/2023-06-09-sunset.json",
+          "sha256": "3e8d5c66deb5a3cb56eb891ff8ac14cd2a30c4e0691647ce90ea240f418afc60"
+        }
+      ],
+      "minuteOffsets": [
+        -40,
+        -35,
+        -30,
+        -25,
+        -20,
+        -15,
+        -10,
+        -5,
+        0,
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        35,
+        40
+      ],
+      "options": {},
+      "measures": {
+        "0": {
+          "eventRed": 7.973290764510044e-7,
+          "eventCoveredRed": 7.973290764510044e-7,
+          "referenceRed": 4.987369286781042e-7,
+          "referenceCoveredRed": 4.987369286781042e-7,
+          "maximumRed": 0.000052213094873111025,
+          "maximumTime": "2023-06-09T10:18:16.762Z",
+          "maximumSunAltitude": 6.724582655303667,
+          "maximumRedExcess": 0.00004675911905769873,
+          "maximumExcessTime": "2023-06-09T10:18:16.762Z"
+        },
+        "0.75": {
+          "eventRed": 0.0000017803354709257814,
+          "eventCoveredRed": 0.0000017803354709257814,
+          "referenceRed": 4.909610764449072e-7,
+          "referenceCoveredRed": 4.909610764449072e-7,
+          "maximumRed": 0.0001434578997319136,
+          "maximumTime": "2023-06-09T10:18:16.762Z",
+          "maximumSunAltitude": 6.724582655303667,
+          "maximumRedExcess": 0.00013318408837766755,
+          "maximumExcessTime": "2023-06-09T10:18:16.762Z"
+        },
+        "0.85": {
+          "eventRed": 0.0000016834245661651058,
+          "eventCoveredRed": 0.0000016834245661651058,
+          "referenceRed": 4.553205565296556e-7,
+          "referenceCoveredRed": 4.553205565296556e-7,
+          "maximumRed": 0.00017420508822014202,
+          "maximumTime": "2023-06-09T10:18:16.762Z",
+          "maximumSunAltitude": 6.724582655303667,
+          "maximumRedExcess": 0.00016377512956606706,
+          "maximumExcessTime": "2023-06-09T10:18:16.762Z"
+        },
+        "0.9": {
+          "eventRed": 0.0000013196563196694287,
+          "eventCoveredRed": 0.0000013196563196694287,
+          "referenceRed": 3.5734515596721587e-7,
+          "referenceCoveredRed": 3.5734515596721587e-7,
+          "maximumRed": 0.00017179954413856102,
+          "maximumTime": "2023-06-09T10:18:16.762Z",
+          "maximumSunAltitude": 6.724582655303667,
+          "maximumRedExcess": 0.00016256376292957518,
+          "maximumExcessTime": "2023-06-09T10:18:16.762Z"
+        }
+      },
+      "reference": {
+        "time": "2023-06-09T10:57:21.615Z",
+        "targetAltitude": -0.833,
+        "actualAltitude": -0.8330139601448501,
+        "offsetSeconds": -55.147
+      },
+      "wallSeconds": 16.117747167000022,
+      "scope": "Previously inspected source-label development diagnostics; relative spectral cloud radiance, uncalibrated"
+    },
+    {
+      "id": "2023-06-10-sunrise",
+      "density": "coarse",
+      "mesh": "base",
+      "cohort": "pilot",
+      "observedCase": {
+        "id": "2023-06-10-sunrise",
+        "date": "2023-06-10",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "微烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306100000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230610_rise.jpg"
+      },
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-10-sunrise.json",
+          "sha256": "7c4ac9015dc14e8dfce463de45445d9ad827e46a78f249fe04261ef236d81c32"
+        }
+      ],
+      "minuteOffsets": [
+        -40,
+        -35,
+        -30,
+        -25,
+        -20,
+        -15,
+        -10,
+        -5,
+        0,
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        35,
+        40
+      ],
+      "options": {},
+      "measures": {
+        "0": {
+          "eventRed": 0.00006135219383459049,
+          "eventCoveredRed": 0.00006135219383459049,
+          "referenceRed": 0.000049585004488944834,
+          "referenceCoveredRed": 0.000049585004488944834,
+          "maximumRed": 0.0005151756670128467,
+          "maximumTime": "2023-06-09T21:30:53.261Z",
+          "maximumSunAltitude": 7.108442437286604,
+          "maximumRedExcess": 0.0003745566395260122,
+          "maximumExcessTime": "2023-06-09T21:30:53.261Z"
+        },
+        "0.75": {
+          "eventRed": 0.000041777250851574074,
+          "eventCoveredRed": 0.000041777250851574074,
+          "referenceRed": 0.000039518534868631695,
+          "referenceCoveredRed": 0.000039518534868631695,
+          "maximumRed": 0.0015178411589534253,
+          "maximumTime": "2023-06-09T21:30:53.261Z",
+          "maximumSunAltitude": 7.108442437286604,
+          "maximumRedExcess": 0.001228603876596601,
+          "maximumExcessTime": "2023-06-09T21:30:53.261Z"
+        },
+        "0.85": {
+          "eventRed": 0.00003699399761039009,
+          "eventCoveredRed": 0.00003699399761039009,
+          "referenceRed": 0.000034658834324508474,
+          "referenceCoveredRed": 0.000034658834324508474,
+          "maximumRed": 0.0018182118308076925,
+          "maximumTime": "2023-06-09T21:30:53.261Z",
+          "maximumSunAltitude": 7.108442437286604,
+          "maximumRedExcess": 0.001543483519474318,
+          "maximumExcessTime": "2023-06-09T21:30:53.261Z"
+        },
+        "0.9": {
+          "eventRed": 0.000030242917400214565,
+          "eventCoveredRed": 0.000030242917400214565,
+          "referenceRed": 0.000028114324816690725,
+          "referenceCoveredRed": 0.000028114324816690725,
+          "maximumRed": 0.0018243861862326165,
+          "maximumTime": "2023-06-09T21:30:53.261Z",
+          "maximumSunAltitude": 7.108442437286604,
+          "maximumRedExcess": 0.001589055111935135,
+          "maximumExcessTime": "2023-06-09T21:30:53.261Z"
+        }
+      },
+      "reference": {
+        "time": "2023-06-09T20:49:51.568Z",
+        "targetAltitude": -0.833,
+        "actualAltitude": -0.833009239412878,
+        "offsetSeconds": -61.693
+      },
+      "wallSeconds": 6.12082695800002,
+      "scope": "Previously inspected source-label development diagnostics; relative spectral cloud radiance, uncalibrated"
+    },
+    {
+      "id": "2023-06-10-sunrise",
+      "density": "dense",
+      "mesh": "base",
+      "cohort": "pilot",
+      "observedCase": {
+        "id": "2023-06-10-sunrise",
+        "date": "2023-06-10",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "微烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306100000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230610_rise.jpg"
+      },
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-10-sunrise.json",
+          "sha256": "7c4ac9015dc14e8dfce463de45445d9ad827e46a78f249fe04261ef236d81c32"
+        },
+        {
+          "file": "research/experiments/cloud-column-dense-inputs/2023-06-10-sunrise.json",
+          "sha256": "fd006197cafccf1593ae1d28177b8eab9245c311d1fb9adc00089e53936467c0"
+        }
+      ],
+      "minuteOffsets": [
+        -40,
+        -35,
+        -30,
+        -25,
+        -20,
+        -15,
+        -10,
+        -5,
+        0,
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        35,
+        40
+      ],
+      "options": {},
+      "measures": {
+        "0": {
+          "eventRed": 0.000022451868474809655,
+          "eventCoveredRed": 0.000022451868474809655,
+          "referenceRed": 0.00002873408186740219,
+          "referenceCoveredRed": 0.00002873408186740219,
+          "maximumRed": 0.0008569177239976007,
+          "maximumTime": "2023-06-09T21:30:53.261Z",
+          "maximumSunAltitude": 7.108442437286604,
+          "maximumRedExcess": 0.0006027351506140932,
+          "maximumExcessTime": "2023-06-09T21:30:53.261Z"
+        },
+        "0.75": {
+          "eventRed": 0.00001330485343594477,
+          "eventCoveredRed": 0.00001330485343594477,
+          "referenceRed": 0.000018307086072678108,
+          "referenceCoveredRed": 0.000018307086072678108,
+          "maximumRed": 0.0025574357234761764,
+          "maximumTime": "2023-06-09T21:30:53.261Z",
+          "maximumSunAltitude": 7.108442437286604,
+          "maximumRedExcess": 0.0020422898019269156,
+          "maximumExcessTime": "2023-06-09T21:30:53.261Z"
+        },
+        "0.85": {
+          "eventRed": 0.000011429307170218847,
+          "eventCoveredRed": 0.000011429307170218847,
+          "referenceRed": 0.000015238641667091713,
+          "referenceCoveredRed": 0.000015238641667091713,
+          "maximumRed": 0.0029582008128626845,
+          "maximumTime": "2023-06-09T21:30:53.261Z",
+          "maximumSunAltitude": 7.108442437286604,
+          "maximumRedExcess": 0.002487087273209412,
+          "maximumExcessTime": "2023-06-09T21:30:53.261Z"
+        },
+        "0.9": {
+          "eventRed": 0.000009332946491859943,
+          "eventCoveredRed": 0.000009332946491859943,
+          "referenceRed": 0.000011870302992943286,
+          "referenceCoveredRed": 0.000011870302992943286,
+          "maximumRed": 0.0029336065053110812,
+          "maximumTime": "2023-06-09T21:30:53.261Z",
+          "maximumSunAltitude": 7.108442437286604,
+          "maximumRedExcess": 0.0025393878540148148,
+          "maximumExcessTime": "2023-06-09T21:30:53.261Z"
+        }
+      },
+      "reference": {
+        "time": "2023-06-09T20:49:51.568Z",
+        "targetAltitude": -0.833,
+        "actualAltitude": -0.833009239412878,
+        "offsetSeconds": -61.693
+      },
+      "wallSeconds": 16.334345207999984,
+      "scope": "Previously inspected source-label development diagnostics; relative spectral cloud radiance, uncalibrated"
+    },
+    {
+      "id": "2023-06-10-sunset",
+      "density": "coarse",
+      "mesh": "base",
+      "cohort": "pilot",
+      "observedCase": {
+        "id": "2023-06-10-sunset",
+        "date": "2023-06-10",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "小烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306100000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230610_set.jpg"
+      },
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-10-sunset.json",
+          "sha256": "48ea66b7717e9cd94eb06ba518ba652d563cfff63c2dba49f315c81e083fbd19"
+        }
+      ],
+      "minuteOffsets": [
+        -40,
+        -35,
+        -30,
+        -25,
+        -20,
+        -15,
+        -10,
+        -5,
+        0,
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        35,
+        40
+      ],
+      "options": {},
+      "measures": {
+        "0": {
+          "eventRed": 0.00010898805459829046,
+          "eventCoveredRed": 0.00010898805459829046,
+          "referenceRed": 0.00011333423659307582,
+          "referenceCoveredRed": 0.00011333423659307582,
+          "maximumRed": 0.0008719181132210352,
+          "maximumTime": "2023-06-10T10:18:43.145Z",
+          "maximumSunAltitude": 6.719256513569008,
+          "maximumRedExcess": 0.0005931816714394883,
+          "maximumExcessTime": "2023-06-10T10:18:43.145Z"
+        },
+        "0.75": {
+          "eventRed": 0.0001616355792809883,
+          "eventCoveredRed": 0.0001616355792809883,
+          "referenceRed": 0.00016181664586494425,
+          "referenceCoveredRed": 0.00016181664586494425,
+          "maximumRed": 0.0020471802885583756,
+          "maximumTime": "2023-06-10T10:18:43.145Z",
+          "maximumSunAltitude": 6.719256513569008,
+          "maximumRedExcess": 0.001617673635995451,
+          "maximumExcessTime": "2023-06-10T10:18:43.145Z"
+        },
+        "0.85": {
+          "eventRed": 0.00014988962536659342,
+          "eventCoveredRed": 0.00014988962536659342,
+          "referenceRed": 0.0001510900220693758,
+          "referenceCoveredRed": 0.0001510900220693758,
+          "maximumRed": 0.0023041566216314494,
+          "maximumTime": "2023-06-10T10:18:43.145Z",
+          "maximumSunAltitude": 6.719256513569008,
+          "maximumRedExcess": 0.0019196533779146157,
+          "maximumExcessTime": "2023-06-10T10:18:43.145Z"
+        },
+        "0.9": {
+          "eventRed": 0.0001236585511825224,
+          "eventCoveredRed": 0.0001236585511825224,
+          "referenceRed": 0.0001253983427438086,
+          "referenceCoveredRed": 0.0001253983427438086,
+          "maximumRed": 0.002201596337199925,
+          "maximumTime": "2023-06-10T10:18:43.145Z",
+          "maximumSunAltitude": 6.719256513569008,
+          "maximumRedExcess": 0.0018822462022501276,
+          "maximumExcessTime": "2023-06-10T10:18:43.145Z"
+        }
+      },
+      "reference": {
+        "time": "2023-06-10T10:57:48.255Z",
+        "targetAltitude": -0.833,
+        "actualAltitude": -0.8330070909311106,
+        "offsetSeconds": -54.89
+      },
+      "wallSeconds": 11.650459334000013,
+      "scope": "Previously inspected source-label development diagnostics; relative spectral cloud radiance, uncalibrated"
+    },
+    {
+      "id": "2023-06-10-sunset",
+      "density": "dense",
+      "mesh": "base",
+      "cohort": "pilot",
+      "observedCase": {
+        "id": "2023-06-10-sunset",
+        "date": "2023-06-10",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "小烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306100000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230610_set.jpg"
+      },
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-10-sunset.json",
+          "sha256": "48ea66b7717e9cd94eb06ba518ba652d563cfff63c2dba49f315c81e083fbd19"
+        },
+        {
+          "file": "research/experiments/cloud-column-dense-inputs/2023-06-10-sunset.json",
+          "sha256": "2b24062319288b2d8192b40545553e9111e5a1dce2c4158ab61c43448414fd23"
+        }
+      ],
+      "minuteOffsets": [
+        -40,
+        -35,
+        -30,
+        -25,
+        -20,
+        -15,
+        -10,
+        -5,
+        0,
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        35,
+        40
+      ],
+      "options": {},
+      "measures": {
+        "0": {
+          "eventRed": 0.00012667787890454157,
+          "eventCoveredRed": 0.00012667787890454157,
+          "referenceRed": 0.00013015987937924764,
+          "referenceCoveredRed": 0.00013015987937924764,
+          "maximumRed": 0.0009538388159523498,
+          "maximumTime": "2023-06-10T10:18:43.145Z",
+          "maximumSunAltitude": 6.719256513569008,
+          "maximumRedExcess": 0.0006508303220487261,
+          "maximumExcessTime": "2023-06-10T10:18:43.145Z"
+        },
+        "0.75": {
+          "eventRed": 0.0001961793967756557,
+          "eventCoveredRed": 0.0001961793967756557,
+          "referenceRed": 0.00019453409211038278,
+          "referenceCoveredRed": 0.00019453409211038278,
+          "maximumRed": 0.0022160583135339045,
+          "maximumTime": "2023-06-10T10:18:43.145Z",
+          "maximumSunAltitude": 6.719256513569008,
+          "maximumRedExcess": 0.0017495472205430731,
+          "maximumExcessTime": "2023-06-10T10:18:43.145Z"
+        },
+        "0.85": {
+          "eventRed": 0.00018793486688717064,
+          "eventCoveredRed": 0.00018793486688717064,
+          "referenceRed": 0.00018742611676450521,
+          "referenceCoveredRed": 0.00018742611676450521,
+          "maximumRed": 0.002482379501298887,
+          "maximumTime": "2023-06-10T10:18:43.145Z",
+          "maximumSunAltitude": 6.719256513569008,
+          "maximumRedExcess": 0.0020672152458420033,
+          "maximumExcessTime": "2023-06-10T10:18:43.145Z"
+        },
+        "0.9": {
+          "eventRed": 0.00015750727693578228,
+          "eventCoveredRed": 0.00015750727693578228,
+          "referenceRed": 0.00015859141503063817,
+          "referenceCoveredRed": 0.00015859141503063817,
+          "maximumRed": 0.0023795598084759037,
+          "maximumTime": "2023-06-10T10:18:43.145Z",
+          "maximumSunAltitude": 6.719256513569008,
+          "maximumRedExcess": 0.002036339353585965,
+          "maximumExcessTime": "2023-06-10T10:18:43.145Z"
+        }
+      },
+      "reference": {
+        "time": "2023-06-10T10:57:48.255Z",
+        "targetAltitude": -0.833,
+        "actualAltitude": -0.8330070909311106,
+        "offsetSeconds": -54.89
+      },
+      "wallSeconds": 29.147878167000016,
+      "scope": "Previously inspected source-label development diagnostics; relative spectral cloud radiance, uncalibrated"
+    }
+  ],
+  "rankings": {
+    "coarse:g=0:eventRed": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 31,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.6078431372549019,
+      "ordinalSpearman": 0.15375144918680525
+    },
+    "coarse:g=0:eventCoveredRed": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 31,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.6078431372549019,
+      "ordinalSpearman": 0.15375144918680525
+    },
+    "coarse:g=0:referenceRed": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 32,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.6274509803921569,
+      "ordinalSpearman": 0.17675363449821704
+    },
+    "coarse:g=0:referenceCoveredRed": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 32,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.6274509803921569,
+      "ordinalSpearman": 0.17675363449821704
+    },
+    "coarse:g=0:maximumRed": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 31,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.6078431372549019,
+      "ordinalSpearman": 0.15738337318334394
+    },
+    "coarse:g=0:maximumRedExcess": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 30,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.5882352941176471,
+      "ordinalSpearman": 0.13438118787193212
+    },
+    "coarse:g=0.75:eventRed": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 35,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.6862745098039216,
+      "ordinalSpearman": 0.24939211442899117
+    },
+    "coarse:g=0.75:eventCoveredRed": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 35,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.6862745098039216,
+      "ordinalSpearman": 0.24939211442899117
+    },
+    "coarse:g=0.75:referenceRed": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 33,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.6470588235294118,
+      "ordinalSpearman": 0.20338774380616756
+    },
+    "coarse:g=0.75:referenceCoveredRed": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 33,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.6470588235294118,
+      "ordinalSpearman": 0.20338774380616756
+    },
+    "coarse:g=0.75:maximumRed": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 33,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.6470588235294118,
+      "ordinalSpearman": 0.19975581980962884
+    },
+    "coarse:g=0.75:maximumRedExcess": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 33,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.6470588235294118,
+      "ordinalSpearman": 0.19975581980962884
+    },
+    "coarse:g=0.85:eventRed": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 36,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.7058823529411765,
+      "ordinalSpearman": 0.27239429974040297
+    },
+    "coarse:g=0.85:eventCoveredRed": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 36,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.7058823529411765,
+      "ordinalSpearman": 0.27239429974040297
+    },
+    "coarse:g=0.85:referenceRed": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 33,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.6470588235294118,
+      "ordinalSpearman": 0.20338774380616756
+    },
+    "coarse:g=0.85:referenceCoveredRed": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 33,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.6470588235294118,
+      "ordinalSpearman": 0.20338774380616756
+    },
+    "coarse:g=0.85:maximumRed": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 34,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.6666666666666666,
+      "ordinalSpearman": 0.22275800512104066
+    },
+    "coarse:g=0.85:maximumRedExcess": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 34,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.6666666666666666,
+      "ordinalSpearman": 0.22275800512104066
+    },
+    "coarse:g=0.9:eventRed": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 36,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.7058823529411765,
+      "ordinalSpearman": 0.27239429974040297
+    },
+    "coarse:g=0.9:eventCoveredRed": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 36,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.7058823529411765,
+      "ordinalSpearman": 0.27239429974040297
+    },
+    "coarse:g=0.9:referenceRed": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 33,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.6470588235294118,
+      "ordinalSpearman": 0.20338774380616756
+    },
+    "coarse:g=0.9:referenceCoveredRed": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 33,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.6470588235294118,
+      "ordinalSpearman": 0.20338774380616756
+    },
+    "coarse:g=0.9:maximumRed": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 34,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.6666666666666666,
+      "ordinalSpearman": 0.22275800512104066
+    },
+    "coarse:g=0.9:maximumRedExcess": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 34,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.6666666666666666,
+      "ordinalSpearman": 0.22275800512104066
+    },
+    "dense:g=0:eventRed": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 36,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.7058823529411765,
+      "ordinalSpearman": 0.27239429974040297
+    },
+    "dense:g=0:eventCoveredRed": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 36,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.7058823529411765,
+      "ordinalSpearman": 0.27239429974040297
+    },
+    "dense:g=0:referenceRed": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 38,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.7450980392156863,
+      "ordinalSpearman": 0.3183986703632266
+    },
+    "dense:g=0:referenceCoveredRed": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 38,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.7450980392156863,
+      "ordinalSpearman": 0.3183986703632266
+    },
+    "dense:g=0:maximumRed": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 38,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.7450980392156863,
+      "ordinalSpearman": 0.3147667463666879
+    },
+    "dense:g=0:maximumRedExcess": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 38,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.7450980392156863,
+      "ordinalSpearman": 0.3147667463666879
+    },
+    "dense:g=0.75:eventRed": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 37,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.7254901960784313,
+      "ordinalSpearman": 0.29539648505181476
+    },
+    "dense:g=0.75:eventCoveredRed": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 37,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.7254901960784313,
+      "ordinalSpearman": 0.29539648505181476
+    },
+    "dense:g=0.75:referenceRed": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 37,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.7254901960784313,
+      "ordinalSpearman": 0.29539648505181476
+    },
+    "dense:g=0.75:referenceCoveredRed": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 37,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.7254901960784313,
+      "ordinalSpearman": 0.29539648505181476
+    },
+    "dense:g=0.75:maximumRed": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 38,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.7450980392156863,
+      "ordinalSpearman": 0.3147667463666879
+    },
+    "dense:g=0.75:maximumRedExcess": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 38,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.7450980392156863,
+      "ordinalSpearman": 0.3147667463666879
+    },
+    "dense:g=0.85:eventRed": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 36,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.7058823529411765,
+      "ordinalSpearman": 0.27239429974040297
+    },
+    "dense:g=0.85:eventCoveredRed": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 36,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.7058823529411765,
+      "ordinalSpearman": 0.27239429974040297
+    },
+    "dense:g=0.85:referenceRed": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 37,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.7254901960784313,
+      "ordinalSpearman": 0.29539648505181476
+    },
+    "dense:g=0.85:referenceCoveredRed": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 37,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.7254901960784313,
+      "ordinalSpearman": 0.29539648505181476
+    },
+    "dense:g=0.85:maximumRed": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 38,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.7450980392156863,
+      "ordinalSpearman": 0.31113482237014917
+    },
+    "dense:g=0.85:maximumRedExcess": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 38,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.7450980392156863,
+      "ordinalSpearman": 0.31113482237014917
+    },
+    "dense:g=0.9:eventRed": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 37,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.7254901960784313,
+      "ordinalSpearman": 0.29539648505181476
+    },
+    "dense:g=0.9:eventCoveredRed": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 37,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.7254901960784313,
+      "ordinalSpearman": 0.29539648505181476
+    },
+    "dense:g=0.9:referenceRed": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 37,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.7254901960784313,
+      "ordinalSpearman": 0.29539648505181476
+    },
+    "dense:g=0.9:referenceCoveredRed": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 37,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.7254901960784313,
+      "ordinalSpearman": 0.29539648505181476
+    },
+    "dense:g=0.9:maximumRed": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 38,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.7450980392156863,
+      "ordinalSpearman": 0.31113482237014917
+    },
+    "dense:g=0.9:maximumRedExcess": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 38,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.7450980392156863,
+      "ordinalSpearman": 0.31113482237014917
+    }
+  },
+  "scope": "Preserved source labels now used for model development; radiance observables and g scenarios are diagnostic. New-date promotion requires a source freeze and independent coverage."
+}

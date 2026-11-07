@@ -1,0 +1,1009 @@
+{
+  "computedAt": "2026-11-07T16:25:47.352Z",
+  "signature": "96d29e1ee63ed239a9ed2879b56b59add599eb1f847c1f0271d3186a8e7a6200",
+  "codeIdentity": {
+    "sha256": "73bcaf8f14ffafe61e9c577e72b63e81d2b5475f1ce9bc2f7096c23edcf11b87",
+    "files": [
+      {
+        "file": "src/scattering-engine.mjs",
+        "sha256": "abce068da194f6e857d4597df443225be8c6bd73d5697f45aa8c31a9e71cf26e"
+      },
+      {
+        "file": "src/radiance.mjs",
+        "sha256": "eae7ad9d3b601cda5ac9ba3e370227ca4443ff09f9cc6b31b2f6f275fa35b3f0"
+      },
+      {
+        "file": "src/radiative-geometry.mjs",
+        "sha256": "4d8fde9f6641ab067bf82b4de6700e2cec0572bff98022bb9aa09dc9c6eaa15a"
+      },
+      {
+        "file": "src/section-medium.mjs",
+        "sha256": "39b58f5c3cbeedf2235db4a0bac0dad67e1e0b8c081d6494a61652a86556f6da"
+      },
+      {
+        "file": "src/quadrature.mjs",
+        "sha256": "80443c1e09973314e7d5298b08da54a772e2d3dacb79f51bdd9632043ab3fd71"
+      },
+      {
+        "file": "src/astro.mjs",
+        "sha256": "0662f77dfef70869dfe1912234bf5c45fe64de00bcc6bab634629928c5d21b8d"
+      },
+      {
+        "file": "src/cloud-optics.mjs",
+        "sha256": "74d100c6fabaa45c7095221fa642c1d2ce1cf483f366e5a87e0712cb09584c3b"
+      },
+      {
+        "file": "src/provider.mjs",
+        "sha256": "beef2d788599f4b82da2895416a104fc5fe30ea4e43d402733a8690f80f60abd"
+      },
+      {
+        "file": "package-lock.json",
+        "sha256": "e99c3274b12262ef68d348e7f212672fe150d416ab14d809d8e20f4d1af1c9f0"
+      },
+      {
+        "file": "scripts/diagnose_scattering.mjs",
+        "sha256": "fc34298b0ce3731b128da1f67563eaaf07d10ad040dd4aa9bcdb68c4aa01dd7a"
+      },
+      {
+        "file": "research/model-snapshots/section-optics-0.3.1/engine.mjs",
+        "sha256": "bb57d43a8687f58a3c2342a7806c1011b404cf3da52b5e6c423b71ca68deb09a"
+      },
+      {
+        "file": "research/model-snapshots/section-optics-0.3.1/provider.mjs",
+        "sha256": "beef2d788599f4b82da2895416a104fc5fe30ea4e43d402733a8690f80f60abd"
+      }
+    ]
+  },
+  "cohort": "pilot",
+  "mesh": "base",
+  "minuteOffsets": [
+    0
+  ],
+  "cases": [
+    {
+      "id": "2023-06-03-sunset",
+      "density": "coarse",
+      "mesh": "base",
+      "cohort": "pilot",
+      "observedCase": {
+        "id": "2023-06-03-sunset",
+        "date": "2023-06-03",
+        "eventType": "sunset",
+        "observedGrade": 3,
+        "observedLabel": "小到中烧",
+        "observedCloud": "卷层云",
+        "observedColour": "橘红色",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "https://weibo.com/3169171125/N3DJwplJK",
+        "originalMap": "/static/media/ERA5/202306030000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230603_set.jpg"
+      },
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-03-sunset.json",
+          "sha256": "f98d64e2160b7980ee99771dad9307efe698dfe39f469fe79ae85dac764f6bb6"
+        }
+      ],
+      "minuteOffsets": [
+        0
+      ],
+      "options": {},
+      "measures": {
+        "0": {
+          "eventRed": 0.000003520052110995435,
+          "eventCoveredRed": 0.000003520052110995435,
+          "referenceRed": 0.000003748253210626693,
+          "referenceCoveredRed": 0.000003748253210626693,
+          "maximumRed": 0.000003520052110995435,
+          "maximumTime": "2023-06-03T10:55:19.202Z",
+          "maximumSunAltitude": -1.0102737316963446,
+          "maximumRedExcess": 0.000003402823345111254,
+          "maximumExcessTime": "2023-06-03T10:55:19.202Z"
+        },
+        "0.75": {
+          "eventRed": 0.000004975798982704088,
+          "eventCoveredRed": 0.000004975798982704088,
+          "referenceRed": 0.0000035037735528977207,
+          "referenceCoveredRed": 0.0000035037735528977207,
+          "maximumRed": 0.000004975798982704088,
+          "maximumTime": "2023-06-03T10:55:19.202Z",
+          "maximumSunAltitude": -1.0102737316963446,
+          "maximumRedExcess": 0.000004837754439715386,
+          "maximumExcessTime": "2023-06-03T10:55:19.202Z"
+        },
+        "0.85": {
+          "eventRed": 0.0000042515169927579705,
+          "eventCoveredRed": 0.0000042515169927579705,
+          "referenceRed": 0.0000025471424765602823,
+          "referenceCoveredRed": 0.0000025471424765602823,
+          "maximumRed": 0.0000042515169927579705,
+          "maximumTime": "2023-06-03T10:55:19.202Z",
+          "maximumSunAltitude": -1.0102737316963446,
+          "maximumRedExcess": 0.00000415072847081647,
+          "maximumExcessTime": "2023-06-03T10:55:19.202Z"
+        },
+        "0.9": {
+          "eventRed": 0.0000032883331011586616,
+          "eventCoveredRed": 0.0000032883331011586616,
+          "referenceRed": 0.0000018273096296432412,
+          "referenceCoveredRed": 0.0000018273096296432412,
+          "maximumRed": 0.0000032883331011586616,
+          "maximumTime": "2023-06-03T10:55:19.202Z",
+          "maximumSunAltitude": -1.0102737316963446,
+          "maximumRedExcess": 0.0000032160107136299503,
+          "maximumExcessTime": "2023-06-03T10:55:19.202Z"
+        }
+      },
+      "reference": {
+        "time": "2023-06-03T10:54:23.378Z",
+        "targetAltitude": -0.833,
+        "actualAltitude": -0.8330059962740642,
+        "offsetSeconds": -55.824
+      },
+      "wallSeconds": 3.2312585,
+      "scope": "Previously inspected source-label development diagnostics; relative spectral cloud radiance, uncalibrated"
+    },
+    {
+      "id": "2023-06-03-sunset",
+      "density": "dense",
+      "mesh": "base",
+      "cohort": "pilot",
+      "observedCase": {
+        "id": "2023-06-03-sunset",
+        "date": "2023-06-03",
+        "eventType": "sunset",
+        "observedGrade": 3,
+        "observedLabel": "小到中烧",
+        "observedCloud": "卷层云",
+        "observedColour": "橘红色",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "https://weibo.com/3169171125/N3DJwplJK",
+        "originalMap": "/static/media/ERA5/202306030000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230603_set.jpg"
+      },
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-03-sunset.json",
+          "sha256": "f98d64e2160b7980ee99771dad9307efe698dfe39f469fe79ae85dac764f6bb6"
+        },
+        {
+          "file": "research/experiments/cloud-column-dense-inputs/2023-06-03-sunset.json",
+          "sha256": "fe496c8a75392ca0eee01f728fa78208455f6bdc2a809f9705e2addccb818d5a"
+        }
+      ],
+      "minuteOffsets": [
+        0
+      ],
+      "options": {},
+      "measures": {
+        "0": {
+          "eventRed": 0.000007050254064436217,
+          "eventCoveredRed": 0.000007050254064436217,
+          "referenceRed": 0.000011994941344025223,
+          "referenceCoveredRed": 0.000011994941344025223,
+          "maximumRed": 0.000007050254064436217,
+          "maximumTime": "2023-06-03T10:55:19.202Z",
+          "maximumSunAltitude": -1.0102737316963446,
+          "maximumRedExcess": 0.000006847094218816976,
+          "maximumExcessTime": "2023-06-03T10:55:19.202Z"
+        },
+        "0.75": {
+          "eventRed": 0.000006132387116820359,
+          "eventCoveredRed": 0.000006132387116820359,
+          "referenceRed": 0.000010342953541434445,
+          "referenceCoveredRed": 0.000010342953541434445,
+          "maximumRed": 0.000006132387116820359,
+          "maximumTime": "2023-06-03T10:55:19.202Z",
+          "maximumSunAltitude": -1.0102737316963446,
+          "maximumRedExcess": 0.000005949723843464059,
+          "maximumExcessTime": "2023-06-03T10:55:19.202Z"
+        },
+        "0.85": {
+          "eventRed": 0.0000049098767437683845,
+          "eventCoveredRed": 0.0000049098767437683845,
+          "referenceRed": 0.000006706855898211836,
+          "referenceCoveredRed": 0.000006706855898211836,
+          "maximumRed": 0.0000049098767437683845,
+          "maximumTime": "2023-06-03T10:55:19.202Z",
+          "maximumSunAltitude": -1.0102737316963446,
+          "maximumRedExcess": 0.000004782159309475077,
+          "maximumExcessTime": "2023-06-03T10:55:19.202Z"
+        },
+        "0.9": {
+          "eventRed": 0.0000037042072030599212,
+          "eventCoveredRed": 0.0000037042072030599212,
+          "referenceRed": 0.000004559606028000293,
+          "referenceCoveredRed": 0.000004559606028000293,
+          "maximumRed": 0.0000037042072030599212,
+          "maximumTime": "2023-06-03T10:55:19.202Z",
+          "maximumSunAltitude": -1.0102737316963446,
+          "maximumRedExcess": 0.0000036143161972775334,
+          "maximumExcessTime": "2023-06-03T10:55:19.202Z"
+        }
+      },
+      "reference": {
+        "time": "2023-06-03T10:54:23.378Z",
+        "targetAltitude": -0.833,
+        "actualAltitude": -0.8330059962740642,
+        "offsetSeconds": -55.824
+      },
+      "wallSeconds": 4.9396929169999995,
+      "scope": "Previously inspected source-label development diagnostics; relative spectral cloud radiance, uncalibrated"
+    },
+    {
+      "id": "2023-06-09-sunset",
+      "density": "coarse",
+      "mesh": "base",
+      "cohort": "pilot",
+      "observedCase": {
+        "id": "2023-06-09-sunset",
+        "date": "2023-06-09",
+        "eventType": "sunset",
+        "observedGrade": 3,
+        "observedLabel": "小到中烧",
+        "observedCloud": "卷云",
+        "observedColour": "橘黄色,橘色,橘红色",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "https://weibo.com/5538010841/N4x498V8i",
+        "originalMap": "/static/media/ERA5/202306090000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230609_set.jpg"
+      },
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-09-sunset.json",
+          "sha256": "8529600e0c2c02ef9969aa0661da5b855d4c3f6d1037b77073b9f07d16e2cd91"
+        }
+      ],
+      "minuteOffsets": [
+        0
+      ],
+      "options": {},
+      "measures": {
+        "0": {
+          "eventRed": 8.025911017900308e-7,
+          "eventCoveredRed": 8.025911017900308e-7,
+          "referenceRed": 7.959511593800985e-7,
+          "referenceCoveredRed": 7.959511593800985e-7,
+          "maximumRed": 8.025911017900308e-7,
+          "maximumTime": "2023-06-09T10:58:16.762Z",
+          "maximumSunAltitude": -1.0069282162856514,
+          "maximumRedExcess": 7.954509240748594e-7,
+          "maximumExcessTime": "2023-06-09T10:58:16.762Z"
+        },
+        "0.75": {
+          "eventRed": 9.954361831005755e-7,
+          "eventCoveredRed": 9.954361831005755e-7,
+          "referenceRed": 7.434064936340389e-7,
+          "referenceCoveredRed": 7.434064936340389e-7,
+          "maximumRed": 9.954361831005755e-7,
+          "maximumTime": "2023-06-09T10:58:16.762Z",
+          "maximumSunAltitude": -1.0069282162856514,
+          "maximumRedExcess": 9.848090481465882e-7,
+          "maximumExcessTime": "2023-06-09T10:58:16.762Z"
+        },
+        "0.85": {
+          "eventRed": 9.873870096130164e-7,
+          "eventCoveredRed": 9.873870096130164e-7,
+          "referenceRed": 7.000009793951232e-7,
+          "referenceCoveredRed": 7.000009793951232e-7,
+          "maximumRed": 9.873870096130164e-7,
+          "maximumTime": "2023-06-09T10:58:16.762Z",
+          "maximumSunAltitude": -1.0069282162856514,
+          "maximumRedExcess": 9.780869962015736e-7,
+          "maximumExcessTime": "2023-06-09T10:58:16.762Z"
+        },
+        "0.9": {
+          "eventRed": 8.087401743980619e-7,
+          "eventCoveredRed": 8.087401743980619e-7,
+          "referenceRed": 5.550710643359107e-7,
+          "referenceCoveredRed": 5.550710643359107e-7,
+          "maximumRed": 8.087401743980619e-7,
+          "maximumTime": "2023-06-09T10:58:16.762Z",
+          "maximumSunAltitude": -1.0069282162856514,
+          "maximumRedExcess": 8.016315182672281e-7,
+          "maximumExcessTime": "2023-06-09T10:58:16.762Z"
+        }
+      },
+      "reference": {
+        "time": "2023-06-09T10:57:21.615Z",
+        "targetAltitude": -0.833,
+        "actualAltitude": -0.8330139601448501,
+        "offsetSeconds": -55.147
+      },
+      "wallSeconds": 2.142249875,
+      "scope": "Previously inspected source-label development diagnostics; relative spectral cloud radiance, uncalibrated"
+    },
+    {
+      "id": "2023-06-09-sunset",
+      "density": "dense",
+      "mesh": "base",
+      "cohort": "pilot",
+      "observedCase": {
+        "id": "2023-06-09-sunset",
+        "date": "2023-06-09",
+        "eventType": "sunset",
+        "observedGrade": 3,
+        "observedLabel": "小到中烧",
+        "observedCloud": "卷云",
+        "observedColour": "橘黄色,橘色,橘红色",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "https://weibo.com/5538010841/N4x498V8i",
+        "originalMap": "/static/media/ERA5/202306090000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230609_set.jpg"
+      },
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-09-sunset.json",
+          "sha256": "8529600e0c2c02ef9969aa0661da5b855d4c3f6d1037b77073b9f07d16e2cd91"
+        },
+        {
+          "file": "research/experiments/cloud-column-dense-inputs/2023-06-09-sunset.json",
+          "sha256": "3e8d5c66deb5a3cb56eb891ff8ac14cd2a30c4e0691647ce90ea240f418afc60"
+        }
+      ],
+      "minuteOffsets": [
+        0
+      ],
+      "options": {},
+      "measures": {
+        "0": {
+          "eventRed": 9.66466401962668e-7,
+          "eventCoveredRed": 9.66466401962668e-7,
+          "referenceRed": 6.480824150644223e-7,
+          "referenceCoveredRed": 6.480824150644223e-7,
+          "maximumRed": 9.66466401962668e-7,
+          "maximumTime": "2023-06-09T10:58:16.762Z",
+          "maximumSunAltitude": -1.0069282162856514,
+          "maximumRedExcess": 9.540442387485027e-7,
+          "maximumExcessTime": "2023-06-09T10:58:16.762Z"
+        },
+        "0.75": {
+          "eventRed": 0.0000023486031948391837,
+          "eventCoveredRed": 0.0000023486031948391837,
+          "referenceRed": 8.533241468908692e-7,
+          "referenceCoveredRed": 8.533241468908692e-7,
+          "maximumRed": 0.0000023486031948391837,
+          "maximumTime": "2023-06-09T10:58:16.762Z",
+          "maximumSunAltitude": -1.0069282162856514,
+          "maximumRedExcess": 0.0000023230338769664016,
+          "maximumExcessTime": "2023-06-09T10:58:16.762Z"
+        },
+        "0.85": {
+          "eventRed": 0.0000022214270194766596,
+          "eventCoveredRed": 0.0000022214270194766596,
+          "referenceRed": 7.914733948605306e-7,
+          "referenceCoveredRed": 7.914733948605306e-7,
+          "maximumRed": 0.0000022214270194766596,
+          "maximumTime": "2023-06-09T10:58:16.762Z",
+          "maximumSunAltitude": -1.0069282162856514,
+          "maximumRedExcess": 0.000002199204016130992,
+          "maximumExcessTime": "2023-06-09T10:58:16.762Z"
+        },
+        "0.9": {
+          "eventRed": 0.0000017481424914879097,
+          "eventCoveredRed": 0.0000017481424914879097,
+          "referenceRed": 6.199064838880625e-7,
+          "referenceCoveredRed": 6.199064838880625e-7,
+          "maximumRed": 0.0000017481424914879097,
+          "maximumTime": "2023-06-09T10:58:16.762Z",
+          "maximumSunAltitude": -1.0069282162856514,
+          "maximumRedExcess": 0.000001731282616490523,
+          "maximumExcessTime": "2023-06-09T10:58:16.762Z"
+        }
+      },
+      "reference": {
+        "time": "2023-06-09T10:57:21.615Z",
+        "targetAltitude": -0.833,
+        "actualAltitude": -0.8330139601448501,
+        "offsetSeconds": -55.147
+      },
+      "wallSeconds": 6.389665625,
+      "scope": "Previously inspected source-label development diagnostics; relative spectral cloud radiance, uncalibrated"
+    },
+    {
+      "id": "2023-06-10-sunrise",
+      "density": "coarse",
+      "mesh": "base",
+      "cohort": "pilot",
+      "observedCase": {
+        "id": "2023-06-10-sunrise",
+        "date": "2023-06-10",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "微烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306100000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230610_rise.jpg"
+      },
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-10-sunrise.json",
+          "sha256": "7c4ac9015dc14e8dfce463de45445d9ad827e46a78f249fe04261ef236d81c32"
+        }
+      ],
+      "minuteOffsets": [
+        0
+      ],
+      "options": {},
+      "measures": {
+        "0": {
+          "eventRed": 0.0000690099840394341,
+          "eventCoveredRed": 0.0000690099840394341,
+          "referenceRed": 0.000057808218120364746,
+          "referenceCoveredRed": 0.000057808218120364746,
+          "maximumRed": 0.0000690099840394341,
+          "maximumTime": "2023-06-09T20:50:53.261Z",
+          "maximumSunAltitude": -0.6382310166692374,
+          "maximumRedExcess": 0.00006685674356921367,
+          "maximumExcessTime": "2023-06-09T20:50:53.261Z"
+        },
+        "0.75": {
+          "eventRed": 0.00004872056212124724,
+          "eventCoveredRed": 0.00004872056212124724,
+          "referenceRed": 0.00004903897693039659,
+          "referenceCoveredRed": 0.00004903897693039659,
+          "maximumRed": 0.00004872056212124724,
+          "maximumTime": "2023-06-09T20:50:53.261Z",
+          "maximumSunAltitude": -0.6382310166692374,
+          "maximumRedExcess": 0.000047062133176553015,
+          "maximumExcessTime": "2023-06-09T20:50:53.261Z"
+        },
+        "0.85": {
+          "eventRed": 0.00004175440519918887,
+          "eventCoveredRed": 0.00004175440519918887,
+          "referenceRed": 0.000041731266267752805,
+          "referenceCoveredRed": 0.000041731266267752805,
+          "maximumRed": 0.00004175440519918887,
+          "maximumTime": "2023-06-09T20:50:53.261Z",
+          "maximumSunAltitude": -0.6382310166692374,
+          "maximumRedExcess": 0.00004063685227973337,
+          "maximumExcessTime": "2023-06-09T20:50:53.261Z"
+        },
+        "0.9": {
+          "eventRed": 0.000033539313482158247,
+          "eventCoveredRed": 0.000033539313482158247,
+          "referenceRed": 0.00003317537252520809,
+          "referenceCoveredRed": 0.00003317537252520809,
+          "maximumRed": 0.000033539313482158247,
+          "maximumTime": "2023-06-09T20:50:53.261Z",
+          "maximumSunAltitude": -0.6382310166692374,
+          "maximumRedExcess": 0.00003275917698072987,
+          "maximumExcessTime": "2023-06-09T20:50:53.261Z"
+        }
+      },
+      "reference": {
+        "time": "2023-06-09T20:49:51.568Z",
+        "targetAltitude": -0.833,
+        "actualAltitude": -0.833009239412878,
+        "offsetSeconds": -61.693
+      },
+      "wallSeconds": 2.7019314999999997,
+      "scope": "Previously inspected source-label development diagnostics; relative spectral cloud radiance, uncalibrated"
+    },
+    {
+      "id": "2023-06-10-sunrise",
+      "density": "dense",
+      "mesh": "base",
+      "cohort": "pilot",
+      "observedCase": {
+        "id": "2023-06-10-sunrise",
+        "date": "2023-06-10",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "微烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202306100000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230610_rise.jpg"
+      },
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-10-sunrise.json",
+          "sha256": "7c4ac9015dc14e8dfce463de45445d9ad827e46a78f249fe04261ef236d81c32"
+        },
+        {
+          "file": "research/experiments/cloud-column-dense-inputs/2023-06-10-sunrise.json",
+          "sha256": "fd006197cafccf1593ae1d28177b8eab9245c311d1fb9adc00089e53936467c0"
+        }
+      ],
+      "minuteOffsets": [
+        0
+      ],
+      "options": {},
+      "measures": {
+        "0": {
+          "eventRed": 0.0000302643657402186,
+          "eventCoveredRed": 0.0000302643657402186,
+          "referenceRed": 0.00003824380870913994,
+          "referenceCoveredRed": 0.00003824380870913994,
+          "maximumRed": 0.0000302643657402186,
+          "maximumTime": "2023-06-09T20:50:53.261Z",
+          "maximumSunAltitude": -0.6382310166692374,
+          "maximumRedExcess": 0.000029168025979497785,
+          "maximumExcessTime": "2023-06-09T20:50:53.261Z"
+        },
+        "0.75": {
+          "eventRed": 0.000024970028153628795,
+          "eventCoveredRed": 0.000024970028153628795,
+          "referenceRed": 0.000029665501859287514,
+          "referenceCoveredRed": 0.000029665501859287514,
+          "maximumRed": 0.000024970028153628795,
+          "maximumTime": "2023-06-09T20:50:53.261Z",
+          "maximumSunAltitude": -0.6382310166692374,
+          "maximumRedExcess": 0.000024014900514520473,
+          "maximumExcessTime": "2023-06-09T20:50:53.261Z"
+        },
+        "0.85": {
+          "eventRed": 0.000021041945970911938,
+          "eventCoveredRed": 0.000021041945970911938,
+          "referenceRed": 0.000023584245247206796,
+          "referenceCoveredRed": 0.000023584245247206796,
+          "maximumRed": 0.000021041945970911938,
+          "maximumTime": "2023-06-09T20:50:53.261Z",
+          "maximumSunAltitude": -0.6382310166692374,
+          "maximumRedExcess": 0.00002038928188556603,
+          "maximumExcessTime": "2023-06-09T20:50:53.261Z"
+        },
+        "0.9": {
+          "eventRed": 0.000016800962818757754,
+          "eventCoveredRed": 0.000016800962818757754,
+          "referenceRed": 0.000017813732272320624,
+          "referenceCoveredRed": 0.000017813732272320624,
+          "maximumRed": 0.000016800962818757754,
+          "maximumTime": "2023-06-09T20:50:53.261Z",
+          "maximumSunAltitude": -0.6382310166692374,
+          "maximumRedExcess": 0.00001634392638527277,
+          "maximumExcessTime": "2023-06-09T20:50:53.261Z"
+        }
+      },
+      "reference": {
+        "time": "2023-06-09T20:49:51.568Z",
+        "targetAltitude": -0.833,
+        "actualAltitude": -0.833009239412878,
+        "offsetSeconds": -61.693
+      },
+      "wallSeconds": 6.310361416,
+      "scope": "Previously inspected source-label development diagnostics; relative spectral cloud radiance, uncalibrated"
+    }
+  ],
+  "rankings": {
+    "coarse:g=0:eventRed": {
+      "evaluatedCases": 3,
+      "missingScores": 0,
+      "positiveControlPairs": 2,
+      "correctlyOrderedPairs": 0,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0,
+      "ordinalSpearman": -0.8660254037844387
+    },
+    "coarse:g=0:eventCoveredRed": {
+      "evaluatedCases": 3,
+      "missingScores": 0,
+      "positiveControlPairs": 2,
+      "correctlyOrderedPairs": 0,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0,
+      "ordinalSpearman": -0.8660254037844387
+    },
+    "coarse:g=0:referenceRed": {
+      "evaluatedCases": 3,
+      "missingScores": 0,
+      "positiveControlPairs": 2,
+      "correctlyOrderedPairs": 0,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0,
+      "ordinalSpearman": -0.8660254037844387
+    },
+    "coarse:g=0:referenceCoveredRed": {
+      "evaluatedCases": 3,
+      "missingScores": 0,
+      "positiveControlPairs": 2,
+      "correctlyOrderedPairs": 0,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0,
+      "ordinalSpearman": -0.8660254037844387
+    },
+    "coarse:g=0:maximumRed": {
+      "evaluatedCases": 3,
+      "missingScores": 0,
+      "positiveControlPairs": 2,
+      "correctlyOrderedPairs": 0,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0,
+      "ordinalSpearman": -0.8660254037844387
+    },
+    "coarse:g=0:maximumRedExcess": {
+      "evaluatedCases": 3,
+      "missingScores": 0,
+      "positiveControlPairs": 2,
+      "correctlyOrderedPairs": 0,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0,
+      "ordinalSpearman": -0.8660254037844387
+    },
+    "coarse:g=0.75:eventRed": {
+      "evaluatedCases": 3,
+      "missingScores": 0,
+      "positiveControlPairs": 2,
+      "correctlyOrderedPairs": 0,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0,
+      "ordinalSpearman": -0.8660254037844387
+    },
+    "coarse:g=0.75:eventCoveredRed": {
+      "evaluatedCases": 3,
+      "missingScores": 0,
+      "positiveControlPairs": 2,
+      "correctlyOrderedPairs": 0,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0,
+      "ordinalSpearman": -0.8660254037844387
+    },
+    "coarse:g=0.75:referenceRed": {
+      "evaluatedCases": 3,
+      "missingScores": 0,
+      "positiveControlPairs": 2,
+      "correctlyOrderedPairs": 0,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0,
+      "ordinalSpearman": -0.8660254037844387
+    },
+    "coarse:g=0.75:referenceCoveredRed": {
+      "evaluatedCases": 3,
+      "missingScores": 0,
+      "positiveControlPairs": 2,
+      "correctlyOrderedPairs": 0,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0,
+      "ordinalSpearman": -0.8660254037844387
+    },
+    "coarse:g=0.75:maximumRed": {
+      "evaluatedCases": 3,
+      "missingScores": 0,
+      "positiveControlPairs": 2,
+      "correctlyOrderedPairs": 0,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0,
+      "ordinalSpearman": -0.8660254037844387
+    },
+    "coarse:g=0.75:maximumRedExcess": {
+      "evaluatedCases": 3,
+      "missingScores": 0,
+      "positiveControlPairs": 2,
+      "correctlyOrderedPairs": 0,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0,
+      "ordinalSpearman": -0.8660254037844387
+    },
+    "coarse:g=0.85:eventRed": {
+      "evaluatedCases": 3,
+      "missingScores": 0,
+      "positiveControlPairs": 2,
+      "correctlyOrderedPairs": 0,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0,
+      "ordinalSpearman": -0.8660254037844387
+    },
+    "coarse:g=0.85:eventCoveredRed": {
+      "evaluatedCases": 3,
+      "missingScores": 0,
+      "positiveControlPairs": 2,
+      "correctlyOrderedPairs": 0,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0,
+      "ordinalSpearman": -0.8660254037844387
+    },
+    "coarse:g=0.85:referenceRed": {
+      "evaluatedCases": 3,
+      "missingScores": 0,
+      "positiveControlPairs": 2,
+      "correctlyOrderedPairs": 0,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0,
+      "ordinalSpearman": -0.8660254037844387
+    },
+    "coarse:g=0.85:referenceCoveredRed": {
+      "evaluatedCases": 3,
+      "missingScores": 0,
+      "positiveControlPairs": 2,
+      "correctlyOrderedPairs": 0,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0,
+      "ordinalSpearman": -0.8660254037844387
+    },
+    "coarse:g=0.85:maximumRed": {
+      "evaluatedCases": 3,
+      "missingScores": 0,
+      "positiveControlPairs": 2,
+      "correctlyOrderedPairs": 0,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0,
+      "ordinalSpearman": -0.8660254037844387
+    },
+    "coarse:g=0.85:maximumRedExcess": {
+      "evaluatedCases": 3,
+      "missingScores": 0,
+      "positiveControlPairs": 2,
+      "correctlyOrderedPairs": 0,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0,
+      "ordinalSpearman": -0.8660254037844387
+    },
+    "coarse:g=0.9:eventRed": {
+      "evaluatedCases": 3,
+      "missingScores": 0,
+      "positiveControlPairs": 2,
+      "correctlyOrderedPairs": 0,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0,
+      "ordinalSpearman": -0.8660254037844387
+    },
+    "coarse:g=0.9:eventCoveredRed": {
+      "evaluatedCases": 3,
+      "missingScores": 0,
+      "positiveControlPairs": 2,
+      "correctlyOrderedPairs": 0,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0,
+      "ordinalSpearman": -0.8660254037844387
+    },
+    "coarse:g=0.9:referenceRed": {
+      "evaluatedCases": 3,
+      "missingScores": 0,
+      "positiveControlPairs": 2,
+      "correctlyOrderedPairs": 0,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0,
+      "ordinalSpearman": -0.8660254037844387
+    },
+    "coarse:g=0.9:referenceCoveredRed": {
+      "evaluatedCases": 3,
+      "missingScores": 0,
+      "positiveControlPairs": 2,
+      "correctlyOrderedPairs": 0,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0,
+      "ordinalSpearman": -0.8660254037844387
+    },
+    "coarse:g=0.9:maximumRed": {
+      "evaluatedCases": 3,
+      "missingScores": 0,
+      "positiveControlPairs": 2,
+      "correctlyOrderedPairs": 0,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0,
+      "ordinalSpearman": -0.8660254037844387
+    },
+    "coarse:g=0.9:maximumRedExcess": {
+      "evaluatedCases": 3,
+      "missingScores": 0,
+      "positiveControlPairs": 2,
+      "correctlyOrderedPairs": 0,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0,
+      "ordinalSpearman": -0.8660254037844387
+    },
+    "dense:g=0:eventRed": {
+      "evaluatedCases": 3,
+      "missingScores": 0,
+      "positiveControlPairs": 2,
+      "correctlyOrderedPairs": 0,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0,
+      "ordinalSpearman": -0.8660254037844387
+    },
+    "dense:g=0:eventCoveredRed": {
+      "evaluatedCases": 3,
+      "missingScores": 0,
+      "positiveControlPairs": 2,
+      "correctlyOrderedPairs": 0,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0,
+      "ordinalSpearman": -0.8660254037844387
+    },
+    "dense:g=0:referenceRed": {
+      "evaluatedCases": 3,
+      "missingScores": 0,
+      "positiveControlPairs": 2,
+      "correctlyOrderedPairs": 0,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0,
+      "ordinalSpearman": -0.8660254037844387
+    },
+    "dense:g=0:referenceCoveredRed": {
+      "evaluatedCases": 3,
+      "missingScores": 0,
+      "positiveControlPairs": 2,
+      "correctlyOrderedPairs": 0,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0,
+      "ordinalSpearman": -0.8660254037844387
+    },
+    "dense:g=0:maximumRed": {
+      "evaluatedCases": 3,
+      "missingScores": 0,
+      "positiveControlPairs": 2,
+      "correctlyOrderedPairs": 0,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0,
+      "ordinalSpearman": -0.8660254037844387
+    },
+    "dense:g=0:maximumRedExcess": {
+      "evaluatedCases": 3,
+      "missingScores": 0,
+      "positiveControlPairs": 2,
+      "correctlyOrderedPairs": 0,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0,
+      "ordinalSpearman": -0.8660254037844387
+    },
+    "dense:g=0.75:eventRed": {
+      "evaluatedCases": 3,
+      "missingScores": 0,
+      "positiveControlPairs": 2,
+      "correctlyOrderedPairs": 0,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0,
+      "ordinalSpearman": -0.8660254037844387
+    },
+    "dense:g=0.75:eventCoveredRed": {
+      "evaluatedCases": 3,
+      "missingScores": 0,
+      "positiveControlPairs": 2,
+      "correctlyOrderedPairs": 0,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0,
+      "ordinalSpearman": -0.8660254037844387
+    },
+    "dense:g=0.75:referenceRed": {
+      "evaluatedCases": 3,
+      "missingScores": 0,
+      "positiveControlPairs": 2,
+      "correctlyOrderedPairs": 0,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0,
+      "ordinalSpearman": -0.8660254037844387
+    },
+    "dense:g=0.75:referenceCoveredRed": {
+      "evaluatedCases": 3,
+      "missingScores": 0,
+      "positiveControlPairs": 2,
+      "correctlyOrderedPairs": 0,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0,
+      "ordinalSpearman": -0.8660254037844387
+    },
+    "dense:g=0.75:maximumRed": {
+      "evaluatedCases": 3,
+      "missingScores": 0,
+      "positiveControlPairs": 2,
+      "correctlyOrderedPairs": 0,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0,
+      "ordinalSpearman": -0.8660254037844387
+    },
+    "dense:g=0.75:maximumRedExcess": {
+      "evaluatedCases": 3,
+      "missingScores": 0,
+      "positiveControlPairs": 2,
+      "correctlyOrderedPairs": 0,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0,
+      "ordinalSpearman": -0.8660254037844387
+    },
+    "dense:g=0.85:eventRed": {
+      "evaluatedCases": 3,
+      "missingScores": 0,
+      "positiveControlPairs": 2,
+      "correctlyOrderedPairs": 0,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0,
+      "ordinalSpearman": -0.8660254037844387
+    },
+    "dense:g=0.85:eventCoveredRed": {
+      "evaluatedCases": 3,
+      "missingScores": 0,
+      "positiveControlPairs": 2,
+      "correctlyOrderedPairs": 0,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0,
+      "ordinalSpearman": -0.8660254037844387
+    },
+    "dense:g=0.85:referenceRed": {
+      "evaluatedCases": 3,
+      "missingScores": 0,
+      "positiveControlPairs": 2,
+      "correctlyOrderedPairs": 0,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0,
+      "ordinalSpearman": -0.8660254037844387
+    },
+    "dense:g=0.85:referenceCoveredRed": {
+      "evaluatedCases": 3,
+      "missingScores": 0,
+      "positiveControlPairs": 2,
+      "correctlyOrderedPairs": 0,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0,
+      "ordinalSpearman": -0.8660254037844387
+    },
+    "dense:g=0.85:maximumRed": {
+      "evaluatedCases": 3,
+      "missingScores": 0,
+      "positiveControlPairs": 2,
+      "correctlyOrderedPairs": 0,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0,
+      "ordinalSpearman": -0.8660254037844387
+    },
+    "dense:g=0.85:maximumRedExcess": {
+      "evaluatedCases": 3,
+      "missingScores": 0,
+      "positiveControlPairs": 2,
+      "correctlyOrderedPairs": 0,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0,
+      "ordinalSpearman": -0.8660254037844387
+    },
+    "dense:g=0.9:eventRed": {
+      "evaluatedCases": 3,
+      "missingScores": 0,
+      "positiveControlPairs": 2,
+      "correctlyOrderedPairs": 0,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0,
+      "ordinalSpearman": -0.8660254037844387
+    },
+    "dense:g=0.9:eventCoveredRed": {
+      "evaluatedCases": 3,
+      "missingScores": 0,
+      "positiveControlPairs": 2,
+      "correctlyOrderedPairs": 0,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0,
+      "ordinalSpearman": -0.8660254037844387
+    },
+    "dense:g=0.9:referenceRed": {
+      "evaluatedCases": 3,
+      "missingScores": 0,
+      "positiveControlPairs": 2,
+      "correctlyOrderedPairs": 0,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0,
+      "ordinalSpearman": -0.8660254037844387
+    },
+    "dense:g=0.9:referenceCoveredRed": {
+      "evaluatedCases": 3,
+      "missingScores": 0,
+      "positiveControlPairs": 2,
+      "correctlyOrderedPairs": 0,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0,
+      "ordinalSpearman": -0.8660254037844387
+    },
+    "dense:g=0.9:maximumRed": {
+      "evaluatedCases": 3,
+      "missingScores": 0,
+      "positiveControlPairs": 2,
+      "correctlyOrderedPairs": 0,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0,
+      "ordinalSpearman": -0.8660254037844387
+    },
+    "dense:g=0.9:maximumRedExcess": {
+      "evaluatedCases": 3,
+      "missingScores": 0,
+      "positiveControlPairs": 2,
+      "correctlyOrderedPairs": 0,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0,
+      "ordinalSpearman": -0.8660254037844387
+    }
+  },
+  "scope": "Preserved source labels now used for model development; radiance observables and g scenarios are diagnostic. New-date promotion requires a source freeze and independent coverage."
+}

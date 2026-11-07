@@ -18,6 +18,12 @@ Its availability and proprietary forecast outputs are independent of runtime.
 - `src/cloud-optics.mjs`: cloud-occurrence overlap and conditional transmission.
 - `src/cloud-column.mjs`: isolated research cloud-base eligibility; its target
   threshold is supplied by the frozen engine assumptions.
+- `src/scattering-engine.mjs`: isolated directional single-scattering research
+  model and its explicit optical/numerical assumptions.
+- `src/section-medium.mjs` and `src/radiative-geometry.mjs`: spherical ray-cell
+  intersections and the declared extruded atmospheric medium.
+- `src/radiance.mjs` and `src/quadrature.mjs`: normalized phase functions,
+  formal-source checks, solid angles and numerical integration diagnostics.
 - `src/provider.mjs`: Open-Meteo requests, units, strict validation and metadata.
 - `src/cache.mjs`: bounded atomic disk cache and request coalescing.
 - `src/archive.mjs`: bounded forecast/source retention for observation pairing.

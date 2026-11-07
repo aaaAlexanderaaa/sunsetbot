@@ -1,0 +1,611 @@
+I need a practical numerical design for a directional single-scattering solver whose real cloud fields fail mesh convergence despite passing analytic tests. Please diagnose the important numerical failure modes in the exact implementation below and recommend a coherent adaptive integration strategy that resolves illuminated cloud skins and narrow angular support while keeping its fixed random-cloud model unchanged.
+
+This is an independent sunrise/sunset forecaster for Shanghai. Production remains on an earlier heuristic. The new research prototype has 14 fixed section columns at signed distances[-150,-100,-50,-25,0,25,50,100,150,200,300,450,600,800]km, with11or37pressure cloud fractions/geopotential heights, native ERA5 nearest-grid profiles and EAC4 AOD. It rotates/interpolates a three-bearing input fan into the current solar section and extrudes that1D medium cross-track. Points use spherical radius and longitude-like section x=R*atan2(X,Z); this is explicitly declared, with nearest-column terrain. Observer lies at[0,0,R+ground]. Sun rays are parallel in the x-zplane; viewing rays are3D. Sources occupy symmetric|x|<=150km,view azimuth windows±10deg and180±10deg,elevations0.5..85deg. The medium, including solar extinction, continues outside the viewing wedge; low-altitude paths outside sampled x get coverage flags.
+
+Each fixed horizontal column has U~Uniform(0,1),cloud exists in levelj iffU<f_j(global maximum vertical overlap). Along x the stationary latent U is copied with probabilityexp(-distance/50km),otherwise independently redrawn. For every volume source point the integrand uses f*κ*omega0*phase*E[T_solar*T_view|U_source<f], so fraction is occurrence and κ is conditional cloudy extinction. Both ray paths share the same U; the conditional transmission function is included below. All f>0 emit. κ=2/.7/.2 perkm below3/between3..8/above8km,omega0=1;normalizedHG scenariosg=0,.75,.85,.9. Rayleigh and aerosol extinguish but are not scattered in this controlled first source. Outputs at680/550/440nm are normalized by direct irradiance at the same wavelength (per-ray units sr^-1); their solid-angle integrals are angular-integrated normalized radiance. There is no quality-index transformation. Single scattering in thick cloud/deep twilight has its declared approximation scope.
+
+The tracer exactly splits horizontal nearest-column boundaries, pressure-band heights,3/8kmκchanges,nearest terrain,spherical top65km,and view intersections with Earth's direct-solar shadow cylinder. Clear molecular/aerosol optical depths use composite Simpson with maximum4km path steps and0.5km vertical span. Volume emission is composite2-point Gauss, currently controlled only by viewing cloudy optical depthκ*ds<=.5. A rigorous upper bound on the remaining in-segment viewing attenuation truncates radiance tails at1e-9 perray, with the omitted bound reported. Geometrical potential lit-cloud union area samples full segments separately from that tail cutoff. Angular quadrature is midpoint in azimuth and sin(elevation),starting edges[e=.5,2,5,10,20,40,65,85],two azimuth cells per side.
+
+The kernel passes HG normalization/mean cosine, thin-cloud linearity, constant-source subdivision invariance, same-side/both-side illuminated slab solutions,shadow tangent geometry,and fixed-U union/conditioning tests. A same-side slab error falls with fourth-order Gauss refinement. SunCalc is pinned1.9.0; a bisection within±10minutes of its event estimate yields a common geometric solar altitude−.833deg for comparison, alongside unchanged original-time measures. Source profiles interpolate at the actual frame time.
+
+Three real diagnostic cases at that common solar altitude reveal large changes. Source refinement halves emission optical-depth step(.5→.25) and gas step(4→2km);angle refinement doubles azimuth resolution and splits each elevation cell equally in sin(e). Both factors together are also run. This is development evidence, with labels unused for numerical acceptance. June3sunset/June9sunset have source-positive labels,June10sunrise has source-onlyzero label. The exact red-integral comparisons follow. A coarse reference frame costs about.56seconds on the local machine(1132emission quadrature points,28angular cells);dense takes around1second. I stopped broader development scoring after observing nonconvergence. The fixed live model and its earlier independent-calendar evidence are preserved.
+
+[
+  {
+    "id": "2023-06-03-sunset",
+    "density": "coarse",
+    "mesh": "source",
+    "base": 1.4452905490266304e-06,
+    "refined": 2.1180683271271906e-06,
+    "ratio": 1.465496559535147
+  },
+  {
+    "id": "2023-06-03-sunset",
+    "density": "dense",
+    "mesh": "source",
+    "base": 5.546225017566e-06,
+    "refined": 6.712531660468322e-06,
+    "ratio": 1.2102883743822863
+  },
+  {
+    "id": "2023-06-09-sunset",
+    "density": "coarse",
+    "mesh": "source",
+    "base": 2.4325663895259057e-07,
+    "refined": 4.956670528768604e-07,
+    "ratio": 2.037630113657302
+  },
+  {
+    "id": "2023-06-09-sunset",
+    "density": "dense",
+    "mesh": "source",
+    "base": 4.553205565296556e-07,
+    "refined": 6.632798868579005e-07,
+    "ratio": 1.4567316967045398
+  },
+  {
+    "id": "2023-06-10-sunrise",
+    "density": "coarse",
+    "mesh": "source",
+    "base": 3.4658834324508474e-05,
+    "refined": 3.843182043060971e-05,
+    "ratio": 1.1088607329021805
+  },
+  {
+    "id": "2023-06-10-sunrise",
+    "density": "dense",
+    "mesh": "source",
+    "base": 1.5238641667091713e-05,
+    "refined": 2.005004749749568e-05,
+    "ratio": 1.3157371854733177
+  },
+  {
+    "id": "2023-06-03-sunset",
+    "density": "coarse",
+    "mesh": "angle",
+    "base": 1.4452905490266304e-06,
+    "refined": 4.687627060117518e-06,
+    "ratio": 3.243380414598661
+  },
+  {
+    "id": "2023-06-03-sunset",
+    "density": "dense",
+    "mesh": "angle",
+    "base": 5.546225017566e-06,
+    "refined": 2.4537310206547755e-05,
+    "ratio": 4.424146176693734
+  },
+  {
+    "id": "2023-06-09-sunset",
+    "density": "coarse",
+    "mesh": "angle",
+    "base": 2.4325663895259057e-07,
+    "refined": 7.048369226694785e-07,
+    "ratio": 2.8975033351786443
+  },
+  {
+    "id": "2023-06-09-sunset",
+    "density": "dense",
+    "mesh": "angle",
+    "base": 4.553205565296556e-07,
+    "refined": 7.263471632318382e-07,
+    "ratio": 1.595243511006581
+  },
+  {
+    "id": "2023-06-10-sunrise",
+    "density": "coarse",
+    "mesh": "angle",
+    "base": 3.4658834324508474e-05,
+    "refined": 4.3142512616642976e-05,
+    "ratio": 1.2447767923382063
+  },
+  {
+    "id": "2023-06-10-sunrise",
+    "density": "dense",
+    "mesh": "angle",
+    "base": 1.5238641667091713e-05,
+    "refined": 3.258082266326887e-05,
+    "ratio": 2.138039818445767
+  },
+  {
+    "id": "2023-06-03-sunset",
+    "density": "coarse",
+    "mesh": "source-angle",
+    "base": 1.4452905490266304e-06,
+    "refined": 5.260348094252423e-06,
+    "ratio": 3.6396474728179364
+  },
+  {
+    "id": "2023-06-03-sunset",
+    "density": "dense",
+    "mesh": "source-angle",
+    "base": 5.546225017566e-06,
+    "refined": 2.5992149979844327e-05,
+    "ratio": 4.686457887576146
+  },
+  {
+    "id": "2023-06-09-sunset",
+    "density": "coarse",
+    "mesh": "source-angle",
+    "base": 2.4325663895259057e-07,
+    "refined": 7.92378236183606e-07,
+    "ratio": 3.2573755832334603
+  },
+  {
+    "id": "2023-06-09-sunset",
+    "density": "dense",
+    "mesh": "source-angle",
+    "base": 4.553205565296556e-07,
+    "refined": 7.514003466525351e-07,
+    "ratio": 1.6502666876706136
+  },
+  {
+    "id": "2023-06-10-sunrise",
+    "density": "coarse",
+    "mesh": "source-angle",
+    "base": 3.4658834324508474e-05,
+    "refined": 4.8300482736195535e-05,
+    "ratio": 1.3935980155582028
+  },
+  {
+    "id": "2023-06-10-sunrise",
+    "density": "dense",
+    "mesh": "source-angle",
+    "base": 1.5238641667091713e-05,
+    "refined": 3.598196927512472e-05,
+    "ratio": 2.361232061308248
+  }
+]
+My current diagnosis is that κ*view_step ignores the rapid incident-light variation at grazing solar incidence. Adaptive Simpson with inside-endpoint samples should catch a thin illuminated boundary skin, while a Gauss rule can miss it. Ordinary adaptive sky sampling can also miss a narrow cloudy patch if all initial sample nodes are clear. I am considering prepartitioning elevation at projected corners of each nonzero cloud support band, then adaptive quadrature in mu=sin(elevation) and azimuth. For a fixed viewing azimuth phi and section longitude gamma=x/R, a spherical cloud boundary at radiusr gives z=r/sqrt(1+(tan(gamma)/cos(phi))^2),horizontal_distance=z*tan(gamma)/cos(phi),e=atan2(z-(R+observer_height),horizontal_distance). Sources at x=0 require the overhead limiting case. Need to handle both solar-view wedges and source-support boundaries consistently. Contiguous positive-cloud bands could define support partitions; internal fraction/κ changes still need quadrature convergence.
+
+I want an interpretable tolerance for the angular red integral (roughly2%relative and1e-10absolute per unit direct irradiance), explicit max-depth/error diagnostics, and a computationally practical first solution. A tempting extra refinement or score transformation could hide numerical aliasing, so the mathematical acceptance should drive the choice. Please assess this diagnosis and give the preferable implementation/acceptance approach for these exact constraints.
+
+
+Exact src/scattering-engine.mjs:
+```javascript
+import { EARTH_KM, RAD, sunPosition } from './astro.mjs';
+import { interpolate } from './provider.mjs';
+import { cloudTransmission } from './cloud-optics.mjs';
+import { sectionMedium } from './section-medium.mjs';
+import { pointAlong, skyDirection, earthShadowed, sectionCrossing, shadowCrossings, dot } from './radiative-geometry.mjs';
+import { henyeyGreenstein, skyGrid, integrateSky } from './radiance.mjs';
+
+export const SCATTERING_VERSION = 'directional-single-scatter-0.1.0';
+export const SCATTERING_ASSUMPTIONS = {
+  wavelengthsNm: [680, 550, 440], directSolarIrradiancePerChannel: [1, 1, 1],
+  cloudExtinction: { low: 2, mid: 0.7, high: 0.2 }, singleScatteringAlbedo: 1,
+  asymmetry: 0.85, phaseScenarios: [0, 0.75, 0.85, 0.9], correlationLengthKm: 50,
+  rayleigh550: 0.012, molecularScaleHeightKm: 8, aerosolScaleHeightKm: 1.5, aerosolAngstrom: 1.2,
+  sourceExtentKm: 150, maximumViewingPathKm: 350, maximumSolarPathKm: 2200,
+  azimuthHalfWidthDegrees: 10, referenceSolarAltitudeDegrees: -0.833,
+  gasStepKm: 4, maximumEmissionOpticalDepth: 0.5, sourceTailAbsoluteTolerance: 1e-9,
+  elevationEdgesDegrees: [0.5, 2, 5, 10, 20, 40, 65, 85],
+  cloudField: 'Current solar section extruded along cross-track; U depends on longitude-like section coordinate and height bands',
+  terrain: 'Nearest fixed horizontal column; constant within each probability column',
+  scope: 'Single cloud scattering with Rayleigh/aerosol extinction; relative spectral radiance per unit direct irradiance, sr^-1',
+};
+
+const difference = (a, b) => ((a - b + 540) % 360) - 180;
+const clamp = value => Math.max(-1, Math.min(1, value));
+
+// getTimes supplies a calendar event estimate. Use the same getPosition
+// ephemeris to establish a common geometric solar altitude for radiance
+// comparisons, retaining the original event-time result as a separate measure.
+export function solarAltitudeReference(event, location, target = SCATTERING_ASSUMPTIONS.referenceSolarAltitudeDegrees) {
+  const centre = Date.parse(event.time);
+  let left = centre - 10 * 60000, right = centre + 10 * 60000;
+  const value = t => sunPosition(t, location.lat, location.lon).altitude - target;
+  let a = value(left), b = value(right);
+  if (a * b > 0) throw Error('Solar-altitude reference is outside the preserved event neighbourhood');
+  for (let i = 0; i < 40 && right - left > 10; i++) {
+    const middle = (left + right) / 2, c = value(middle);
+    if (a * c <= 0) { right = middle;b = c; }
+    else { left = middle;a = c; }
+  }
+  const time = Math.round((left + right) / 2);
+  return { time: new Date(time).toISOString(), targetAltitude: target,
+    actualAltitude: sunPosition(time, location.lat, location.lon).altitude,
+    offsetSeconds: (time - centre) / 1000 };
+}
+
+export function scatteringColumns({ weather, aerosol, time, event, location, fanOffsets, levelsHpa, distancesKm }) {
+  if (!Array.isArray(levelsHpa) || levelsHpa.length < 2 || !distancesKm?.length || fanOffsets.length < 1 ||
+      weather.length !== fanOffsets.length * distancesKm.length || aerosol?.length !== weather.length) throw Error('Directional profiles, pressure grid or aerosol inputs are incomplete');
+  const sun = sunPosition(time, location.lat, location.lon), offset = difference(sun.azimuth, event.azimuth);
+  let index = 0;
+  while (index < fanOffsets.length - 2 && offset > fanOffsets[index + 1]) index++;
+  const second = fanOffsets.length === 1 ? index : index + 1;
+  const weight = index === second ? 0 : Math.max(0, Math.min(1, (offset - fanOffsets[index]) / (fanOffsets[second] - fanOffsets[index])));
+  const columns = distancesKm.map((x, i) => {
+    const left = index * distancesKm.length + i, right = second * distancesKm.length + i;
+    const blend = field => {
+      const a = interpolate(weather[left], field, time), b = interpolate(weather[right], field, time);
+      if (a === null || b === null) throw Error('Directional weather profile missing at frame time: ' + field);
+      return a * (1 - weight) + b * weight;
+    };
+    const levels = levelsHpa.map(pressure => ({ pressure, height: blend('geopotential_height_' + pressure + 'hPa') / 1000,
+      cover: blend('cloud_cover_' + pressure + 'hPa') / 100 })).sort((a, b) => a.height - b.height);
+    if (levels.some((p, j) => p.cover < 0 || p.cover > 1 || (j && p.height <= levels[j - 1].height))) throw Error('Directional pressure profiles require valid occurrence fractions and ordered heights');
+    const aa = interpolate(aerosol[left], 'aerosol_optical_depth', time), ab = interpolate(aerosol[right], 'aerosol_optical_depth', time);
+    if (aa === null || ab === null || aa < 0 || ab < 0) throw Error('Directional spectral experiment requires complete nonnegative AOD');
+    return { x, index: i, ground: Math.max(0, (Number(weather[left].elevation) || 0) * (1 - weight) + (Number(weather[right].elevation) || 0) * weight) / 1000,
+      aod: aa * (1 - weight) + ab * weight, levels };
+  });
+  return { columns, sun, bearingClipped: offset < fanOffsets[0] || offset > fanOffsets.at(-1) };
+}
+
+const clearTransmission = (rayleigh, aerosol, wavelength, assumptions) => Math.exp(-rayleigh * (550 / wavelength) ** 4 - aerosol * (550 / wavelength) ** assumptions.aerosolAngstrom);
+
+export function directionalRay({ medium, observer, direction, solarDirection, assumptions = SCATTERING_ASSUMPTIONS,
+  asymmetries = assumptions.phaseScenarios, overlap = 'decorrelated' }) {
+  const crossing = [-assumptions.sourceExtentKm, assumptions.sourceExtentKm].map(x => sectionCrossing(observer, direction, x)).filter(t => t > 0);
+  const maximum = Math.min(assumptions.maximumViewingPathKm, ...crossing);
+  const view = medium.trace(observer, direction, maximum, { gasStepKm: assumptions.gasStepKm,
+    extraBoundariesXKm: [-assumptions.sourceExtentKm, assumptions.sourceExtentKm],
+    extraDistancesKm: shadowCrossings(observer, direction, solarDirection) });
+  const cosine = clamp(dot(solarDirection, direction)), phases = asymmetries.map(g => henyeyGreenstein(cosine, g));
+  const rgb = asymmetries.map(() => [0, 0, 0]), coveredRgb = asymmetries.map(() => [0, 0, 0]);
+  const prefix = [], litCells = [];let rayleigh = 0, aerosol = 0, viewBounded = true, quadraturePoints = 0, omittedTailBound = 0, uncoveredPoints = 0;
+  const transmissionOptions = condition => ({ overlap, condition, correlationLengthKm: assumptions.correlationLengthKm });
+  for (const segment of view.segments) {
+    const cell = segment.cloud, k = segment.medium.coefficient, length = segment.lengthKm;
+    const condition = { column: cell.column, x: cell.x, lower: 0, upper: cell.fraction };
+    if (cell.fraction > 0 && k > 0) {
+      const startCloud = cloudTransmission(prefix, transmissionOptions(condition));
+      const upper = cell.fraction * Math.max(...phases) * Math.max(...assumptions.directSolarIrradiancePerChannel) * assumptions.singleScatteringAlbedo *
+        startCloud * clearTransmission(rayleigh, aerosol, 680, assumptions);
+      const retainedLength = upper > assumptions.sourceTailAbsoluteTolerance ? Math.min(length,
+        Math.log(upper / assumptions.sourceTailAbsoluteTolerance) / k) : 0;
+      if (retainedLength < length) omittedTailBound += upper * Math.exp(-k * retainedLength);
+      // Area eligibility samples the full segment, independently of the
+      // numerical radiance tail cutoff. It counts a cell once through U-union.
+      for (const fraction of [1e-7, 0.5, 1 - 1e-7]) {
+        const point = pointAlong(observer, direction, segment.startKm + length * fraction);
+        if (!earthShadowed(point, solarDirection) && !medium.trace(point, solarDirection, assumptions.maximumSolarPathKm,
+          { integrateGas: false }).blocked) { litCells.push({ ...cell, depth: 80 });break; }
+      }
+      const count = Math.ceil(k * retainedLength / assumptions.maximumEmissionOpticalDepth);
+      for (let i = 0; i < count; i++) for (const node of [-1 / Math.sqrt(3), 1 / Math.sqrt(3)]) {
+        const delta = retainedLength / count, offset = delta * (i + (1 + node) / 2), distance = segment.startKm + offset;
+        const point = pointAlong(observer, direction, distance);
+        quadraturePoints++;
+        if (earthShadowed(point, solarDirection)) continue;
+        const solar = medium.trace(point, solarDirection, assumptions.maximumSolarPathKm, { gasStepKm: assumptions.gasStepKm });
+        if (solar.blocked) continue;
+        const cloud = cloudTransmission([...prefix, { ...cell, depth: k * offset }, ...solar.segments.map(s => s.cloud)], transmissionOptions(condition));
+        const partial = medium.clearDepth(observer, direction, segment.startKm, distance, assumptions.gasStepKm);
+        const solarRayleigh = solar.segments.reduce((sum, s) => sum + s.rayleigh, 0), solarAerosol = solar.segments.reduce((sum, s) => sum + s.aerosol, 0);
+        const covered = viewBounded && segment.medium.bounded && solar.bounded;
+        if (!covered) uncoveredPoints++;
+        const density = cell.fraction * k * assumptions.singleScatteringAlbedo * cloud * delta / 2;
+        for (let c = 0; c < 3; c++) {
+          const contribution = density * assumptions.directSolarIrradiancePerChannel[c] *
+            clearTransmission(rayleigh + partial.rayleigh + solarRayleigh, aerosol + partial.aerosol + solarAerosol, assumptions.wavelengthsNm[c], assumptions);
+          for (let p = 0; p < phases.length; p++) {
+            rgb[p][c] += contribution * phases[p];
+            if (covered) coveredRgb[p][c] += contribution * phases[p];
+          }
+        }
+      }
+    }
+    prefix.push(cell);rayleigh += segment.rayleigh;aerosol += segment.aerosol;viewBounded &&= segment.medium.bounded;
+  }
+  return { cosine, spectra: asymmetries.map((asymmetry, i) => ({ asymmetry, rgb: rgb[i], coveredRgb: coveredRgb[i] })),
+    potentialLitCloudProbability: litCells.length ? 1 - cloudTransmission(litCells, { overlap, correlationLengthKm: assumptions.correlationLengthKm }) : 0,
+    quadraturePoints, uncoveredPoints, omittedTailUpperBoundPerSr: omittedTailBound,
+    terrainBlocked: view.blocked, bounded: view.bounded && uncoveredPoints === 0 };
+}
+
+export function computeDirectionalFrame(input, options = {}) {
+  const assumptions = { ...SCATTERING_ASSUMPTIONS, ...options }, prepared = scatteringColumns(input);
+  const medium = sectionMedium(prepared.columns, assumptions), local = prepared.columns.find(c => c.x === 0);
+  const observer = [0, 0, EARTH_KM + local.ground], solarDirection = skyDirection(0, prepared.sun.altitude);
+  const halfWidth = assumptions.azimuthHalfWidthDegrees;
+  if (!(halfWidth > 0)) throw Error('Directional sky integration requires a declared positive angular width');
+  const elevationEdges = options.elevationEdgesDegrees ?? assumptions.elevationEdgesDegrees;
+  const toward = skyGrid(options.azimuthEdgesDegrees ?? [-halfWidth, 0, halfWidth], elevationEdges);
+  const grid = [...toward.map(c => ({ ...c, side: 'toward' })), ...toward.map(c => ({ ...c,
+    azimuthLow: c.azimuthLow + 180, azimuthHigh: c.azimuthHigh + 180, azimuth: c.azimuth + 180, side: 'opposite' }))];
+  const asymmetries = options.asymmetries ?? assumptions.phaseScenarios;
+  const cells = grid.map(cell => ({ ...cell, result: directionalRay({ medium, observer, direction: skyDirection(cell.azimuth, cell.elevation),
+    solarDirection, assumptions, asymmetries, overlap: options.overlap ?? 'decorrelated' }) }));
+  const spectra = asymmetries.map((asymmetry, p) => {
+    const items = cells.map(c => ({ ...c, rgb: c.result.spectra[p].rgb }));
+    const aggregate = integrateSky(items), covered = integrateSky(cells.map(c => ({ ...c, rgb: c.result.spectra[p].coveredRgb })));
+    const sides = Object.fromEntries(['toward', 'opposite'].map(side => [side, integrateSky(items.filter(c => c.side === side))]));
+    return { asymmetry, ...aggregate, coveredRgbIntegral: covered.rgbIntegral, sides,
+      redBlueRelativeTransmissionRatio: aggregate.rgbIntegral[2] > 0 ? aggregate.rgbIntegral[0] / aggregate.rgbIntegral[2] : null };
+  });
+  return { modelVersion: SCATTERING_VERSION, time: new Date(input.time).toISOString(), sun: prepared.sun, spectra,
+    potentialLitCloudSolidAngleSr: cells.reduce((sum, c) => sum + c.solidAngleSr * c.result.potentialLitCloudProbability, 0),
+    diagnostics: { bearingClipped: prepared.bearingClipped, quadraturePoints: cells.reduce((sum, c) => sum + c.result.quadraturePoints, 0),
+      uncoveredPoints: cells.reduce((sum, c) => sum + c.result.uncoveredPoints, 0),
+      omittedTailIntegralUpperBound: cells.reduce((sum, c) => sum + c.solidAngleSr * c.result.omittedTailUpperBoundPerSr, 0),
+      cellCount: cells.length, representation: assumptions.cloudField }, assumptions,
+    cells: options.includeCells ? cells : undefined };
+}
+
+```
+
+
+Exact src/section-medium.mjs:
+```javascript
+import { EARTH_KM } from './astro.mjs';
+import { coordinates, pointAlong, sectionCrossing, sphereCrossings } from './radiative-geometry.mjs';
+
+function partition(values, maximum) {
+  const selected = [0, maximum, ...values.filter(v => Number.isFinite(v) && v > 0 && v < maximum)].sort((a, b) => a - b);
+  return selected.filter((v, i) => i === 0 || v - selected[i - 1] > 1e-8);
+}
+
+// A spherical, cross-section-extruded medium with piecewise-constant cloud
+// occurrence bands and nearest-column terrain. The supplied engine owns all
+// optical coefficients. Gas/AOD interpolation retains the original section law.
+export function sectionMedium(columns, optics) {
+  if (columns.length < 2 || columns.some((c, i) => !Number.isFinite(c.x) || (i && c.x <= columns[i - 1].x))) throw Error('Medium columns require increasing km positions');
+  const horizontal = [...columns.map(c => c.x), ...columns.slice(1).map((c, i) => (columns[i].x + c.x) / 2)];
+  function gasAt(x, height) {
+    let i = 0;
+    while (i < columns.length - 2 && x > columns[i + 1].x) i++;
+    const a = columns[i], b = columns[i + 1], w = Math.max(0, Math.min(1, (x - a.x) / (b.x - a.x)));
+    const aod = a.aod === null || b.aod === null ? 0 : a.aod * (1 - w) + b.aod * w;
+    return [optics.rayleigh550 * Math.exp(-Math.max(0, height) / optics.molecularScaleHeightKm),
+      aod / optics.aerosolScaleHeightKm * Math.exp(-Math.max(0, height) / optics.aerosolScaleHeightKm)];
+  }
+  function sample(x, height) {
+    let i = 0;
+    while (i < columns.length - 2 && x > columns[i + 1].x) i++;
+    const a = columns[i], b = columns[i + 1], w = Math.max(0, Math.min(1, (x - a.x) / (b.x - a.x)));
+    const column = w <= 0.5 ? a : b, levels = column.levels;
+    let level = 0;
+    while (level < levels.length - 1 && height > (levels[level].height + levels[level + 1].height) / 2) level++;
+    const inside = height >= Math.max(column.ground, levels[0].height - 0.3) && height <= levels.at(-1).height + 0.5;
+    const aod = a.aod === null || b.aod === null ? null : a.aod * (1 - w) + b.aod * w;
+    return { column: column.index, x: column.x, level, fraction: inside ? levels[level].cover : 0,
+      coefficient: optics.cloudExtinction[height < 3 ? 'low' : height < 8 ? 'mid' : 'high'],
+      rayleigh: optics.rayleigh550 * Math.exp(-Math.max(0, height) / optics.molecularScaleHeightKm),
+      aerosol: aod === null ? 0 : aod / optics.aerosolScaleHeightKm * Math.exp(-Math.max(0, height) / optics.aerosolScaleHeightKm),
+      ground: column.ground, missingAerosol: aod === null,
+      bounded: !(height < 15 && (x < columns[0].x || x > columns.at(-1).x)), levels };
+  }
+
+  function clearDepth(origin, direction, start, end, gasStepKm = 4) {
+    const at = t => coordinates(pointAlong(origin, direction, t));
+    const distanceKm = end - start;
+    const count = Math.max(1, Math.ceil(distanceKm / gasStepKm), Math.ceil(Math.abs(at(end).height - at(start).height) / 0.5));
+    let rayleigh = 0, aerosol = 0;
+    for (let k = 0; k < count; k++) {
+      const a = start + distanceKm * k / count, b = start + distanceKm * (k + 1) / count;
+      const pa = at(a), pm = at((a + b) / 2), pb = at(b), length = b - a;
+      const va = gasAt(pa.x, pa.height), vm = gasAt(pm.x, pm.height), vb = gasAt(pb.x, pb.height);
+      rayleigh += length * (va[0] + 4 * vm[0] + vb[0]) / 6;
+      aerosol += length * (va[1] + 4 * vm[1] + vb[1]) / 6;
+    }
+    return { rayleigh, aerosol };
+  }
+
+  function trace(origin, direction, maximumKm, { gasStepKm = 4, extraBoundariesXKm = [], extraDistancesKm = [], integrateGas = true } = {}) {
+    if (!Number.isFinite(maximumKm) || maximumKm <= 0 || !Number.isFinite(gasStepKm) || gasStepKm <= 0 ||
+        Math.abs(Math.hypot(...direction) - 1) > 1e-9) throw Error('Ray tracing requires unit direction and positive finite km steps');
+    const cuts = partition([...extraDistancesKm, ...[...horizontal, ...extraBoundariesXKm].map(x => sectionCrossing(origin, direction, x))], maximumKm), segments = [];
+    let blocked = false, bounded = true, missingAerosol = false;
+    for (let i = 1; i < cuts.length && !blocked; i++) {
+      const lo = cuts[i - 1], hi = cuts[i], middle = coordinates(pointAlong(origin, direction, (lo + hi) / 2));
+      const cell = sample(middle.x, middle.height), levels = cell.levels;
+      const heights = [cell.ground, Math.max(cell.ground, levels[0].height - 0.3), levels.at(-1).height + 0.5, 3, 8, 65,
+        ...levels.slice(1).map((p, j) => (levels[j].height + p.height) / 2)];
+      const vertical = [lo, hi, ...heights.flatMap(h => sphereCrossings(origin, direction, EARTH_KM + h)).filter(t => t > lo + 1e-8 && t < hi - 1e-8)]
+        .sort((a, b) => a - b).filter((v, j, all) => j === 0 || v - all[j - 1] > 1e-8);
+      for (let j = 1; j < vertical.length; j++) {
+        const start = vertical[j - 1], end = vertical[j], distanceKm = end - start;
+        const at = t => { const p = coordinates(pointAlong(origin, direction, t));return { ...p, ...sample(p.x, p.height) }; };
+        const centre = at((start + end) / 2);
+        if (centre.height < centre.ground - 1e-9) { blocked = true;break; }
+        if (centre.height > 65) continue;
+        const { rayleigh, aerosol } = integrateGas ? clearDepth(origin, direction, start, end, gasStepKm) : { rayleigh: 0, aerosol: 0 };
+        bounded &&= centre.bounded;missingAerosol ||= centre.missingAerosol;
+        const { levels: unused, ...medium } = centre;
+        segments.push({ startKm: start, endKm: end, lengthKm: distanceKm, medium,
+          rayleigh, aerosol, cloud: { column: centre.column, x: centre.x, level: centre.level,
+            fraction: centre.fraction, depth: centre.coefficient * distanceKm } });
+      }
+    }
+    return { segments, blocked, bounded, missingAerosol };
+  }
+  return { sample, trace, clearDepth };
+}
+
+```
+
+
+Exact src/radiative-geometry.mjs:
+```javascript
+import { EARTH_KM, RAD } from './astro.mjs';
+
+// Observer-local axes: x is toward the solar section, y is cross-section,
+// z is radial up from the Earth's centre. Positions and path lengths use km.
+export const pointAlong = (origin, direction, distanceKm) => origin.map((v, i) => v + direction[i] * distanceKm);
+export const coordinates = point => ({ x: EARTH_KM * Math.atan2(point[0], point[2]), height: Math.hypot(...point) - EARTH_KM });
+export const skyDirection = (azimuthOffset, elevation) => [Math.cos(elevation * RAD) * Math.cos(azimuthOffset * RAD),
+  Math.cos(elevation * RAD) * Math.sin(azimuthOffset * RAD), Math.sin(elevation * RAD)];
+export const dot = (a, b) => a.reduce((s, v, i) => s + v * b[i], 0);
+
+export function sphereCrossings(origin, direction, radiusKm) {
+  const b = dot(origin, direction), radius = Math.hypot(...origin), c = (radius - radiusKm) * (radius + radiusKm);
+  const discriminant = b * b - c;
+  if (discriminant < 0) return [];
+  const q = -b - (b >= 0 ? 1 : -1) * Math.sqrt(discriminant);
+  return q === 0 ? [0] : [q, c / q].sort((a, b) => a - b);
+}
+
+export function earthShadowed(origin, solarDirection) {
+  const nearest = -dot(origin, solarDirection);
+  return nearest > 0 && Math.hypot(...pointAlong(origin, solarDirection, nearest)) < EARTH_KM - 1e-9;
+}
+
+export function sectionCrossing(origin, direction, xKm) {
+  const angle = xKm / EARTH_KM, normal = [Math.cos(angle), 0, -Math.sin(angle)], denominator = dot(normal, direction);
+  return Math.abs(denominator) < 1e-15 ? null : -dot(normal, origin) / denominator;
+}
+
+export function shadowCrossings(origin, direction, solarDirection) {
+  const mu = dot(direction, solarDirection), os = dot(origin, solarDirection), on = dot(origin, direction);
+  const a = Math.max(0, 1 - mu * mu), b = on - os * mu;
+  const radius = Math.hypot(...origin), c = (radius - EARTH_KM) * (radius + EARTH_KM) - os * os;
+  const roots = [];
+  if (a > 1e-14) {
+    const discriminant = b * b - a * c;
+    if (discriminant >= 0) {
+      const q = -b - (b >= 0 ? 1 : -1) * Math.sqrt(discriminant);
+      if (q !== 0) roots.push(q / a, c / q);
+      else roots.push(0);
+    }
+  } else if (Math.abs(b) > 1e-12) roots.push(-c / (2 * b));
+  if (Math.abs(mu) > 1e-14) roots.push(-os / mu);
+  return roots.filter(Number.isFinite);
+}
+
+```
+
+
+Exact src/radiance.mjs:
+```javascript
+// Relative radiance with a unit direct-solar spectral irradiance. Coefficients
+// are conditional on a realized medium; cloud-occurrence expectation is owned
+// by the research engine and must precede angular aggregation.
+const RAD = Math.PI / 180;
+const finite = value => Number.isFinite(value);
+const spectrum = value => Array.isArray(value) && value.length === 3 && value.every(v => finite(v) && v >= 0);
+
+export function henyeyGreenstein(cosine, asymmetry) {
+  if (!finite(cosine) || cosine < -1 || cosine > 1 || !finite(asymmetry) || Math.abs(asymmetry) >= 1) {
+    throw Error('Phase requires a photon-propagation cosine in [-1,1] and |g| < 1');
+  }
+  const magnitude = Math.abs(asymmetry);
+  const denominator = (1 - magnitude) ** 2 + 2 * magnitude * (1 - Math.sign(asymmetry) * cosine);
+  return ((1 - asymmetry) * (1 + asymmetry)) / (4 * Math.PI * denominator ** 1.5);
+}
+
+export function attenuationIntegral(extinctionPerKm, lengthKm) {
+  if (!finite(extinctionPerKm) || extinctionPerKm < 0 || !finite(lengthKm) || lengthKm < 0) {
+    throw Error('Attenuation requires nonnegative finite km and per-km coefficients');
+  }
+  return extinctionPerKm === 0 ? lengthKm : -Math.expm1(-extinctionPerKm * lengthKm) / extinctionPerKm;
+}
+
+// Segments run from observer to scene. Each segment has constant extinction,
+// scattering and incident direct irradiance. Its internal viewing attenuation
+// is integrated analytically; foreground transmission is carried exactly.
+export function singleScatterRay(segments, { cosine, asymmetry }) {
+  const phase = henyeyGreenstein(cosine, asymmetry), rgb = [0, 0, 0], transmission = [1, 1, 1];
+  for (const { lengthKm, extinctionPerKm, scatteringPerKm, incidentIrradiance } of segments) {
+    if (!finite(lengthKm) || lengthKm < 0 || !spectrum(extinctionPerKm) || !spectrum(scatteringPerKm) ||
+        !spectrum(incidentIrradiance) || scatteringPerKm.some((v, i) => v > extinctionPerKm[i])) {
+      throw Error('Realized segments require finite spectra and 0 <= scattering <= extinction');
+    }
+    for (let c = 0; c < 3; c++) {
+      rgb[c] += transmission[c] * scatteringPerKm[c] * incidentIrradiance[c] * phase * attenuationIntegral(extinctionPerKm[c], lengthKm);
+      transmission[c] *= Math.exp(-extinctionPerKm[c] * lengthKm);
+    }
+  }
+  return { rgb, transmission };
+}
+
+export function solidAngle({ azimuthLow, azimuthHigh, elevationLow, elevationHigh }) {
+  if (![azimuthLow, azimuthHigh, elevationLow, elevationHigh].every(finite) ||
+      azimuthHigh <= azimuthLow || azimuthHigh - azimuthLow > 360 ||
+      elevationLow < -90 || elevationHigh > 90 || elevationHigh <= elevationLow) {
+    throw Error('Angular bounds require a positive <=360-degree azimuth span and ordered elevations in [-90,90]');
+  }
+  return (azimuthHigh - azimuthLow) * RAD * (Math.sin(elevationHigh * RAD) - Math.sin(elevationLow * RAD));
+}
+
+export function skyGrid(azimuthEdges, elevationEdges) {
+  if (![azimuthEdges, elevationEdges].every(edges => Array.isArray(edges) && edges.length >= 2 &&
+      edges.every((v, i) => finite(v) && (i === 0 || v > edges[i - 1])))) throw Error('Sky grids require increasing finite degree edges');
+  const cells = [];
+  for (let a = 1; a < azimuthEdges.length; a++) for (let e = 1; e < elevationEdges.length; e++) {
+    const bounds = { azimuthLow: azimuthEdges[a - 1], azimuthHigh: azimuthEdges[a],
+      elevationLow: elevationEdges[e - 1], elevationHigh: elevationEdges[e] };
+    cells.push({ ...bounds, azimuth: (bounds.azimuthLow + bounds.azimuthHigh) / 2,
+      elevation: Math.asin((Math.sin(bounds.elevationLow * RAD) + Math.sin(bounds.elevationHigh * RAD)) / 2) / RAD,
+      solidAngleSr: solidAngle(bounds) });
+  }
+  return cells;
+}
+
+function azimuthIntervals(cell) {
+  const start = ((cell.azimuthLow % 360) + 360) % 360, end = start + cell.azimuthHigh - cell.azimuthLow;
+  return end <= 360 ? [[start, end]] : [[start, 360], [0, end - 360]];
+}
+
+export function integrateSky(cells) {
+  const integral = [0, 0, 0];let area = 0;
+  const selected = [];
+  for (const cell of cells) {
+    const weight = solidAngle(cell);
+    if (!spectrum(cell.rgb)) throw Error('Sky cells require nonnegative finite relative-radiance spectra');
+    const intervals = azimuthIntervals(cell);
+    for (const previous of selected) {
+      const elevationOverlap = Math.min(cell.elevationHigh, previous.cell.elevationHigh) - Math.max(cell.elevationLow, previous.cell.elevationLow);
+      if (elevationOverlap > 1e-12 && intervals.some(([lo, hi]) => previous.intervals.some(([pl, ph]) => Math.min(hi, ph) - Math.max(lo, pl) > 1e-12))) {
+        throw Error('Overlapping sky cells would count the same viewing direction more than once');
+      }
+    }
+    selected.push({ cell, intervals });area += weight;
+    for (let c = 0; c < 3; c++) integral[c] += cell.rgb[c] * weight;
+  }
+  return { rgbIntegral: integral, rgbMean: area > 0 ? integral.map(v => v / area) : null, solidAngleSr: area };
+}
+
+```
+
+
+Exact src/cloud-optics.mjs:
+```javascript
+// Each vertical column shares U~Uniform(0,1): a cell exists when U<fraction.
+// Horizontally, U is copied with probability exp(-distance/L), or independently
+// redrawn. Piecewise-constant quadrature integrates the Markov chain exactly.
+export function cloudTransmission(pieces, { overlap = 'decorrelated', correlationLengthKm = 50, condition = null } = {}) {
+  if (!['maximum', 'random-columns', 'decorrelated'].includes(overlap)) throw new Error('Unknown cloud overlap scenario');
+  if (!Number.isFinite(correlationLengthKm) || correlationLengthKm <= 0 || (condition &&
+    (!Number.isFinite(condition.x) || !(condition.lower >= 0 && condition.lower < condition.upper && condition.upper <= 1)))) {
+    throw new Error('Invalid cloud probability condition or correlation length');
+  }
+  const groups = new Map();
+  for (const { column, x, level, fraction, depth } of pieces) {
+    if (![x, fraction, depth].every(Number.isFinite) || fraction < 0 || fraction > 1 || depth < 0) {
+      throw new Error('Cloud pieces require km positions, nonnegative depth and fractions in [0,1]');
+    }
+    if (depth <= 0 || fraction <= 0) continue;
+    const key = `${column}:${level}:${fraction}`;
+    const cell = groups.get(key) ?? { column, x, level, fraction, depth: 0 };
+    cell.depth += depth;
+    groups.set(key, cell);
+  }
+  const cells = [...groups.values()];
+  const columns = new Map();
+  for (const c of cells) {
+    if (!columns.has(c.column)) columns.set(c.column, { column: c.column, x: c.x, cells: [] });
+    columns.get(c.column).cells.push(c);
+  }
+  if (condition && !columns.has(condition.column)) columns.set(condition.column, { column: condition.column, x: condition.x, cells: [] });
+  const breaks = [...new Set([0, 1, ...cells.map(c => c.fraction), ...(condition ? [condition.lower, condition.upper] : [])])].sort((a, b) => a - b);
+  const bins = breaks.slice(1).map((end, i) => ({ u: (breaks[i] + end) / 2, width: end - breaks[i] }));
+  let density = bins.map(() => 1), previous = null;
+  for (const c of [...columns.values()].sort((a, b) => a.x - b.x)) {
+    const mass = density.reduce((sum, d, i) => sum + d * bins[i].width, 0);
+    const correlation = previous === null || overlap === 'random-columns' ? 0 : overlap === 'maximum' ? 1 :
+      Math.exp(-Math.abs(c.x - previous) / correlationLengthKm);
+    density = bins.map((bin, i) => {
+      const depth = c.cells.reduce((sum, cell) => sum + (bin.u < cell.fraction ? cell.depth : 0), 0);
+      const selected = !condition || c.column !== condition.column || (bin.u >= condition.lower && bin.u < condition.upper);
+      return selected ? (correlation * density[i] + (1 - correlation) * mass) * Math.exp(-Math.min(80, depth)) : 0;
+    });
+    previous = c.x;
+  }
+  const mass = density.reduce((sum, d, i) => sum + d * bins[i].width, 0);
+  return mass / (condition ? condition.upper - condition.lower : 1);
+}
+
+```
