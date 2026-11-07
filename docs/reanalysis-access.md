@@ -11,6 +11,12 @@ and the official [CDS](https://cds.climate.copernicus.eu/how-to-api) /
 these steps. Local copies and hashes are under
 `research/sources/reanalysis-access/`.
 
+Follow-up completed on 2026-11-07: both official endpoints authenticated, all
+regional ERA5/EAC4 inputs were downloaded, and the twenty-event four-way study
+completed with exact offline replay. [Results and interpretation](evidence/era5-input-comparison.md)
+retain the frozen model's limits. The steps below also document fresh-machine
+setup; this workspace's account configuration is already complete.
+
 ## What the owner does
 
 1. Open the [CDS setup page](https://cds.climate.copernicus.eu/how-to-api),
@@ -129,10 +135,26 @@ extraction. No Google Cloud billing account was used for the anonymous probes.
   var/reanalysis-venv/bin/python -m unittest discover -s tests -p test_reanalysis_tools.py -v
   ```
 
-Authenticated submission and official GRIB field decoding await the account
-steps. The asynchronous SDK's actual installed interfaces were inspected;
-remote resumption was exercised with an interrupted transport fixture. The
-forecast engine's source hash and parameters are unchanged. The next scientific
-experiment is a frozen GFS/ERA5 cloud-input comparison on the same observed
-events, with each retained non-ERA5 input identified, followed by separate
-cloud-water/scattering development and held-out evaluation.
+Authenticated submission, official GRIB decoding, native-layer cloud baselines
+and the frozen GFS/ERA5/EAC4 comparison have now completed. Python checks cover
+actual GRIB reference values and input isolation; Node checks cover UTC alignment
+when older control captures contain surplus hours. Full event bundles replay
+without network access. The engine source and parameters remain frozen.
+Native cloud-column representation and independent-date evaluation are the
+next scientific stage in `docs/plans/cloud-column-representation.md`.
+
+Additional native-layer baseline requests and a bounded 37-level diagnostic are
+under `config/reanalysis/`. The same credential successfully retrieved the
+single-level ERA5 dataset. To reproduce the completed studies from local raw
+files:
+
+```sh
+var/reanalysis-venv/bin/python scripts/build_reanalysis_cases.py --require-baseline
+node scripts/backtest-reanalysis.mjs --evaluate
+node scripts/backtest-reanalysis.mjs
+var/reanalysis-venv/bin/python scripts/diagnose_vertical_resolution.py
+```
+
+`--submit-only` queues each missing remote request and saves its ID before any
+download wait. `scripts/complete_reanalysis_study.py` watches local download
+receipts and completes a staged full study; it submits zero data requests.

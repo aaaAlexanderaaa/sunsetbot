@@ -1,0 +1,433 @@
+独立实现一个上海与长三角朝晚霞预测服务，完成了同一组历史记录上的冻结输入对照。下一次模型改动应该优先解决哪一个可验证的结构问题，怎样在新日期上安排一轮有判别力的验证？希望你依据下方实际代码与实验事实独立判断物理模型、数据表示和观测标签各自的影响，提出一条可以实施的改进路线。
+
+对象和目标：引擎 section-optics-0.3.1 是 0–100 观赏潜力指数，尚未做经验概率校准；上海中心 31.2304N,121.4737E，朝霞和晚霞，时区 Asia/Shanghai。用户希望一个可自托管网页/API/Docker 的独立 sunsetbot。网页/API和真实预报数据接入已经运行，当前主要问题是历史排序。原 sunsetbot.top 公开教程考虑云相态、云水、光路、遮挡和散射；独立引擎采用较简化的透射与云底表示。以下源码就是正在被评估的实现，源码之外的同名公开仓库仅代表其各自内容。
+
+观测集：sunsetbot.top 公开上海 2023-06-01..10 连续 20 场朝/晚霞记录，3 场正例（6/3晚霞小到中烧、6/9朝霞中到大烧、6/9晚霞小到中烧）和17场“基本不烧”。等级来自原站维护者的记录，负例实际观测覆盖、精确拍摄位置与独立照片尚待核验。这20场已用于诊断，下一版的泛化验证需要新日期。6/11以后在原先一次范围请求中缺失，后续可以主动调查分页和分日期读取。
+
+输入与实验：GFS是Open-Meteo Historical Forecast短预报拼接，未知固定起报和提前量。原CAMS是同供应商历史AOD。ERA5与CAMS EAC4均已从Copernicus官方成功下载并用ecCodes解码，区域北38西110南26东132，UTC2023-05-31..06-10。ERA5五变量为cloud fraction(0–1)、云液水和云冰网格平均kg/kg、温度K、位势m²/s²，0.25度、逐小时。冻结引擎仍只消费11个压力层1000/925/850/700/600/500/400/300/250/200/150hPa的云量与位势高度，云水/冰/温度本轮只保存诊断；位势除以9.80665，云量乘100。另从ERA5 single levels下载了原生低中高云量作为同源简单基线。EAC4是AOD550整柱无量纲，0.75度、每3小时。所有源采用请求位置最近网格，实际选中坐标均保存，时间插值保持原引擎。GFS地形、降雨、能见度固定，以隔离压力廓线和AOD替换。模型系数、阈值、几何取样、版本和代码均冻结；原GFS控制结果在每个事件中逐分数精确复现。
+
+四格对照及两个同源简单基线的完整指标：
+{"rankings": {"gfs_cams": {"evaluatedCases": 20, "missingScores": 0, "positiveControlPairs": 51, "correctlyOrderedPairs": 34, "tiedPairs": 0, "pairwiseAuc": 0.6666666666666666, "ordinalSpearman": 0.21347337597995777}, "era5_cams": {"evaluatedCases": 20, "missingScores": 0, "positiveControlPairs": 51, "correctlyOrderedPairs": 26, "tiedPairs": 6, "pairwiseAuc": 0.5686274509803921, "ordinalSpearman": 0.11380056828305729}, "gfs_eac4": {"evaluatedCases": 20, "missingScores": 0, "positiveControlPairs": 51, "correctlyOrderedPairs": 34, "tiedPairs": 0, "pairwiseAuc": 0.6666666666666666, "ordinalSpearman": 0.2135549010453624}, "era5_eac4": {"evaluatedCases": 20, "missingScores": 0, "positiveControlPairs": 51, "correctlyOrderedPairs": 32, "tiedPairs": 1, "pairwiseAuc": 0.6372549019607843, "ordinalSpearman": 0.19453755167938713}}, "gfsBaseline": {"evaluatedCases": 20, "missingScores": 0, "positiveControlPairs": 51, "correctlyOrderedPairs": 45, "tiedPairs": 4, "pairwiseAuc": 0.9215686274509803, "ordinalSpearman": 0.5326916207913593}, "era5Baseline": {"evaluatedCases": 20, "missingScores": 0, "positiveControlPairs": 51, "correctlyOrderedPairs": 35, "tiedPairs": 0, "pairwiseAuc": 0.6862745098039216, "ordinalSpearman": 0.24212826643591376}, "cloudAndHeightAblations": {"era5CloudOnly": {"evaluatedCases": 20, "missingScores": 0, "positiveControlPairs": 51, "correctlyOrderedPairs": 26, "tiedPairs": 6, "pairwiseAuc": 0.5686274509803921, "ordinalSpearman": 0.11380056828305729}, "era5HeightOnly": {"evaluatedCases": 20, "missingScores": 0, "positiveControlPairs": 51, "correctlyOrderedPairs": 34, "tiedPairs": 0, "pairwiseAuc": 0.6666666666666666, "ordinalSpearman": 0.21347337597995777}}}
+
+pairwiseAuc 的正/负配对数是51，平分计0.5；3场正例对应记录等级3/4/3，其余0。两种简单基线都用 max(中云量,高云量)*(1-低云量/100)，保持同一公式，分别输入各自原生低中高云量。辅助归因还分别只替换ERA5云量、只替换ERA5高度，固定原CAMS气溶胶和其他GFS字段。
+
+逐场冻结结果，列为事件、记录等级、GFS+原CAMS、ERA5+原CAMS、GFS+EAC4、ERA5+EAC4、GFS基线、ERA5基线：
+
+["2023-06-01-sunrise", 0, 0.6, 0, 0.6, 0, 0, 1.288]
+
+["2023-06-01-sunset", 0, 0, 0, 0, 0, 0, 17.636]
+
+["2023-06-02-sunrise", 0, 0, 0, 0, 0, 0, 0]
+
+["2023-06-02-sunset", 0, 0, 0, 0, 0, 4.56, 28.169]
+
+["2023-06-03-sunrise", 0, 0.7, 0.9, 0.6, 0.8, 72.61, 76.393]
+
+["2023-06-03-sunset", 3, 36.4, 2.4, 37.3, 2.7, 100, 80.709]
+
+["2023-06-04-sunrise", 0, 43.5, 6.7, 50.4, 7.8, 100, 34.654]
+
+["2023-06-04-sunset", 0, 65.3, 1, 65.8, 1, 79.81, 70.612]
+
+["2023-06-05-sunrise", 0, 57.2, 23.5, 61.2, 27.8, 0, 77.794]
+
+["2023-06-05-sunset", 0, 2.1, 0.4, 1.4, 0.1, 17.21, 19.709]
+
+["2023-06-06-sunrise", 0, 3.1, 10.2, 3.2, 10.2, 0, 0.445]
+
+["2023-06-06-sunset", 0, 38.9, 0, 38.9, 0, 42.32, 1.177]
+
+["2023-06-07-sunrise", 0, 18.3, 11.4, 18.1, 11.9, 86.01, 49.245]
+
+["2023-06-07-sunset", 0, 0, 0, 0, 0, 0, 98.601]
+
+["2023-06-08-sunrise", 0, 0.3, 1.7, 0.3, 1.6, 27.5, 71.215]
+
+["2023-06-08-sunset", 0, 46.3, 29.6, 56.8, 35.9, 96.55, 93.276]
+
+["2023-06-09-sunrise", 4, 41.9, 38, 41.2, 38, 100, 83.516]
+
+["2023-06-09-sunset", 3, 23.8, 0, 28.6, 0.1, 97.59, 30.022]
+
+["2023-06-10-sunrise", 0, 83.1, 15.6, 80.3, 14.4, 100, 68.072]
+
+["2023-06-10-sunset", 0, 0, 39.8, 0, 47, 2.09, 88.888]
+
+下面三个诊断事件的本地廓线，位于中央扇面中心点；云量为%，高度m，温度K，水/冰kg/kg。它们只描述中心柱，完整模型还使用三方位各14个水平位置（-150到800km），所以中心柱承担其自身范围的证据。
+
+2023-06-03-sunset
+{"profiles": [{"pressureHpa": 1000, "gfsCloudPercent": 0, "era5CloudPercent": 0, "gfsHeightM": 111.68800222211414, "era5HeightM": 113.49789196088342, "liquid": 0.0, "ice": 0.0, "temperature": 294.0376953723353}, {"pressureHpa": 925, "gfsCloudPercent": 0, "era5CloudPercent": 0, "gfsHeightM": 781.7660016665856, "era5HeightM": 783.2923978042477, "liquid": 0.0, "ice": 0.0, "temperature": 291.69253414035563}, {"pressureHpa": 850, "gfsCloudPercent": 0, "era5CloudPercent": 0, "gfsHeightM": 1504.6100027776426, "era5HeightM": 1505.0444328258675, "liquid": 0.0, "ice": 0.0, "temperature": 289.66280871744186}, {"pressureHpa": 700, "gfsCloudPercent": 0, "era5CloudPercent": 0.06093706599333226, "gfsHeightM": 3129.610002777643, "era5HeightM": 3130.9186721699807, "liquid": 1.8596516721597965e-08, "ice": 0.0, "temperature": 280.6911277789821}, {"pressureHpa": 600, "gfsCloudPercent": 0, "era5CloudPercent": 0.06093706599333226, "gfsHeightM": 4393.688002222114, "era5HeightM": 4397.763488431738, "liquid": 9.5367431640625e-07, "ice": 0.0, "temperature": 277.73061456421783}, {"pressureHpa": 500, "gfsCloudPercent": 6, "era5CloudPercent": 0, "gfsHeightM": 5854.844001111057, "era5HeightM": 5861.101726533691, "liquid": 0.0, "ice": 0.0, "temperature": 269.54039982352447}, {"pressureHpa": 400, "gfsCloudPercent": 0, "era5CloudPercent": 0, "gfsHeightM": 7588.793280688856, "era5HeightM": 7596.073711567255, "liquid": 0.0, "ice": 0.0, "temperature": 260.5103048196406}, {"pressureHpa": 300, "gfsCloudPercent": 0, "era5CloudPercent": 0, "gfsHeightM": 9723.812482688758, "era5HeightM": 9732.784413588019, "liquid": 0.0, "ice": 2.384185791015625e-07, "temperature": 246.15033251764243}, {"pressureHpa": 250, "gfsCloudPercent": 72.14200611081388, "era5CloudPercent": 12.073440538046675, "gfsHeightM": 11005.422822116563, "era5HeightM": 11019.278183026363, "liquid": 0.0, "ice": 6.269932985247806e-06, "temperature": 236.0230246267815}, {"pressureHpa": 200, "gfsCloudPercent": 0, "era5CloudPercent": 2.8421783858599756, "gfsHeightM": 12506.617302583207, "era5HeightM": 12520.031587203794, "liquid": 0.0, "ice": 2.942081292663564e-07, "temperature": 223.79651722406666}, {"pressureHpa": 150, "gfsCloudPercent": 0, "era5CloudPercent": 0, "gfsHeightM": 14330.874343316505, "era5HeightM": 14345.977973134794, "liquid": 0.0, "ice": 0.0, "temperature": 210.01570423211544}], "nativeLayerCoverAtEvent": {"low": 0.0, "mid": 4.657671566757118, "high": 80.70850111593649}, "ablations": {"era5CloudOnly": {"score": 2.4, "peakTime": "2023-06-03T10:15:19.202Z"}, "era5HeightOnly": {"score": 36.4, "peakTime": "2023-06-03T10:15:19.202Z"}}, "aod": {"original": 0.5531199777788587, "EAC4": 0.4947461641712223}}
+
+2023-06-09-sunset
+{"profiles": [{"pressureHpa": 1000, "gfsCloudPercent": 0, "era5CloudPercent": 0, "gfsHeightM": 28.856613889005448, "era5HeightM": 21.262889110181625, "liquid": 0.0, "ice": 0.0, "temperature": 299.026236084354}, {"pressureHpa": 925, "gfsCloudPercent": 0, "era5CloudPercent": 0, "gfsHeightM": 714.9713227778011, "era5HeightM": 710.3066934455499, "liquid": 0.0, "ice": 0.0, "temperature": 298.1822987448454}, {"pressureHpa": 850, "gfsCloudPercent": 0, "era5CloudPercent": 0, "gfsHeightM": 1449.971322777801, "era5HeightM": 1446.041148313583, "liquid": 0.0, "ice": 0.0, "temperature": 292.04509781087205}, {"pressureHpa": 700, "gfsCloudPercent": 47.168360556231605, "era5CloudPercent": 22.611441840314203, "gfsHeightM": 3079.971322777801, "era5HeightM": 3077.642609435236, "liquid": 0.00011305142958955609, "ice": 0.0, "temperature": 280.5611557740564}, {"pressureHpa": 600, "gfsCloudPercent": 0, "era5CloudPercent": 0, "gfsHeightM": 4330, "era5HeightM": 4332.048766170582, "liquid": 0.0, "ice": 0.0, "temperature": 274.4802880822722}, {"pressureHpa": 500, "gfsCloudPercent": 0, "era5CloudPercent": 0, "gfsHeightM": 5766, "era5HeightM": 5770.862882566163, "liquid": 0.0, "ice": 0.0, "temperature": 264.8869412005559}, {"pressureHpa": 400, "gfsCloudPercent": 0, "era5CloudPercent": 0, "gfsHeightM": 7457.959167261169, "era5HeightM": 7468.2685019363535, "liquid": 0.0, "ice": 0.0, "temperature": 254.82670970515272}, {"pressureHpa": 300, "gfsCloudPercent": 0, "era5CloudPercent": 0, "gfsHeightM": 9538.571202244557, "era5HeightM": 9551.389293974784, "liquid": 0.0, "ice": 0.0, "temperature": 239.8814270303127}, {"pressureHpa": 250, "gfsCloudPercent": 4.573544443978204, "era5CloudPercent": 0, "gfsHeightM": 10794.125966289022, "era5HeightM": 10807.160512767929, "liquid": 0.0, "ice": 0.0, "temperature": 230.36304533333848}, {"pressureHpa": 200, "gfsCloudPercent": 65.43015833298365, "era5CloudPercent": 0.7588459201571014, "gfsHeightM": 12262.656650916775, "era5HeightM": 12275.513419755753, "liquid": 0.0, "ice": 0.0, "temperature": 219.9945879930168}, {"pressureHpa": 150, "gfsCloudPercent": 0, "era5CloudPercent": 0, "gfsHeightM": 14089.635744894375, "era5HeightM": 14102.811958371245, "liquid": 0.0, "ice": 0.0, "temperature": 214.8741543468575}], "nativeLayerCoverAtEvent": {"low": 0.4176900244549163, "mid": 30.148350507556138, "high": 17.56609735488665}, "ablations": {"era5CloudOnly": {"score": 0, "peakTime": null}, "era5HeightOnly": {"score": 23.8, "peakTime": "2023-06-09T10:58:16.762Z"}}, "aod": {"original": 1.272580949997902, "EAC4": 0.9353617076400653}}
+
+2023-06-10-sunrise
+{"profiles": [{"pressureHpa": 1000, "gfsCloudPercent": 0, "era5CloudPercent": 0, "gfsHeightM": 17.54438416659832, "era5HeightM": 19.49691337311621, "liquid": 0.0, "ice": 0.0, "temperature": 294.99919187181393}, {"pressureHpa": 925, "gfsCloudPercent": 0, "era5CloudPercent": 0, "gfsHeightM": 699.8481280555328, "era5HeightM": 702.4804861983678, "liquid": 0.0, "ice": 0.0, "temperature": 297.3448733248576}, {"pressureHpa": 850, "gfsCloudPercent": 0, "era5CloudPercent": 0, "gfsHeightM": 1435.8481280555327, "era5HeightM": 1436.7119318470125, "liquid": 0.0, "ice": 0.0, "temperature": 292.16773920776177}, {"pressureHpa": 700, "gfsCloudPercent": 0, "era5CloudPercent": 0, "gfsHeightM": 3068.848128055533, "era5HeightM": 3067.667761196697, "liquid": 4.76837158203125e-07, "ice": 0.0, "temperature": 280.56554188977805}, {"pressureHpa": 600, "gfsCloudPercent": 0, "era5CloudPercent": 1.5625, "gfsHeightM": 4314, "era5HeightM": 4318.216016006814, "liquid": 9.13232419226991e-06, "ice": 1.1920928955078125e-07, "temperature": 272.831459381101}, {"pressureHpa": 500, "gfsCloudPercent": 0, "era5CloudPercent": 0.6626000433849792, "gfsHeightM": 5745.8481280555325, "era5HeightM": 5752.695070481349, "liquid": 1.430511474609375e-06, "ice": 0.0, "temperature": 264.3638836401369}, {"pressureHpa": 400, "gfsCloudPercent": 0, "era5CloudPercent": 0, "gfsHeightM": 7428.4, "era5HeightM": 7438.441899742631, "liquid": 0.0, "ice": 0.0, "temperature": 252.08933726802297}, {"pressureHpa": 300, "gfsCloudPercent": 0, "era5CloudPercent": 2.8877000867699585, "gfsHeightM": 9498.879027661183, "era5HeightM": 9515.215045284258, "liquid": 0.0, "ice": 3.00585932203982e-06, "temperature": 240.9491495356517}, {"pressureHpa": 250, "gfsCloudPercent": 61.53260999917984, "era5CloudPercent": 13.043950086769959, "gfsHeightM": 10756.19, "era5HeightM": 10776.739058499914, "liquid": 0.0, "ice": 6.054046683819555e-06, "temperature": 231.16188846223295}, {"pressureHpa": 200, "gfsCloudPercent": 85.75935972233613, "era5CloudPercent": 8.57369943599527, "gfsHeightM": 12223.612342911165, "era5HeightM": 12242.2937883049, "liquid": 0.0, "ice": 5.045806434604097e-06, "temperature": 219.22968531525817}, {"pressureHpa": 150, "gfsCloudPercent": 0, "era5CloudPercent": 0, "gfsHeightM": 14053.73, "era5HeightM": 14068.36179600462, "liquid": 0.0, "ice": 0.0, "temperature": 213.97699968743404}], "nativeLayerCoverAtEvent": {"low": 17.666904884784646, "mid": 1.2002714115017927, "high": 82.67918799526038}, "ablations": {"era5CloudOnly": {"score": 15.5, "peakTime": "2023-06-09T21:30:53.261Z"}, "era5HeightOnly": {"score": 83.2, "peakTime": "2023-06-09T20:50:53.261Z"}}, "aod": {"original": 0.5115187194446723, "EAC4": 0.6375668257575452}}
+
+引擎源码如下。engine.mjs中的profile把压力云量和位势高度转成垂直列；cloudDecks生成云底；opticalDepth积分路径；targetLight给目标亮度；frame做角面积汇总；computeForecast取±40分钟窗口最大值。cloud-optics.mjs按条件云出现概率求期望透射。astro.mjs给球面几何与太阳位置，SunCalc依赖版本1.9.0。provider.mjs中的LEVELS就是上述11层，interpolate是单位为UTC epoch秒的分段线性插值，precipitation字段按前一小时累积语义取相应区间。
+
+src/engine.mjs
+```javascript
+import { EARTH_KM, RAD, clamp, round, sectionPoint, rayPoint, earthBlocks, viewElevation, sunPosition } from './astro.mjs';
+import { LEVELS, interpolate, precedingAccumulation } from './provider.mjs';
+import { cloudTransmission } from './cloud-optics.mjs';
+import { AppError } from './errors.mjs';
+
+export const MODEL_VERSION = 'section-optics-0.3.1';
+export const DISTANCES = [-150, -100, -50, -25, 0, 25, 50, 100, 150, 200, 300, 450, 600, 800];
+export const ASSUMPTIONS = {
+  earthRadiusKm: EARTH_KM, molecularScaleHeightKm: 8, molecularExtinction550PerKm: 0.012,
+  aerosolScaleHeightsKm: [0.8, 1.5, 3], aerosolAngstromExponent: 1.2,
+  conditionalCloudExtinctionPerKm: { low: 2, mid: 0.7, high: 0.2 },
+  cloudOverlap: ['decorrelated', 'maximum', 'random-columns'], cloudHorizontalCorrelationLengthKm: 50,
+  profileCloudThreshold: 0.15,
+  minimumViewElevationDegrees: 0.5, maximumTargetDistanceKm: 300,
+  solarRayStepKm: 4, viewingRayStepKm: 0.5, timelineStepMinutes: 5,
+  qualityScale: 'independent heuristic 0–100', calibration: 'experimental',
+};
+
+const angleDifference = (a, b) => ((a - b + 540) % 360) - 180;
+export function samplingOffsets(event, location) {
+  const offsets = [-40, 40].map(m => Math.abs(angleDifference(
+    sunPosition(Date.parse(event.time) + m * 60000, location.lat, location.lon).azimuth, event.azimuth)));
+  const width = Math.ceil(Math.max(...offsets)) + 2;
+  return [-width, 0, width];
+}
+
+function profile(row, time) {
+  const levels = LEVELS.map(pressure => ({ pressure,
+    height: interpolate(row, `geopotential_height_${pressure}hPa`, time),
+    cover: interpolate(row, `cloud_cover_${pressure}hPa`, time),
+  }));
+  if (levels.some(p => p.cover === null || p.height === null || p.height < -1000 || p.cover < 0 || p.cover > 100)) {
+    throw new AppError('PROFILE_INCOMPLETE', '预报时段的垂直云层数据缺失，请选择其他时段或模型。');
+  }
+  levels.forEach(p => { p.cover /= 100; p.height /= 1000; });
+  levels.sort((a, b) => a.height - b.height);
+  if (levels.some((p, i) => i && p.height <= levels[i - 1].height)) {
+    throw new AppError('PROFILE_HEIGHT', '云层高度序列需要检查，请选择其他模型。');
+  }
+  return levels;
+}
+
+export function cloudDecks(levels, ground = 0) {
+  const decks = [];
+  let below = 0;
+  for (let i = 0; i < levels.length; i++) {
+    const level = levels[i];
+    if (level.height < ground) continue;
+    const lower = below;
+    below = Math.max(below, level.cover);
+    if (level.cover < ASSUMPTIONS.profileCloudThreshold || level.cover <= lower) continue;
+    const previous = levels[i - 1], next = levels[i + 1];
+    // A base face occupies the new fraction beyond all lower cloudy bands.
+    // Conditioning uses this exact U interval, preserving every original f.
+    const base = Math.max(ground + 0.05, previous ?
+      (previous.height + level.height) / 2 : level.height - 0.3);
+    const top = next ? (level.height + next.height) / 2 : level.height + 0.5;
+    if (top > base) decks.push({ base, top, cover: level.cover - lower, lower, upper: level.cover });
+  }
+  return decks;
+}
+
+function pair(values, value, key) {
+  let i = 0;
+  while (i < values.length - 2 && value > key(values[i + 1])) i++;
+  const a = values[i], b = values[i + 1];
+  return { a, b, index: i, w: clamp((value - key(a)) / (key(b) - key(a))) };
+}
+
+function prepareColumns(weather, aerosol, time, offset, fanOffsets) {
+  const single = fanOffsets.length === 1;
+  const angular = single ? { index: 0, w: 0 } : pair(fanOffsets, offset, v => v);
+  const first = angular.index * DISTANCES.length;
+  const second = single ? first : first + DISTANCES.length;
+  const blendOptional = (a, b) => a === null || b === null ? null : a * (1 - angular.w) + b * angular.w;
+  return DISTANCES.map((x, index) => {
+    const a = weather[first + index], b = weather[second + index];
+    const al = profile(a, time), bl = single ? al : profile(b, time);
+    const levels = al.map((p, j) => ({ pressure: p.pressure,
+      height: p.height * (1 - angular.w) + bl[j].height * angular.w,
+      cover: p.cover * (1 - angular.w) + bl[j].cover * angular.w }));
+    return { x, index, levels,
+      ground: Math.max(0, (Number(a.elevation) || 0) * (1 - angular.w) + (Number(b.elevation) || 0) * angular.w) / 1000,
+      aod: aerosol ? blendOptional(interpolate(aerosol[first + index], 'aerosol_optical_depth', time),
+        interpolate(aerosol[second + index], 'aerosol_optical_depth', time)) : null };
+  });
+}
+
+function atmosphere(columns, x, height, aerosolHeight) {
+  // Repeated integration steps share an occurrence variate per horizontal
+  // column/vertical-level cell, and accumulate conditional cloudy depth.
+  const { a, b, w } = pair(columns, x, c => c.x), column = w <= 0.5 ? a : b;
+  const levels = column.levels;
+  let level = 0;
+  while (level < levels.length - 1 && height > (levels[level].height + levels[level + 1].height) / 2) level++;
+  const within = height >= Math.max(column.ground, levels[0].height - 0.3) && height <= levels.at(-1).height + 0.5;
+  const fraction = within ? levels[level].cover : 0;
+  const coefficient = ASSUMPTIONS.conditionalCloudExtinctionPerKm[height < 3 ? 'low' : height < 8 ? 'mid' : 'high'];
+  const aod = a.aod === null || b.aod === null ? null : a.aod * (1 - w) + b.aod * w;
+  return { column: column.index, level, fraction, coefficient,
+    rayleigh: ASSUMPTIONS.molecularExtinction550PerKm * Math.exp(-Math.max(0, height) / ASSUMPTIONS.molecularScaleHeightKm),
+    aerosol: aod === null ? 0 : aod / aerosolHeight * Math.exp(-Math.max(0, height) / aerosolHeight),
+    terrain: a.ground * (1 - w) + b.ground * w, missingAerosol: aod === null };
+}
+
+function opticalDepth(columns, origin, direction, maxDistance, aerosolHeight, step) {
+  const depth = { pieces: [], rayleigh: 0, aerosol: 0, bounded: true, blocked: false, missingAerosol: false };
+  for (let start = 0; start < maxDistance; start += step) {
+    const ds = Math.min(step, maxDistance - start), p = rayPoint(origin, direction, start + ds / 2);
+    if (p.height > 65) break;
+    if (p.height < 0) { depth.blocked = true; break; }
+    const v = atmosphere(columns, p.x, p.height, aerosolHeight);
+    if ((p.x < columns[0].x || p.x > columns.at(-1).x) && p.height < 15) depth.bounded = false;
+    if (p.height < v.terrain) { depth.blocked = true; break; }
+    if (v.fraction > 0) depth.pieces.push({ column: v.column, x: columns[v.column].x, level: v.level, fraction: v.fraction, depth: v.coefficient * ds });
+    depth.rayleigh += v.rayleigh * ds;
+    depth.aerosol += v.aerosol * ds;
+    depth.missingAerosol ||= v.missingAerosol;
+  }
+  return depth;
+}
+
+function targetLight(columns, target, altitude, observerHeight, aerosolHeight, overlap) {
+  const origin = sectionPoint(target.x, target.base), direction = [Math.cos(altitude * RAD), Math.sin(altitude * RAD)];
+  const dark = { strength: 0, rgb: [0, 0, 0], bounded: true, missingAerosol: false, reason: 'earth-shadow' };
+  if (earthBlocks(origin, direction)) return dark;
+  const solar = opticalDepth(columns, origin, direction, 1600, aerosolHeight, ASSUMPTIONS.solarRayStepKm);
+  const observer = sectionPoint(0, observerHeight), delta = [origin[0] - observer[0], origin[1] - observer[1]];
+  const distance = Math.hypot(...delta);
+  const viewing = opticalDepth(columns, observer, delta.map(v => v / distance), distance,
+    aerosolHeight, ASSUMPTIONS.viewingRayStepKm);
+  if (solar.blocked || viewing.blocked) return { ...dark, reason: 'terrain-obstruction' };
+  const condition = { column: target.index, x: target.x, lower: target.lower, upper: target.upper };
+  const cloud = cloudTransmission([...solar.pieces, ...viewing.pieces], { overlap, condition,
+    correlationLengthKm: ASSUMPTIONS.cloudHorizontalCorrelationLengthKm });
+  const rgb = [680, 550, 440].map(wavelength => cloud * Math.exp(
+    -(solar.rayleigh + viewing.rayleigh) * (550 / wavelength) ** 4 -
+    (solar.aerosol + viewing.aerosol) * (550 / wavelength) ** ASSUMPTIONS.aerosolAngstromExponent));
+  const luminance = 0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[2];
+  const warmth = clamp((rgb[0] - rgb[2]) / Math.max(rgb[0], 0.00001));
+  return { strength: clamp(Math.sqrt(luminance) * warmth * 2.5) * target.cover, rgb,
+    bounded: solar.bounded && viewing.bounded, missingAerosol: solar.missingAerosol || viewing.missingAerosol,
+    viewingPathKm: round(distance, 4), viewingRayleighDepth550: round(viewing.rayleigh, 6),
+    reason: cloud < 0.05 ? 'cloud-obstruction' : 'illuminated' };
+}
+
+function frame(weather, aerosol, time, location, event, fanOffsets, aerosolHeight = 1.5, overlap = 'decorrelated') {
+  const sun = sunPosition(time, location.lat, location.lon);
+  const offset = angleDifference(sun.azimuth, event.azimuth);
+  const columns = prepareColumns(weather, aerosol, time, offset, fanOffsets);
+  const local = columns.find(c => c.x === 0), targets = [];
+  for (let i = 0; i < columns.length; i++) {
+    const column = columns[i];
+    if (Math.abs(column.x) > ASSUMPTIONS.maximumTargetDistanceKm) continue;
+    const width = ((columns[i + 1]?.x ?? column.x + 25) - (columns[i - 1]?.x ?? column.x - 25)) / 2;
+    for (const deck of cloudDecks(column.levels, column.ground)) {
+      const elevation = viewElevation(column.x, deck.base, local.ground);
+      if (elevation < ASSUMPTIONS.minimumViewElevationDegrees) continue;
+      const light = targetLight(columns, { ...deck, x: column.x, index: column.index }, sun.altitude, local.ground, aerosolHeight, overlap);
+      const weight = Math.min(1, width * Math.max(0.2, deck.base - local.ground) /
+        (column.x ** 2 + (deck.base - local.ground) ** 2)) / Math.PI;
+      targets.push({ x: column.x, baseKm: round(deck.base), topKm: round(deck.top), elevation: round(elevation),
+        cover: round(deck.cover), strength: round(light.strength, 4), weight, rgb: light.rgb,
+        reason: light.reason, bounded: light.bounded, missingAerosol: light.missingAerosol,
+        viewingPathKm: light.viewingPathKm ?? null, viewingRayleighDepth550: light.viewingRayleighDepth550 ?? null });
+    }
+  }
+  const integral = targets.reduce((sum, t) => sum + t.strength * t.weight, 0);
+  const localRow = weather[Math.floor(fanOffsets.length / 2) * DISTANCES.length + DISTANCES.indexOf(0)];
+  const rain = precedingAccumulation(localRow, 'precipitation', time), visibility = interpolate(localRow, 'visibility', time);
+  const localFactor = Math.exp(-Math.max(0, rain ?? 0) * 0.15) * (visibility === null ? 1 : clamp(visibility / 12000, 0.2, 1));
+  const score = 100 * (1 - Math.exp(-integral * 5)) * localFactor;
+  const directional = sign => 100 * (1 - Math.exp(-targets.filter(t => t.x * sign >= 0)
+    .reduce((sum, t) => sum + t.strength * t.weight * (t.x === 0 ? 0.5 : 1), 0) * 5)) * localFactor;
+  return { time: new Date(time).toISOString(), score: round(score, 1), solarAltitude: round(sun.altitude), bearing: sun.azimuth,
+    towardSun: round(directional(1), 1), oppositeSun: round(directional(-1), 1), targets, columns,
+    aod: local.aod, rain, visibility, bearingClipped: fanOffsets.length === 1 || offset < fanOffsets[0] || offset > fanOffsets.at(-1) };
+}
+
+export function computeForecast({ weather, aerosol = null, event, location, fanOffsets = [0] }) {
+  if (weather.length !== DISTANCES.length * fanOffsets.length || (aerosol && aerosol.length !== weather.length)) {
+    throw new AppError('SECTION_INCOMPLETE', '大气截面采样点缺失，请重新获取。');
+  }
+  const instant = Date.parse(event.time), timeline = [];
+  const at = (time, height = 1.5, overlap = 'decorrelated') => frame(weather, aerosol, time, location, event, fanOffsets, height, overlap);
+  for (let minutes = -40; minutes <= 40; minutes += ASSUMPTIONS.timelineStepMinutes) timeline.push(at(instant + minutes * 60000));
+  const maximum = timeline.reduce((a, b) => a.score >= b.score ? a : b);
+  const hasPeak = maximum.score > 0, peak = hasPeak ? maximum : timeline[Math.floor(timeline.length / 2)];
+  const peakIndex = timeline.indexOf(peak), missingAerosol = timeline.some(f => f.columns.some(c => c.aod === null) || f.targets.some(t => t.missingAerosol));
+  const sensitivity = missingAerosol ? [] : [0.8, 3].map(h => at(Date.parse(peak.time), h).score);
+  const overlapScores = ['maximum', 'random-columns'].map(overlap => at(Date.parse(peak.time), 1.5, overlap).score);
+  const threshold = Math.max(8, maximum.score * 0.6);
+  let left = peakIndex, right = peakIndex;
+  while (left > 0 && timeline[left - 1].score >= threshold) left--;
+  while (right < timeline.length - 1 && timeline[right + 1].score >= threshold) right++;
+  const range = maximum.score >= 8 ? { start: timeline[left].time, end: timeline[right].time,
+    resolutionMinutes: 5, clipped: left === 0 || right === timeline.length - 1 } : null;
+  const score = round(maximum.score), labels = score >= 65 ? ['较强观赏潜力', '模型显示较多受光云底，临近时结合云图观察'] : score >= 40 ?
+    ['中等观赏潜力', '模型显示部分受光云底，可留意天空变化'] : score >= 15 ? ['局部霞光潜力', '以临近云况为准'] : ['霞光条件偏弱', '留意临近日出日落的变化'];
+  const uncertainty = [
+    '云量代表出现面积，云内消光系数、云底重建及云层重叠方式采用情景假设；云水与冰含量仍待补充。',
+    '三方位插值形成随太阳转动的二维截面，细小云洞、云顶侧面受光与建筑遮挡需现场判断。',
+    '5 分钟曲线是天气场上的推算；GFS 原始资料约 1 小时、ECMWF 与 CAMS 约 3 小时，窗口精度受这些资料约束。',
+    '指数正在积累实测校准，当前表示模型观赏潜力。',
+  ];
+  if (missingAerosol) uncertainty.unshift('部分光路缺少 CAMS 气溶胶资料，缺失处按 AOD=0 计算，偏差方向与幅度待评估。');
+  if (peak.visibility === null) uncertainty.unshift('当前模式缺少能见度资料，视程修正系数暂取 1，雾与近地视程请结合现场判断。');
+  if (peak.rain === null) uncertainty.unshift('降水资料缺失，降水修正系数暂取 1。');
+  if (timeline.some(f => f.targets.some(t => !t.bounded))) uncertainty.unshift('部分低空光路超出采样边界，存在截面外遮挡风险。');
+  if (timeline.some(f => f.bearingClipped)) uncertainty.unshift('本次输入采用固定方位或超出扇面，太阳方位变化的空间信息受限。');
+  const illuminated = peak.targets.filter(t => t.strength > 0.05);
+  const minSensitivity = missingAerosol ? null : round(Math.min(peak.score, ...sensitivity));
+  const maxSensitivity = missingAerosol ? null : round(Math.max(peak.score, ...sensitivity));
+  const reasons = [
+    illuminated.length ? `参考时刻有 ${illuminated.length} 处采样云底具备可见受光条件。` : '采样云层的可见受光面积偏少。',
+    peak.aod === null ? '本地气溶胶分布待补充。' : `本地 AOD550 为 ${round(peak.aod)}，已按垂直分布假设纳入光路积分。`,
+    missingAerosol ? '气溶胶高度假设敏感性待资料齐备后评估。' : `参考时刻的气溶胶高度假设带来约 ${round(maxSensitivity - minSensitivity)} 分的变化。`,
+    `参考时刻的云层重叠情景给出 ${round(Math.min(peak.score, ...overlapScores))}–${round(Math.max(peak.score, ...overlapScores))} 分。`,
+  ];
+  return {
+    modelVersion: MODEL_VERSION, calibration: 'experimental', score, label: labels[0], advice: labels[1],
+    pathCoverage: timeline.some(f => f.targets.some(t => !t.bounded)) ? 'extrapolated' : 'within-sampling',
+    peakTime: hasPeak ? peak.time : null, window: range, towardSun: peak.towardSun, oppositeSun: peak.oppositeSun,
+    sensitivity: { minimum: minSensitivity, maximum: maxSensitivity, meaning: '参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备' },
+    cloudOverlapSensitivity: { minimum: round(Math.min(peak.score, ...overlapScores)), maximum: round(Math.max(peak.score, ...overlapScores)),
+      meaning: '参考时刻水平相关衰减、完全相关与独立水平云柱情景范围' },
+    aod: peak.aod === null ? null : round(peak.aod, 3), visibilityKm: peak.visibility === null ? null : round(peak.visibility / 1000),
+    precipitationMm: peak.rain === null ? null : round(peak.rain), missingAerosol, reasons, uncertainty,
+    timeline: timeline.map(({ time, score, solarAltitude, towardSun, oppositeSun }) => ({ time, score, solarAltitude, towardSun, oppositeSun })),
+    section: { time: peak.time, bearing: round(peak.bearing), fanOffsetsDegrees: fanOffsets, distancesKm: DISTANCES,
+      rays: peak.targets.filter(t => t.strength > 0.05).sort((a, b) => b.strength - a.strength).slice(0, 4).map(t => {
+        const origin = sectionPoint(t.x, t.baseKm), altitude = peak.solarAltitude * RAD;
+        return Array.from({ length: 49 }, (_, i) => rayPoint(origin, [Math.cos(altitude), Math.sin(altitude)], i * 25))
+          .map(p => ({ distanceKm: round(p.x), heightKm: round(p.height) }));
+      }),
+      columns: peak.columns.map(c => ({ distanceKm: c.x, terrainKm: c.ground,
+        aod: c.aod === null ? null : round(c.aod, 3), levels: c.levels.map(l => ({ pressureHpa: l.pressure, heightKm: round(l.height), cloudCover: round(l.cover * 100, 1) })) })),
+      targets: peak.targets.map(({ weight, rgb, ...t }) => ({ ...t, color: '#' + rgb.map(c => Math.round(clamp(c / Math.max(...rgb, 0.001)) ** (1 / 2.2) * 255).toString(16).padStart(2, '0')).join('') })) },
+    assumptions: ASSUMPTIONS,
+  };
+}
+
+```
+
+src/cloud-optics.mjs
+```javascript
+// Each vertical column shares U~Uniform(0,1): a cell exists when U<fraction.
+// Horizontally, U is copied with probability exp(-distance/L), or independently
+// redrawn. Piecewise-constant quadrature integrates the Markov chain exactly.
+export function cloudTransmission(pieces, { overlap = 'decorrelated', correlationLengthKm = 50, condition = null } = {}) {
+  if (!['maximum', 'random-columns', 'decorrelated'].includes(overlap)) throw new Error('Unknown cloud overlap scenario');
+  if (!Number.isFinite(correlationLengthKm) || correlationLengthKm <= 0 || (condition &&
+    (!Number.isFinite(condition.x) || !(condition.lower >= 0 && condition.lower < condition.upper && condition.upper <= 1)))) {
+    throw new Error('Invalid cloud probability condition or correlation length');
+  }
+  const groups = new Map();
+  for (const { column, x, level, fraction, depth } of pieces) {
+    if (![x, fraction, depth].every(Number.isFinite) || fraction < 0 || fraction > 1 || depth < 0) {
+      throw new Error('Cloud pieces require km positions, nonnegative depth and fractions in [0,1]');
+    }
+    if (depth <= 0 || fraction <= 0) continue;
+    const key = `${column}:${level}:${fraction}`;
+    const cell = groups.get(key) ?? { column, x, level, fraction, depth: 0 };
+    cell.depth += depth;
+    groups.set(key, cell);
+  }
+  const cells = [...groups.values()];
+  const columns = new Map();
+  for (const c of cells) {
+    if (!columns.has(c.column)) columns.set(c.column, { column: c.column, x: c.x, cells: [] });
+    columns.get(c.column).cells.push(c);
+  }
+  if (condition && !columns.has(condition.column)) columns.set(condition.column, { column: condition.column, x: condition.x, cells: [] });
+  const breaks = [...new Set([0, 1, ...cells.map(c => c.fraction), ...(condition ? [condition.lower, condition.upper] : [])])].sort((a, b) => a - b);
+  const bins = breaks.slice(1).map((end, i) => ({ u: (breaks[i] + end) / 2, width: end - breaks[i] }));
+  let density = bins.map(() => 1), previous = null;
+  for (const c of [...columns.values()].sort((a, b) => a.x - b.x)) {
+    const mass = density.reduce((sum, d, i) => sum + d * bins[i].width, 0);
+    const correlation = previous === null || overlap === 'random-columns' ? 0 : overlap === 'maximum' ? 1 :
+      Math.exp(-Math.abs(c.x - previous) / correlationLengthKm);
+    density = bins.map((bin, i) => {
+      const depth = c.cells.reduce((sum, cell) => sum + (bin.u < cell.fraction ? cell.depth : 0), 0);
+      const selected = !condition || c.column !== condition.column || (bin.u >= condition.lower && bin.u < condition.upper);
+      return selected ? (correlation * density[i] + (1 - correlation) * mass) * Math.exp(-Math.min(80, depth)) : 0;
+    });
+    previous = c.x;
+  }
+  const mass = density.reduce((sum, d, i) => sum + d * bins[i].width, 0);
+  return mass / (condition ? condition.upper - condition.lower : 1);
+}
+
+```
+
+src/astro.mjs
+```javascript
+import SunCalc from 'suncalc';
+
+export const EARTH_KM = 6371;
+export const RAD = Math.PI / 180;
+export const clamp = (x, min = 0, max = 1) => Math.max(min, Math.min(max, x));
+export const round = (x, digits = 2) => Number(x.toFixed(digits));
+
+export function civilDate(instant, zone = 'Asia/Shanghai') {
+  const parts = new Intl.DateTimeFormat('en-US', {
+    timeZone: zone, year: 'numeric', month: '2-digit', day: '2-digit',
+  }).formatToParts(new Date(instant));
+  const value = type => parts.find(p => p.type === type).value;
+  return `${value('year')}-${value('month')}-${value('day')}`;
+}
+
+export function addDays(date, days) {
+  return new Date(Date.parse(`${date}T12:00:00Z`) + days * 86400000).toISOString().slice(0, 10);
+}
+
+export function validDate(date) {
+  return /^\d{4}-\d{2}-\d{2}$/.test(date) &&
+    Number.isFinite(Date.parse(`${date}T12:00:00Z`)) && addDays(date, 0) === date;
+}
+
+export function sunPosition(instant, lat, lon) {
+  const p = SunCalc.getPosition(new Date(instant), lat, lon);
+  return { altitude: p.altitude / RAD, azimuth: (p.azimuth / RAD + 180 + 360) % 360 };
+}
+
+export function solarEvent(date, event, lat, lon, zone) {
+  for (const day of [-1, 0, 1]) {
+    const times = SunCalc.getTimes(new Date(`${addDays(date, day)}T12:00:00Z`), lat, lon);
+    const value = times[event];
+    if (Number.isFinite(+value) && civilDate(value, zone) === date) {
+      return { time: value.toISOString(), ...sunPosition(value, lat, lon) };
+    }
+  }
+  return null;
+}
+
+export function destination(lat, lon, bearing, km) {
+  const phi = lat * RAD, lambda = lon * RAD, theta = bearing * RAD, d = km / EARTH_KM;
+  const p = Math.asin(Math.sin(phi) * Math.cos(d) + Math.cos(phi) * Math.sin(d) * Math.cos(theta));
+  const l = lambda + Math.atan2(Math.sin(theta) * Math.sin(d) * Math.cos(phi), Math.cos(d) - Math.sin(phi) * Math.sin(p));
+  return { lat: round(p / RAD, 4), lon: round(((l / RAD + 540) % 360) - 180, 4) };
+}
+
+export function sectionPoint(x, height) {
+  const a = x / EARTH_KM, r = EARTH_KM + height;
+  return [r * Math.sin(a), r * Math.cos(a)];
+}
+
+export function rayPoint(point, direction, distance) {
+  const x = point[0] + direction[0] * distance, y = point[1] + direction[1] * distance;
+  return { x: Math.atan2(x, y) * EARTH_KM, height: Math.hypot(x, y) - EARTH_KM };
+}
+
+export function earthBlocks(point, direction) {
+  const t = -(point[0] * direction[0] + point[1] * direction[1]);
+  return t > 0 && Math.hypot(point[0] + t * direction[0], point[1] + t * direction[1]) < EARTH_KM;
+}
+
+export function viewElevation(x, height, observerHeight = 0) {
+  const p = sectionPoint(x, height);
+  return Math.atan2(p[1] - EARTH_KM - observerHeight, Math.abs(p[0])) / RAD;
+}
+
+```

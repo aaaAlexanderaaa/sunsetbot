@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Inspect or execute regional CDS/ADS requests, with resumable remote job IDs.
 
-The default is a local dry run. --fetch submits the selected plan; --check-auth
-checks credentials alone. --prompt-key accepts a hidden, process-local token.
+The default is a local dry run. --fetch submits and downloads the selected plan;
+--submit-only queues all jobs without waiting; --check-auth checks credentials
+alone. --prompt-key accepts a hidden, process-local token.
 CDSAPI_KEY and the SDK's standard ~/.cdsapirc are also supported. Credentials
 never enter plan files, state receipts, download URLs or printed output.
 """
@@ -18,6 +19,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 STORES = {
     "reanalysis-era5-pressure-levels": "https://cds.climate.copernicus.eu/api",
+    "reanalysis-era5-single-levels": "https://cds.climate.copernicus.eu/api",
     "cams-global-reanalysis-eac4": "https://ads.atmosphere.copernicus.eu/api",
 }
 
@@ -73,7 +75,7 @@ def load_key(prompt=False):
     return key
 
 
-def fetch_job(client, job, directory):
+def fetch_job(client, job, directory, *, submit_only=False):
     identity = {"dataset": job["dataset"], "endpoint": STORES[job["dataset"]], "request": job["request"]}
     fingerprint = digest(json.dumps(identity, sort_keys=True).encode())
     target = directory / (job["id"] + ".grib")
@@ -96,6 +98,8 @@ def fetch_job(client, job, directory):
         state.update(request_id=remote.request_id, submitted_at=datetime.now(timezone.utc).isoformat())
         save_state(receipt_file, state)
         print(f"{job['id']}: submitted; remote ID saved", flush=True)
+    if submit_only:
+        return
     temporary = target.with_name(target.name + ".partial")
     remote.download(str(temporary))
     with temporary.open("rb") as stream:
@@ -114,11 +118,12 @@ def main():
     parser.add_argument("--output", type=Path, default=ROOT / "var/reanalysis/official")
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument("--fetch", action="store_true")
+    mode.add_argument("--submit-only", action="store_true")
     mode.add_argument("--check-auth", action="store_true")
     parser.add_argument("--prompt-key", action="store_true")
     args = parser.parse_args()
     plan = load_plan(args.plan)
-    if not (args.fetch or args.check_auth):
+    if not (args.fetch or args.submit_only or args.check_auth):
         print(json.dumps({"mode": "local dry run; no remote job submitted", **plan,
                           "endpoints": STORES}, indent=2))
         return
@@ -136,7 +141,7 @@ def main():
         return
     args.output.mkdir(parents=True, exist_ok=True)
     for job in plan["jobs"]:
-        fetch_job(clients[job["dataset"]], job, args.output)
+        fetch_job(clients[job["dataset"]], job, args.output, submit_only=args.submit_only)
 
 
 if __name__ == "__main__":

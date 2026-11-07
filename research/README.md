@@ -79,7 +79,7 @@ counting by location/variables. The application has its own smaller budget.
 
 ## Ask ChatGPT MCP
 
-Six self-contained, isolated questions use the owner's configured
+Seven completed self-contained, isolated assessments use the owner's configured
 `ask_chatgpt` MCP and account model/thinking settings. The actual questions,
 raw HTML/JSON responses and extracted reading copies are retained:
 
@@ -91,6 +91,7 @@ raw HTML/JSON responses and extracted reading copies are retained:
 | [Focused probability review](questions/04-probability-review.txt) | [raw](chatgpt/04-probability-review.json), [reading copy](chatgpt/04-probability-review.md); confirms the stated conditional Markov integral and exposed-base areas, identifies threshold-merging and shortened-path risks |
 | [Historical validation review](questions/05-historical-validation.txt) | [raw](chatgpt/05-historical-validation.json), [reading copy](chatgpt/05-historical-validation.md); identifies cloud-target/scattering errors and a frozen historical evaluation route |
 | [Reanalysis data access](questions/06-data-acquisition.txt) | [raw](chatgpt/06-data-acquisition.json), [reading copy](chatgpt/06-data-acquisition.md); recommends official regional CDS/ADS retrieval and concrete account steps |
+| [Priority after complete ERA5/EAC4 replay](questions/08-model-priority-after-era5.txt) | [raw](chatgpt/08-model-priority-after-era5.json), [reading copy](chatgpt/08-model-priority-after-era5.md); prioritizes vertical representation, paired ablations and independent dates; server reported 222 s thinking |
 
 The owner authorized relevant newly authored source for these assessments.
 Every question includes the required implementation/context. Model answers are
@@ -183,3 +184,29 @@ This store chunks each variable/hour globally; the first cloud chunk is
 and the official regional route as the bulk recommendation. Full numerical
 cloud-array retrieval and authenticated official requests retain pending status
 until the account steps are completed. The model remains frozen at 0.3.1.
+
+## Complete official input comparison (2026-11-07)
+
+The configured official sources now work end to end. Exact ERA5/EAC4 regional
+GRIB inputs, including native cloud water/ice, and ERA5 native low/mid/high
+cover were retrieved. The [full four-way study](backtests/shanghai-era5-input-2023-06/report.md)
+evaluates the same twenty events with unchanged parameters. Ranking AUC is
+0.667 (GFS/original CAMS), 0.569 (ERA5/original CAMS), 0.667 (GFS/EAC4), and
+0.637 (ERA5/EAC4); the native ERA5 simple baseline gives 0.686.
+[Detailed evidence](../docs/evidence/era5-input-comparison.md) includes field
+attribution and exact offline replay.
+
+A [37-level diagnostic](reanalysis/vertical-resolution.json) reveals a 225 hPa
+cloud band omitted by the eleven-level input representation in both an
+observed-positive sunset and a source-labelled zero sunrise. The next
+[representation experiment](../docs/plans/cloud-column-representation.md)
+keeps optics fixed and specifies independent calendar dates before scoring.
+Official current-IFS cloud concepts support the distinction between layer
+cover integrated across model levels and pressure-level samples; the actual
+ERA5 fields remain their own data evidence.
+
+The [seventh question attempt](questions/07-era5-experiment-design.txt) returned
+a [pre-dispatch compatibility error](chatgpt/07-era5-experiment-design.json).
+The fresh eighth question completed with full local facts/code and the finished
+experiment. The client now propagates MCP tool errors after preserving their
+raw response, preventing a failed assessment from being counted as complete.

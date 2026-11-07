@@ -13,9 +13,11 @@ observed essentially no glow, index 46.3) and weaker ranking than a simple
 cloud-layer baseline. The complete 20-event returned slice has ranking AUC 0.667 versus 0.922
 for that baseline; it includes a labeled-zero sunrise given 83.1.
 See the [continuous historical pilot](research/backtests/shanghai-2023-06-all/report.md).
-The [reanalysis access guide](docs/reanalysis-access.md) includes verified free
-CDS/ADS sources, exact regional requests, an anonymous mirror access probe,
-and the three account steps needed for the next frozen-input comparison.
+The [completed ERA5/EAC4 comparison](docs/evidence/era5-input-comparison.md)
+includes all twenty cases with both input factors: ERA5+EAC4 gives ranking AUC
+0.637 versus 0.686 for the native ERA5 cloud-layer baseline. Dense diagnostic
+profiles reveal omitted 225 hPa cloud. The [data-access guide](docs/reanalysis-access.md)
+documents the working free official sources and reproducible acquisition.
 Engineering regression/replay and empirical prediction skill retain separate
 evidence. Cloud-target reconstruction and cloud scattering require priority
 review before relying on the numerical index for outings.

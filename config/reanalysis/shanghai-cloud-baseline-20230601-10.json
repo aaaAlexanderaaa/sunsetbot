@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "purpose": "Native ERA5 low/medium/high cloud cover for a same-source simple cloud-layer baseline on the existing 20-event input comparison.",
+  "jobs": [
+    {
+      "id": "era5-cloud-baseline-20230531",
+      "dataset": "reanalysis-era5-single-levels",
+      "request": {
+        "product_type": ["reanalysis"],
+        "variable": ["low_cloud_cover", "medium_cloud_cover", "high_cloud_cover"],
+        "year": ["2023"], "month": ["05"], "day": ["31"],
+        "time": ["00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"],
+        "area": [38, 110, 26, 132], "data_format": "grib", "download_format": "unarchived"
+      }
+    },
+    {
+      "id": "era5-cloud-baseline-20230601-10",
+      "dataset": "reanalysis-era5-single-levels",
+      "request": {
+        "product_type": ["reanalysis"],
+        "variable": ["low_cloud_cover", "medium_cloud_cover", "high_cloud_cover"],
+        "year": ["2023"], "month": ["06"],
+        "day": ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10"],
+        "time": ["00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"],
+        "area": [38, 110, 26, 132], "data_format": "grib", "download_format": "unarchived"
+      }
+    }
+  ]
+}

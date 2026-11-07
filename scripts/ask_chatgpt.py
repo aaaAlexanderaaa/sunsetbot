@@ -81,6 +81,8 @@ def main():
     for block in result.get('result', {}).get('content', []):
         if block.get('type') == 'text':
             print(block['text'], flush=True)
+    if 'error' in result or result.get('result', {}).get('isError'):
+        raise RuntimeError('Ask ChatGPT MCP returned an error; the exact response is preserved in the output file')
 
 
 if __name__ == '__main__':

@@ -67,6 +67,7 @@ class ReanalysisChecks(unittest.TestCase):
     def test_request_choices_match_official_captured_forms(self):
         forms = {
             "reanalysis-era5-pressure-levels": captured_widgets("research/sources/history-copernicus/era5-pressure-levels.html"),
+            "reanalysis-era5-single-levels": captured_widgets("research/sources/era5-baseline/era5-single-levels.html"),
             "cams-global-reanalysis-eac4": captured_widgets("research/sources/history-copernicus/cams-eac4.html"),
         }
         for path in (ROOT / "config/reanalysis").glob("*.json"):

@@ -1,0 +1,3748 @@
+{
+  "generatedAt": "2026-11-07T01:23:00.935Z",
+  "modelVersion": "section-optics-0.3.1",
+  "modelSha256": "f80a37d9a92cb2a421fda2599af9e336e2261d7b4a49980159a931be5e28e71f",
+  "design": "2x2 ERA5 pressure-profile and EAC4 AOD interventions, all other consumed inputs fixed to GFS control",
+  "cases": [
+    {
+      "id": "2023-06-01-sunrise",
+      "date": "2023-06-01",
+      "eventType": "sunrise",
+      "observedGrade": 0,
+      "observedLabel": "基本不烧",
+      "observedCloud": "-",
+      "observedColour": "-",
+      "originalPrediction": "基本不烧",
+      "evidenceUrls": "-",
+      "originalMap": "/static/media/ERA5/202306010000_rise.jpg",
+      "originalSection": "/static/media/ERA5/上海市_20230601_rise.jpg",
+      "baselineScore": 0,
+      "era5BaselineScore": 1.287999013921151,
+      "modes": {
+        "gfs_cams": {
+          "score": 0.6,
+          "peakTime": "2023-05-31T21:32:21.020Z",
+          "aodAtPeak": 0.27,
+          "pathCoverage": "within-sampling",
+          "overlapSensitivity": {
+            "minimum": 0.6,
+            "maximum": 0.6,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 0.6,
+            "maximum": 0.7,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "era5_cams": {
+          "score": 0,
+          "peakTime": null,
+          "aodAtPeak": 0.267,
+          "pathCoverage": "within-sampling",
+          "overlapSensitivity": {
+            "minimum": 0,
+            "maximum": 0,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 0,
+            "maximum": 0,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "gfs_eac4": {
+          "score": 0.6,
+          "peakTime": "2023-05-31T21:32:21.020Z",
+          "aodAtPeak": 0.325,
+          "pathCoverage": "within-sampling",
+          "overlapSensitivity": {
+            "minimum": 0.5,
+            "maximum": 0.6,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 0.6,
+            "maximum": 0.6,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "era5_eac4": {
+          "score": 0,
+          "peakTime": null,
+          "aodAtPeak": 0.326,
+          "pathCoverage": "within-sampling",
+          "overlapSensitivity": {
+            "minimum": 0,
+            "maximum": 0,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 0,
+            "maximum": 0,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        }
+      },
+      "profileAblations": {
+        "era5CloudOnly": {
+          "score": 0,
+          "peakTime": null
+        },
+        "era5HeightOnly": {
+          "score": 0.6,
+          "peakTime": "2023-05-31T21:32:21.020Z"
+        }
+      },
+      "localAtSolarEvent": {
+        "profiles": [
+          {
+            "pressureHpa": 1000,
+            "gfsCloudPercent": 0.8725055555502573,
+            "era5CloudPercent": 0.78125,
+            "gfsHeightM": 43.74501111110052,
+            "era5HeightM": 49.234466006990054
+          },
+          {
+            "pressureHpa": 925,
+            "gfsCloudPercent": 0.8725055555502573,
+            "era5CloudPercent": 7.11526475691547,
+            "gfsHeightM": 720.7450111111006,
+            "era5HeightM": 725.5478437702358
+          },
+          {
+            "pressureHpa": 850,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 5.169934895820916,
+            "gfsHeightM": 1449.7450111111004,
+            "era5HeightM": 1454.7243580607594
+          },
+          {
+            "pressureHpa": 700,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 7.345655381989976,
+            "gfsHeightM": 3090.7450111111007,
+            "era5HeightM": 3094.426007765078
+          },
+          {
+            "pressureHpa": 600,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0.6816449652736385,
+            "gfsHeightM": 4353.7450111111,
+            "era5HeightM": 4356.9973729118365
+          },
+          {
+            "pressureHpa": 500,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 5821.2549888889,
+            "era5HeightM": 5822.849194669383
+          },
+          {
+            "pressureHpa": 400,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 7545.994911277791,
+            "era5HeightM": 7546.540163771391
+          },
+          {
+            "pressureHpa": 300,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 9668.151807055572,
+            "era5HeightM": 9670.08918997428
+          },
+          {
+            "pressureHpa": 250,
+            "gfsCloudPercent": 6.3625277777512865,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 10945.245753833353,
+            "era5HeightM": 10947.48840359605
+          },
+          {
+            "pressureHpa": 200,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 12435.769911222258,
+            "era5HeightM": 12443.038964595758
+          },
+          {
+            "pressureHpa": 150,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 14266.051208388904,
+            "era5HeightM": 14273.038178741539
+          }
+        ],
+        "camsAod": 0.26745011111100514,
+        "eac4Aod": 0.32594882439762507,
+        "era5Grid": {
+          "latitude": 31.25,
+          "longitude": 121.5
+        },
+        "eac4Grid": {
+          "latitude": 31.5,
+          "longitude": 121.5
+        }
+      },
+      "scoreInteraction": 0
+    },
+    {
+      "id": "2023-06-01-sunset",
+      "date": "2023-06-01",
+      "eventType": "sunset",
+      "observedGrade": 0,
+      "observedLabel": "基本不烧",
+      "observedCloud": "-",
+      "observedColour": "-",
+      "originalPrediction": "基本不烧",
+      "evidenceUrls": "-",
+      "originalMap": "/static/media/ERA5/202306010000_set.jpg",
+      "originalSection": "/static/media/ERA5/上海市_20230601_set.jpg",
+      "baselineScore": 0,
+      "era5BaselineScore": 17.63616100383275,
+      "modes": {
+        "gfs_cams": {
+          "score": 0,
+          "peakTime": null,
+          "aodAtPeak": 0.406,
+          "pathCoverage": "within-sampling",
+          "overlapSensitivity": {
+            "minimum": 0,
+            "maximum": 0,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 0,
+            "maximum": 0,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "era5_cams": {
+          "score": 0,
+          "peakTime": null,
+          "aodAtPeak": 0.406,
+          "pathCoverage": "within-sampling",
+          "overlapSensitivity": {
+            "minimum": 0,
+            "maximum": 0,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 0,
+            "maximum": 0,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "gfs_eac4": {
+          "score": 0,
+          "peakTime": null,
+          "aodAtPeak": 0.499,
+          "pathCoverage": "within-sampling",
+          "overlapSensitivity": {
+            "minimum": 0,
+            "maximum": 0,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 0,
+            "maximum": 0,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "era5_eac4": {
+          "score": 0,
+          "peakTime": null,
+          "aodAtPeak": 0.499,
+          "pathCoverage": "within-sampling",
+          "overlapSensitivity": {
+            "minimum": 0,
+            "maximum": 0,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 0,
+            "maximum": 0,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        }
+      },
+      "profileAblations": {
+        "era5CloudOnly": {
+          "score": 0,
+          "peakTime": null
+        },
+        "era5HeightOnly": {
+          "score": 0,
+          "peakTime": null
+        }
+      },
+      "localAtSolarEvent": {
+        "profiles": [
+          {
+            "pressureHpa": 1000,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 30.80745777779155,
+            "era5HeightM": 30.267800302195123
+          },
+          {
+            "pressureHpa": 925,
+            "gfsCloudPercent": 0.09627111110422348,
+            "era5CloudPercent": 0.15042361110034919,
+            "gfsHeightM": 711.7111866666874,
+            "era5HeightM": 708.3726750417151
+          },
+          {
+            "pressureHpa": 850,
+            "gfsCloudPercent": 1.192542222208447,
+            "era5CloudPercent": 13.32732986105192,
+            "gfsHeightM": 1441.7111866666874,
+            "era5HeightM": 1437.104447232014
+          },
+          {
+            "pressureHpa": 700,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 7.03125,
+            "gfsHeightM": 3078.7111866666874,
+            "era5HeightM": 3074.9611443032204
+          },
+          {
+            "pressureHpa": 600,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 4347.807457777792,
+            "era5HeightM": 4346.7817348007
+          },
+          {
+            "pressureHpa": 500,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 5809,
+            "era5HeightM": 5811.24453711116
+          },
+          {
+            "pressureHpa": 400,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 7547.912210355572,
+            "era5HeightM": 7552.440889657089
+          },
+          {
+            "pressureHpa": 300,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 9677.265003511122,
+            "era5HeightM": 9684.120261931112
+          },
+          {
+            "pressureHpa": 250,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 10961.543207066692,
+            "era5HeightM": 10969.451488644048
+          },
+          {
+            "pressureHpa": 200,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 12460.245688311126,
+            "era5HeightM": 12471.487135996722
+          },
+          {
+            "pressureHpa": 150,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 14291.965261466708,
+            "era5HeightM": 14299.688934861111
+          }
+        ],
+        "camsAod": 0.40577626666625344,
+        "eac4Aod": 0.4987417715446007,
+        "era5Grid": {
+          "latitude": 31.25,
+          "longitude": 121.5
+        },
+        "eac4Grid": {
+          "latitude": 31.5,
+          "longitude": 121.5
+        }
+      },
+      "scoreInteraction": 0
+    },
+    {
+      "id": "2023-06-02-sunrise",
+      "date": "2023-06-02",
+      "eventType": "sunrise",
+      "observedGrade": 0,
+      "observedLabel": "基本不烧",
+      "observedCloud": "-",
+      "observedColour": "-",
+      "originalPrediction": "基本不烧",
+      "evidenceUrls": "-",
+      "originalMap": "/static/media/ERA5/202306020000_rise.jpg",
+      "originalSection": "/static/media/ERA5/上海市_20230602_rise.jpg",
+      "baselineScore": 0,
+      "era5BaselineScore": 0,
+      "modes": {
+        "gfs_cams": {
+          "score": 0,
+          "peakTime": null,
+          "aodAtPeak": 0.463,
+          "pathCoverage": "within-sampling",
+          "overlapSensitivity": {
+            "minimum": 0,
+            "maximum": 0,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 0,
+            "maximum": 0,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "era5_cams": {
+          "score": 0,
+          "peakTime": null,
+          "aodAtPeak": 0.463,
+          "pathCoverage": "within-sampling",
+          "overlapSensitivity": {
+            "minimum": 0,
+            "maximum": 0,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 0,
+            "maximum": 0,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "gfs_eac4": {
+          "score": 0,
+          "peakTime": null,
+          "aodAtPeak": 0.413,
+          "pathCoverage": "within-sampling",
+          "overlapSensitivity": {
+            "minimum": 0,
+            "maximum": 0,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 0,
+            "maximum": 0,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "era5_eac4": {
+          "score": 0,
+          "peakTime": null,
+          "aodAtPeak": 0.413,
+          "pathCoverage": "within-sampling",
+          "overlapSensitivity": {
+            "minimum": 0,
+            "maximum": 0,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 0,
+            "maximum": 0,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        }
+      },
+      "profileAblations": {
+        "era5CloudOnly": {
+          "score": 0,
+          "peakTime": null
+        },
+        "era5HeightOnly": {
+          "score": 0,
+          "peakTime": null
+        }
+      },
+      "localAtSolarEvent": {
+        "profiles": [
+          {
+            "pressureHpa": 1000,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 27.077604166666667,
+            "era5HeightM": 26.54403374267504
+          },
+          {
+            "pressureHpa": 925,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 704.0776041666667,
+            "era5HeightM": 700.9605444578212
+          },
+          {
+            "pressureHpa": 850,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 1430.3411458333333,
+            "era5HeightM": 1426.7128049084254
+          },
+          {
+            "pressureHpa": 700,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 3067.7364583333333,
+            "era5HeightM": 3065.6175416654983
+          },
+          {
+            "pressureHpa": 600,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 4338.868229166666,
+            "era5HeightM": 4339.366637040791
+          },
+          {
+            "pressureHpa": 500,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 5809.472916666667,
+            "era5HeightM": 5810.18275175054
+          },
+          {
+            "pressureHpa": 400,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 7543.047921875,
+            "era5HeightM": 7545.977998268395
+          },
+          {
+            "pressureHpa": 300,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 9670.97,
+            "era5HeightM": 9676.827235855262
+          },
+          {
+            "pressureHpa": 250,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 10950.48,
+            "era5HeightM": 10958.664933627098
+          },
+          {
+            "pressureHpa": 200,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 12457.527265625,
+            "era5HeightM": 12458.952439161183
+          },
+          {
+            "pressureHpa": 150,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 14286.176005208334,
+            "era5HeightM": 14289.483654081883
+          }
+        ],
+        "camsAod": 0.4634114583333333,
+        "eac4Aod": 0.4130317276602404,
+        "era5Grid": {
+          "latitude": 31.25,
+          "longitude": 121.5
+        },
+        "eac4Grid": {
+          "latitude": 31.5,
+          "longitude": 121.5
+        }
+      },
+      "scoreInteraction": 0
+    },
+    {
+      "id": "2023-06-02-sunset",
+      "date": "2023-06-02",
+      "eventType": "sunset",
+      "observedGrade": 0,
+      "observedLabel": "基本不烧",
+      "observedCloud": "-",
+      "observedColour": "-",
+      "originalPrediction": "基本不烧",
+      "evidenceUrls": "-",
+      "originalMap": "/static/media/ERA5/202306020000_set.jpg",
+      "originalSection": "/static/media/ERA5/上海市_20230602_set.jpg",
+      "matchedTo": "2023-06-03-sunset",
+      "baselineScore": 4.56,
+      "era5BaselineScore": 28.169436411614893,
+      "modes": {
+        "gfs_cams": {
+          "score": 0,
+          "peakTime": null,
+          "aodAtPeak": 1.151,
+          "pathCoverage": "extrapolated",
+          "overlapSensitivity": {
+            "minimum": 0,
+            "maximum": 0,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 0,
+            "maximum": 0,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "era5_cams": {
+          "score": 0,
+          "peakTime": null,
+          "aodAtPeak": 1.151,
+          "pathCoverage": "extrapolated",
+          "overlapSensitivity": {
+            "minimum": 0,
+            "maximum": 0,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 0,
+            "maximum": 0,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "gfs_eac4": {
+          "score": 0,
+          "peakTime": null,
+          "aodAtPeak": 1.197,
+          "pathCoverage": "extrapolated",
+          "overlapSensitivity": {
+            "minimum": 0,
+            "maximum": 0,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 0,
+            "maximum": 0,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "era5_eac4": {
+          "score": 0,
+          "peakTime": null,
+          "aodAtPeak": 1.197,
+          "pathCoverage": "extrapolated",
+          "overlapSensitivity": {
+            "minimum": 0,
+            "maximum": 0,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 0,
+            "maximum": 0,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        }
+      },
+      "profileAblations": {
+        "era5CloudOnly": {
+          "score": 0,
+          "peakTime": null
+        },
+        "era5HeightOnly": {
+          "score": 0,
+          "peakTime": null
+        }
+      },
+      "localAtSolarEvent": {
+        "profiles": [
+          {
+            "pressureHpa": 1000,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 55.477813333272934,
+            "era5HeightM": 56.78229936578997
+          },
+          {
+            "pressureHpa": 925,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 742.6518755555153,
+            "era5HeightM": 743.849811267447
+          },
+          {
+            "pressureHpa": 850,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 1474.6518755555153,
+            "era5HeightM": 1476.7223971034753
+          },
+          {
+            "pressureHpa": 700,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 18.61401388887316,
+            "gfsHeightM": 3100.7389066666365,
+            "era5HeightM": 3104.5560434967633
+          },
+          {
+            "pressureHpa": 600,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 4363.477813333273,
+            "era5HeightM": 4371.803554953691
+          },
+          {
+            "pressureHpa": 500,
+            "gfsCloudPercent": 2.738906666636467,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 5831.651875555515,
+            "era5HeightM": 5840.794746903513
+          },
+          {
+            "pressureHpa": 400,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 7570.155033155531,
+            "era5HeightM": 7579.457511201225
+          },
+          {
+            "pressureHpa": 300,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 9706.028769422173,
+            "era5HeightM": 9714.749482805544
+          },
+          {
+            "pressureHpa": 250,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 10992.048411466627,
+            "era5HeightM": 11002.761232655585
+          },
+          {
+            "pressureHpa": 200,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 12497.265305333287,
+            "era5HeightM": 12505.06375571676
+          },
+          {
+            "pressureHpa": 150,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 14321.870424266606,
+            "era5HeightM": 14334.77516333868
+          }
+        ],
+        "camsAod": 1.151296888887882,
+        "eac4Aod": 1.1973065609911944,
+        "era5Grid": {
+          "latitude": 31.25,
+          "longitude": 121.5
+        },
+        "eac4Grid": {
+          "latitude": 31.5,
+          "longitude": 121.5
+        }
+      },
+      "scoreInteraction": 0
+    },
+    {
+      "id": "2023-06-03-sunrise",
+      "date": "2023-06-03",
+      "eventType": "sunrise",
+      "observedGrade": 0,
+      "observedLabel": "基本不烧",
+      "observedCloud": "-",
+      "observedColour": "-",
+      "originalPrediction": "基本不烧",
+      "evidenceUrls": "-",
+      "originalMap": "/static/media/ERA5/202306030000_rise.jpg",
+      "originalSection": "/static/media/ERA5/上海市_20230603_rise.jpg",
+      "baselineScore": 72.61,
+      "era5BaselineScore": 76.39277529269586,
+      "modes": {
+        "gfs_cams": {
+          "score": 0.7,
+          "peakTime": "2023-06-02T21:31:51.646Z",
+          "aodAtPeak": 1.346,
+          "pathCoverage": "within-sampling",
+          "overlapSensitivity": {
+            "minimum": 0.7,
+            "maximum": 0.7,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 0.3,
+            "maximum": 0.9,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "era5_cams": {
+          "score": 0.9,
+          "peakTime": "2023-06-02T21:31:51.646Z",
+          "aodAtPeak": 1.346,
+          "pathCoverage": "within-sampling",
+          "overlapSensitivity": {
+            "minimum": 0.9,
+            "maximum": 0.9,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 0.4,
+            "maximum": 1.1,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "gfs_eac4": {
+          "score": 0.6,
+          "peakTime": "2023-06-02T21:31:51.646Z",
+          "aodAtPeak": 1.457,
+          "pathCoverage": "within-sampling",
+          "overlapSensitivity": {
+            "minimum": 0.6,
+            "maximum": 0.6,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 0.2,
+            "maximum": 0.8,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "era5_eac4": {
+          "score": 0.8,
+          "peakTime": "2023-06-02T21:31:51.646Z",
+          "aodAtPeak": 1.457,
+          "pathCoverage": "within-sampling",
+          "overlapSensitivity": {
+            "minimum": 0.8,
+            "maximum": 0.8,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 0.3,
+            "maximum": 1.1,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        }
+      },
+      "profileAblations": {
+        "era5CloudOnly": {
+          "score": 0.9,
+          "peakTime": "2023-06-02T21:31:51.646Z"
+        },
+        "era5HeightOnly": {
+          "score": 0.7,
+          "peakTime": "2023-06-02T21:31:51.646Z"
+        }
+      },
+      "localAtSolarEvent": {
+        "profiles": [
+          {
+            "pressureHpa": 1000,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 90.18607666651408,
+            "era5HeightM": 88.14506000884703
+          },
+          {
+            "pressureHpa": 925,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 762.3217305554284,
+            "era5HeightM": 762.6213252861505
+          },
+          {
+            "pressureHpa": 850,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 2.34375,
+            "gfsHeightM": 1489.186076666514,
+            "era5HeightM": 1489.8000261660177
+          },
+          {
+            "pressureHpa": 700,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 4.899459201428625,
+            "gfsHeightM": 3112.3217305554285,
+            "era5HeightM": 3115.8000603725322
+          },
+          {
+            "pressureHpa": 600,
+            "gfsCloudPercent": 6.034808333714803,
+            "era5CloudPercent": 46.54486241357194,
+            "gfsHeightM": 4369.593038333257,
+            "era5HeightM": 4374.951239150537
+          },
+          {
+            "pressureHpa": 500,
+            "gfsCloudPercent": 4.271307777828641,
+            "era5CloudPercent": 23.900811197857063,
+            "gfsHeightM": 5830.593038333257,
+            "era5HeightM": 5835.858461621023
+          },
+          {
+            "pressureHpa": 400,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 7566.334934894382,
+            "era5HeightM": 7569.899925072057
+          },
+          {
+            "pressureHpa": 300,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 9701.391597238848,
+            "era5HeightM": 9704.075325916125
+          },
+          {
+            "pressureHpa": 250,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 10988.312257611062,
+            "era5HeightM": 10990.285847953472
+          },
+          {
+            "pressureHpa": 200,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 12486.05,
+            "era5HeightM": 12491.07234970797
+          },
+          {
+            "pressureHpa": 150,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 14307.46,
+            "era5HeightM": 14311.730782477827
+          }
+        ],
+        "camsAod": 1.4249219277805751,
+        "eac4Aod": 1.5430714659679348,
+        "era5Grid": {
+          "latitude": 31.25,
+          "longitude": 121.5
+        },
+        "eac4Grid": {
+          "latitude": 31.5,
+          "longitude": 121.5
+        }
+      },
+      "scoreInteraction": 0
+    },
+    {
+      "id": "2023-06-03-sunset",
+      "date": "2023-06-03",
+      "eventType": "sunset",
+      "observedGrade": 3,
+      "observedLabel": "小到中烧",
+      "observedCloud": "卷层云",
+      "observedColour": "橘红色",
+      "originalPrediction": "基本不烧",
+      "evidenceUrls": "https://weibo.com/3169171125/N3DJwplJK",
+      "originalMap": "/static/media/ERA5/202306030000_set.jpg",
+      "originalSection": "/static/media/ERA5/上海市_20230603_set.jpg",
+      "baselineScore": 100,
+      "era5BaselineScore": 80.70850111593649,
+      "modes": {
+        "gfs_cams": {
+          "score": 36.4,
+          "peakTime": "2023-06-03T10:15:19.202Z",
+          "aodAtPeak": 0.58,
+          "pathCoverage": "extrapolated",
+          "overlapSensitivity": {
+            "minimum": 36.4,
+            "maximum": 36.4,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 35.6,
+            "maximum": 36.5,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "era5_cams": {
+          "score": 2.4,
+          "peakTime": "2023-06-03T10:15:19.202Z",
+          "aodAtPeak": 0.58,
+          "pathCoverage": "extrapolated",
+          "overlapSensitivity": {
+            "minimum": 2.4,
+            "maximum": 2.5,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 2.4,
+            "maximum": 2.5,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "gfs_eac4": {
+          "score": 37.3,
+          "peakTime": "2023-06-03T10:15:19.202Z",
+          "aodAtPeak": 0.522,
+          "pathCoverage": "extrapolated",
+          "overlapSensitivity": {
+            "minimum": 37.3,
+            "maximum": 37.3,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 36.7,
+            "maximum": 37.4,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "era5_eac4": {
+          "score": 2.7,
+          "peakTime": "2023-06-03T10:15:19.202Z",
+          "aodAtPeak": 0.522,
+          "pathCoverage": "extrapolated",
+          "overlapSensitivity": {
+            "minimum": 2.6,
+            "maximum": 2.7,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 2.6,
+            "maximum": 2.7,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        }
+      },
+      "profileAblations": {
+        "era5CloudOnly": {
+          "score": 2.4,
+          "peakTime": "2023-06-03T10:15:19.202Z"
+        },
+        "era5HeightOnly": {
+          "score": 36.4,
+          "peakTime": "2023-06-03T10:15:19.202Z"
+        }
+      },
+      "localAtSolarEvent": {
+        "profiles": [
+          {
+            "pressureHpa": 1000,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 111.68800222211414,
+            "era5HeightM": 113.49789196088342
+          },
+          {
+            "pressureHpa": 925,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 781.7660016665856,
+            "era5HeightM": 783.2923978042477
+          },
+          {
+            "pressureHpa": 850,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 1504.6100027776426,
+            "era5HeightM": 1505.0444328258675
+          },
+          {
+            "pressureHpa": 700,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0.06093706599333226,
+            "gfsHeightM": 3129.610002777643,
+            "era5HeightM": 3130.9186721699807
+          },
+          {
+            "pressureHpa": 600,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0.06093706599333226,
+            "gfsHeightM": 4393.688002222114,
+            "era5HeightM": 4397.763488431738
+          },
+          {
+            "pressureHpa": 500,
+            "gfsCloudPercent": 6,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 5854.844001111057,
+            "era5HeightM": 5861.101726533691
+          },
+          {
+            "pressureHpa": 400,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 7588.793280688856,
+            "era5HeightM": 7596.073711567255
+          },
+          {
+            "pressureHpa": 300,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 9723.812482688758,
+            "era5HeightM": 9732.784413588019
+          },
+          {
+            "pressureHpa": 250,
+            "gfsCloudPercent": 72.14200611081388,
+            "era5CloudPercent": 12.073440538046675,
+            "gfsHeightM": 11005.422822116563,
+            "era5HeightM": 11019.278183026363
+          },
+          {
+            "pressureHpa": 200,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 2.8421783858599756,
+            "gfsHeightM": 12506.617302583207,
+            "era5HeightM": 12520.031587203794
+          },
+          {
+            "pressureHpa": 150,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 14330.874343316505,
+            "era5HeightM": 14345.977973134794
+          }
+        ],
+        "camsAod": 0.5531199777788587,
+        "eac4Aod": 0.4947461641712223,
+        "era5Grid": {
+          "latitude": 31.25,
+          "longitude": 121.5
+        },
+        "eac4Grid": {
+          "latitude": 31.5,
+          "longitude": 121.5
+        }
+      },
+      "scoreInteraction": -0.6
+    },
+    {
+      "id": "2023-06-04-sunrise",
+      "date": "2023-06-04",
+      "eventType": "sunrise",
+      "observedGrade": 0,
+      "observedLabel": "基本不烧",
+      "observedCloud": "-",
+      "observedColour": "-",
+      "originalPrediction": "基本不烧",
+      "evidenceUrls": "-",
+      "originalMap": "/static/media/ERA5/202306040000_rise.jpg",
+      "originalSection": "/static/media/ERA5/上海市_20230604_rise.jpg",
+      "baselineScore": 100,
+      "era5BaselineScore": 34.65442758757191,
+      "modes": {
+        "gfs_cams": {
+          "score": 43.5,
+          "peakTime": "2023-06-03T20:51:39.080Z",
+          "aodAtPeak": 0.972,
+          "pathCoverage": "extrapolated",
+          "overlapSensitivity": {
+            "minimum": 41.3,
+            "maximum": 47.8,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 11.5,
+            "maximum": 58.6,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "era5_cams": {
+          "score": 6.7,
+          "peakTime": "2023-06-03T21:31:39.080Z",
+          "aodAtPeak": 1.059,
+          "pathCoverage": "within-sampling",
+          "overlapSensitivity": {
+            "minimum": 6.4,
+            "maximum": 6.9,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 6,
+            "maximum": 6.8,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "gfs_eac4": {
+          "score": 50.4,
+          "peakTime": "2023-06-03T20:51:39.080Z",
+          "aodAtPeak": 0.764,
+          "pathCoverage": "extrapolated",
+          "overlapSensitivity": {
+            "minimum": 48,
+            "maximum": 54.9,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 18,
+            "maximum": 63,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "era5_eac4": {
+          "score": 7.8,
+          "peakTime": "2023-06-03T21:31:39.080Z",
+          "aodAtPeak": 0.799,
+          "pathCoverage": "within-sampling",
+          "overlapSensitivity": {
+            "minimum": 7.5,
+            "maximum": 8,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 7.3,
+            "maximum": 7.8,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        }
+      },
+      "profileAblations": {
+        "era5CloudOnly": {
+          "score": 6.7,
+          "peakTime": "2023-06-03T21:31:39.080Z"
+        },
+        "era5HeightOnly": {
+          "score": 43.6,
+          "peakTime": "2023-06-03T20:51:39.080Z"
+        }
+      },
+      "localAtSolarEvent": {
+        "profiles": [
+          {
+            "pressureHpa": 1000,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 105.13914444446564,
+            "era5HeightM": 109.36150153759537
+          },
+          {
+            "pressureHpa": 925,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 775.1391444444656,
+            "era5HeightM": 779.5351452406737
+          },
+          {
+            "pressureHpa": 850,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 3.688836805522442,
+            "gfsHeightM": 1498,
+            "era5HeightM": 1503.5459607916453
+          },
+          {
+            "pressureHpa": 700,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 21.222760416567326,
+            "gfsHeightM": 3124.7217111110685,
+            "era5HeightM": 3129.610834384722
+          },
+          {
+            "pressureHpa": 600,
+            "gfsCloudPercent": 2.113155555725098,
+            "era5CloudPercent": 2.235043402761221,
+            "gfsHeightM": 4389.7217111110685,
+            "era5HeightM": 4394.350169126829
+          },
+          {
+            "pressureHpa": 500,
+            "gfsCloudPercent": 0.4174333333969118,
+            "era5CloudPercent": 2.907586805522442,
+            "gfsHeightM": 5846,
+            "era5HeightM": 5848.572630190153
+          },
+          {
+            "pressureHpa": 400,
+            "gfsCloudPercent": 80.05956666469574,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 7567.1848344445225,
+            "era5HeightM": 7573.348702581097
+          },
+          {
+            "pressureHpa": 300,
+            "gfsCloudPercent": 89.42502222061157,
+            "era5CloudPercent": 6.834140624850988,
+            "gfsHeightM": 9695.609436555624,
+            "era5HeightM": 9700.30781330643
+          },
+          {
+            "pressureHpa": 250,
+            "gfsCloudPercent": 19.539788889884953,
+            "era5CloudPercent": 0.6725434027612209,
+            "gfsHeightM": 10977.405765888929,
+            "era5HeightM": 10982.717549797591
+          },
+          {
+            "pressureHpa": 200,
+            "gfsCloudPercent": 0.695722222328186,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 12474.42,
+            "era5HeightM": 12481.194734497087
+          },
+          {
+            "pressureHpa": 150,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 14301.49,
+            "era5HeightM": 14305.525861419497
+          }
+        ],
+        "camsAod": 0.9716513333320618,
+        "eac4Aod": 0.7642361359587673,
+        "era5Grid": {
+          "latitude": 31.25,
+          "longitude": 121.5
+        },
+        "eac4Grid": {
+          "latitude": 31.5,
+          "longitude": 121.5
+        }
+      },
+      "scoreInteraction": -5.8
+    },
+    {
+      "id": "2023-06-04-sunset",
+      "date": "2023-06-04",
+      "eventType": "sunset",
+      "observedGrade": 0,
+      "observedLabel": "基本不烧",
+      "observedCloud": "-",
+      "observedColour": "-",
+      "originalPrediction": "基本不烧",
+      "evidenceUrls": "-",
+      "originalMap": "/static/media/ERA5/202306040000_set.jpg",
+      "originalSection": "/static/media/ERA5/上海市_20230604_set.jpg",
+      "baselineScore": 79.81,
+      "era5BaselineScore": 70.6118464032183,
+      "modes": {
+        "gfs_cams": {
+          "score": 65.3,
+          "peakTime": "2023-06-04T10:55:50.934Z",
+          "aodAtPeak": 0.784,
+          "pathCoverage": "within-sampling",
+          "overlapSensitivity": {
+            "minimum": 61.5,
+            "maximum": 71.7,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 22,
+            "maximum": 69.3,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "era5_cams": {
+          "score": 1,
+          "peakTime": "2023-06-04T10:50:50.934Z",
+          "aodAtPeak": 0.789,
+          "pathCoverage": "extrapolated",
+          "overlapSensitivity": {
+            "minimum": 0,
+            "maximum": 1,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 0.1,
+            "maximum": 2.4,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "gfs_eac4": {
+          "score": 65.8,
+          "peakTime": "2023-06-04T10:55:50.934Z",
+          "aodAtPeak": 0.768,
+          "pathCoverage": "within-sampling",
+          "overlapSensitivity": {
+            "minimum": 61.9,
+            "maximum": 72.1,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 21,
+            "maximum": 69.8,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "era5_eac4": {
+          "score": 1,
+          "peakTime": "2023-06-04T10:50:50.934Z",
+          "aodAtPeak": 0.773,
+          "pathCoverage": "extrapolated",
+          "overlapSensitivity": {
+            "minimum": 0,
+            "maximum": 1,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 0.1,
+            "maximum": 2.5,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        }
+      },
+      "profileAblations": {
+        "era5CloudOnly": {
+          "score": 1,
+          "peakTime": "2023-06-04T10:50:50.934Z"
+        },
+        "era5HeightOnly": {
+          "score": 65.3,
+          "peakTime": "2023-06-04T10:55:50.934Z"
+        }
+      },
+      "localAtSolarEvent": {
+        "profiles": [
+          {
+            "pressureHpa": 1000,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 96.79244500001272,
+            "era5HeightM": 97.02294582490164
+          },
+          {
+            "pressureHpa": 925,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 768.7924450000127,
+            "era5HeightM": 767.0486573106019
+          },
+          {
+            "pressureHpa": 850,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0.7271992187533114,
+            "gfsHeightM": 1490.8616300000085,
+            "era5HeightM": 1490.689314997288
+          },
+          {
+            "pressureHpa": 700,
+            "gfsCloudPercent": 0.06918499999576144,
+            "era5CloudPercent": 6.141898437506622,
+            "gfsHeightM": 3125.8616300000085,
+            "era5HeightM": 3132.073352132645
+          },
+          {
+            "pressureHpa": 600,
+            "gfsCloudPercent": 0.9308150000042386,
+            "era5CloudPercent": 2.34375,
+            "gfsHeightM": 4389.792445000013,
+            "era5HeightM": 4395.629955500159
+          },
+          {
+            "pressureHpa": 500,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 43.04733984379305,
+            "gfsHeightM": 5845.8616300000085,
+            "era5HeightM": 5854.660882140579
+          },
+          {
+            "pressureHpa": 400,
+            "gfsCloudPercent": 6.51570500002967,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 7576.454902450006,
+            "era5HeightM": 7585.519592126272
+          },
+          {
+            "pressureHpa": 300,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 9711.178612150008,
+            "era5HeightM": 9715.946381823818
+          },
+          {
+            "pressureHpa": 250,
+            "gfsCloudPercent": 67.61630000008478,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 10996.058548500008,
+            "era5HeightM": 11000.523260842134
+          },
+          {
+            "pressureHpa": 200,
+            "gfsCloudPercent": 96.96222500006358,
+            "era5CloudPercent": 44.33461328140564,
+            "gfsHeightM": 12492.85949080001,
+            "era5HeightM": 12498.096691116485
+          },
+          {
+            "pressureHpa": 150,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 14310.45,
+            "era5HeightM": 14319.561652105964
+          }
+        ],
+        "camsAod": 0.7841510999997457,
+        "eac4Aod": 0.7675292029592402,
+        "era5Grid": {
+          "latitude": 31.25,
+          "longitude": 121.5
+        },
+        "eac4Grid": {
+          "latitude": 31.5,
+          "longitude": 121.5
+        }
+      },
+      "scoreInteraction": -0.5
+    },
+    {
+      "id": "2023-06-05-sunrise",
+      "date": "2023-06-05",
+      "eventType": "sunrise",
+      "observedGrade": 0,
+      "observedLabel": "基本不烧",
+      "observedCloud": "-",
+      "observedColour": "-",
+      "originalPrediction": "基本不烧",
+      "evidenceUrls": "-",
+      "originalMap": "/static/media/ERA5/202306050000_rise.jpg",
+      "originalSection": "/static/media/ERA5/上海市_20230605_rise.jpg",
+      "baselineScore": 0,
+      "era5BaselineScore": 77.7939050883591,
+      "modes": {
+        "gfs_cams": {
+          "score": 57.2,
+          "peakTime": "2023-06-04T20:51:27.928Z",
+          "aodAtPeak": 1.046,
+          "pathCoverage": "extrapolated",
+          "overlapSensitivity": {
+            "minimum": 55.2,
+            "maximum": 57.2,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 32.8,
+            "maximum": 58.6,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "era5_cams": {
+          "score": 23.5,
+          "peakTime": "2023-06-04T20:51:27.928Z",
+          "aodAtPeak": 1.046,
+          "pathCoverage": "extrapolated",
+          "overlapSensitivity": {
+            "minimum": 19.3,
+            "maximum": 26.5,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 3.6,
+            "maximum": 30.8,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "gfs_eac4": {
+          "score": 61.2,
+          "peakTime": "2023-06-04T20:51:27.928Z",
+          "aodAtPeak": 0.883,
+          "pathCoverage": "extrapolated",
+          "overlapSensitivity": {
+            "minimum": 59.2,
+            "maximum": 61.2,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 42.5,
+            "maximum": 62.2,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "era5_eac4": {
+          "score": 27.8,
+          "peakTime": "2023-06-04T20:51:27.928Z",
+          "aodAtPeak": 0.883,
+          "pathCoverage": "extrapolated",
+          "overlapSensitivity": {
+            "minimum": 22.9,
+            "maximum": 30.7,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 7.4,
+            "maximum": 33.5,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        }
+      },
+      "profileAblations": {
+        "era5CloudOnly": {
+          "score": 23.5,
+          "peakTime": "2023-06-04T20:51:27.928Z"
+        },
+        "era5HeightOnly": {
+          "score": 57.3,
+          "peakTime": "2023-06-04T20:51:27.928Z"
+        }
+      },
+      "localAtSolarEvent": {
+        "profiles": [
+          {
+            "pressureHpa": 1000,
+            "gfsCloudPercent": 0.5689688889185587,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 68.28448444445928,
+            "era5HeightM": 72.2846447822357
+          },
+          {
+            "pressureHpa": 925,
+            "gfsCloudPercent": 0.5689688889185587,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 743,
+            "era5HeightM": 745.4602245502062
+          },
+          {
+            "pressureHpa": 850,
+            "gfsCloudPercent": 0.5689688889185587,
+            "era5CloudPercent": 1.114630208350718,
+            "gfsHeightM": 1474,
+            "era5HeightM": 1474.788497555997
+          },
+          {
+            "pressureHpa": 700,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 1.784753472233812,
+            "gfsHeightM": 3114.7155155555406,
+            "era5HeightM": 3116.581238684008
+          },
+          {
+            "pressureHpa": 600,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 1.5625,
+            "gfsHeightM": 4378.8577577777705,
+            "era5HeightM": 4381.874967566496
+          },
+          {
+            "pressureHpa": 500,
+            "gfsCloudPercent": 0.8577577777703603,
+            "era5CloudPercent": 2.232623263883094,
+            "gfsHeightM": 5832,
+            "era5HeightM": 5834.01035865971
+          },
+          {
+            "pressureHpa": 400,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 15.523961805428069,
+            "gfsHeightM": 7558.2049579333425,
+            "era5HeightM": 7561.6860760867185
+          },
+          {
+            "pressureHpa": 300,
+            "gfsCloudPercent": 5.715515555540721,
+            "era5CloudPercent": 64.62149652776618,
+            "gfsHeightM": 9685.48,
+            "era5HeightM": 9690.36342256703
+          },
+          {
+            "pressureHpa": 250,
+            "gfsCloudPercent": 3.715515555540721,
+            "era5CloudPercent": 33.47589756951978,
+            "gfsHeightM": 10965.72,
+            "era5HeightM": 10970.408735554769
+          },
+          {
+            "pressureHpa": 200,
+            "gfsCloudPercent": 85.19819999933243,
+            "era5CloudPercent": 12.264295139039557,
+            "gfsHeightM": 12456.141424377794,
+            "era5HeightM": 12461.989560669472
+          },
+          {
+            "pressureHpa": 150,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 14272.065304244466,
+            "era5HeightM": 14277.746715324183
+          }
+        ],
+        "camsAod": 1.045775777777036,
+        "eac4Aod": 0.8830244331031696,
+        "era5Grid": {
+          "latitude": 31.25,
+          "longitude": 121.5
+        },
+        "eac4Grid": {
+          "latitude": 31.5,
+          "longitude": 121.5
+        }
+      },
+      "scoreInteraction": 0.3
+    },
+    {
+      "id": "2023-06-05-sunset",
+      "date": "2023-06-05",
+      "eventType": "sunset",
+      "observedGrade": 0,
+      "observedLabel": "基本不烧",
+      "observedCloud": "-",
+      "observedColour": "-",
+      "originalPrediction": "基本不烧",
+      "evidenceUrls": "-",
+      "originalMap": "/static/media/ERA5/202306050000_set.jpg",
+      "originalSection": "/static/media/ERA5/上海市_20230605_set.jpg",
+      "baselineScore": 17.21,
+      "era5BaselineScore": 19.709340670547356,
+      "modes": {
+        "gfs_cams": {
+          "score": 2.1,
+          "peakTime": "2023-06-05T10:51:21.853Z",
+          "aodAtPeak": 0.787,
+          "pathCoverage": "extrapolated",
+          "overlapSensitivity": {
+            "minimum": 0,
+            "maximum": 2.1,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 1.4,
+            "maximum": 2.2,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "era5_cams": {
+          "score": 0.4,
+          "peakTime": "2023-06-05T10:16:21.853Z",
+          "aodAtPeak": 0.898,
+          "pathCoverage": "extrapolated",
+          "overlapSensitivity": {
+            "minimum": 0.3,
+            "maximum": 0.4,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 0.4,
+            "maximum": 0.4,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "gfs_eac4": {
+          "score": 1.4,
+          "peakTime": "2023-06-05T10:51:21.853Z",
+          "aodAtPeak": 1.141,
+          "pathCoverage": "extrapolated",
+          "overlapSensitivity": {
+            "minimum": 0,
+            "maximum": 1.4,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 0.6,
+            "maximum": 1.5,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "era5_eac4": {
+          "score": 0.1,
+          "peakTime": "2023-06-05T10:16:21.853Z",
+          "aodAtPeak": 1.288,
+          "pathCoverage": "extrapolated",
+          "overlapSensitivity": {
+            "minimum": 0.1,
+            "maximum": 0.2,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 0.1,
+            "maximum": 0.2,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        }
+      },
+      "profileAblations": {
+        "era5CloudOnly": {
+          "score": 0.4,
+          "peakTime": "2023-06-05T10:16:21.853Z"
+        },
+        "era5HeightOnly": {
+          "score": 2.1,
+          "peakTime": "2023-06-05T10:51:21.853Z"
+        }
+      },
+      "localAtSolarEvent": {
+        "profiles": [
+          {
+            "pressureHpa": 1000,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 66.8788072221809,
+            "era5HeightM": 71.62385069939512
+          },
+          {
+            "pressureHpa": 925,
+            "gfsCloudPercent": 1.5755061116483482,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 741.9394036110905,
+            "era5HeightM": 742.8782371427117
+          },
+          {
+            "pressureHpa": 850,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0.7339090711644126,
+            "gfsHeightM": 1467.9394036110905,
+            "era5HeightM": 1470.0524062322381
+          },
+          {
+            "pressureHpa": 700,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 22.443340494452663,
+            "gfsHeightM": 3107.0605963889097,
+            "era5HeightM": 3112.368934150688
+          },
+          {
+            "pressureHpa": 600,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 8.569954861369398,
+            "gfsHeightM": 4376.060596388909,
+            "era5HeightM": 4380.036102480678
+          },
+          {
+            "pressureHpa": 500,
+            "gfsCloudPercent": 0.18178916672865553,
+            "era5CloudPercent": 4.5928181423288255,
+            "gfsHeightM": 5835,
+            "era5HeightM": 5838.318402588796
+          },
+          {
+            "pressureHpa": 400,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 7566.5203269193935,
+            "era5HeightM": 7565.989740164265
+          },
+          {
+            "pressureHpa": 300,
+            "gfsCloudPercent": 4.242385555638208,
+            "era5CloudPercent": 14.867545138630602,
+            "gfsHeightM": 9690.12487962771,
+            "era5HeightM": 9689.559985877215
+          },
+          {
+            "pressureHpa": 250,
+            "gfsCloudPercent": 5.393716944919692,
+            "era5CloudPercent": 0.4734092883558745,
+            "gfsHeightM": 10969.414260897183,
+            "era5HeightM": 10971.556473432864
+          },
+          {
+            "pressureHpa": 200,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 12462.64941637773,
+            "era5HeightM": 12465.76304645632
+          },
+          {
+            "pressureHpa": 150,
+            "gfsCloudPercent": 0.18178916672865553,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 14277.42942276105,
+            "era5HeightM": 14281.49558997524
+          }
+        ],
+        "camsAod": 0.7715133138928149,
+        "eac4Aod": 1.120413790627339,
+        "era5Grid": {
+          "latitude": 31.25,
+          "longitude": 121.5
+        },
+        "eac4Grid": {
+          "latitude": 31.5,
+          "longitude": 121.5
+        }
+      },
+      "scoreInteraction": 0.4
+    },
+    {
+      "id": "2023-06-06-sunrise",
+      "date": "2023-06-06",
+      "eventType": "sunrise",
+      "observedGrade": 0,
+      "observedLabel": "基本不烧",
+      "observedCloud": "-",
+      "observedColour": "-",
+      "originalPrediction": "基本不烧",
+      "evidenceUrls": "-",
+      "originalMap": "/static/media/ERA5/202306060000_rise.jpg",
+      "originalSection": "/static/media/ERA5/上海市_20230606_rise.jpg",
+      "baselineScore": 0,
+      "era5BaselineScore": 0.44517447265353144,
+      "modes": {
+        "gfs_cams": {
+          "score": 3.1,
+          "peakTime": "2023-06-05T20:51:18.187Z",
+          "aodAtPeak": 0.443,
+          "pathCoverage": "within-sampling",
+          "overlapSensitivity": {
+            "minimum": 1.7,
+            "maximum": 3.2,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 0.9,
+            "maximum": 5.2,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "era5_cams": {
+          "score": 10.2,
+          "peakTime": "2023-06-05T21:31:18.187Z",
+          "aodAtPeak": 0.409,
+          "pathCoverage": "extrapolated",
+          "overlapSensitivity": {
+            "minimum": 9.7,
+            "maximum": 10.3,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 10,
+            "maximum": 10.2,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "gfs_eac4": {
+          "score": 3.2,
+          "peakTime": "2023-06-05T20:51:18.187Z",
+          "aodAtPeak": 0.389,
+          "pathCoverage": "within-sampling",
+          "overlapSensitivity": {
+            "minimum": 1.8,
+            "maximum": 3.5,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 0.9,
+            "maximum": 5.6,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "era5_eac4": {
+          "score": 10.2,
+          "peakTime": "2023-06-05T21:31:18.187Z",
+          "aodAtPeak": 0.393,
+          "pathCoverage": "extrapolated",
+          "overlapSensitivity": {
+            "minimum": 9.8,
+            "maximum": 10.4,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 10.1,
+            "maximum": 10.2,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        }
+      },
+      "profileAblations": {
+        "era5CloudOnly": {
+          "score": 10.2,
+          "peakTime": "2023-06-05T21:31:18.187Z"
+        },
+        "era5HeightOnly": {
+          "score": 3.1,
+          "peakTime": "2023-06-05T20:51:18.187Z"
+        }
+      },
+      "localAtSolarEvent": {
+        "profiles": [
+          {
+            "pressureHpa": 1000,
+            "gfsCloudPercent": 1.710103888909022,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 71.56515583336353,
+            "era5HeightM": 71.47145197126247
+          },
+          {
+            "pressureHpa": 925,
+            "gfsCloudPercent": 42.92823388854663,
+            "era5CloudPercent": 1.3360186632101736,
+            "gfsHeightM": 736.710103888909,
+            "era5HeightM": 735.8305460246139
+          },
+          {
+            "pressureHpa": 850,
+            "gfsCloudPercent": 8.275259722272555,
+            "era5CloudPercent": 23.550740668394912,
+            "gfsHeightM": 1456.8550519444545,
+            "era5HeightM": 1456.40721242478
+          },
+          {
+            "pressureHpa": 700,
+            "gfsCloudPercent": 8.55051944454511,
+            "era5CloudPercent": 0.1132406683949132,
+            "gfsHeightM": 3092.1449480555457,
+            "era5HeightM": 3091.6707598337534
+          },
+          {
+            "pressureHpa": 600,
+            "gfsCloudPercent": 68.40415555636088,
+            "era5CloudPercent": 61.492268663210176,
+            "gfsHeightM": 4357.434844166636,
+            "era5HeightM": 4355.848362333757
+          },
+          {
+            "pressureHpa": 500,
+            "gfsCloudPercent": 49.332389444907506,
+            "era5CloudPercent": 31.31750195333734,
+            "gfsHeightM": 5810.434844166636,
+            "era5HeightM": 5812.877793513213
+          },
+          {
+            "pressureHpa": 400,
+            "gfsCloudPercent": 88.65155833363534,
+            "era5CloudPercent": 4.902546658025434,
+            "gfsHeightM": 7533.5097355888765,
+            "era5HeightM": 7538.560564960996
+          },
+          {
+            "pressureHpa": 300,
+            "gfsCloudPercent": 0.8696883332729337,
+            "era5CloudPercent": 71.55814735234405,
+            "gfsHeightM": 9650.468182219412,
+            "era5HeightM": 9658.595641708098
+          },
+          {
+            "pressureHpa": 250,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 11.945231336789826,
+            "gfsHeightM": 10924.362252091629,
+            "era5HeightM": 10932.119722595013
+          },
+          {
+            "pressureHpa": 200,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 12414.625457938842,
+            "era5HeightM": 12421.372456521423
+          },
+          {
+            "pressureHpa": 150,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 14230.283394686081,
+            "era5HeightM": 14238.643152552457
+          }
+        ],
+        "camsAod": 0.44289896111090976,
+        "eac4Aod": 0.3892669900102352,
+        "era5Grid": {
+          "latitude": 31.25,
+          "longitude": 121.5
+        },
+        "eac4Grid": {
+          "latitude": 31.5,
+          "longitude": 121.5
+        }
+      },
+      "scoreInteraction": -0.1
+    },
+    {
+      "id": "2023-06-06-sunset",
+      "date": "2023-06-06",
+      "eventType": "sunset",
+      "observedGrade": 0,
+      "observedLabel": "基本不烧",
+      "observedCloud": "-",
+      "observedColour": "-",
+      "originalPrediction": "基本不烧",
+      "evidenceUrls": "-",
+      "originalMap": "/static/media/ERA5/202306060000_set.jpg",
+      "originalSection": "/static/media/ERA5/上海市_20230606_set.jpg",
+      "baselineScore": 42.32,
+      "era5BaselineScore": 1.176928497334302,
+      "modes": {
+        "gfs_cams": {
+          "score": 38.9,
+          "peakTime": "2023-06-06T11:01:51.926Z",
+          "aodAtPeak": 0.579,
+          "pathCoverage": "extrapolated",
+          "overlapSensitivity": {
+            "minimum": 38.5,
+            "maximum": 38.9,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 6.8,
+            "maximum": 52.7,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "era5_cams": {
+          "score": 0,
+          "peakTime": null,
+          "aodAtPeak": 0.584,
+          "pathCoverage": "within-sampling",
+          "overlapSensitivity": {
+            "minimum": 0,
+            "maximum": 0,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 0,
+            "maximum": 0,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "gfs_eac4": {
+          "score": 38.9,
+          "peakTime": "2023-06-06T11:01:51.926Z",
+          "aodAtPeak": 0.583,
+          "pathCoverage": "extrapolated",
+          "overlapSensitivity": {
+            "minimum": 38.6,
+            "maximum": 39,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 6.9,
+            "maximum": 52.7,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "era5_eac4": {
+          "score": 0,
+          "peakTime": null,
+          "aodAtPeak": 0.585,
+          "pathCoverage": "within-sampling",
+          "overlapSensitivity": {
+            "minimum": 0,
+            "maximum": 0,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 0,
+            "maximum": 0,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        }
+      },
+      "profileAblations": {
+        "era5CloudOnly": {
+          "score": 0,
+          "peakTime": null
+        },
+        "era5HeightOnly": {
+          "score": 38.9,
+          "peakTime": "2023-06-06T11:01:51.926Z"
+        }
+      },
+      "localAtSolarEvent": {
+        "profiles": [
+          {
+            "pressureHpa": 1000,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 82.84327166676522,
+            "era5HeightM": 83.16392228586483
+          },
+          {
+            "pressureHpa": 925,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 756.8432716667652,
+            "era5HeightM": 756.4861411835783
+          },
+          {
+            "pressureHpa": 850,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 1479.8432716667653,
+            "era5HeightM": 1480.5540726008937
+          },
+          {
+            "pressureHpa": 700,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0.040814670113225815,
+            "gfsHeightM": 3109.7910288890203,
+            "era5HeightM": 3112.1679403079247
+          },
+          {
+            "pressureHpa": 600,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 4373.791028889021,
+            "era5HeightM": 4376.463211614755
+          },
+          {
+            "pressureHpa": 500,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0.7404353298867742,
+            "gfsHeightM": 5829.843271666765,
+            "era5HeightM": 5834.809297585417
+          },
+          {
+            "pressureHpa": 400,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 7554.06192067794,
+            "era5HeightM": 7557.196356419596
+          },
+          {
+            "pressureHpa": 300,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 9661.037144955715,
+            "era5HeightM": 9665.562886504447
+          },
+          {
+            "pressureHpa": 250,
+            "gfsCloudPercent": 47.95514444510142,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 10923.710738722284,
+            "era5HeightM": 10928.015794111898
+          },
+          {
+            "pressureHpa": 200,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 12409.17879675563,
+            "era5HeightM": 12413.578041909146
+          },
+          {
+            "pressureHpa": 150,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 14235.82,
+            "era5HeightM": 14242.691056207219
+          }
+        ],
+        "camsAod": 0.5841794222195943,
+        "eac4Aod": 0.5852546544529301,
+        "era5Grid": {
+          "latitude": 31.25,
+          "longitude": 121.5
+        },
+        "eac4Grid": {
+          "latitude": 31.5,
+          "longitude": 121.5
+        }
+      },
+      "scoreInteraction": 0
+    },
+    {
+      "id": "2023-06-07-sunrise",
+      "date": "2023-06-07",
+      "eventType": "sunrise",
+      "observedGrade": 0,
+      "observedLabel": "基本不烧",
+      "observedCloud": "-",
+      "observedColour": "-",
+      "originalPrediction": "微烧",
+      "evidenceUrls": "-",
+      "originalMap": "/static/media/ERA5/202306070000_rise.jpg",
+      "originalSection": "/static/media/ERA5/上海市_20230607_rise.jpg",
+      "baselineScore": 86.01,
+      "era5BaselineScore": 49.245398232828784,
+      "modes": {
+        "gfs_cams": {
+          "score": 18.3,
+          "peakTime": "2023-06-06T21:31:09.854Z",
+          "aodAtPeak": 0.593,
+          "pathCoverage": "extrapolated",
+          "overlapSensitivity": {
+            "minimum": 15.1,
+            "maximum": 22.1,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 17.7,
+            "maximum": 18.4,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "era5_cams": {
+          "score": 11.4,
+          "peakTime": "2023-06-06T20:51:09.854Z",
+          "aodAtPeak": 0.656,
+          "pathCoverage": "extrapolated",
+          "overlapSensitivity": {
+            "minimum": 0,
+            "maximum": 11.4,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 3.4,
+            "maximum": 15.8,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "gfs_eac4": {
+          "score": 18.1,
+          "peakTime": "2023-06-06T20:46:09.854Z",
+          "aodAtPeak": 0.699,
+          "pathCoverage": "extrapolated",
+          "overlapSensitivity": {
+            "minimum": 1.8,
+            "maximum": 18.8,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 8.1,
+            "maximum": 21.7,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "era5_eac4": {
+          "score": 11.9,
+          "peakTime": "2023-06-06T20:51:09.854Z",
+          "aodAtPeak": 0.699,
+          "pathCoverage": "extrapolated",
+          "overlapSensitivity": {
+            "minimum": 0,
+            "maximum": 11.9,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 4.6,
+            "maximum": 15.5,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        }
+      },
+      "profileAblations": {
+        "era5CloudOnly": {
+          "score": 11.4,
+          "peakTime": "2023-06-06T20:51:09.854Z"
+        },
+        "era5HeightOnly": {
+          "score": 18.3,
+          "peakTime": "2023-06-06T21:31:09.854Z"
+        }
+      },
+      "localAtSolarEvent": {
+        "profiles": [
+          {
+            "pressureHpa": 1000,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 86.70547444449531,
+            "era5HeightM": 88.06817234799087
+          },
+          {
+            "pressureHpa": 925,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 756.8527372222477,
+            "era5HeightM": 758.767420030008
+          },
+          {
+            "pressureHpa": 850,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 1482.7054744444954,
+            "era5HeightM": 1483.1402596560872
+          },
+          {
+            "pressureHpa": 700,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 4.342352864642939,
+            "gfsHeightM": 3112.8527372222475,
+            "era5HeightM": 3112.390765347269
+          },
+          {
+            "pressureHpa": 600,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 4378,
+            "era5HeightM": 4375.506471610752
+          },
+          {
+            "pressureHpa": 500,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 2.894901909761959,
+            "gfsHeightM": 5831,
+            "era5HeightM": 5830.560345570612
+          },
+          {
+            "pressureHpa": 400,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 29.91218055619134,
+            "gfsHeightM": 7543.391133216635,
+            "era5HeightM": 7545.894766982732
+          },
+          {
+            "pressureHpa": 300,
+            "gfsCloudPercent": 22.171167778438992,
+            "era5CloudPercent": 9.441862413452732,
+            "gfsHeightM": 9643.78709307218,
+            "era5HeightM": 9651.055450712407
+          },
+          {
+            "pressureHpa": 250,
+            "gfsCloudPercent": 20.781022220187708,
+            "era5CloudPercent": 2.046789496309227,
+            "gfsHeightM": 10906.949799277729,
+            "era5HeightM": 10914.577997197297
+          },
+          {
+            "pressureHpa": 200,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 12386.391649644385,
+            "era5HeightM": 12392.215607854207
+          },
+          {
+            "pressureHpa": 150,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 14212.38031570548,
+            "era5HeightM": 14212.095388761765
+          }
+        ],
+        "camsAod": 0.6558905111100939,
+        "eac4Aod": 0.6991851778145227,
+        "era5Grid": {
+          "latitude": 31.25,
+          "longitude": 121.5
+        },
+        "eac4Grid": {
+          "latitude": 31.5,
+          "longitude": 121.5
+        }
+      },
+      "scoreInteraction": 0.7
+    },
+    {
+      "id": "2023-06-07-sunset",
+      "date": "2023-06-07",
+      "eventType": "sunset",
+      "observedGrade": 0,
+      "observedLabel": "基本不烧",
+      "observedCloud": "-",
+      "observedColour": "-",
+      "originalPrediction": "基本不烧",
+      "evidenceUrls": "-",
+      "originalMap": "/static/media/ERA5/202306070000_set.jpg",
+      "originalSection": "/static/media/ERA5/上海市_20230607_set.jpg",
+      "baselineScore": 0,
+      "era5BaselineScore": 98.60111749434189,
+      "modes": {
+        "gfs_cams": {
+          "score": 0,
+          "peakTime": null,
+          "aodAtPeak": 0.7,
+          "pathCoverage": "extrapolated",
+          "overlapSensitivity": {
+            "minimum": 0,
+            "maximum": 0,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 0,
+            "maximum": 0,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "era5_cams": {
+          "score": 0,
+          "peakTime": null,
+          "aodAtPeak": 0.7,
+          "pathCoverage": "extrapolated",
+          "overlapSensitivity": {
+            "minimum": 0,
+            "maximum": 0,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 0,
+            "maximum": 0,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "gfs_eac4": {
+          "score": 0,
+          "peakTime": null,
+          "aodAtPeak": 0.999,
+          "pathCoverage": "extrapolated",
+          "overlapSensitivity": {
+            "minimum": 0,
+            "maximum": 0,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 0,
+            "maximum": 0,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "era5_eac4": {
+          "score": 0,
+          "peakTime": null,
+          "aodAtPeak": 0.999,
+          "pathCoverage": "extrapolated",
+          "overlapSensitivity": {
+            "minimum": 0,
+            "maximum": 0,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 0,
+            "maximum": 0,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        }
+      },
+      "profileAblations": {
+        "era5CloudOnly": {
+          "score": 0,
+          "peakTime": null
+        },
+        "era5HeightOnly": {
+          "score": 0,
+          "peakTime": null
+        }
+      },
+      "localAtSolarEvent": {
+        "profiles": [
+          {
+            "pressureHpa": 1000,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 61.08826555556721,
+            "era5HeightM": 62.63501358288744
+          },
+          {
+            "pressureHpa": 925,
+            "gfsCloudPercent": 65.52959333340327,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 736.0882655555672,
+            "era5HeightM": 739.7875459916704
+          },
+          {
+            "pressureHpa": 850,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 1464.0441327777837,
+            "era5HeightM": 1467.6254804414507
+          },
+          {
+            "pressureHpa": 700,
+            "gfsCloudPercent": 0.5737261111868754,
+            "era5CloudPercent": 72.20802647563525,
+            "gfsHeightM": 3102.9558672222165,
+            "era5HeightM": 3103.5790953752594
+          },
+          {
+            "pressureHpa": 600,
+            "gfsCloudPercent": 3.823468888865577,
+            "era5CloudPercent": 53.88353211815573,
+            "gfsHeightM": 4365.911734444433,
+            "era5HeightM": 4368.7655151288845
+          },
+          {
+            "pressureHpa": 500,
+            "gfsCloudPercent": 46.07321166654428,
+            "era5CloudPercent": 16.808233940922136,
+            "gfsHeightM": 5820.8676016666495,
+            "era5HeightM": 5824.721567059621
+          },
+          {
+            "pressureHpa": 400,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 4.584063802069673,
+            "gfsHeightM": 7540.685716683326,
+            "era5HeightM": 7546.351846996373
+          },
+          {
+            "pressureHpa": 300,
+            "gfsCloudPercent": 3.9117344444327884,
+            "era5CloudPercent": 2.412707465286884,
+            "gfsHeightM": 9654.768946227769,
+            "era5HeightM": 9658.199831608734
+          },
+          {
+            "pressureHpa": 250,
+            "gfsCloudPercent": 0.0882655555672116,
+            "era5CloudPercent": 8.455835069426232,
+            "gfsHeightM": 10927.536147722212,
+            "era5HeightM": 10928.173241662258
+          },
+          {
+            "pressureHpa": 200,
+            "gfsCloudPercent": 0.1323983333508174,
+            "era5CloudPercent": 11.753228732643443,
+            "gfsHeightM": 12411.424782583306,
+            "era5HeightM": 12413.46448541578
+          },
+          {
+            "pressureHpa": 150,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 14241.526527316633,
+            "era5HeightM": 14242.8988659764
+          }
+        ],
+        "camsAod": 0.7,
+        "eac4Aod": 0.9986811805462871,
+        "era5Grid": {
+          "latitude": 31.25,
+          "longitude": 121.5
+        },
+        "eac4Grid": {
+          "latitude": 31.5,
+          "longitude": 121.5
+        }
+      },
+      "scoreInteraction": 0
+    },
+    {
+      "id": "2023-06-08-sunrise",
+      "date": "2023-06-08",
+      "eventType": "sunrise",
+      "observedGrade": 0,
+      "observedLabel": "基本不烧",
+      "observedCloud": "-",
+      "observedColour": "-",
+      "originalPrediction": "基本不烧",
+      "evidenceUrls": "-",
+      "originalMap": "/static/media/ERA5/202306080000_rise.jpg",
+      "originalSection": "/static/media/ERA5/上海市_20230608_rise.jpg",
+      "matchedTo": "2023-06-09-sunrise",
+      "baselineScore": 27.5,
+      "era5BaselineScore": 71.21526419988236,
+      "modes": {
+        "gfs_cams": {
+          "score": 0.3,
+          "peakTime": "2023-06-07T21:26:02.926Z",
+          "aodAtPeak": 0.537,
+          "pathCoverage": "extrapolated",
+          "overlapSensitivity": {
+            "minimum": 0.2,
+            "maximum": 0.4,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 0.3,
+            "maximum": 0.4,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "era5_cams": {
+          "score": 1.7,
+          "peakTime": "2023-06-07T21:11:02.926Z",
+          "aodAtPeak": 0.544,
+          "pathCoverage": "within-sampling",
+          "overlapSensitivity": {
+            "minimum": 1.3,
+            "maximum": 1.9,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 1.5,
+            "maximum": 1.7,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "gfs_eac4": {
+          "score": 0.3,
+          "peakTime": "2023-06-07T21:26:02.926Z",
+          "aodAtPeak": 0.703,
+          "pathCoverage": "extrapolated",
+          "overlapSensitivity": {
+            "minimum": 0.2,
+            "maximum": 0.4,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 0.3,
+            "maximum": 0.3,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "era5_eac4": {
+          "score": 1.6,
+          "peakTime": "2023-06-07T21:11:02.926Z",
+          "aodAtPeak": 0.734,
+          "pathCoverage": "within-sampling",
+          "overlapSensitivity": {
+            "minimum": 1.2,
+            "maximum": 1.8,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 1.3,
+            "maximum": 1.6,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        }
+      },
+      "profileAblations": {
+        "era5CloudOnly": {
+          "score": 1.7,
+          "peakTime": "2023-06-07T21:11:02.926Z"
+        },
+        "era5HeightOnly": {
+          "score": 0.3,
+          "peakTime": "2023-06-07T21:26:02.926Z"
+        }
+      },
+      "localAtSolarEvent": {
+        "profiles": [
+          {
+            "pressureHpa": 1000,
+            "gfsCloudPercent": 6.237808332840601,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 47.89512333313624,
+            "era5HeightM": 53.74868381242551
+          },
+          {
+            "pressureHpa": 925,
+            "gfsCloudPercent": 2.44756166656812,
+            "era5CloudPercent": 0.78125,
+            "gfsHeightM": 724.8951233331362,
+            "era5HeightM": 732.4618567549538
+          },
+          {
+            "pressureHpa": 850,
+            "gfsCloudPercent": 2.9394338884618545,
+            "era5CloudPercent": 1.9940924479936561,
+            "gfsHeightM": 1449.4475616665682,
+            "era5HeightM": 1457.8771496483157
+          },
+          {
+            "pressureHpa": 700,
+            "gfsCloudPercent": 48.77399111005995,
+            "era5CloudPercent": 71.47802517335448,
+            "gfsHeightM": 3077,
+            "era5HeightM": 3084.2902650826313
+          },
+          {
+            "pressureHpa": 600,
+            "gfsCloudPercent": 100,
+            "era5CloudPercent": 53.13421831476606,
+            "gfsHeightM": 4335.298374444379,
+            "era5HeightM": 4343.8464402640575
+          },
+          {
+            "pressureHpa": 500,
+            "gfsCloudPercent": 92.37519611212943,
+            "era5CloudPercent": 57.592094618620145,
+            "gfsHeightM": 5787.298374444379,
+            "era5HeightM": 5795.24327326469
+          },
+          {
+            "pressureHpa": 400,
+            "gfsCloudPercent": 97.55243833343188,
+            "era5CloudPercent": 51.250941407866776,
+            "gfsHeightM": 7503.7,
+            "era5HeightM": 7511.977023485114
+          },
+          {
+            "pressureHpa": 300,
+            "gfsCloudPercent": 98.29837444437875,
+            "era5CloudPercent": 60.34551909855671,
+            "gfsHeightM": 9606.931874727672,
+            "era5HeightM": 9613.16169137202
+          },
+          {
+            "pressureHpa": 250,
+            "gfsCloudPercent": 2.685369999408721,
+            "era5CloudPercent": 5.002539930658208,
+            "gfsHeightM": 10873.233350910923,
+            "era5HeightM": 10880.742249607809
+          },
+          {
+            "pressureHpa": 200,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 12366.15983493866,
+            "era5HeightM": 12377.017251898596
+          },
+          {
+            "pressureHpa": 150,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 14198.355225638596,
+            "era5HeightM": 14209.274053101371
+          }
+        ],
+        "camsAod": 0.5574593611094687,
+        "eac4Aod": 0.7647614918488999,
+        "era5Grid": {
+          "latitude": 31.25,
+          "longitude": 121.5
+        },
+        "eac4Grid": {
+          "latitude": 31.5,
+          "longitude": 121.5
+        }
+      },
+      "scoreInteraction": -0.1
+    },
+    {
+      "id": "2023-06-08-sunset",
+      "date": "2023-06-08",
+      "eventType": "sunset",
+      "observedGrade": 0,
+      "observedLabel": "基本不烧",
+      "observedCloud": "-",
+      "observedColour": "-",
+      "originalPrediction": "微烧",
+      "evidenceUrls": "-",
+      "originalMap": "/static/media/ERA5/202306080000_set.jpg",
+      "originalSection": "/static/media/ERA5/上海市_20230608_set.jpg",
+      "matchedTo": "2023-06-09-sunset",
+      "baselineScore": 96.55,
+      "era5BaselineScore": 93.27605915263085,
+      "modes": {
+        "gfs_cams": {
+          "score": 46.3,
+          "peakTime": "2023-06-08T10:52:49.411Z",
+          "aodAtPeak": 1.182,
+          "pathCoverage": "extrapolated",
+          "overlapSensitivity": {
+            "minimum": 40.2,
+            "maximum": 51.2,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 29.9,
+            "maximum": 47.4,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "era5_cams": {
+          "score": 29.6,
+          "peakTime": "2023-06-08T10:22:49.411Z",
+          "aodAtPeak": 1.192,
+          "pathCoverage": "extrapolated",
+          "overlapSensitivity": {
+            "minimum": 28.8,
+            "maximum": 30.3,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 28.7,
+            "maximum": 29.6,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "gfs_eac4": {
+          "score": 56.8,
+          "peakTime": "2023-06-08T10:52:49.411Z",
+          "aodAtPeak": 0.661,
+          "pathCoverage": "extrapolated",
+          "overlapSensitivity": {
+            "minimum": 50.2,
+            "maximum": 61.9,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 40.8,
+            "maximum": 57.8,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "era5_eac4": {
+          "score": 35.9,
+          "peakTime": "2023-06-08T10:22:49.411Z",
+          "aodAtPeak": 0.658,
+          "pathCoverage": "extrapolated",
+          "overlapSensitivity": {
+            "minimum": 35,
+            "maximum": 36.7,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 34.9,
+            "maximum": 35.9,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        }
+      },
+      "profileAblations": {
+        "era5CloudOnly": {
+          "score": 29.6,
+          "peakTime": "2023-06-08T10:22:49.411Z"
+        },
+        "era5HeightOnly": {
+          "score": 46.3,
+          "peakTime": "2023-06-08T10:52:49.411Z"
+        }
+      },
+      "localAtSolarEvent": {
+        "profiles": [
+          {
+            "pressureHpa": 1000,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 37.85490111112595,
+            "era5HeightM": 40.35334808926379
+          },
+          {
+            "pressureHpa": 925,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 720.8911758333445,
+            "era5HeightM": 724.2185804539295
+          },
+          {
+            "pressureHpa": 850,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 1450.927450555563,
+            "era5HeightM": 1454.5510905733304
+          },
+          {
+            "pressureHpa": 700,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 3085.854901111126,
+            "era5HeightM": 3091.1569377076403
+          },
+          {
+            "pressureHpa": 600,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 4340.891175833344,
+            "era5HeightM": 4346.363828705394
+          },
+          {
+            "pressureHpa": 500,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 5781.891175833344,
+            "era5HeightM": 5788.524342212357
+          },
+          {
+            "pressureHpa": 400,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 7488.89,
+            "era5HeightM": 7495.82670432643
+          },
+          {
+            "pressureHpa": 300,
+            "gfsCloudPercent": 5.782351666688919,
+            "era5CloudPercent": 38.45510829007253,
+            "gfsHeightM": 9593.666804605544,
+            "era5HeightM": 9600.33064655638
+          },
+          {
+            "pressureHpa": 250,
+            "gfsCloudPercent": 88.60097805559636,
+            "era5CloudPercent": 88.93688194453716,
+            "gfsHeightM": 10859.188206691651,
+            "era5HeightM": 10865.444665119183
+          },
+          {
+            "pressureHpa": 200,
+            "gfsCloudPercent": 3.072549444437027,
+            "era5CloudPercent": 0.7529103732667863,
+            "gfsHeightM": 12339.708677458317,
+            "era5HeightM": 12346.205938936977
+          },
+          {
+            "pressureHpa": 150,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 14176.228461419434,
+            "era5HeightM": 14192.834815343911
+          }
+        ],
+        "camsAod": 1.1807254944443701,
+        "eac4Aod": 0.6611075054536482,
+        "era5Grid": {
+          "latitude": 31.25,
+          "longitude": 121.5
+        },
+        "eac4Grid": {
+          "latitude": 31.5,
+          "longitude": 121.5
+        }
+      },
+      "scoreInteraction": -4.2
+    },
+    {
+      "id": "2023-06-09-sunrise",
+      "date": "2023-06-09",
+      "eventType": "sunrise",
+      "observedGrade": 4,
+      "observedLabel": "中到大烧",
+      "observedCloud": "卷云",
+      "observedColour": "橘红色,橘色",
+      "originalPrediction": "小烧",
+      "evidenceUrls": "https://weibo.com/5538010841/N4rhsFnuZ",
+      "originalMap": "/static/media/ERA5/202306090000_rise.jpg",
+      "originalSection": "/static/media/ERA5/上海市_20230609_rise.jpg",
+      "baselineScore": 100,
+      "era5BaselineScore": 83.51624567935444,
+      "modes": {
+        "gfs_cams": {
+          "score": 41.9,
+          "peakTime": "2023-06-08T21:25:57.397Z",
+          "aodAtPeak": 0.659,
+          "pathCoverage": "extrapolated",
+          "overlapSensitivity": {
+            "minimum": 41.9,
+            "maximum": 41.9,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 40.8,
+            "maximum": 42,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "era5_cams": {
+          "score": 38,
+          "peakTime": "2023-06-08T20:50:57.397Z",
+          "aodAtPeak": 0.641,
+          "pathCoverage": "extrapolated",
+          "overlapSensitivity": {
+            "minimum": 33.3,
+            "maximum": 40.5,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 10.3,
+            "maximum": 43.4,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "gfs_eac4": {
+          "score": 41.2,
+          "peakTime": "2023-06-08T21:25:57.397Z",
+          "aodAtPeak": 0.703,
+          "pathCoverage": "extrapolated",
+          "overlapSensitivity": {
+            "minimum": 41.2,
+            "maximum": 41.2,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 40.1,
+            "maximum": 41.3,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "era5_eac4": {
+          "score": 38,
+          "peakTime": "2023-06-08T20:50:57.397Z",
+          "aodAtPeak": 0.696,
+          "pathCoverage": "extrapolated",
+          "overlapSensitivity": {
+            "minimum": 33.3,
+            "maximum": 40.6,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 14.6,
+            "maximum": 42.3,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        }
+      },
+      "profileAblations": {
+        "era5CloudOnly": {
+          "score": 37.9,
+          "peakTime": "2023-06-08T20:50:57.397Z"
+        },
+        "era5HeightOnly": {
+          "score": 41.9,
+          "peakTime": "2023-06-08T21:25:57.397Z"
+        }
+      },
+      "localAtSolarEvent": {
+        "profiles": [
+          {
+            "pressureHpa": 1000,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 37.39710777786043,
+            "era5HeightM": 40.6460014550916
+          },
+          {
+            "pressureHpa": 925,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 721.3971077778605,
+            "era5HeightM": 724.923467290438
+          },
+          {
+            "pressureHpa": 850,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 1453.3971077778604,
+            "era5HeightM": 1456.0560222493534
+          },
+          {
+            "pressureHpa": 700,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 3079.6985538889303,
+            "era5HeightM": 3083.934641404954
+          },
+          {
+            "pressureHpa": 600,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 4333,
+            "era5HeightM": 4335.7298517543
+          },
+          {
+            "pressureHpa": 500,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 5770.150723055535,
+            "era5HeightM": 5774.946478853629
+          },
+          {
+            "pressureHpa": 400,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 7455.932285947171,
+            "era5HeightM": 7465.408658332471
+          },
+          {
+            "pressureHpa": 300,
+            "gfsCloudPercent": 4.6028922221395705,
+            "era5CloudPercent": 69.48823329004355,
+            "gfsHeightM": 9539.439499588789,
+            "era5HeightM": 9559.093400362983
+          },
+          {
+            "pressureHpa": 250,
+            "gfsCloudPercent": 100,
+            "era5CloudPercent": 7.706045355596062,
+            "gfsHeightM": 10795.438509683177,
+            "era5HeightM": 10816.248148050106
+          },
+          {
+            "pressureHpa": 200,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0.11775238713663483,
+            "gfsHeightM": 12277.442369438792,
+            "era5HeightM": 12300.534728816674
+          },
+          {
+            "pressureHpa": 150,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 14119.850661936049,
+            "era5HeightM": 14135.468573057922
+          }
+        ],
+        "camsAod": 0.6409566166679065,
+        "eac4Aod": 0.6963931002655588,
+        "era5Grid": {
+          "latitude": 31.25,
+          "longitude": 121.5
+        },
+        "eac4Grid": {
+          "latitude": 31.5,
+          "longitude": 121.5
+        }
+      },
+      "scoreInteraction": 0.7
+    },
+    {
+      "id": "2023-06-09-sunset",
+      "date": "2023-06-09",
+      "eventType": "sunset",
+      "observedGrade": 3,
+      "observedLabel": "小到中烧",
+      "observedCloud": "卷云",
+      "observedColour": "橘黄色,橘色,橘红色",
+      "originalPrediction": "基本不烧",
+      "evidenceUrls": "https://weibo.com/5538010841/N4x498V8i",
+      "originalMap": "/static/media/ERA5/202306090000_set.jpg",
+      "originalSection": "/static/media/ERA5/上海市_20230609_set.jpg",
+      "baselineScore": 97.59,
+      "era5BaselineScore": 30.02242385494837,
+      "modes": {
+        "gfs_cams": {
+          "score": 23.8,
+          "peakTime": "2023-06-09T10:58:16.762Z",
+          "aodAtPeak": 1.273,
+          "pathCoverage": "within-sampling",
+          "overlapSensitivity": {
+            "minimum": 23.6,
+            "maximum": 24.3,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 12.2,
+            "maximum": 24.7,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "era5_cams": {
+          "score": 0,
+          "peakTime": null,
+          "aodAtPeak": 1.273,
+          "pathCoverage": "extrapolated",
+          "overlapSensitivity": {
+            "minimum": 0,
+            "maximum": 0,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 0,
+            "maximum": 0,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "gfs_eac4": {
+          "score": 28.6,
+          "peakTime": "2023-06-09T10:58:16.762Z",
+          "aodAtPeak": 0.935,
+          "pathCoverage": "within-sampling",
+          "overlapSensitivity": {
+            "minimum": 28.4,
+            "maximum": 29.1,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 16.2,
+            "maximum": 29.6,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "era5_eac4": {
+          "score": 0.1,
+          "peakTime": "2023-06-09T10:53:16.762Z",
+          "aodAtPeak": 0.935,
+          "pathCoverage": "extrapolated",
+          "overlapSensitivity": {
+            "minimum": 0.1,
+            "maximum": 0.1,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 0.1,
+            "maximum": 0.8,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        }
+      },
+      "profileAblations": {
+        "era5CloudOnly": {
+          "score": 0,
+          "peakTime": null
+        },
+        "era5HeightOnly": {
+          "score": 23.8,
+          "peakTime": "2023-06-09T10:58:16.762Z"
+        }
+      },
+      "localAtSolarEvent": {
+        "profiles": [
+          {
+            "pressureHpa": 1000,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 28.856613889005448,
+            "era5HeightM": 21.262889110181625
+          },
+          {
+            "pressureHpa": 925,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 714.9713227778011,
+            "era5HeightM": 710.3066934455499
+          },
+          {
+            "pressureHpa": 850,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 1449.971322777801,
+            "era5HeightM": 1446.041148313583
+          },
+          {
+            "pressureHpa": 700,
+            "gfsCloudPercent": 47.168360556231605,
+            "era5CloudPercent": 22.611441840314203,
+            "gfsHeightM": 3079.971322777801,
+            "era5HeightM": 3077.642609435236
+          },
+          {
+            "pressureHpa": 600,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 4330,
+            "era5HeightM": 4332.048766170582
+          },
+          {
+            "pressureHpa": 500,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 5766,
+            "era5HeightM": 5770.862882566163
+          },
+          {
+            "pressureHpa": 400,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 7457.959167261169,
+            "era5HeightM": 7468.2685019363535
+          },
+          {
+            "pressureHpa": 300,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 9538.571202244557,
+            "era5HeightM": 9551.389293974784
+          },
+          {
+            "pressureHpa": 250,
+            "gfsCloudPercent": 4.573544443978204,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 10794.125966289022,
+            "era5HeightM": 10807.160512767929
+          },
+          {
+            "pressureHpa": 200,
+            "gfsCloudPercent": 65.43015833298365,
+            "era5CloudPercent": 0.7588459201571014,
+            "gfsHeightM": 12262.656650916775,
+            "era5HeightM": 12275.513419755753
+          },
+          {
+            "pressureHpa": 150,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 14089.635744894375,
+            "era5HeightM": 14102.811958371245
+          }
+        ],
+        "camsAod": 1.272580949997902,
+        "eac4Aod": 0.9353617076400653,
+        "era5Grid": {
+          "latitude": 31.25,
+          "longitude": 121.5
+        },
+        "eac4Grid": {
+          "latitude": 31.5,
+          "longitude": 121.5
+        }
+      },
+      "scoreInteraction": -4.7
+    },
+    {
+      "id": "2023-06-10-sunrise",
+      "date": "2023-06-10",
+      "eventType": "sunrise",
+      "observedGrade": 0,
+      "observedLabel": "基本不烧",
+      "observedCloud": "-",
+      "observedColour": "-",
+      "originalPrediction": "微烧",
+      "evidenceUrls": "-",
+      "originalMap": "/static/media/ERA5/202306100000_rise.jpg",
+      "originalSection": "/static/media/ERA5/上海市_20230610_rise.jpg",
+      "baselineScore": 100,
+      "era5BaselineScore": 68.07233449262544,
+      "modes": {
+        "gfs_cams": {
+          "score": 83.1,
+          "peakTime": "2023-06-09T20:50:53.261Z",
+          "aodAtPeak": 0.512,
+          "pathCoverage": "extrapolated",
+          "overlapSensitivity": {
+            "minimum": 82.6,
+            "maximum": 84.2,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 69.8,
+            "maximum": 83.5,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "era5_cams": {
+          "score": 15.6,
+          "peakTime": "2023-06-09T21:30:53.261Z",
+          "aodAtPeak": 0.505,
+          "pathCoverage": "extrapolated",
+          "overlapSensitivity": {
+            "minimum": 15.4,
+            "maximum": 15.7,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 15.4,
+            "maximum": 15.6,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "gfs_eac4": {
+          "score": 80.3,
+          "peakTime": "2023-06-09T20:50:53.261Z",
+          "aodAtPeak": 0.638,
+          "pathCoverage": "extrapolated",
+          "overlapSensitivity": {
+            "minimum": 79.8,
+            "maximum": 81.5,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 67,
+            "maximum": 81.3,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "era5_eac4": {
+          "score": 14.4,
+          "peakTime": "2023-06-09T21:30:53.261Z",
+          "aodAtPeak": 0.643,
+          "pathCoverage": "extrapolated",
+          "overlapSensitivity": {
+            "minimum": 14.3,
+            "maximum": 14.6,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 14.2,
+            "maximum": 14.4,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        }
+      },
+      "profileAblations": {
+        "era5CloudOnly": {
+          "score": 15.5,
+          "peakTime": "2023-06-09T21:30:53.261Z"
+        },
+        "era5HeightOnly": {
+          "score": 83.2,
+          "peakTime": "2023-06-09T20:50:53.261Z"
+        }
+      },
+      "localAtSolarEvent": {
+        "profiles": [
+          {
+            "pressureHpa": 1000,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 17.54438416659832,
+            "era5HeightM": 19.49691337311621
+          },
+          {
+            "pressureHpa": 925,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 699.8481280555328,
+            "era5HeightM": 702.4804861983678
+          },
+          {
+            "pressureHpa": 850,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 1435.8481280555327,
+            "era5HeightM": 1436.7119318470125
+          },
+          {
+            "pressureHpa": 700,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 3068.848128055533,
+            "era5HeightM": 3067.667761196697
+          },
+          {
+            "pressureHpa": 600,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 1.5625,
+            "gfsHeightM": 4314,
+            "era5HeightM": 4318.216016006814
+          },
+          {
+            "pressureHpa": 500,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0.6626000433849792,
+            "gfsHeightM": 5745.8481280555325,
+            "era5HeightM": 5752.695070481349
+          },
+          {
+            "pressureHpa": 400,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 7428.4,
+            "era5HeightM": 7438.441899742631
+          },
+          {
+            "pressureHpa": 300,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 2.8877000867699585,
+            "gfsHeightM": 9498.879027661183,
+            "era5HeightM": 9515.215045284258
+          },
+          {
+            "pressureHpa": 250,
+            "gfsCloudPercent": 61.53260999917984,
+            "era5CloudPercent": 13.043950086769959,
+            "gfsHeightM": 10756.19,
+            "era5HeightM": 10776.739058499914
+          },
+          {
+            "pressureHpa": 200,
+            "gfsCloudPercent": 85.75935972233613,
+            "era5CloudPercent": 8.57369943599527,
+            "gfsHeightM": 12223.612342911165,
+            "era5HeightM": 12242.2937883049
+          },
+          {
+            "pressureHpa": 150,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 14053.73,
+            "era5HeightM": 14068.36179600462
+          }
+        ],
+        "camsAod": 0.5115187194446723,
+        "eac4Aod": 0.6375668257575452,
+        "era5Grid": {
+          "latitude": 31.25,
+          "longitude": 121.5
+        },
+        "eac4Grid": {
+          "latitude": 31.5,
+          "longitude": 121.5
+        }
+      },
+      "scoreInteraction": 1.6
+    },
+    {
+      "id": "2023-06-10-sunset",
+      "date": "2023-06-10",
+      "eventType": "sunset",
+      "observedGrade": 0,
+      "observedLabel": "基本不烧",
+      "observedCloud": "-",
+      "observedColour": "-",
+      "originalPrediction": "小烧",
+      "evidenceUrls": "-",
+      "originalMap": "/static/media/ERA5/202306100000_set.jpg",
+      "originalSection": "/static/media/ERA5/上海市_20230610_set.jpg",
+      "baselineScore": 2.09,
+      "era5BaselineScore": 88.8883638763291,
+      "modes": {
+        "gfs_cams": {
+          "score": 0,
+          "peakTime": null,
+          "aodAtPeak": 0.891,
+          "pathCoverage": "within-sampling",
+          "overlapSensitivity": {
+            "minimum": 0,
+            "maximum": 0,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 0,
+            "maximum": 0,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "era5_cams": {
+          "score": 39.8,
+          "peakTime": "2023-06-10T10:58:43.145Z",
+          "aodAtPeak": 0.891,
+          "pathCoverage": "within-sampling",
+          "overlapSensitivity": {
+            "minimum": 35.3,
+            "maximum": 39.8,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 6.9,
+            "maximum": 49.1,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "gfs_eac4": {
+          "score": 0,
+          "peakTime": null,
+          "aodAtPeak": 0.603,
+          "pathCoverage": "within-sampling",
+          "overlapSensitivity": {
+            "minimum": 0,
+            "maximum": 0,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 0,
+            "maximum": 0,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        },
+        "era5_eac4": {
+          "score": 47,
+          "peakTime": "2023-06-10T10:58:43.145Z",
+          "aodAtPeak": 0.603,
+          "pathCoverage": "within-sampling",
+          "overlapSensitivity": {
+            "minimum": 41.9,
+            "maximum": 47,
+            "meaning": "参考时刻水平相关衰减、完全相关与独立水平云柱情景范围"
+          },
+          "aerosolSensitivity": {
+            "minimum": 10.1,
+            "maximum": 56.2,
+            "meaning": "参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备"
+          }
+        }
+      },
+      "profileAblations": {
+        "era5CloudOnly": {
+          "score": 39.8,
+          "peakTime": "2023-06-10T10:58:43.145Z"
+        },
+        "era5HeightOnly": {
+          "score": 0,
+          "peakTime": null
+        }
+      },
+      "localAtSolarEvent": {
+        "profiles": [
+          {
+            "pressureHpa": 1000,
+            "gfsCloudPercent": 0.9786513888835907,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 0.8078624999523161,
+            "era5HeightM": 27.08582393611144
+          },
+          {
+            "pressureHpa": 925,
+            "gfsCloudPercent": 0.9786513888835907,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 689.8505597221852,
+            "era5HeightM": 710.1362046419137
+          },
+          {
+            "pressureHpa": 850,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0,
+            "gfsHeightM": 1426.8505597221852,
+            "era5HeightM": 1445.4191016999127
+          },
+          {
+            "pressureHpa": 700,
+            "gfsCloudPercent": 54.8471749997139,
+            "era5CloudPercent": 0.78125,
+            "gfsHeightM": 3063.8932569444178,
+            "era5HeightM": 3079.684433101093
+          },
+          {
+            "pressureHpa": 600,
+            "gfsCloudPercent": 7.829211111068726,
+            "era5CloudPercent": 3.1583572048693895,
+            "gfsHeightM": 4313,
+            "era5HeightM": 4327.782287011304
+          },
+          {
+            "pressureHpa": 500,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 3.125,
+            "gfsHeightM": 5753.957302777767,
+            "era5HeightM": 5759.040038786974
+          },
+          {
+            "pressureHpa": 400,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 0.78125,
+            "gfsHeightM": 7451.771010138869,
+            "era5HeightM": 7449.517071908249
+          },
+          {
+            "pressureHpa": 300,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 41.005963541567326,
+            "gfsHeightM": 9522.476672722196,
+            "era5HeightM": 9519.533550752387
+          },
+          {
+            "pressureHpa": 250,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 67.81864257808775,
+            "gfsHeightM": 10767.457323583294,
+            "era5HeightM": 10773.553987980824
+          },
+          {
+            "pressureHpa": 200,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 28.775465494953096,
+            "gfsHeightM": 12232.510257736098,
+            "era5HeightM": 12241.875043346747
+          },
+          {
+            "pressureHpa": 150,
+            "gfsCloudPercent": 0,
+            "era5CloudPercent": 3.058285590261221,
+            "gfsHeightM": 14062.69,
+            "era5HeightM": 14065.198104358165
+          }
+        ],
+        "camsAod": 0.8912809166669846,
+        "eac4Aod": 0.6031738090253815,
+        "era5Grid": {
+          "latitude": 31.25,
+          "longitude": 121.5
+        },
+        "eac4Grid": {
+          "latitude": 31.5,
+          "longitude": 121.5
+        }
+      },
+      "scoreInteraction": 7.2
+    }
+  ],
+  "rankings": {
+    "gfs_cams": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 34,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.6666666666666666,
+      "ordinalSpearman": 0.21347337597995777
+    },
+    "era5_cams": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 26,
+      "tiedPairs": 6,
+      "pairwiseAuc": 0.5686274509803921,
+      "ordinalSpearman": 0.11380056828305729
+    },
+    "gfs_eac4": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 34,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.6666666666666666,
+      "ordinalSpearman": 0.2135549010453624
+    },
+    "era5_eac4": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 32,
+      "tiedPairs": 1,
+      "pairwiseAuc": 0.6372549019607843,
+      "ordinalSpearman": 0.19453755167938713
+    }
+  },
+  "profileAblationRankings": {
+    "era5CloudOnly": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 26,
+      "tiedPairs": 6,
+      "pairwiseAuc": 0.5686274509803921,
+      "ordinalSpearman": 0.11380056828305729
+    },
+    "era5HeightOnly": {
+      "evaluatedCases": 20,
+      "missingScores": 0,
+      "positiveControlPairs": 51,
+      "correctlyOrderedPairs": 34,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.6666666666666666,
+      "ordinalSpearman": 0.21347337597995777
+    }
+  },
+  "gfsBaselineRanking": {
+    "evaluatedCases": 20,
+    "missingScores": 0,
+    "positiveControlPairs": 51,
+    "correctlyOrderedPairs": 45,
+    "tiedPairs": 4,
+    "pairwiseAuc": 0.9215686274509803,
+    "ordinalSpearman": 0.5326916207913593
+  },
+  "era5BaselineRanking": {
+    "evaluatedCases": 20,
+    "missingScores": 0,
+    "positiveControlPairs": 51,
+    "correctlyOrderedPairs": 35,
+    "tiedPairs": 0,
+    "pairwiseAuc": 0.6862745098039216,
+    "ordinalSpearman": 0.24212826643591376
+  },
+  "scope": "Frozen input intervention on the preserved curator-labelled June slice. GFS ancillary terrain/rain/visibility are held fixed. ERA5 water/ice are diagnostics. Fixed-lead forecasting, independent truth coverage and generalisation retain separate evaluation."
+}

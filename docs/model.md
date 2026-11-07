@@ -159,8 +159,14 @@ input error further; run/lead-preserving archives support prospective forecast
 skill evaluation. Source labels, missing dates and original-image provenance
 retain their limits in the historical evidence record.
 
-The [reanalysis access guide](reanalysis-access.md) now supplies the verified
-free CDS/ADS route, exact requests and three owner account steps. An anonymous
-ARCO cloud-object access probe and decoded grid are preserved. Official regional
-retrieval and the frozen ERA5 comparison follow account configuration; native
-cloud-water/scattering changes retain separate development ownership.
+The [reanalysis access guide](reanalysis-access.md) supplies working free CDS/ADS
+retrieval. The complete frozen [ERA5/EAC4 comparison](evidence/era5-input-comparison.md)
+evaluates all twenty records. ERA5+EAC4 ranking AUC is 0.637 versus 0.686 for
+the native ERA5 cloud-layer baseline. Fraction-only replacement changes scores
+substantially; height-only replacement changes at most 0.1 points. At the June 3
+positive snapshot a 37-level profile finds 56.25% cloud at the omitted 225 hPa
+level while the current eleven-level maximum is 12.5%. The June 10 negative
+snapshot also gains substantial cloud at 225 hPa, making both label classes
+essential controls. Cloud-base eligibility and denser sampling have priority in
+the [representation experiment](plans/cloud-column-representation.md), followed
+by independently controlled vertical-overlap and scattering work.
