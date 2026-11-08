@@ -1,0 +1,176 @@
+{
+  "verifiedAt": "2026-11-08T01:14:05.852Z",
+  "codeIdentity": {
+    "sha256": "ce23fc5d4a9171c999459c49452e6eee6077a8121becff7d68596e4ae2d46dab",
+    "files": [
+      {
+        "file": "src/scattering-engine.mjs",
+        "sha256": "6db79e28c59e429ce6572991b51b7f48f33f6f9288ac9604112a3b55dbd0e1f2"
+      },
+      {
+        "file": "src/radiance.mjs",
+        "sha256": "eae7ad9d3b601cda5ac9ba3e370227ca4443ff09f9cc6b31b2f6f275fa35b3f0"
+      },
+      {
+        "file": "src/radiative-geometry.mjs",
+        "sha256": "4d8fde9f6641ab067bf82b4de6700e2cec0572bff98022bb9aa09dc9c6eaa15a"
+      },
+      {
+        "file": "src/section-medium.mjs",
+        "sha256": "3a8ebaf53ce1027a0f4f77856d02de5f90fe7cc7470d1a4a786d4f0cbf1bdfc4"
+      },
+      {
+        "file": "src/quadrature.mjs",
+        "sha256": "bd8f733ab48877fb4a216649e6aed5340f1fa6a43c31f3eea87b5ec31854c8fe"
+      },
+      {
+        "file": "src/angular-support.mjs",
+        "sha256": "a96db4a599e56d3c217f2e03eb14c28fa038c468b796f9e86fc5caf92b7c6900"
+      },
+      {
+        "file": "src/angular-bound.mjs",
+        "sha256": "b10318b05674f3387e11bd99b22814f02e7c661daa555881f51a748f07545f46"
+      },
+      {
+        "file": "src/sky-radiance.mjs",
+        "sha256": "c7478556540ec3b40d95675189567fd8053a57f5542f31cde1f2225e5ba89c2f"
+      },
+      {
+        "file": "src/astro.mjs",
+        "sha256": "0662f77dfef70869dfe1912234bf5c45fe64de00bcc6bab634629928c5d21b8d"
+      },
+      {
+        "file": "src/cloud-optics.mjs",
+        "sha256": "74d100c6fabaa45c7095221fa642c1d2ce1cf483f366e5a87e0712cb09584c3b"
+      },
+      {
+        "file": "src/provider.mjs",
+        "sha256": "beef2d788599f4b82da2895416a104fc5fe30ea4e43d402733a8690f80f60abd"
+      },
+      {
+        "file": "package-lock.json",
+        "sha256": "e99c3274b12262ef68d348e7f212672fe150d416ab14d809d8e20f4d1af1c9f0"
+      },
+      {
+        "file": "scripts/diagnose_scattering.mjs",
+        "sha256": "bf1c4af258911a74a590ceebc6f88e114438513aab78f4c9bf285c172aec7398"
+      },
+      {
+        "file": "research/model-snapshots/section-optics-0.3.1/engine.mjs",
+        "sha256": "bb57d43a8687f58a3c2342a7806c1011b404cf3da52b5e6c423b71ca68deb09a"
+      },
+      {
+        "file": "research/model-snapshots/section-optics-0.3.1/provider.mjs",
+        "sha256": "beef2d788599f4b82da2895416a104fc5fe30ea4e43d402733a8690f80f60abd"
+      }
+    ]
+  },
+  "verifierSha256": "553e26203e3ed65112eae6c033fb8f58a269894b773ec9533746920dbf4e21f4",
+  "cases": [
+    {
+      "id": "2023-06-03-sunset",
+      "density": "coarse",
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-03-sunset.json",
+          "sha256": "f98d64e2160b7980ee99771dad9307efe698dfe39f469fe79ae85dac764f6bb6"
+        }
+      ],
+      "intervals": 342,
+      "rays": 2394,
+      "zeroBounds": 3,
+      "tightenedBounds": 282,
+      "maximumSourceToBound": 0.9999999967547349
+    },
+    {
+      "id": "2023-06-03-sunset",
+      "density": "dense",
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-03-sunset.json",
+          "sha256": "f98d64e2160b7980ee99771dad9307efe698dfe39f469fe79ae85dac764f6bb6"
+        },
+        {
+          "file": "research/experiments/cloud-column-dense-inputs/2023-06-03-sunset.json",
+          "sha256": "fe496c8a75392ca0eee01f728fa78208455f6bdc2a809f9705e2addccb818d5a"
+        }
+      ],
+      "intervals": 474,
+      "rays": 3318,
+      "zeroBounds": 3,
+      "tightenedBounds": 129,
+      "maximumSourceToBound": 0.9979204501931356
+    },
+    {
+      "id": "2023-06-09-sunset",
+      "density": "coarse",
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-09-sunset.json",
+          "sha256": "8529600e0c2c02ef9969aa0661da5b855d4c3f6d1037b77073b9f07d16e2cd91"
+        }
+      ],
+      "intervals": 288,
+      "rays": 2016,
+      "zeroBounds": 0,
+      "tightenedBounds": 180,
+      "maximumSourceToBound": 0.9999999990000003
+    },
+    {
+      "id": "2023-06-09-sunset",
+      "density": "dense",
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-09-sunset.json",
+          "sha256": "8529600e0c2c02ef9969aa0661da5b855d4c3f6d1037b77073b9f07d16e2cd91"
+        },
+        {
+          "file": "research/experiments/cloud-column-dense-inputs/2023-06-09-sunset.json",
+          "sha256": "3e8d5c66deb5a3cb56eb891ff8ac14cd2a30c4e0691647ce90ea240f418afc60"
+        }
+      ],
+      "intervals": 526,
+      "rays": 3682,
+      "zeroBounds": 0,
+      "tightenedBounds": 247,
+      "maximumSourceToBound": 0.9546441413414741
+    },
+    {
+      "id": "2023-06-10-sunrise",
+      "density": "coarse",
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-10-sunrise.json",
+          "sha256": "7c4ac9015dc14e8dfce463de45445d9ad827e46a78f249fe04261ef236d81c32"
+        }
+      ],
+      "intervals": 402,
+      "rays": 2814,
+      "zeroBounds": 3,
+      "tightenedBounds": 270,
+      "maximumSourceToBound": 0.9999999965481366
+    },
+    {
+      "id": "2023-06-10-sunrise",
+      "density": "dense",
+      "inputSources": [
+        {
+          "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-10-sunrise.json",
+          "sha256": "7c4ac9015dc14e8dfce463de45445d9ad827e46a78f249fe04261ef236d81c32"
+        },
+        {
+          "file": "research/experiments/cloud-column-dense-inputs/2023-06-10-sunrise.json",
+          "sha256": "fd006197cafccf1593ae1d28177b8eab9245c311d1fb9adc00089e53936467c0"
+        }
+      ],
+      "intervals": 613,
+      "rays": 4291,
+      "zeroBounds": 0,
+      "tightenedBounds": 172,
+      "maximumSourceToBound": 0.9851958004763496
+    }
+  ],
+  "violations": [],
+  "passed": true,
+  "scope": "Six actual media; exact view-only sunlit source at seven interior locations per support/pressure boundary interval. Finite material geometry coverage, independent of solar-source quadrature and label grades."
+}

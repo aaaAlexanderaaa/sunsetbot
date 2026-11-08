@@ -20,3 +20,29 @@ test('known support partitions retain a narrow interior source and max-depth fai
   assert.equal(limited.converged, false);
   assert.ok(limited.depthLimitCount > 0);
 });
+
+test('unresolved supported zero samples retain their contribution bound and failure status', () => {
+  const result = adaptiveSimpson(() => [0], 0, 1, { absoluteTolerance: 1e-12, relativeTolerance: 0, maxDepth: 2,
+    additionalError: (a, b) => [b - a] });
+  assert.equal(result.converged, false);
+  assert.ok(result.errorEstimate[0] >= 1 - 1e-12);
+});
+
+test('a limited source interval can retain a conservative envelope bound for global accounting', () => {
+  const result = adaptiveSimpson(x => [Math.exp(-10000 * x)], 0, 1, { absoluteTolerance: 1e-15,
+    relativeTolerance: 0, maxDepth: 0, onLimitError: (a, b) => [b - a] });
+  assert.equal(result.converged, false);
+  assert.equal(result.boundedLimitCount, result.depthLimitCount);
+  assert.ok(Math.abs(result.value[0] - 0.0001) <= result.errorEstimate[0]);
+});
+
+test('a complete primary envelope absorbs subordinate uncertainty only on its own limited interval', () => {
+  const result = adaptiveSimpson(x => [1e6 * Math.max(0, x - 0.5) ** 8, 1], 0, 1, {
+    breakpoints: [0.5], absoluteTolerance: 1e-12, relativeTolerance: 0, maxDepth: 0,
+    onLimitError: (a, b) => ({ errorBound: [(b - a) * 1e6 * Math.max(0, b - 0.5) ** 8, 0], absorbedComponents: [1] }),
+  });
+  assert.equal(result.boundedLimitCount, 1);
+  assert.equal(result.value[1], 0.5);
+  const exactPrimary = 1e6 * 0.5 ** 9 / 9;
+  assert.ok(Math.abs(result.value[0] - exactPrimary) <= result.errorEstimate[0]);
+});

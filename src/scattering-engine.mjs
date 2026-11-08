@@ -5,17 +5,22 @@ import { sectionMedium } from './section-medium.mjs';
 import { pointAlong, skyDirection, earthShadowed, sectionCrossing, shadowCrossings, dot } from './radiative-geometry.mjs';
 import { henyeyGreenstein, skyGrid, integrateSky } from './radiance.mjs';
 import { adaptiveSimpson } from './quadrature.mjs';
+import { adaptiveSkyRadiance } from './sky-radiance.mjs';
 
-export const SCATTERING_VERSION = 'directional-single-scatter-0.1.1';
+export const SCATTERING_VERSION = 'directional-single-scatter-0.2.0';
 export const SCATTERING_ASSUMPTIONS = {
   wavelengthsNm: [680, 550, 440], directSolarIrradiancePerChannel: [1, 1, 1],
   cloudExtinction: { low: 2, mid: 0.7, high: 0.2 }, singleScatteringAlbedo: 1,
   asymmetry: 0.85, phaseScenarios: [0, 0.75, 0.85, 0.9], correlationLengthKm: 50,
+  cloudOverlap: 'decorrelated',
   rayleigh550: 0.012, molecularScaleHeightKm: 8, aerosolScaleHeightKm: 1.5, aerosolAngstrom: 1.2,
   sourceExtentKm: 150, maximumViewingPathKm: 350, maximumSolarPathKm: 2200,
   azimuthHalfWidthDegrees: 10, referenceSolarAltitudeDegrees: -0.833,
-  gasStepKm: 4, maximumEmissionOpticalDepth: 0.5, sourceTailAbsoluteTolerance: 1e-9,
-  sourceRelativeTolerance: 0.002, sourceAbsoluteTolerance: 1e-12, sourceMaximumDepth: 18,
+  gasStepKm: 4, maximumEmissionOpticalDepth: 0.5, sourceTailAbsoluteTolerance: 1e-13,
+  sourceRelativeTolerance: 0.002, sourceAbsoluteTolerance: 1e-11, sourceMaximumDepth: 18,
+  angularIntegration: 'adaptive-support', angularRelativeTolerance: 0.005, angularAbsoluteTolerance: 1e-10,
+  angularMuMaximumDepth: 14, angularAzimuthMaximumDepth: 10, azimuthPartitionFractions: [], maximumAngularRays: 4096,
+  totalAbsoluteTolerance: 1e-10, totalRelativeTolerance: 0.02,
   elevationEdgesDegrees: [0.5, 2, 5, 10, 20, 40, 65, 85],
   cloudField: 'Current solar section extruded along cross-track; U depends on longitude-like section coordinate and height bands',
   terrain: 'Nearest fixed horizontal column; constant within each probability column',
@@ -74,7 +79,8 @@ export function scatteringColumns({ weather, aerosol, time, event, location, fan
 const clearTransmission = (rayleigh, aerosol, wavelength, assumptions) => Math.exp(-rayleigh * (550 / wavelength) ** 4 - aerosol * (550 / wavelength) ** assumptions.aerosolAngstrom);
 
 export function directionalRay({ medium, observer, direction, solarDirection, assumptions = SCATTERING_ASSUMPTIONS,
-  asymmetries = assumptions.phaseScenarios, overlap = 'decorrelated' }) {
+  asymmetries = assumptions.phaseScenarios, overlap = 'decorrelated', illuminationMode = 'direct-solar' }) {
+  if (!['direct-solar', 'constant-unit'].includes(illuminationMode)) throw Error('Unknown directional illumination mode');
   const crossing = [-assumptions.sourceExtentKm, assumptions.sourceExtentKm].map(x => sectionCrossing(observer, direction, x)).filter(t => t > 0);
   const maximum = Math.min(assumptions.maximumViewingPathKm, ...crossing);
   const view = medium.trace(observer, direction, maximum, { gasStepKm: assumptions.gasStepKm,
@@ -83,7 +89,8 @@ export function directionalRay({ medium, observer, direction, solarDirection, as
   const cosine = clamp(dot(solarDirection, direction)), phases = asymmetries.map(g => henyeyGreenstein(cosine, g));
   const rgb = asymmetries.map(() => [0, 0, 0]), coveredRgb = asymmetries.map(() => [0, 0, 0]);
   const prefix = [], litCells = [];let rayleigh = 0, aerosol = 0, viewBounded = true, quadraturePoints = 0, omittedTailBound = 0, uncoveredPoints = 0;
-  let sourceErrorEstimate = 0, sourceDepthLimitCount = 0;
+  let sourceErrorEstimate = 0, sourceDepthLimitCount = 0, sourceBoundedLimitCount = 0;
+  const sourceErrorCommon = Array(6).fill(0);
   const cloudSegments = view.segments.filter(s => s.cloud.fraction > 0).length;
   const transmissionOptions = condition => ({ overlap, condition, correlationLengthKm: assumptions.correlationLengthKm });
   for (const segment of view.segments) {
@@ -91,8 +98,9 @@ export function directionalRay({ medium, observer, direction, solarDirection, as
     const condition = { column: cell.column, x: cell.x, lower: 0, upper: cell.fraction };
     if (cell.fraction > 0 && k > 0) {
       const startCloud = cloudTransmission(prefix, transmissionOptions(condition));
-      const upper = cell.fraction * Math.max(...phases) * Math.max(...assumptions.directSolarIrradiancePerChannel) * assumptions.singleScatteringAlbedo *
-        startCloud * clearTransmission(rayleigh, aerosol, 680, assumptions);
+      const densityBounds = assumptions.wavelengthsNm.map((wavelength, c) => cell.fraction * assumptions.singleScatteringAlbedo *
+        assumptions.directSolarIrradiancePerChannel[c] * startCloud * clearTransmission(rayleigh, aerosol, wavelength, assumptions));
+      const upper = Math.max(...phases) * Math.max(...densityBounds);
       const retainedLength = upper > assumptions.sourceTailAbsoluteTolerance ? Math.min(length,
         Math.log(upper / assumptions.sourceTailAbsoluteTolerance) / k) : 0;
       if (retainedLength < length) omittedTailBound += upper * Math.exp(-k * retainedLength);
@@ -100,24 +108,28 @@ export function directionalRay({ medium, observer, direction, solarDirection, as
       // numerical radiance tail cutoff. It counts a cell once through U-union.
       for (const fraction of [1e-7, 0.5, 1 - 1e-7]) {
         const point = pointAlong(observer, direction, segment.startKm + length * fraction);
-        if (!earthShadowed(point, solarDirection) && !medium.trace(point, solarDirection, assumptions.maximumSolarPathKm,
-          { integrateGas: false }).blocked) { litCells.push({ ...cell, depth: 80 });break; }
+        if (illuminationMode === 'constant-unit' || (!earthShadowed(point, solarDirection) && !medium.trace(point, solarDirection, assumptions.maximumSolarPathKm,
+          { integrateGas: false }).blocked)) { litCells.push({ ...cell, depth: 80 });break; }
       }
-      function sourceAt(rawOffset) {
+      function sourceAt(u) {
         // The fixed source-cell condition supplies the one-sided material
         // limit at an interface; ray extinction starts beyond that point.
-        const offset = rawOffset, distance = segment.startKm + offset;
+        const offset = Math.min(retainedLength, -Math.log1p(-u) / k), distance = segment.startKm + offset;
         const point = pointAlong(observer, direction, distance);
         quadraturePoints++;
-        if (earthShadowed(point, solarDirection)) return [0, 0, 0, 0, 0, 0];
-        const solar = medium.trace(point, solarDirection, assumptions.maximumSolarPathKm, { gasStepKm: assumptions.gasStepKm });
+        if (illuminationMode === 'direct-solar' && earthShadowed(point, solarDirection)) return [0, 0, 0, 0, 0, 0];
+        const solar = illuminationMode === 'constant-unit' ? { segments: [], blocked: false, bounded: true } :
+          medium.trace(point, solarDirection, assumptions.maximumSolarPathKm, { gasStepKm: assumptions.gasStepKm });
         if (solar.blocked) return [0, 0, 0, 0, 0, 0];
-        const cloud = cloudTransmission([...prefix, { ...cell, depth: k * offset }, ...solar.segments.map(s => s.cloud)], transmissionOptions(condition));
+        // Conditioning makes the current segment's viewing extinction exactly
+        // exp(-k*t). With u=1-exp(-k*t), k*exp(-k*t)*dt=du. Keep shared solar
+        // extinction inside the same conditional expectation.
+        const cloud = cloudTransmission([...prefix, ...solar.segments.map(s => s.cloud)], transmissionOptions(condition));
         const partial = medium.clearDepth(observer, direction, segment.startKm, distance, assumptions.gasStepKm);
         const solarRayleigh = solar.segments.reduce((sum, s) => sum + s.rayleigh, 0), solarAerosol = solar.segments.reduce((sum, s) => sum + s.aerosol, 0);
         const covered = viewBounded && segment.medium.bounded && solar.bounded;
         if (!covered) uncoveredPoints++;
-        const density = cell.fraction * k * assumptions.singleScatteringAlbedo * cloud, common = [];
+        const density = cell.fraction * assumptions.singleScatteringAlbedo * cloud, common = [];
         for (let c = 0; c < 3; c++) {
           const contribution = density * assumptions.directSolarIrradiancePerChannel[c] *
             clearTransmission(rayleigh + partial.rayleigh + solarRayleigh, aerosol + partial.aerosol + solarAerosol, assumptions.wavelengthsNm[c], assumptions);
@@ -126,13 +138,17 @@ export function directionalRay({ medium, observer, direction, solarDirection, as
         return [...common, ...common.map(v => covered ? v : 0)];
       }
       if (retainedLength > 0) {
-        const result = adaptiveSimpson(sourceAt, 0, retainedLength, {
+        const uEnd = Math.min(1 - Number.EPSILON / 2, -Math.expm1(-k * retainedLength));
+        const result = adaptiveSimpson(sourceAt, 0, uEnd, {
           absoluteTolerance: assumptions.sourceAbsoluteTolerance / (Math.max(...phases) * Math.max(1, cloudSegments)),
           relativeTolerance: assumptions.sourceRelativeTolerance, maxDepth: assumptions.sourceMaximumDepth,
-          maxInterval: assumptions.maximumEmissionOpticalDepth / k, maxEvaluations: 30000,
+          maxInterval: -Math.expm1(-assumptions.maximumEmissionOpticalDepth), maxEvaluations: 30000,
+          onLimitError: (a, b) => [...densityBounds, ...densityBounds].map(bound => bound * (b - a) * (1 + 8 * Number.EPSILON)),
         });
         sourceDepthLimitCount += result.depthLimitCount;
+        sourceBoundedLimitCount += result.boundedLimitCount;
         sourceErrorEstimate += Math.max(...result.errorEstimate) * Math.max(...phases);
+        for (let c = 0; c < 6; c++) sourceErrorCommon[c] += result.errorEstimate[c];
         for (let c = 0; c < 3; c++) {
           for (let p = 0; p < phases.length; p++) {
             rgb[p][c] += result.value[c] * phases[p];
@@ -143,24 +159,37 @@ export function directionalRay({ medium, observer, direction, solarDirection, as
     }
     prefix.push(cell);rayleigh += segment.rayleigh;aerosol += segment.aerosol;viewBounded &&= segment.medium.bounded;
   }
-  return { cosine, spectra: asymmetries.map((asymmetry, i) => ({ asymmetry, rgb: rgb[i], coveredRgb: coveredRgb[i] })),
+  return { cosine, illuminationMode, spectra: asymmetries.map((asymmetry, i) => ({ asymmetry, rgb: rgb[i], coveredRgb: coveredRgb[i],
+    sourceErrorEstimate: sourceErrorCommon.slice(0, 3).map(e => e * phases[i]),
+    coveredSourceErrorEstimate: sourceErrorCommon.slice(3).map(e => e * phases[i]),
+    tailUpperBound: omittedTailBound * phases[i] / Math.max(...phases) })),
     potentialLitCloudProbability: litCells.length ? 1 - cloudTransmission(litCells, { overlap, correlationLengthKm: assumptions.correlationLengthKm }) : 0,
     quadraturePoints, uncoveredPoints, omittedTailUpperBoundPerSr: omittedTailBound,
-    sourceErrorEstimatePerSr: sourceErrorEstimate, sourceDepthLimitCount,
+    sourceErrorEstimatePerSr: sourceErrorEstimate, sourceDepthLimitCount, sourceBoundedLimitCount,
+    viewCloudTransmission: cloudTransmission(prefix, { overlap, correlationLengthKm: assumptions.correlationLengthKm }),
     terrainBlocked: view.blocked, bounded: view.bounded && uncoveredPoints === 0 };
 }
 
 export function computeDirectionalFrame(input, options = {}) {
-  const assumptions = { ...SCATTERING_ASSUMPTIONS, ...options }, prepared = scatteringColumns(input);
+  const assumptions = { ...SCATTERING_ASSUMPTIONS, ...options, cloudOverlap: options.overlap ?? 'decorrelated' }, prepared = scatteringColumns(input);
   const medium = sectionMedium(prepared.columns, assumptions), local = prepared.columns.find(c => c.x === 0);
   const observer = [0, 0, EARTH_KM + local.ground], solarDirection = skyDirection(0, prepared.sun.altitude);
   const halfWidth = assumptions.azimuthHalfWidthDegrees;
   if (!(halfWidth > 0)) throw Error('Directional sky integration requires a declared positive angular width');
+  const asymmetries = options.asymmetries ?? assumptions.phaseScenarios;
+  if (assumptions.angularIntegration === 'adaptive-support') {
+    const result = adaptiveSkyRadiance({ blocks: medium.emissionBlocks(assumptions.sourceExtentKm),
+      cells: medium.emissionBlocks(assumptions.sourceExtentKm, { merge: false }), medium, observer, observerHeight: local.ground,
+      solarAltitude: prepared.sun.altitude, asymmetries, assumptions,
+      rayAt: (phi, elevation) => directionalRay({ medium, observer, direction: skyDirection(phi, elevation), solarDirection,
+        assumptions, asymmetries, overlap: options.overlap ?? 'decorrelated' }) });
+    return { modelVersion: SCATTERING_VERSION, time: new Date(input.time).toISOString(), sun: prepared.sun, ...result,
+      diagnostics: { ...result.diagnostics, bearingClipped: prepared.bearingClipped, representation: assumptions.cloudField }, assumptions };
+  }
   const elevationEdges = options.elevationEdgesDegrees ?? assumptions.elevationEdgesDegrees;
   const toward = skyGrid(options.azimuthEdgesDegrees ?? [-halfWidth, 0, halfWidth], elevationEdges);
   const grid = [...toward.map(c => ({ ...c, side: 'toward' })), ...toward.map(c => ({ ...c,
     azimuthLow: c.azimuthLow + 180, azimuthHigh: c.azimuthHigh + 180, azimuth: c.azimuth + 180, side: 'opposite' }))];
-  const asymmetries = options.asymmetries ?? assumptions.phaseScenarios;
   const cells = grid.map(cell => ({ ...cell, result: directionalRay({ medium, observer, direction: skyDirection(cell.azimuth, cell.elevation),
     solarDirection, assumptions, asymmetries, overlap: options.overlap ?? 'decorrelated' }) }));
   const spectra = asymmetries.map((asymmetry, p) => {

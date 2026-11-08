@@ -79,7 +79,7 @@ counting by location/variables. The application has its own smaller budget.
 
 ## Ask ChatGPT MCP
 
-Seven completed self-contained, isolated assessments use the owner's configured
+Twelve completed self-contained, isolated assessments use the owner's configured
 `ask_chatgpt` MCP and account model/thinking settings. The actual questions,
 raw HTML/JSON responses and extracted reading copies are retained:
 
@@ -93,6 +93,10 @@ raw HTML/JSON responses and extracted reading copies are retained:
 | [Reanalysis data access](questions/06-data-acquisition.txt) | [raw](chatgpt/06-data-acquisition.json), [reading copy](chatgpt/06-data-acquisition.md); recommends official regional CDS/ADS retrieval and concrete account steps |
 | [Priority after complete ERA5/EAC4 replay](questions/08-model-priority-after-era5.txt) | [raw](chatgpt/08-model-priority-after-era5.json), [reading copy](chatgpt/08-model-priority-after-era5.md); prioritizes vertical representation, paired ablations and independent dates; server reported 222 s thinking |
 | [Physics after independent-calendar validation](questions/09-next-physics-after-independent-validation.txt) | [raw](chatgpt/09-next-physics-after-independent-validation.json), [reading copy](chatgpt/09-next-physics-after-independent-validation.md); full frozen source and all 164 scores; prioritizes directional scattering and angular integration; server reported 332 s thinking |
+| [Minimal directional-transfer design](questions/10-minimal-consistent-directional-transfer.txt) | [raw](chatgpt/10-minimal-consistent-directional-transfer.json), [reading copy](chatgpt/10-minimal-consistent-directional-transfer.md); fixed-U volume source, photon-direction phase convention and declared extruded medium |
+| [Real-field numerical convergence](questions/11-real-cloud-numerical-convergence.txt) | [raw](chatgpt/11-real-cloud-numerical-convergence.json), [reading copy](chatgpt/11-real-cloud-numerical-convergence.md); optical-depth source variable, known support, angular adaptivity and independent controls |
+| [Whole-angle zero-region bound](questions/12-angular-zero-region-bound.txt) | [raw](chatgpt/12-angular-zero-region-bound.json), [reading copy](chatgpt/12-angular-zero-region-bound.md); supports fixed-azimuth probability/geometry proof and identifies nested/RGB/outer-angle accounting gaps |
+| [Finite numerical acceptance](questions/13-finite-numerical-acceptance.txt) | [raw](chatgpt/13-finite-numerical-acceptance.json), [reading copy](chatgpt/13-finite-numerical-acceptance.md); accepts a bounded empirical convergence design, with source partitions, real-medium envelope checks and numerical rank resolution |
 
 The owner authorized relevant newly authored source for these assessments.
 Every question includes the required implementation/context. Model answers are
@@ -235,3 +239,22 @@ completed with 332 seconds of reported thinking. Its physical recommendations
 are checked against the saved libRadtran, ECMWF ecRad and JMA primary sources.
 The [next implementation plan](../docs/plans/directional-scattering.md) owns
 directional scattering, angular integration and independent acceptance.
+
+## Directional-source numerical work (2026-11-08)
+
+The isolated research solver now integrates normalized directional cloud
+radiance with a conditional optical-depth variable and adaptive solid-angle
+quadrature. [The numerical record](../docs/evidence/directional-scattering-numerics.md)
+retains initial large mesh differences, transitional failures and exact source
+snapshots where available. A real-medium geometric envelope sweep passes
+18,515 rays at coarse/dense pressure resolution. Full empirical acceptance
+uses six fixed media and four independent controls; it precedes a new source
+freeze and new-date observed labels.
+
+All 122 weather-only Sep/Oct cases are preserved in
+[normalized inputs](experiments/scattering-weather-inputs/manifest.json), with
+five new official raw-data receipts and three reused regional/terrain files.
+[The weather audit](experiments/scattering-weather-verification.json) checks
+399,672 aligned finite field series. Labels remain unrequested during numerical
+development. The local web/API/Docker continues to use the frozen 0.3.1 model
+and its completed independent-calendar evidence.

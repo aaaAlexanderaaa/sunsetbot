@@ -87,15 +87,34 @@ fixed-lead operational skill have distinct acceptance evidence.
 
 ## Execution state
 
-The prototype now computes actual ERA5/EAC4 source radiance and passes the
-mathematical kernel checks. Twenty events at both pressure resolutions and
-six fixed-medium refinement experiments reveal significant source/angle
-aliasing. The exact initial and transitional adaptive-source versions are
-preserved. [Numerical evidence](../evidence/directional-scattering-numerics.md)
-records the failed acceptance, completed independent assessments and the
-specific next solver changes. Source/angle convergence, candidate source
-freeze and new-date observation evaluation remain at this plan's owner.
+The source now integrates in `u=1-exp(-k*t)`, with geometric cloud support,
+conditional interval attenuation bounds, reflection symmetry and nested
+adaptive sky integration. All raw/covered RGB channels have propagated
+angular/source/tail error estimates and colour-ratio diagnostics. A bounded
+local angular interval owns its complete numerical error; its subordinate
+source/tail ledger is absorbed on that interval. Positive-background subgrid
+peaks retain explicitly estimated-quadrature scope.
 
-Weather-only retrieval for the declared 122-event Sep/Oct calendar has been
-submitted through five official tasks. Existing August/terrain archives are
-reused. New-date observation labels remain unrequested during numerical work.
+The six-real-medium view-only envelope check passes 18,515 interior rays over
+2,645 boundary-aware intervals. It exposed and corrected a floating-point
+support exclusion on sub-1e-17-wide intervals. Sixty-seven Node tests and
+thirteen Python checks pass. Full empirical acceptance is a separate 24-job
+gate: base, fourfold tighter tolerances, independent gas-step refinement, and
+changed source/angle partitions at both pressure resolutions. Job identities
+include actual input hashes, source hashes and options. Budget failures retain
+their zero-region samples. [Numerical evidence](../evidence/directional-scattering-numerics.md)
+preserves development failures and independent assessments.
+
+Five official weather retrievals are downloaded. Together with reused August
+and static-terrain files they normalize all 122 Sep/Oct events at 37 levels.
+All 399,672 weather field series pass alignment/range checks. New-date labels
+remain unrequested. A prospective evaluation-policy draft specifies equal-Sun-
+altitude comparison to an exactly exposed frozen heuristic frame and a native
+layer baseline. Candidate/source/policy freeze follows the numerical gate;
+observed-label retrieval and new-date scoring follow that freeze.
+
+The original component-ablation idea now has two explicit scopes: the earlier
+representation study isolates vertical discovery/density; the new comparison
+evaluates the combined directional-source/angular observable. Its source and
+area have different physical units from the old target-strength proxy, so a
+mixed-unit factorial score would require another defined observable.

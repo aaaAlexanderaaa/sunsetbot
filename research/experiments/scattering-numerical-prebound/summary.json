@@ -1,0 +1,829 @@
+{
+  "completedAt": "2026-11-07T17:25:40.806Z",
+  "signature": "357226a1817b03800fbd886de92be8718ba4274bf290acb3422e0d90a0715eff",
+  "codeIdentity": {
+    "sha256": "ed86f93abb7d159b435f3e4aee76eeb5d01fa488f98770863f7cc9d7dd7bef2d",
+    "files": [
+      {
+        "file": "src/scattering-engine.mjs",
+        "sha256": "ce31c017838b4d87b42c25cccac119245fcb4310b7d976fbe67d680f7215350a"
+      },
+      {
+        "file": "src/radiance.mjs",
+        "sha256": "eae7ad9d3b601cda5ac9ba3e370227ca4443ff09f9cc6b31b2f6f275fa35b3f0"
+      },
+      {
+        "file": "src/radiative-geometry.mjs",
+        "sha256": "4d8fde9f6641ab067bf82b4de6700e2cec0572bff98022bb9aa09dc9c6eaa15a"
+      },
+      {
+        "file": "src/section-medium.mjs",
+        "sha256": "75612d3f5171891856c975b2087269bfdc0c272fd9babb2f771638494a0a750f"
+      },
+      {
+        "file": "src/quadrature.mjs",
+        "sha256": "823460ec047d95e9d9e00b6cb78516f41b31184d8fdc8d4ebc52de70a776e0d7"
+      },
+      {
+        "file": "src/angular-support.mjs",
+        "sha256": "d1c3da9d6861d759e276b341235ac52e4ebe104bfe9ee25c4d48b4e0a2c43055"
+      },
+      {
+        "file": "src/sky-radiance.mjs",
+        "sha256": "7a53dd39a317463c8d2b61805879f896bb6d09e6d675517a2484fe24576d9052"
+      },
+      {
+        "file": "src/astro.mjs",
+        "sha256": "0662f77dfef70869dfe1912234bf5c45fe64de00bcc6bab634629928c5d21b8d"
+      },
+      {
+        "file": "src/cloud-optics.mjs",
+        "sha256": "74d100c6fabaa45c7095221fa642c1d2ce1cf483f366e5a87e0712cb09584c3b"
+      },
+      {
+        "file": "src/provider.mjs",
+        "sha256": "beef2d788599f4b82da2895416a104fc5fe30ea4e43d402733a8690f80f60abd"
+      },
+      {
+        "file": "package-lock.json",
+        "sha256": "e99c3274b12262ef68d348e7f212672fe150d416ab14d809d8e20f4d1af1c9f0"
+      },
+      {
+        "file": "scripts/diagnose_scattering.mjs",
+        "sha256": "9cc5fa3869e7b4119061719b474b9933608b70dfde5f65e97b62341d91f1a1d6"
+      },
+      {
+        "file": "research/model-snapshots/section-optics-0.3.1/engine.mjs",
+        "sha256": "bb57d43a8687f58a3c2342a7806c1011b404cf3da52b5e6c423b71ca68deb09a"
+      },
+      {
+        "file": "research/model-snapshots/section-optics-0.3.1/provider.mjs",
+        "sha256": "beef2d788599f4b82da2895416a104fc5fe30ea4e43d402733a8690f80f60abd"
+      }
+    ]
+  },
+  "scriptSha256": "af5447e469f3ddce32b2acb5691421f71f594706e4862ae6dd2bcd8d4916b525",
+  "accepted": false,
+  "comparisons": [
+    {
+      "id": "2023-06-03-sunset",
+      "density": "coarse",
+      "accepted": true,
+      "differences": [
+        {
+          "mode": "tight",
+          "asymmetry": 0,
+          "field": "rgbIntegral",
+          "baseline": 0.000004669328877762125,
+          "refined": 0.000004665284732101429,
+          "absoluteDifference": 4.044145660695681e-9,
+          "relativeDifference": 0.0008668593436255363,
+          "budget": 9.330569464202858e-8
+        },
+        {
+          "mode": "tight",
+          "asymmetry": 0,
+          "field": "coveredRgbIntegral",
+          "baseline": 0.000004669328877762125,
+          "refined": 0.000004665284732101429,
+          "absoluteDifference": 4.044145660695681e-9,
+          "relativeDifference": 0.0008668593436255363,
+          "budget": 9.330569464202858e-8
+        },
+        {
+          "mode": "tight",
+          "asymmetry": 0.75,
+          "field": "rgbIntegral",
+          "baseline": 0.000005344705464881341,
+          "refined": 0.000005339409535873229,
+          "absoluteDifference": 5.295929008112594e-9,
+          "relativeDifference": 0.000991856678633001,
+          "budget": 1.0678819071746457e-7
+        },
+        {
+          "mode": "tight",
+          "asymmetry": 0.75,
+          "field": "coveredRgbIntegral",
+          "baseline": 0.000005344705464881341,
+          "refined": 0.000005339409535873229,
+          "absoluteDifference": 5.295929008112594e-9,
+          "relativeDifference": 0.000991856678633001,
+          "budget": 1.0678819071746457e-7
+        },
+        {
+          "mode": "tight",
+          "asymmetry": 0.85,
+          "field": "rgbIntegral",
+          "baseline": 0.000005004607748463374,
+          "refined": 0.000004999778455848216,
+          "absoluteDifference": 4.8292926151579925e-9,
+          "relativeDifference": 0.0009659013209893717,
+          "budget": 9.999556911696432e-8
+        },
+        {
+          "mode": "tight",
+          "asymmetry": 0.85,
+          "field": "coveredRgbIntegral",
+          "baseline": 0.000005004607748463374,
+          "refined": 0.000004999778455848216,
+          "absoluteDifference": 4.8292926151579925e-9,
+          "relativeDifference": 0.0009659013209893717,
+          "budget": 9.999556911696432e-8
+        },
+        {
+          "mode": "tight",
+          "asymmetry": 0.9,
+          "field": "rgbIntegral",
+          "baseline": 0.000004212775215654213,
+          "refined": 0.000004207852575646286,
+          "absoluteDifference": 4.9226400079270785e-9,
+          "relativeDifference": 0.0011698698848000891,
+          "budget": 8.415705151292571e-8
+        },
+        {
+          "mode": "tight",
+          "asymmetry": 0.9,
+          "field": "coveredRgbIntegral",
+          "baseline": 0.000004212775215654213,
+          "refined": 0.000004207852575646286,
+          "absoluteDifference": 4.9226400079270785e-9,
+          "relativeDifference": 0.0011698698848000891,
+          "budget": 8.415705151292571e-8
+        },
+        {
+          "mode": "gas",
+          "asymmetry": 0,
+          "field": "rgbIntegral",
+          "baseline": 0.000004669328877762125,
+          "refined": 0.000004669329374209601,
+          "absoluteDifference": 4.964474765997771e-13,
+          "relativeDifference": 1.0632093750803627e-7,
+          "budget": 4.6693293742096015e-9
+        },
+        {
+          "mode": "gas",
+          "asymmetry": 0,
+          "field": "coveredRgbIntegral",
+          "baseline": 0.000004669328877762125,
+          "refined": 0.000004669329374209601,
+          "absoluteDifference": 4.964474765997771e-13,
+          "relativeDifference": 1.0632093750803627e-7,
+          "budget": 4.6693293742096015e-9
+        },
+        {
+          "mode": "gas",
+          "asymmetry": 0.75,
+          "field": "rgbIntegral",
+          "baseline": 0.000005344705464881341,
+          "refined": 0.000005344709133137324,
+          "absoluteDifference": 3.668255982850659e-12,
+          "relativeDifference": 6.863340719717345e-7,
+          "budget": 5.344709133137324e-9
+        },
+        {
+          "mode": "gas",
+          "asymmetry": 0.75,
+          "field": "coveredRgbIntegral",
+          "baseline": 0.000005344705464881341,
+          "refined": 0.000005344709133137324,
+          "absoluteDifference": 3.668255982850659e-12,
+          "relativeDifference": 6.863340719717345e-7,
+          "budget": 5.344709133137324e-9
+        },
+        {
+          "mode": "gas",
+          "asymmetry": 0.85,
+          "field": "rgbIntegral",
+          "baseline": 0.000005004607748463374,
+          "refined": 0.0000050046128065688305,
+          "absoluteDifference": 5.058105456797379e-12,
+          "relativeDifference": 0.0000010106886690931088,
+          "budget": 5.0046128065688305e-9
+        },
+        {
+          "mode": "gas",
+          "asymmetry": 0.85,
+          "field": "coveredRgbIntegral",
+          "baseline": 0.000005004607748463374,
+          "refined": 0.0000050046128065688305,
+          "absoluteDifference": 5.058105456797379e-12,
+          "relativeDifference": 0.0000010106886690931088,
+          "budget": 5.0046128065688305e-9
+        },
+        {
+          "mode": "gas",
+          "asymmetry": 0.9,
+          "field": "rgbIntegral",
+          "baseline": 0.000004212775215654213,
+          "refined": 0.00000421278015902682,
+          "absoluteDifference": 4.9433726070777706e-12,
+          "relativeDifference": 0.0000011734228752681276,
+          "budget": 4.212780159026821e-9
+        },
+        {
+          "mode": "gas",
+          "asymmetry": 0.9,
+          "field": "coveredRgbIntegral",
+          "baseline": 0.000004212775215654213,
+          "refined": 0.00000421278015902682,
+          "absoluteDifference": 4.9433726070777706e-12,
+          "relativeDifference": 0.0000011734228752681276,
+          "budget": 4.212780159026821e-9
+        },
+        {
+          "mode": "partition",
+          "asymmetry": 0,
+          "field": "rgbIntegral",
+          "baseline": 0.000004669328877762125,
+          "refined": 0.0000046709872666143174,
+          "absoluteDifference": 1.6583888521928125e-9,
+          "relativeDifference": 0.00035504032820771664,
+          "budget": 9.341974533228635e-8
+        },
+        {
+          "mode": "partition",
+          "asymmetry": 0,
+          "field": "coveredRgbIntegral",
+          "baseline": 0.000004669328877762125,
+          "refined": 0.0000046709872666143174,
+          "absoluteDifference": 1.6583888521928125e-9,
+          "relativeDifference": 0.00035504032820771664,
+          "budget": 9.341974533228635e-8
+        },
+        {
+          "mode": "partition",
+          "asymmetry": 0.75,
+          "field": "rgbIntegral",
+          "baseline": 0.000005344705464881341,
+          "refined": 0.000005344375366495904,
+          "absoluteDifference": 3.3009838543761956e-10,
+          "relativeDifference": 0.00006176556899558724,
+          "budget": 1.0688750732991807e-7
+        },
+        {
+          "mode": "partition",
+          "asymmetry": 0.75,
+          "field": "coveredRgbIntegral",
+          "baseline": 0.000005344705464881341,
+          "refined": 0.000005344375366495904,
+          "absoluteDifference": 3.3009838543761956e-10,
+          "relativeDifference": 0.00006176556899558724,
+          "budget": 1.0688750732991807e-7
+        },
+        {
+          "mode": "partition",
+          "asymmetry": 0.85,
+          "field": "rgbIntegral",
+          "baseline": 0.000005004607748463374,
+          "refined": 0.000005001704630980884,
+          "absoluteDifference": 2.9031174824900677e-9,
+          "relativeDifference": 0.0005804256142012004,
+          "budget": 1.0003409261961767e-7
+        },
+        {
+          "mode": "partition",
+          "asymmetry": 0.85,
+          "field": "coveredRgbIntegral",
+          "baseline": 0.000005004607748463374,
+          "refined": 0.000005001704630980884,
+          "absoluteDifference": 2.9031174824900677e-9,
+          "relativeDifference": 0.0005804256142012004,
+          "budget": 1.0003409261961767e-7
+        },
+        {
+          "mode": "partition",
+          "asymmetry": 0.9,
+          "field": "rgbIntegral",
+          "baseline": 0.000004212775215654213,
+          "refined": 0.000004208735713015034,
+          "absoluteDifference": 4.039502639178495e-9,
+          "relativeDifference": 0.0009597900449502673,
+          "budget": 8.417471426030068e-8
+        },
+        {
+          "mode": "partition",
+          "asymmetry": 0.9,
+          "field": "coveredRgbIntegral",
+          "baseline": 0.000004212775215654213,
+          "refined": 0.000004208735713015034,
+          "absoluteDifference": 4.039502639178495e-9,
+          "relativeDifference": 0.0009597900449502673,
+          "budget": 8.417471426030068e-8
+        }
+      ]
+    },
+    {
+      "id": "2023-06-03-sunset",
+      "density": "dense",
+      "accepted": true,
+      "differences": [
+        {
+          "mode": "gas",
+          "asymmetry": 0,
+          "field": "rgbIntegral",
+          "baseline": 0.000013223841646354344,
+          "refined": 0.000013223841888814415,
+          "absoluteDifference": 2.4246007084656115e-13,
+          "relativeDifference": 1.8335070313541002e-8,
+          "budget": 1.3223841888814414e-8
+        },
+        {
+          "mode": "gas",
+          "asymmetry": 0,
+          "field": "coveredRgbIntegral",
+          "baseline": 0.000013223841646354344,
+          "refined": 0.000013223841888814415,
+          "absoluteDifference": 2.4246007084656115e-13,
+          "relativeDifference": 1.8335070313541002e-8,
+          "budget": 1.3223841888814414e-8
+        },
+        {
+          "mode": "gas",
+          "asymmetry": 0.75,
+          "field": "rgbIntegral",
+          "baseline": 0.000020563571319831775,
+          "refined": 0.000020563572812156407,
+          "absoluteDifference": 1.4923246320598053e-12,
+          "relativeDifference": 7.25712718160338e-8,
+          "budget": 2.056357281215641e-8
+        },
+        {
+          "mode": "gas",
+          "asymmetry": 0.75,
+          "field": "coveredRgbIntegral",
+          "baseline": 0.000020563571319831775,
+          "refined": 0.000020563572812156407,
+          "absoluteDifference": 1.4923246320598053e-12,
+          "relativeDifference": 7.25712718160338e-8,
+          "budget": 2.056357281215641e-8
+        },
+        {
+          "mode": "gas",
+          "asymmetry": 0.85,
+          "field": "rgbIntegral",
+          "baseline": 0.000017162275801264005,
+          "refined": 0.000017162277919829094,
+          "absoluteDifference": 2.1185650889848917e-12,
+          "relativeDifference": 1.2344311745104224e-7,
+          "budget": 1.7162277919829094e-8
+        },
+        {
+          "mode": "gas",
+          "asymmetry": 0.85,
+          "field": "coveredRgbIntegral",
+          "baseline": 0.000017162275801264005,
+          "refined": 0.000017162277919829094,
+          "absoluteDifference": 2.1185650889848917e-12,
+          "relativeDifference": 1.2344311745104224e-7,
+          "budget": 1.7162277919829094e-8
+        },
+        {
+          "mode": "gas",
+          "asymmetry": 0.9,
+          "field": "rgbIntegral",
+          "baseline": 0.000013330030893512772,
+          "refined": 0.000013330033019827156,
+          "absoluteDifference": 2.1263143833551504e-12,
+          "relativeDifference": 1.5951306198510238e-7,
+          "budget": 1.3330033019827157e-8
+        },
+        {
+          "mode": "gas",
+          "asymmetry": 0.9,
+          "field": "coveredRgbIntegral",
+          "baseline": 0.000013330030893512772,
+          "refined": 0.000013330033019827156,
+          "absoluteDifference": 2.1263143833551504e-12,
+          "relativeDifference": 1.5951306198510238e-7,
+          "budget": 1.3330033019827157e-8
+        },
+        {
+          "mode": "tight",
+          "asymmetry": 0,
+          "field": "rgbIntegral",
+          "baseline": 0.000013223841646354344,
+          "refined": 0.000013244472324750669,
+          "absoluteDifference": 2.063067839632414e-8,
+          "relativeDifference": 0.0015576821703776349,
+          "budget": 2.648894464950134e-7
+        },
+        {
+          "mode": "tight",
+          "asymmetry": 0,
+          "field": "coveredRgbIntegral",
+          "baseline": 0.000013223841646354344,
+          "refined": 0.000013244472324750669,
+          "absoluteDifference": 2.063067839632414e-8,
+          "relativeDifference": 0.0015576821703776349,
+          "budget": 2.648894464950134e-7
+        },
+        {
+          "mode": "tight",
+          "asymmetry": 0.75,
+          "field": "rgbIntegral",
+          "baseline": 0.000020563571319831775,
+          "refined": 0.00002058168600165928,
+          "absoluteDifference": 1.8114681827506384e-8,
+          "relativeDifference": 0.0008801359531986831,
+          "budget": 4.116337200331856e-7
+        },
+        {
+          "mode": "tight",
+          "asymmetry": 0.75,
+          "field": "coveredRgbIntegral",
+          "baseline": 0.000020563571319831775,
+          "refined": 0.00002058168600165928,
+          "absoluteDifference": 1.8114681827506384e-8,
+          "relativeDifference": 0.0008801359531986831,
+          "budget": 4.116337200331856e-7
+        },
+        {
+          "mode": "tight",
+          "asymmetry": 0.85,
+          "field": "rgbIntegral",
+          "baseline": 0.000017162275801264005,
+          "refined": 0.00001716902222690229,
+          "absoluteDifference": 6.7464256382846746e-9,
+          "relativeDifference": 0.0003929417499217656,
+          "budget": 3.433804445380458e-7
+        },
+        {
+          "mode": "tight",
+          "asymmetry": 0.85,
+          "field": "coveredRgbIntegral",
+          "baseline": 0.000017162275801264005,
+          "refined": 0.00001716902222690229,
+          "absoluteDifference": 6.7464256382846746e-9,
+          "relativeDifference": 0.0003929417499217656,
+          "budget": 3.433804445380458e-7
+        },
+        {
+          "mode": "tight",
+          "asymmetry": 0.9,
+          "field": "rgbIntegral",
+          "baseline": 0.000013330030893512772,
+          "refined": 0.000013331961424558055,
+          "absoluteDifference": 1.930531045283055e-9,
+          "relativeDifference": 0.00014480472781198814,
+          "budget": 2.666392284911611e-7
+        },
+        {
+          "mode": "tight",
+          "asymmetry": 0.9,
+          "field": "coveredRgbIntegral",
+          "baseline": 0.000013330030893512772,
+          "refined": 0.000013331961424558055,
+          "absoluteDifference": 1.930531045283055e-9,
+          "relativeDifference": 0.00014480472781198814,
+          "budget": 2.666392284911611e-7
+        },
+        {
+          "mode": "partition",
+          "asymmetry": 0,
+          "field": "rgbIntegral",
+          "baseline": 0.000013223841646354344,
+          "refined": 0.000013239684950493886,
+          "absoluteDifference": 1.5843304139541355e-8,
+          "relativeDifference": 0.0011966526544085435,
+          "budget": 2.6479369900987773e-7
+        },
+        {
+          "mode": "partition",
+          "asymmetry": 0,
+          "field": "coveredRgbIntegral",
+          "baseline": 0.000013223841646354344,
+          "refined": 0.000013239684950493886,
+          "absoluteDifference": 1.5843304139541355e-8,
+          "relativeDifference": 0.0011966526544085435,
+          "budget": 2.6479369900987773e-7
+        },
+        {
+          "mode": "partition",
+          "asymmetry": 0.75,
+          "field": "rgbIntegral",
+          "baseline": 0.000020563571319831775,
+          "refined": 0.000020563313875448215,
+          "absoluteDifference": 2.574443835602581e-10,
+          "relativeDifference": 0.000012519596068979744,
+          "budget": 4.112662775089643e-7
+        },
+        {
+          "mode": "partition",
+          "asymmetry": 0.75,
+          "field": "coveredRgbIntegral",
+          "baseline": 0.000020563571319831775,
+          "refined": 0.000020563313875448215,
+          "absoluteDifference": 2.574443835602581e-10,
+          "relativeDifference": 0.000012519596068979744,
+          "budget": 4.112662775089643e-7
+        },
+        {
+          "mode": "partition",
+          "asymmetry": 0.85,
+          "field": "rgbIntegral",
+          "baseline": 0.000017162275801264005,
+          "refined": 0.000017150018639043546,
+          "absoluteDifference": 1.2257162220459072e-8,
+          "relativeDifference": 0.0007147025597135242,
+          "budget": 3.430003727808709e-7
+        },
+        {
+          "mode": "partition",
+          "asymmetry": 0.85,
+          "field": "coveredRgbIntegral",
+          "baseline": 0.000017162275801264005,
+          "refined": 0.000017150018639043546,
+          "absoluteDifference": 1.2257162220459072e-8,
+          "relativeDifference": 0.0007147025597135242,
+          "budget": 3.430003727808709e-7
+        },
+        {
+          "mode": "partition",
+          "asymmetry": 0.9,
+          "field": "rgbIntegral",
+          "baseline": 0.000013330030893512772,
+          "refined": 0.000013313040618006196,
+          "absoluteDifference": 1.6990275506576088e-8,
+          "relativeDifference": 0.0012762130000261809,
+          "budget": 2.6626081236012393e-7
+        },
+        {
+          "mode": "partition",
+          "asymmetry": 0.9,
+          "field": "coveredRgbIntegral",
+          "baseline": 0.000013330030893512772,
+          "refined": 0.000013313040618006196,
+          "absoluteDifference": 1.6990275506576088e-8,
+          "relativeDifference": 0.0012762130000261809,
+          "budget": 2.6626081236012393e-7
+        }
+      ]
+    },
+    {
+      "id": "2023-06-09-sunset",
+      "density": "coarse",
+      "accepted": false,
+      "differences": []
+    },
+    {
+      "id": "2023-06-09-sunset",
+      "density": "dense",
+      "accepted": false,
+      "differences": []
+    },
+    {
+      "id": "2023-06-10-sunrise",
+      "density": "coarse",
+      "accepted": true,
+      "differences": [
+        {
+          "mode": "tight",
+          "asymmetry": 0,
+          "field": "rgbIntegral",
+          "baseline": 0.000056609877321699825,
+          "refined": 0.00005634657055688975,
+          "absoluteDifference": 2.633067648100744e-7,
+          "relativeDifference": 0.004672986522653218,
+          "budget": 0.000001126931411137795
+        },
+        {
+          "mode": "tight",
+          "asymmetry": 0,
+          "field": "coveredRgbIntegral",
+          "baseline": 0.000056609877321699825,
+          "refined": 0.00005634657055688975,
+          "absoluteDifference": 2.633067648100744e-7,
+          "relativeDifference": 0.004672986522653218,
+          "budget": 0.000001126931411137795
+        },
+        {
+          "mode": "tight",
+          "asymmetry": 0.75,
+          "field": "rgbIntegral",
+          "baseline": 0.00006458733438685123,
+          "refined": 0.0000645814576748008,
+          "absoluteDifference": 5.876712050420941e-9,
+          "relativeDifference": 0.00009099689387645999,
+          "budget": 0.0000012916291534960162
+        },
+        {
+          "mode": "tight",
+          "asymmetry": 0.75,
+          "field": "coveredRgbIntegral",
+          "baseline": 0.00006458733438685123,
+          "refined": 0.0000645814576748008,
+          "absoluteDifference": 5.876712050420941e-9,
+          "relativeDifference": 0.00009099689387645999,
+          "budget": 0.0000012916291534960162
+        },
+        {
+          "mode": "tight",
+          "asymmetry": 0.85,
+          "field": "rgbIntegral",
+          "baseline": 0.00005351965961630245,
+          "refined": 0.00005354283760778211,
+          "absoluteDifference": 2.317799147965818e-8,
+          "relativeDifference": 0.00043288687180616307,
+          "budget": 0.0000010708567521556421
+        },
+        {
+          "mode": "tight",
+          "asymmetry": 0.85,
+          "field": "coveredRgbIntegral",
+          "baseline": 0.00005351965961630245,
+          "refined": 0.00005354283760778211,
+          "absoluteDifference": 2.317799147965818e-8,
+          "relativeDifference": 0.00043288687180616307,
+          "budget": 0.0000010708567521556421
+        },
+        {
+          "mode": "tight",
+          "asymmetry": 0.9,
+          "field": "rgbIntegral",
+          "baseline": 0.00004096462502418334,
+          "refined": 0.000040997886452974624,
+          "absoluteDifference": 3.3261428791285064e-8,
+          "relativeDifference": 0.0008112961830224241,
+          "budget": 8.199577290594925e-7
+        },
+        {
+          "mode": "tight",
+          "asymmetry": 0.9,
+          "field": "coveredRgbIntegral",
+          "baseline": 0.00004096462502418334,
+          "refined": 0.000040997886452974624,
+          "absoluteDifference": 3.3261428791285064e-8,
+          "relativeDifference": 0.0008112961830224241,
+          "budget": 8.199577290594925e-7
+        },
+        {
+          "mode": "gas",
+          "asymmetry": 0,
+          "field": "rgbIntegral",
+          "baseline": 0.000056609877321699825,
+          "refined": 0.00005660988137283855,
+          "absoluteDifference": 4.051138724069266e-12,
+          "relativeDifference": 7.156239557168554e-8,
+          "budget": 5.660988137283856e-8
+        },
+        {
+          "mode": "gas",
+          "asymmetry": 0,
+          "field": "coveredRgbIntegral",
+          "baseline": 0.000056609877321699825,
+          "refined": 0.00005660988137283855,
+          "absoluteDifference": 4.051138724069266e-12,
+          "relativeDifference": 7.156239557168554e-8,
+          "budget": 5.660988137283856e-8
+        },
+        {
+          "mode": "gas",
+          "asymmetry": 0.75,
+          "field": "rgbIntegral",
+          "baseline": 0.00006458733438685123,
+          "refined": 0.00006458736134955898,
+          "absoluteDifference": 2.6962707755503676e-11,
+          "relativeDifference": 4.174610510805112e-7,
+          "budget": 6.458736134955898e-8
+        },
+        {
+          "mode": "gas",
+          "asymmetry": 0.75,
+          "field": "coveredRgbIntegral",
+          "baseline": 0.00006458733438685123,
+          "refined": 0.00006458736134955898,
+          "absoluteDifference": 2.6962707755503676e-11,
+          "relativeDifference": 4.174610510805112e-7,
+          "budget": 6.458736134955898e-8
+        },
+        {
+          "mode": "gas",
+          "asymmetry": 0.85,
+          "field": "rgbIntegral",
+          "baseline": 0.00005351965961630245,
+          "refined": 0.000053519697057328356,
+          "absoluteDifference": 3.744102590626502e-11,
+          "relativeDifference": 6.995746980062228e-7,
+          "budget": 5.351969705732836e-8
+        },
+        {
+          "mode": "gas",
+          "asymmetry": 0.85,
+          "field": "coveredRgbIntegral",
+          "baseline": 0.00005351965961630245,
+          "refined": 0.000053519697057328356,
+          "absoluteDifference": 3.744102590626502e-11,
+          "relativeDifference": 6.995746980062228e-7,
+          "budget": 5.351969705732836e-8
+        },
+        {
+          "mode": "gas",
+          "asymmetry": 0.9,
+          "field": "rgbIntegral",
+          "baseline": 0.00004096462502418334,
+          "refined": 0.00004096466159962723,
+          "absoluteDifference": 3.657544389291901e-11,
+          "relativeDifference": 8.928535587671458e-7,
+          "budget": 4.0964661599627234e-8
+        },
+        {
+          "mode": "gas",
+          "asymmetry": 0.9,
+          "field": "coveredRgbIntegral",
+          "baseline": 0.00004096462502418334,
+          "refined": 0.00004096466159962723,
+          "absoluteDifference": 3.657544389291901e-11,
+          "relativeDifference": 8.928535587671458e-7,
+          "budget": 4.0964661599627234e-8
+        },
+        {
+          "mode": "partition",
+          "asymmetry": 0,
+          "field": "rgbIntegral",
+          "baseline": 0.000056609877321699825,
+          "refined": 0.000056622476701461,
+          "absoluteDifference": 1.2599379761175217e-8,
+          "relativeDifference": 0.00022251551848579104,
+          "budget": 0.00000113244953402922
+        },
+        {
+          "mode": "partition",
+          "asymmetry": 0,
+          "field": "coveredRgbIntegral",
+          "baseline": 0.000056609877321699825,
+          "refined": 0.000056622476701461,
+          "absoluteDifference": 1.2599379761175217e-8,
+          "relativeDifference": 0.00022251551848579104,
+          "budget": 0.00000113244953402922
+        },
+        {
+          "mode": "partition",
+          "asymmetry": 0.75,
+          "field": "rgbIntegral",
+          "baseline": 0.00006458733438685123,
+          "refined": 0.00006456176850018262,
+          "absoluteDifference": 2.5565886668606663e-8,
+          "relativeDifference": 0.00039599111459492236,
+          "budget": 0.0000012912353700036524
+        },
+        {
+          "mode": "partition",
+          "asymmetry": 0.75,
+          "field": "coveredRgbIntegral",
+          "baseline": 0.00006458733438685123,
+          "refined": 0.00006456176850018262,
+          "absoluteDifference": 2.5565886668606663e-8,
+          "relativeDifference": 0.00039599111459492236,
+          "budget": 0.0000012912353700036524
+        },
+        {
+          "mode": "partition",
+          "asymmetry": 0.85,
+          "field": "rgbIntegral",
+          "baseline": 0.00005351965961630245,
+          "refined": 0.000053496859037729437,
+          "absoluteDifference": 2.2800578573012916e-8,
+          "relativeDifference": 0.0004262040610072542,
+          "budget": 0.0000010699371807545887
+        },
+        {
+          "mode": "partition",
+          "asymmetry": 0.85,
+          "field": "coveredRgbIntegral",
+          "baseline": 0.00005351965961630245,
+          "refined": 0.000053496859037729437,
+          "absoluteDifference": 2.2800578573012916e-8,
+          "relativeDifference": 0.0004262040610072542,
+          "budget": 0.0000010699371807545887
+        },
+        {
+          "mode": "partition",
+          "asymmetry": 0.9,
+          "field": "rgbIntegral",
+          "baseline": 0.00004096462502418334,
+          "refined": 0.000040947325811414855,
+          "absoluteDifference": 1.7299212768484117e-8,
+          "relativeDifference": 0.0004224747874417144,
+          "budget": 8.189465162282971e-7
+        },
+        {
+          "mode": "partition",
+          "asymmetry": 0.9,
+          "field": "coveredRgbIntegral",
+          "baseline": 0.00004096462502418334,
+          "refined": 0.000040947325811414855,
+          "absoluteDifference": 1.7299212768484117e-8,
+          "relativeDifference": 0.0004224747874417144,
+          "budget": 8.189465162282971e-7
+        }
+      ]
+    },
+    {
+      "id": "2023-06-10-sunrise",
+      "density": "dense",
+      "accepted": false,
+      "differences": []
+    }
+  ],
+  "scope": "Six fixed real media; numerical acceptance only. Label grades have no role in numerical acceptance."
+}

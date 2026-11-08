@@ -3,10 +3,11 @@
 export function adaptiveSimpson(evaluate, low, high, {
   absoluteTolerance = 1e-10, relativeTolerance = 0.005, maxDepth = 16, breakpoints = [], maxInterval = Infinity,
   maxEvaluations = 100000,
+  errorComponents = null, relativeReferenceComponents = null, additionalError = null, onLimitError = null,
 } = {}) {
   if (!Number.isFinite(low) || !Number.isFinite(high) || high < low || !(absoluteTolerance > 0) || !(relativeTolerance >= 0) ||
       !Number.isInteger(maxDepth) || maxDepth < 0 || !(maxInterval > 0)) throw Error('Invalid adaptive quadrature bounds or tolerances');
-  const cache = new Map();let dimensions = null, acceptedIntervals = 0, depthLimitCount = 0, deepest = 0;
+  const cache = new Map();let dimensions = null, acceptedIntervals = 0, depthLimitCount = 0, boundedLimitCount = 0, deepest = 0;
   function sample(x) {
     if (cache.has(x)) return cache.get(x);
     if (cache.size >= maxEvaluations) throw Error('Adaptive quadrature evaluation budget exceeded');
@@ -20,12 +21,30 @@ export function adaptiveSimpson(evaluate, low, high, {
   function recurse(a, b, fa, fm, fb, coarse, absolute, depth) {
     const middle = (a + b) / 2, fl = sample((a + middle) / 2), fr = sample((middle + b) / 2);
     const left = estimate(a, middle, fa, fl, fm), right = estimate(middle, b, fm, fr, fb);
-    const fine = left.map((v, c) => v + right[c]), error = fine.map((v, c) => Math.abs(v - coarse[c]) / 15);
+    const fine = left.map((v, c) => v + right[c]), extra = additionalError?.(a, b, fa, fm, fb, fine);
+    const error = fine.map((v, c) => Math.max(Math.abs(v - coarse[c]) / 15, extra?.[c] ?? 0));
     deepest = Math.max(deepest, depth);
-    const accepted = error.every((e, c) => e <= absolute + relativeTolerance * Math.abs(fine[c]));
+    const accepted = (errorComponents ?? error.map((_, i) => i)).every(c => error[c] <= absolute +
+      relativeTolerance * Math.abs(fine[relativeReferenceComponents?.[c] ?? c]));
     if (accepted || depth >= maxDepth) {
-      acceptedIntervals++;if (!accepted) depthLimitCount++;
-      return { value: fine.map((v, c) => v + (v - coarse[c]) / 15), error };
+      acceptedIntervals++;
+      const value = fine.map((v, c) => v + (v - coarse[c]) / 15);
+      if (!accepted) {
+        depthLimitCount++;
+        const envelope = onLimitError?.(a, b), bound = Array.isArray(envelope) ? envelope : envelope?.errorBound;
+        if (bound?.length === dimensions && bound.every(v => Number.isFinite(v) && v >= 0)) {
+          boundedLimitCount++;
+          for (let c = 0; c < dimensions; c++) error[c] = Math.max(error[c], bound[c]);
+          // A caller can give one complete envelope ownership of primary
+          // numerical error and absorb subordinate uncertainty integrals in
+          // precisely this interval. Other intervals retain their own ledger.
+          for (const c of envelope.absorbedComponents ?? []) {
+            if (!Number.isInteger(c) || c < 0 || c >= dimensions) throw Error('Invalid absorbed quadrature component');
+            value[c] = 0;error[c] = 0;
+          }
+        }
+      }
+      return { value, error };
     }
     const first = recurse(a, middle, fa, fl, fm, left, absolute / 2, depth + 1);
     const second = recurse(middle, b, fm, fr, fb, right, absolute / 2, depth + 1);
@@ -45,5 +64,5 @@ export function adaptiveSimpson(evaluate, low, high, {
     value = value.map((v, c) => v + result.value[c]);error = error.map((v, c) => v + result.error[c]);
   }
   return { value: value ?? sample(low).map(() => 0), errorEstimate: error ?? Array(dimensions).fill(0),
-    evaluations: cache.size, acceptedIntervals, depthLimitCount, maximumDepth: deepest, converged: depthLimitCount === 0 };
+    evaluations: cache.size, acceptedIntervals, depthLimitCount, boundedLimitCount, maximumDepth: deepest, converged: depthLimitCount === 0 };
 }

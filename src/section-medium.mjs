@@ -30,6 +30,7 @@ export function sectionMedium(columns, optics) {
     const inside = height >= Math.max(column.ground, levels[0].height - 0.3) && height <= levels.at(-1).height + 0.5;
     const aod = a.aod === null || b.aod === null ? null : a.aod * (1 - w) + b.aod * w;
     return { column: column.index, x: column.x, level, fraction: inside ? levels[level].cover : 0,
+      extinctionBand: height < 3 ? 'low' : height < 8 ? 'mid' : 'high',
       coefficient: optics.cloudExtinction[height < 3 ? 'low' : height < 8 ? 'mid' : 'high'],
       rayleigh: optics.rayleigh550 * Math.exp(-Math.max(0, height) / optics.molecularScaleHeightKm),
       aerosol: aod === null ? 0 : aod / optics.aerosolScaleHeightKm * Math.exp(-Math.max(0, height) / optics.aerosolScaleHeightKm),
@@ -80,5 +81,28 @@ export function sectionMedium(columns, optics) {
     }
     return { segments, blocked, bounded, missingAerosol };
   }
-  return { sample, trace, clearDepth };
+  function emissionBlocks(extentKm, { merge = true } = {}) {
+    const blocks = [];
+    for (let i = 0; i < columns.length; i++) {
+      const column = columns[i], levels = column.levels;
+      const xLow = Math.max(-extentKm, i === 0 ? -Infinity : (columns[i - 1].x + column.x) / 2);
+      const xHigh = Math.min(extentKm, i === columns.length - 1 ? Infinity : (column.x + columns[i + 1].x) / 2);
+      if (xHigh <= xLow) continue;
+      let current = null;
+      for (let j = 0; j < levels.length; j++) {
+        const lower = Math.max(column.ground, j === 0 ? levels[j].height - 0.3 : (levels[j - 1].height + levels[j].height) / 2);
+        const upper = j === levels.length - 1 ? levels[j].height + 0.5 : (levels[j].height + levels[j + 1].height) / 2;
+        if (levels[j].cover > 0 && upper > lower) {
+          if (merge && current && current.heightHigh >= lower - 1e-9) current.heightHigh = upper;
+          else {
+            current = { xLow, xHigh, heightLow: lower, heightHigh: upper };
+            if (!merge) Object.assign(current, { column: column.index, x: column.x, level: j, fraction: levels[j].cover });
+            blocks.push(current);
+          }
+        } else current = null;
+      }
+    }
+    return blocks;
+  }
+  return { sample, trace, clearDepth, emissionBlocks };
 }

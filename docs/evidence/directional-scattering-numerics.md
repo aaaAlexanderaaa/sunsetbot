@@ -115,14 +115,123 @@ These revisions remain at the active
 observation retrieval and candidate promotion follow numerical acceptance and
 a preserved source/policy freeze.
 
+## Optical-depth and angular solver (0.2.0 development)
+
+The new source variable is `u=1-exp(-k*t)`. Conditioning on the source cell
+makes the current viewing segment's extinction exactly `exp(-k*t)`, so its
+Jacobian cancels `k*dt`. Solar-path and shared-cloud attenuation remain inside
+the same conditional expectation. Endpoint adaptive Simpson integrates the
+remaining density, with explicit source-limit envelopes and omitted-tail
+bounds. The actual-cloud isotropic, zero-gas, constant-illumination identity
+`4*pi*L=1-E[T_view_cloud]` passes to 1e-10.
+
+Nested angular integration uses sine elevation and azimuth, exact cross-track
+reflection, cloud projections and Earth-shadow vertices. A whole-elevation-
+interval bound prevents exact-zero samples from silently discarding supported
+cloud sources. For a shadowed observer, separate maxima of the cylinder-ray
+quadratic coefficients lower-bound the first possible sunlight distance.
+Common same-cell foreground portions of both endpoint viewing rays attenuate
+every intermediate ray. Conditional source-cell probabilities then bound the
+remaining view-only source. A stable quadratic root is used for every positive
+quadratic coefficient.
+
+At a limited angular interval, both the exact transfer and positive nested
+source/angle Boole rules lie inside this view-source envelope. Its angular
+ledger therefore owns the complete numerical error on that interval; the
+subordinate source/tail uncertainty integrals are absorbed there. Other
+intervals retain separately integrated source/tail estimates. Their inner and
+outer quadrature errors are included in the final RGB ledger. All raw/covered
+RGB channels must meet `max(1e-10,0.02*channel)`; colour ratios receive error-
+estimate intervals or an unresolved denominator status. Azimuth limits and
+unbounded limits retain numerical failure.
+
+### Independent review and observed corrections
+
+Question [12](../../research/questions/12-angular-zero-region-bound.txt) supplies
+the complete implementation and the first 24-job failure to an isolated MCP
+conversation. Its [assessment](../../research/chatgpt/12-angular-zero-region-bound.md)
+supports the fixed-azimuth geometric/probability argument, identifies a small-
+coefficient linear-root issue, and finds red-only and nested-uncertainty gaps.
+The current implementation corrects these gaps and guards exact-zero outer
+azimuth intervals using a complete-box pathwise envelope.
+
+A trial extension to tiny positive backgrounds exhausts the ray budget on
+actual solar-opaque clouds with sampled radiance around 1e-21. A view-only
+bound remains loose there. The exact source and samples are preserved in
+`scattering-numerical-ledger1`; the current solver explicitly retains estimated
+adaptive-quadrature scope for subgrid peaks on positive backgrounds. The
+textbook authors' [adaptive integration chapter](https://fncbook.com/adaptive/)
+describes extrapolation-based error estimates; NIST's
+[arithmetic reference](https://dlmf.nist.gov/3.1) defines interval-arithmetic
+coverage. Both primary pages are locally archived in
+`research/sources/integration-followup/`. The original QUADPACK source is also
+preserved; the attempted GSL HTML capture records its actual connection failure.
+
+Question [13](../../research/questions/13-finite-numerical-acceptance.txt) supplies
+the revised code, costs, failed tiny-signal trial and prospective acceptance
+policy. Its [assessment](../../research/chatgpt/13-finite-numerical-acceptance.md)
+accepts finite empirical convergence as a suitable research claim, contingent
+on actual six-medium controls, independent source partitions, real-medium
+envelope checks and explicit numerical ties. It precedes the later complete-
+error ownership correction at bounded local intervals; that correction has its
+own conservation argument and regression test.
+
+The [real-medium envelope verification](../../research/experiments/scattering-angular-envelope-verification.json)
+passes 18,515 independently integrated view-only source rays in 2,645 intervals
+at six fixed coarse/dense media. Its first sweep found 28 false exclusions on
+intervals no wider than 6.94e-18 in sine elevation. Removing an artificial
+minimum overlap width retains those source cells. A trial closed-touch rule
+was conservative but enlarged blue-channel bounds; the final rule retains
+every positive-width overlap, with a deeper local angular budget. These
+observed effects are retained with their respective source identities.
+
+### Empirical gate and replay
+
+`node scripts/accept_scattering_numerics.mjs` runs six fixed media under base,
+fourfold tighter source/angle tolerances, gas step 4 to 2 km, and changed
+source/angle partitions. The changed source partition uses optical-depth step
+0.35 versus 0.5. All g/raw/covered RGB integrals must agree within 2%; the gas
+control receives a 0.1% budget. Job identities include exact source hashes,
+actual input hashes and options; matching jobs resume without changing their
+scientific identity. Model exceptions and zero-region budget diagnostics are
+retained as failures. The run must finish before its acceptance status exists.
+
+The evidence directories `scattering-numerical-prebound`, `-bound1` and
+`-ledger1` through `-ledger4` preserve intermediate failures and stopped runs.
+Their matching source snapshots are complete except the first prebound sky
+integrator: that file was replaced before capture and retains only its recorded
+hash. Its snapshot manifest explicitly marks the archive partial. This first
+failure record supplies development evidence with that reproducibility limit.
+
+The current full Node suite covers 67 checks, including actual HTTP behavior,
+conditional slab/real-cloud conservation, support envelopes, blue-channel
+failure, nested uncertainty integration, local error ownership and numerical
+rank ties. Thirteen Python decoder/access checks also pass. The original
+production core SHA remains
+`f80a37d9a92cb2a421fda2599af9e336e2261d7b4a49980159a931be5e28e71f`.
+
+`scripts/freeze_scattering_candidate.mjs` requires matching accepted gate,
+envelope sweep and label-free reference predictions, then preserves source,
+policy and input identities before new-date labels. The prospective policy
+uses common-Sun-altitude red radiance at g=0.85 and 37 levels, compares the
+exact exposed 0.3.1 frame and native layer baseline, and retains source-label
+coverage and numerical missingness. Numerical interval overlap is reported as
+a tie; failed forecasts retain unresolved pair orderings. The uncertainty
+ordering range has empirical numerical scope.
+
 ## Next-calendar resource preparation
 
 The prespecified next calendar is Shanghai 2023-09-01..10-31, 61 days and
 122 sunrise/sunset events. Weather-only geometry and exact UTC brackets are
 preserved in `research/experiments/scattering-validation-calendar/`.
-Five official ERA5/EAC4 retrieval jobs were submitted through the working
-account, using only cloud fraction/geopotential, native low/mid/high cloud and
-AOD. Existing August regional and static terrain files cover reused boundaries.
+Five official ERA5/EAC4 retrieval jobs completed through the working account,
+using cloud fraction/geopotential, native low/mid/high cloud and AOD. Existing
+August regional and static terrain files cover reused boundaries. All eight
+raw dependencies normalize into 122 public label-free weather bundles at 37
+levels. Independent checks cover 399,672 aligned, finite, valid field series.
+The weather-only old-model reference and native baseline predictions are also
+preserved before labels, with original optional rain/visibility defaults made
+explicit.
 The native AOD selection includes 06 UTC for autumn sunset brackets.
 Observation labels for this calendar remain unrequested. Job IDs and account
 state stay in ignored local state.

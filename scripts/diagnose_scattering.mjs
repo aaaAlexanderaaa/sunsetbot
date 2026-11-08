@@ -1,7 +1,8 @@
 import { readFile, writeFile, mkdir, rename } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { Worker, isMainThread, parentPort, workerData } from 'node:worker_threads';
-import { join } from 'node:path';
+import { join, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { computeDirectionalFrame, solarAltitudeReference, SCATTERING_ASSUMPTIONS } from '../src/scattering-engine.mjs';
 import { DISTANCES } from '../research/model-snapshots/section-optics-0.3.1/engine.mjs';
 import { LEVELS } from '../research/model-snapshots/section-optics-0.3.1/provider.mjs';
@@ -14,9 +15,10 @@ const save = async (path, data) => {
 };
 const codeFiles = ['src/scattering-engine.mjs', 'src/radiance.mjs', 'src/radiative-geometry.mjs', 'src/section-medium.mjs',
   'src/quadrature.mjs',
+  'src/angular-support.mjs', 'src/angular-bound.mjs', 'src/sky-radiance.mjs',
   'src/astro.mjs', 'src/cloud-optics.mjs', 'src/provider.mjs', 'package-lock.json', 'scripts/diagnose_scattering.mjs',
   'research/model-snapshots/section-optics-0.3.1/engine.mjs', 'research/model-snapshots/section-optics-0.3.1/provider.mjs'];
-async function codeIdentity() {
+export async function codeIdentity() {
   const files = await Promise.all(codeFiles.map(async file => ({ file, sha256: hash(await readFile(file)) })));
   return { sha256: hash(JSON.stringify(files)), files };
 }
@@ -25,7 +27,7 @@ function subdivide(values, sine = false) {
     Math.asin((Math.sin(v * Math.PI / 180) + Math.sin(values[i + 1] * Math.PI / 180)) / 2) * 180 / Math.PI : (v + values[i + 1]) / 2]);
 }
 
-async function loadInput(id, density, cohort) {
+export async function loadInput(id, density, cohort) {
   const directory = cohort === 'pilot' ? 'research/backtests/shanghai-era5-input-2023-06' : 'research/experiments/cloud-column-validation';
   const manifest = await json(directory + '/manifest.json'), receipt = manifest.cases.find(c => c.file === id + '.json');
   if (!receipt) throw Error('Unknown diagnostic case: ' + id);
@@ -53,10 +55,14 @@ async function evaluate(job) {
   const input = await loadInput(job.id, job.density, job.cohort), frames = [], started = performance.now();
   const width = SCATTERING_ASSUMPTIONS.azimuthHalfWidthDegrees;
   const options = {};
-  if (job.mesh.includes('source')) Object.assign(options, { maximumEmissionOpticalDepth: 0.25, gasStepKm: 2,
+  if (job.mesh.includes('source')) Object.assign(options, { maximumEmissionOpticalDepth: 0.25,
     sourceRelativeTolerance: SCATTERING_ASSUMPTIONS.sourceRelativeTolerance / 2, sourceAbsoluteTolerance: SCATTERING_ASSUMPTIONS.sourceAbsoluteTolerance / 2 });
+  if (job.mesh === 'gas') options.gasStepKm = 2;
   if (job.mesh.includes('angle')) Object.assign(options, { azimuthEdgesDegrees: subdivide([-width, 0, width]),
-    elevationEdgesDegrees: subdivide(SCATTERING_ASSUMPTIONS.elevationEdgesDegrees, true) });
+    elevationEdgesDegrees: subdivide(SCATTERING_ASSUMPTIONS.elevationEdgesDegrees, true),
+    angularRelativeTolerance: SCATTERING_ASSUMPTIONS.angularRelativeTolerance / 2,
+    angularAbsoluteTolerance: SCATTERING_ASSUMPTIONS.angularAbsoluteTolerance / 2,
+    azimuthPartitionFractions: [0.5] });
   for (const minute of job.minutes) {
     const result = computeDirectionalFrame({ ...input, time: Date.parse(input.event.time) + minute * 60000, distancesKm: DISTANCES }, options);
     frames.push(result);
@@ -80,9 +86,10 @@ async function evaluate(job) {
     wallSeconds: (performance.now() - started) / 1000, scope: 'Previously inspected source-label development diagnostics; relative spectral cloud radiance, uncalibrated' };
 }
 
-if (!isMainThread) {
-  evaluate(workerData).then(result => parentPort.postMessage(result)).catch(error => { throw error; });
-} else main().catch(error => { console.error(error.stack);process.exitCode = 1; });
+if (fileURLToPath(import.meta.url) === resolve(process.argv[1] ?? '')) {
+  if (!isMainThread) evaluate(workerData).then(result => parentPort.postMessage(result)).catch(error => { throw error; });
+  else main().catch(error => { console.error(error.stack);process.exitCode = 1; });
+}
 
 async function main() {
   const value = (name, fallback) => { const i = process.argv.indexOf(name);return i < 0 ? fallback : process.argv[i + 1]; };
@@ -90,8 +97,12 @@ async function main() {
   const directory = value('--directory', 'research/experiments/scattering-development');
   const minutes = value('--minutes', Array.from({ length: 17 }, (_, i) => i * 5 - 40).join(',')).split(',').map(Number);
   const threads = Number(value('--threads', '2')), capture = process.argv.includes('--capture');
+  if (!capture) {
+    const expected = await json(join(directory, 'summary.json'));
+    if (expected.codeIdentity.sha256 !== (await codeIdentity()).sha256) throw Error('Captured physics differs; replay the matching archived source or use --capture in a new development directory');
+  }
   if (!['pilot', 'calendar'].includes(cohort) || !['coarse', 'dense', 'both'].includes(density) ||
-      !['base', 'source', 'angle', 'source-angle'].includes(mesh) || !minutes.length || minutes.some(m => !Number.isFinite(m) || Math.abs(m) > 40) ||
+      !['base', 'source', 'angle', 'source-angle', 'gas'].includes(mesh) || !minutes.length || minutes.some(m => !Number.isFinite(m) || Math.abs(m) > 40) ||
       !Number.isInteger(threads) || threads < 1 || threads > 3) throw Error('Invalid bounded diagnostic configuration');
   const inputDirectory = cohort === 'pilot' ? 'research/backtests/shanghai-era5-input-2023-06' : 'research/experiments/cloud-column-validation';
   const manifest = await json(inputDirectory + '/manifest.json');

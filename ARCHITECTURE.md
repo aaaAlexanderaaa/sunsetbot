@@ -24,6 +24,10 @@ Its availability and proprietary forecast outputs are independent of runtime.
   intersections and the declared extruded atmospheric medium.
 - `src/radiance.mjs` and `src/quadrature.mjs`: normalized phase functions,
   formal-source checks, solid angles and numerical integration diagnostics.
+- `src/angular-support.mjs` and `src/angular-bound.mjs`: projected cloud
+  support and whole-elevation-interval sunlit/view-transmission envelopes.
+- `src/sky-radiance.mjs`: nested angular integration, RGB uncertainty
+  propagation and explicit error ownership at bounded local limits.
 - `src/provider.mjs`: Open-Meteo requests, units, strict validation and metadata.
 - `src/cache.mjs`: bounded atomic disk cache and request coalescing.
 - `src/archive.mjs`: bounded forecast/source retention for observation pairing.

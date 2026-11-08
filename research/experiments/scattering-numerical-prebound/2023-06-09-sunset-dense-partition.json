@@ -1,0 +1,48 @@
+{
+  "id": "2023-06-09-sunset",
+  "density": "dense",
+  "mode": "partition",
+  "codeSha256": "ed86f93abb7d159b435f3e4aee76eeb5d01fa488f98770863f7cc9d7dd7bef2d",
+  "options": {
+    "azimuthPartitionFractions": [
+      0.25,
+      0.75
+    ],
+    "elevationEdgesDegrees": [
+      0.5,
+      0.75,
+      1.5,
+      3.5,
+      7.5,
+      15,
+      30,
+      55,
+      75,
+      85
+    ],
+    "maximumAngularRays": 8192
+  },
+  "reference": {
+    "time": "2023-06-09T10:57:21.615Z",
+    "targetAltitude": -0.833,
+    "actualAltitude": -0.8330139601448501,
+    "offsetSeconds": -55.147
+  },
+  "inputSources": [
+    {
+      "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-09-sunset.json",
+      "sha256": "8529600e0c2c02ef9969aa0661da5b855d4c3f6d1037b77073b9f07d16e2cd91"
+    },
+    {
+      "file": "research/experiments/cloud-column-dense-inputs/2023-06-09-sunset.json",
+      "sha256": "3e8d5c66deb5a3cb56eb891ff8ac14cd2a30c4e0691647ce90ea240f418afc60"
+    }
+  ],
+  "wallSeconds": 17.154364833,
+  "failure": {
+    "code": "ANGULAR_BUDGET",
+    "message": "Directional angular ray budget exhausted before numerical acceptance",
+    "rays": 8192
+  },
+  "numericalStatus": "not_converged"
+}
