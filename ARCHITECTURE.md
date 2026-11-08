@@ -30,6 +30,8 @@ Its availability and proprietary forecast outputs are independent of runtime.
   bounds covering the angular interval and positive gas-quadrature panels.
 - `src/sky-radiance.mjs`: nested angular integration, RGB uncertainty
   propagation and explicit error ownership at bounded local limits.
+- `src/quality-rank.mjs`: separate offline three-parameter weak-label ranking
+  research; fitted parameters stay with their frozen study artifacts.
 - `src/provider.mjs`: Open-Meteo requests, units, strict validation and metadata.
 - `src/cache.mjs`: bounded atomic disk cache and request coalescing.
 - `src/archive.mjs`: bounded forecast/source retention for observation pairing.

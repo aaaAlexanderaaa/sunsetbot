@@ -1,0 +1,228 @@
+{
+  "frozenAt": "2026-11-08T03:22:04.074Z",
+  "candidateIdentity": "a8905ab1c091eb5a27a5477fb29f36a122fb3bdad02f6903fb92374d80c5368c",
+  "recipe": {
+    "model": "source-quality-rank-0.1.1",
+    "policySha256": "59dafb159f685259b2852a3e0ced5a24f084ebbcfd91798070a08bf98ebbf43e",
+    "source": [
+      {
+        "file": "research/experiments/quality-rank-policy.json",
+        "sha256": "59dafb159f685259b2852a3e0ced5a24f084ebbcfd91798070a08bf98ebbf43e"
+      },
+      {
+        "file": "src/quality-rank.mjs",
+        "sha256": "56eed37ab1eddad31b832a1a9ce8b35f604bd001ef2e4ceff0704d69a5979102"
+      },
+      {
+        "file": "scripts/freeze_quality_rank.mjs",
+        "sha256": "792fdf332df485031cf1ca87aa71e9180feb282ea95d57c5468b7c906f255c98"
+      },
+      {
+        "file": "scripts/evaluate_quality_rank.mjs",
+        "sha256": "6b6d1272973ec8dbc1852eedbd237e69051e1b5891ebe45da9d68d56f7dc5cae"
+      },
+      {
+        "file": "tests/quality-rank.test.mjs",
+        "sha256": "cb7131370ad02b7fa74857888819745de73eb060b44b10fe809493c50d584f92"
+      },
+      {
+        "file": "tests/quality-rank-evaluation.test.mjs",
+        "sha256": "95ff23cf669f918b53116505fb89ad9ca75e7e9679cb239005a18bdf5b5d3024"
+      },
+      {
+        "file": "scripts/scattering-reference.mjs",
+        "sha256": "d56d76969c61086b27dd9f161adb863eda7b4c973ec07388dd8b0e064fddd7cb"
+      },
+      {
+        "file": "scripts/validation-statistics.mjs",
+        "sha256": "0a5a091c1cd1232c9ae0ff514d8d13fd9c1444b0fb481cd62476b6d82f20d434"
+      },
+      {
+        "file": "scripts/radiance-ranking.mjs",
+        "sha256": "19f5442f8cc828f7504f0e93cec76f982a8f389189e980b782bcb107b7099c61"
+      },
+      {
+        "file": "src/scattering-engine.mjs",
+        "sha256": "cd95d2b1d54e74f3dd6c3aaeedb54296d235791673d5a2ae716bc9365d386407"
+      },
+      {
+        "file": "src/astro.mjs",
+        "sha256": "0662f77dfef70869dfe1912234bf5c45fe64de00bcc6bab634629928c5d21b8d"
+      },
+      {
+        "file": "research/model-snapshots/section-optics-0.3.1/manifest.json",
+        "sha256": "a5b29979e4f32bcc1c5e30e648c37ded70df3877b9921bc08f130755f6d2beb8"
+      }
+    ],
+    "developmentFeaturesSha256": "329783cc1c5d44354c1afd0db041fcd82478feea1dd3b748db0e5320ecc747e9",
+    "referencePredictions": {
+      "file": "research/experiments/scattering-reference-predictions.json",
+      "sha256": "946cd856e9f55a9f22dacf9ca6da38cbfb07e31fbb9b342845f23f6adcadd9d8"
+    },
+    "frozenReference": {
+      "model": "section-optics-0.3.1",
+      "snapshotCoreSha256": "f80a37d9a92cb2a421fda2599af9e336e2261d7b4a49980159a931be5e28e71f",
+      "transformation": "Redirect imports to the verified snapshot and append an export of its existing frame function",
+      "factorySha256": "d56d76969c61086b27dd9f161adb863eda7b4c973ec07388dd8b0e064fddd7cb",
+      "dependencies": [
+        {
+          "file": "engine.mjs",
+          "source": "src/engine.mjs",
+          "sha256": "bb57d43a8687f58a3c2342a7806c1011b404cf3da52b5e6c423b71ca68deb09a"
+        },
+        {
+          "file": "cloud-optics.mjs",
+          "source": "src/cloud-optics.mjs",
+          "sha256": "74d100c6fabaa45c7095221fa642c1d2ce1cf483f366e5a87e0712cb09584c3b"
+        },
+        {
+          "file": "astro.mjs",
+          "source": "src/astro.mjs",
+          "sha256": "0662f77dfef70869dfe1912234bf5c45fe64de00bcc6bab634629928c5d21b8d"
+        },
+        {
+          "file": "provider.mjs",
+          "source": "src/provider.mjs",
+          "sha256": "beef2d788599f4b82da2895416a104fc5fe30ea4e43d402733a8690f80f60abd"
+        },
+        {
+          "file": "errors.mjs",
+          "source": "src/errors.mjs",
+          "sha256": "10b2b9b102779e01e897bddf8642263ced90add38f4ce3e39ef2e9b6bcb1eeef"
+        },
+        {
+          "file": "evaluation.mjs",
+          "source": "src/evaluation.mjs",
+          "sha256": "00050bd9742b83d6ce61f241c50da07f132226dbe3966a30ff9cfb9c0f2a254f"
+        }
+      ]
+    },
+    "physicalCandidate": "f25187812a6edeb5132eccf76ee9c118ff9f63277eb260eb21ce18de05732b58",
+    "fit": {
+      "parameters": [
+        -1.5218036139512838,
+        1.2257039363381608,
+        0.7931579751588534
+      ],
+      "ridge": 0.01,
+      "iterations": 4,
+      "gradientMaximum": 1.6427831317500363e-15,
+      "objective": 0.5870010833059176
+    },
+    "ridgeSelection": [
+      {
+        "parameters": [
+          -1.6628993924269877,
+          1.3630667164316794,
+          0.7813333997879303
+        ],
+        "ridge": 0.01,
+        "iterations": 4,
+        "gradientMaximum": 1.2356435319382797e-14,
+        "objective": 0.581404954495501,
+        "validationLogLoss": 0.5961538624390171,
+        "trainingLogLoss": 0.569062790720161
+      },
+      {
+        "parameters": [
+          -1.9305373715946523,
+          2.229271809809594,
+          0.7962464397615058
+        ],
+        "ridge": 0.001,
+        "iterations": 4,
+        "gradientMaximum": 1.2943851936467188e-11,
+        "objective": 0.5650103692066327,
+        "validationLogLoss": 0.601251195071885,
+        "trainingLogLoss": 0.5622085386092104
+      },
+      {
+        "parameters": [
+          -1.0437699193635894,
+          0.3276176399527883,
+          0.29183594213975245
+        ],
+        "ridge": 0.1,
+        "iterations": 3,
+        "gradientMaximum": 8.755014942185557e-13,
+        "objective": 0.6114668983457531,
+        "validationLogLoss": 0.6154911983356675,
+        "trainingLogLoss": 0.6018418215891115
+      },
+      {
+        "parameters": [
+          -0.8060301351571297,
+          0.03941584348744957,
+          0.0388685591712145
+        ],
+        "ridge": 1,
+        "iterations": 3,
+        "gradientMaximum": 1.235990476633475e-17,
+        "objective": 0.6223742653486213,
+        "validationLogLoss": 0.6339551588306882,
+        "trainingLogLoss": 0.6208420785436847
+      }
+    ],
+    "trainingEvents": 136,
+    "validationEvents": 48,
+    "totalDevelopmentEvents": 184,
+    "positiveDevelopmentLabels": 59,
+    "parameterMeaning": [
+      "intercept",
+      "neutral peak index / 100",
+      "native layer baseline / 100"
+    ]
+  },
+  "policy": {
+    "definedAt": "2026-11-08T03:12:07.131528+00:00",
+    "candidate": "source-quality-rank-0.1.1",
+    "role": "Additional exploratory secondary candidate, defined before independent source-label access",
+    "features": [
+      "Frozen section-optics0.3.1 peak index over +/-40minutes with optional rain/visibility neutralized, divided by100",
+      "Native ERA5 max(mid,high)*(1-low/100) at common Sun altitude-.833deg, divided by100"
+    ],
+    "target": "Explicit public curator source grade>0; fitted source-label likelihood has weak-label scope",
+    "developmentDates": [
+      "2023-06-01",
+      "2023-08-31"
+    ],
+    "innerTrainingDates": [
+      "2023-06-01",
+      "2023-08-07"
+    ],
+    "innerValidationDates": [
+      "2023-08-08",
+      "2023-08-31"
+    ],
+    "ridgeGrid": [
+      0.001,
+      0.01,
+      0.1,
+      1
+    ],
+    "selection": "Minimum inner-validation mean log loss; ties prefer larger ridge; refit all184 development cases",
+    "parameters": 3,
+    "independentDates": [
+      "2023-09-01",
+      "2023-10-31"
+    ],
+    "possibleIndependentEvents": 122,
+    "primaryComparison": "Paired AUC minus the identical neutral peak-index feature",
+    "secondaryComparison": "Paired AUC minus native layer baseline",
+    "bootstrap": {
+      "replicates": 1000,
+      "blockDays": 3,
+      "seed": 20230901
+    },
+    "topK": 20,
+    "inputScope": "ERA5/EAC4 retrospective feature reconstruction; provider transfer to operational GFS/ECMWF remains separate",
+    "labelScope": "Preserve source-only zeros, linked/source-only positives and missing source records. Calibrated real-world probability requires verified observation coverage.",
+    "productionPolicy": "Keep section-optics0.3.1 through this study; no production promotion from source-label fit alone",
+    "registeredPhysicalStudy": "f25187812a6edeb5132eccf76ee9c118ff9f63277eb260eb21ce18de05732b58 remains unchanged",
+    "sourceCorrectionAt": "2026-11-08T03:21:57.360239+00:00",
+    "supersededCandidate": "d7b9b2e8a8f76ea9e8d2e08b23403a68ae8c3d0db3660343ef86b25e2ec62ec8",
+    "sourceCorrection": "Explicit labelled-row metric filtering; all calendar events stay in paired bootstrap and top-20 selection. Features, fitted weights and comparison policy unchanged; independent labels remain unaccessed."
+  },
+  "independentLabelsRead": 0,
+  "scope": "Additional exploratory weak-source-label ranking candidate, separate from the frozen radiance primary study. Production remains section-optics-0.3.1. ERA5/EAC4 feature scope; operational provider transfer and verified probability calibration remain separate."
+}

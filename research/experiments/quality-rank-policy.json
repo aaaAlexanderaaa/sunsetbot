@@ -1,0 +1,50 @@
+{
+  "definedAt": "2026-11-08T03:12:07.131528+00:00",
+  "candidate": "source-quality-rank-0.1.1",
+  "role": "Additional exploratory secondary candidate, defined before independent source-label access",
+  "features": [
+    "Frozen section-optics0.3.1 peak index over +/-40minutes with optional rain/visibility neutralized, divided by100",
+    "Native ERA5 max(mid,high)*(1-low/100) at common Sun altitude-.833deg, divided by100"
+  ],
+  "target": "Explicit public curator source grade>0; fitted source-label likelihood has weak-label scope",
+  "developmentDates": [
+    "2023-06-01",
+    "2023-08-31"
+  ],
+  "innerTrainingDates": [
+    "2023-06-01",
+    "2023-08-07"
+  ],
+  "innerValidationDates": [
+    "2023-08-08",
+    "2023-08-31"
+  ],
+  "ridgeGrid": [
+    0.001,
+    0.01,
+    0.1,
+    1
+  ],
+  "selection": "Minimum inner-validation mean log loss; ties prefer larger ridge; refit all184 development cases",
+  "parameters": 3,
+  "independentDates": [
+    "2023-09-01",
+    "2023-10-31"
+  ],
+  "possibleIndependentEvents": 122,
+  "primaryComparison": "Paired AUC minus the identical neutral peak-index feature",
+  "secondaryComparison": "Paired AUC minus native layer baseline",
+  "bootstrap": {
+    "replicates": 1000,
+    "blockDays": 3,
+    "seed": 20230901
+  },
+  "topK": 20,
+  "inputScope": "ERA5/EAC4 retrospective feature reconstruction; provider transfer to operational GFS/ECMWF remains separate",
+  "labelScope": "Preserve source-only zeros, linked/source-only positives and missing source records. Calibrated real-world probability requires verified observation coverage.",
+  "productionPolicy": "Keep section-optics0.3.1 through this study; no production promotion from source-label fit alone",
+  "registeredPhysicalStudy": "f25187812a6edeb5132eccf76ee9c118ff9f63277eb260eb21ce18de05732b58 remains unchanged",
+  "sourceCorrectionAt": "2026-11-08T03:21:57.360239+00:00",
+  "supersededCandidate": "d7b9b2e8a8f76ea9e8d2e08b23403a68ae8c3d0db3660343ef86b25e2ec62ec8",
+  "sourceCorrection": "Explicit labelled-row metric filtering; all calendar events stay in paired bootstrap and top-20 selection. Features, fitted weights and comparison policy unchanged; independent labels remain unaccessed."
+}

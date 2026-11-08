@@ -123,6 +123,15 @@ weather-only prediction batch is running with unchanged source and analysis
 hashes. The [independent validation record](../evidence/scattering-independent-validation.md)
 owns prediction completion, subsequent source labels and ranking results.
 
+The fourteenth completed Ask ChatGPT assessment (question 15) prioritizes
+forecast quality, observation coverage and operational input transfer. A
+separate [three-parameter empirical candidate](../evidence/quality-ranking.md)
+now has all 122 weather-only predictions frozen before new-date labels. Its
+additional exploratory comparison leaves this physical study's parameters,
+analysis files, calendar and primary observable intact. Future effort follows
+held-out ranking and actual observing usefulness rather than numerical
+refinement alone.
+
 Five official weather retrievals are downloaded. Together with reused August
 and static-terrain files they normalize all 122 Sep/Oct events at 37 levels.
 All 399,672 weather field series pass alignment/range checks. New-date labels

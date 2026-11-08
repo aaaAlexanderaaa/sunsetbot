@@ -79,7 +79,7 @@ counting by location/variables. The application has its own smaller budget.
 
 ## Ask ChatGPT MCP
 
-Thirteen completed self-contained, isolated assessments use the owner's configured
+Fourteen completed self-contained, isolated assessments use the owner's configured
 `ask_chatgpt` MCP and account model/thinking settings. The actual questions,
 raw HTML/JSON responses and extracted reading copies are retained:
 
@@ -98,6 +98,7 @@ raw HTML/JSON responses and extracted reading copies are retained:
 | [Whole-angle zero-region bound](questions/12-angular-zero-region-bound.txt) | [raw](chatgpt/12-angular-zero-region-bound.json), [reading copy](chatgpt/12-angular-zero-region-bound.md); supports fixed-azimuth probability/geometry proof and identifies nested/RGB/outer-angle accounting gaps |
 | [Finite numerical acceptance](questions/13-finite-numerical-acceptance.txt) | [raw](chatgpt/13-finite-numerical-acceptance.json), [reading copy](chatgpt/13-finite-numerical-acceptance.md); accepts a bounded empirical convergence design, with source partitions, real-medium envelope checks and numerical rank resolution |
 | [Clear-gas angular envelope](questions/14-clear-gas-angular-envelope.txt) | [raw](chatgpt/14-clear-gas-angular-envelope.json), [reading copy](chatgpt/14-clear-gas-angular-envelope.md); supports per-source-cell gas-depth/arrival bounds; requires all AOD knots, cellwise summation and numerical-gas consistency |
+| [Forecast quality target](questions/15-forecast-quality-target.txt) | [raw](chatgpt/15-forecast-quality-target.json), [reading copy](chatgpt/15-forecast-quality-target.md); prioritizes source comparability, small empirical ranking models and independent observed quality; preserves the frozen 122-event radiance study |
 
 The owner authorized relevant newly authored source for these assessments.
 Every question includes the required implementation/context. Model answers are
@@ -259,3 +260,18 @@ five new official raw-data receipts and three reused regional/terrain files.
 399,672 aligned finite field series. Labels remain unrequested during numerical
 development. The local web/API/Docker continues to use the frozen 0.3.1 model
 and its completed independent-calendar evidence.
+
+## Fast quality-ranking candidate (2026-11-08)
+
+A separate three-parameter empirical candidate combines the frozen neutralized
+peak index and the native ERA5 cloud-layer baseline. Its 184 development events
+contain 59 positive curator labels. A chronological 136/48 split selects ridge
+0.01, then all 184 events determine the final weights. Both fitted weights are
+positive. These are weak-source-label ranking features; verified viewing-quality
+probabilities and operational GFS/ECMWF transfer retain separate requirements.
+
+[The frozen candidate](experiments/quality-rank/model.json) and its
+[122 weather-only predictions](experiments/quality-rank/predictions.json) were
+saved before independent source-label access. It is an additional exploratory
+comparison, with the physical study and production engine preserved. The
+[study record](../docs/evidence/quality-ranking.md) owns evaluation and limits.
