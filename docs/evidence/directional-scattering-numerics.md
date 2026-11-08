@@ -203,7 +203,7 @@ integrator: that file was replaced before capture and retains only its recorded
 hash. Its snapshot manifest explicitly marks the archive partial. This first
 failure record supplies development evidence with that reproducibility limit.
 
-The current full Node suite covers 67 checks, including actual HTTP behavior,
+The current full Node suite covers 72 checks, including actual HTTP behavior,
 conditional slab/real-cloud conservation, support envelopes, blue-channel
 failure, nested uncertainty integration, local error ownership and numerical
 rank ties. Thirteen Python decoder/access checks also pass. The original
@@ -218,6 +218,61 @@ exact exposed 0.3.1 frame and native layer baseline, and retains source-label
 coverage and numerical missingness. Numerical interval overlap is reported as
 a tie; failed forecasts retain unresolved pair orderings. The uncertainty
 ordering range has empirical numerical scope.
+
+## Clear-gas envelope revision (0.2.1)
+
+The completed portion of the 0.2.0 gate preserves 23 controls: fifteen
+estimated-converged results and eight `ANGULAR_BUDGET` failures on June 9 at
+both pressure resolutions. The final costly June-10 dense partition was
+stopped after overall acceptance was refuted. The [negative gate record](../../research/experiments/scattering-numerical-0.2.0/summary.json)
+and complete matching 0.2.0 source snapshot preserve that finite conclusion
+and the one uncompleted control.
+
+Actual source diagnostics identify known viewing-gas extinction as the June-9
+zero-region mechanism. At azimuth 10 degrees, elevation 0.5..0.7053 degrees,
+all sampled source quadrature counts are zero while retained tail bounds are
+around 1e-15. The first source's conditional cloud transmission is one. Local
+AOD is 0.9353, so clear-gas extinction removes the source within the declared
+tail tolerance; the cloud-only angular bound of 0.0741 ignores that known
+attenuation.
+
+Version 0.2.1 lower-bounds each source cell's arrival distance by the maximum
+of shadow exit, near-column-plane crossing and bottom-height-sphere crossing.
+It applies a separate common cloud foreground and deterministic clear-gas
+bound to each candidate cell, then sums cells per wavelength. All original
+AOD interpolation knots come from the medium, including clear columns.
+
+For each distance rectangle, every positive-elevation ray lies below its
+upper-elevation far endpoint. Its section-coordinate range is bounded by the
+two endpoint rays. Gas density decreases with height; AOD is piecewise linear
+in x, so endpoints plus every crossed interpolation knot give a density lower
+bound. Positive rectangle sums lower-bound optical depth over the entire
+angular interval. Expanding each distance rectangle by the production gas
+panel length also covers the implemented positive Simpson sums, irrespective
+of their panel alignment: every panel node lies inside the expanded density
+range of every point in that panel. Floating margins retain their declared
+empirical scope.
+
+The [fourteenth MCP assessment](../../research/chatgpt/14-clear-gas-angular-envelope.md)
+supports the geometric and gas-envelope constructions and emphasizes cellwise
+summation, complete AOD knots and the numerical-gas bridge. The subsequent
+expanded-window construction supplies that positive-quadrature bridge and has
+independent tests against both 0.1 km and production 4 km gas integration on
+180 rays. The real-medium sweep additionally checks all three gas-attenuated
+source bounds on the same 18,515 rays, with no violations.
+
+The [previously failing coarse June-9 probe](../../research/experiments/scattering-gas-bound-probe.json)
+now completes in 45.85 seconds at 1,970 angular rays, with all RGB raw/covered
+budgets met. Red integral at g=0.85 is 9.55379e-7. This is a numerical mechanism
+result; the fresh complete 24-job source/angle/gas gate retains empirical
+acceptance ownership. Each control now has a declared 900-second wall budget,
+included in its identity, with explicit timeout failure and checkpoints.
+
+The full 0.2.1 gate subsequently passes all 24 jobs and 432 comparisons.
+The largest material source/angle relative change is 0.665814%; the largest
+material gas-step change is 0.000325491%. The [frozen independent study](scattering-independent-validation.md)
+records candidate selection before source labels and the next calendar's
+prospective prediction stage.
 
 ## Next-calendar resource preparation
 

@@ -79,7 +79,7 @@ counting by location/variables. The application has its own smaller budget.
 
 ## Ask ChatGPT MCP
 
-Twelve completed self-contained, isolated assessments use the owner's configured
+Thirteen completed self-contained, isolated assessments use the owner's configured
 `ask_chatgpt` MCP and account model/thinking settings. The actual questions,
 raw HTML/JSON responses and extracted reading copies are retained:
 
@@ -97,6 +97,7 @@ raw HTML/JSON responses and extracted reading copies are retained:
 | [Real-field numerical convergence](questions/11-real-cloud-numerical-convergence.txt) | [raw](chatgpt/11-real-cloud-numerical-convergence.json), [reading copy](chatgpt/11-real-cloud-numerical-convergence.md); optical-depth source variable, known support, angular adaptivity and independent controls |
 | [Whole-angle zero-region bound](questions/12-angular-zero-region-bound.txt) | [raw](chatgpt/12-angular-zero-region-bound.json), [reading copy](chatgpt/12-angular-zero-region-bound.md); supports fixed-azimuth probability/geometry proof and identifies nested/RGB/outer-angle accounting gaps |
 | [Finite numerical acceptance](questions/13-finite-numerical-acceptance.txt) | [raw](chatgpt/13-finite-numerical-acceptance.json), [reading copy](chatgpt/13-finite-numerical-acceptance.md); accepts a bounded empirical convergence design, with source partitions, real-medium envelope checks and numerical rank resolution |
+| [Clear-gas angular envelope](questions/14-clear-gas-angular-envelope.txt) | [raw](chatgpt/14-clear-gas-angular-envelope.json), [reading copy](chatgpt/14-clear-gas-angular-envelope.md); supports per-source-cell gas-depth/arrival bounds; requires all AOD knots, cellwise summation and numerical-gas consistency |
 
 The owner authorized relevant newly authored source for these assessments.
 Every question includes the required implementation/context. Model answers are

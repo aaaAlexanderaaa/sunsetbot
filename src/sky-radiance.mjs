@@ -27,7 +27,8 @@ export function adaptiveSkyRadiance({ blocks, cells, medium, observer, observerH
     const phi = side === 'toward' ? delta / RAD : 180 - delta / RAD;
     const support = cloudAngularSupport(blocks, observerHeight, phi, solarAltitude, eLow, eHigh, { shadowClip: false });
     const litHints = cloudAngularSupport(blocks, observerHeight, phi, solarAltitude, eLow, eHigh);
-    const cloudUpper = medium ? angularCloudUpperBoundFactory({ medium, cells, observer, observerHeight, azimuth: phi, solarAltitude, assumptions }) : () => 1;
+    const cloudUpper = medium ? angularCloudUpperBoundFactory({ medium, cells, observer, observerHeight, azimuth: phi,
+      solarAltitude, assumptions, includeClearAttenuation: true }) : () => 1;
     const initial = assumptions.elevationEdgesDegrees.map(e => Math.sin(e * RAD));
     const possible = (a, b) => support.intervals.some(([lo, hi]) => Math.min(b, hi) > Math.max(a, lo));
     function intervalBound(a, b) {
@@ -36,8 +37,11 @@ export function adaptiveSkyRadiance({ blocks, cells, medium, observer, observerH
       const mus = [a, b, stationary, -stationary].filter(mu => mu >= a && mu <= b);
       const cosines = mus.map(mu => p * Math.sqrt(Math.max(0, 1 - mu * mu)) + q * mu);
       const phase = asymmetries.map(g => Math.max(...cosines.map(c => henyeyGreenstein(c, g))));
-      const upper = (b - a) * Math.max(...assumptions.directSolarIrradiancePerChannel), cloud = cloudUpper(a, b);
-      const radianceBounds = phase.flatMap(p => Array(6).fill(upper * cloud * p));
+      const channelBounds = cloudUpper.channels?.(a, b) ?? Array(3).fill(cloudUpper(a, b));
+      const radianceBounds = phase.flatMap(p => {
+        const rgb = channelBounds.map((bound, c) => (b - a) * assumptions.directSolarIrradiancePerChannel[c] * bound * p);
+        return [...rgb, ...rgb];
+      });
       return [...radianceBounds, ...Array(m - n).fill(0)];
     }
     function radiance(mu) {

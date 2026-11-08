@@ -37,5 +37,11 @@
   "evidencePolicy": "Preserve explicit source grades and linked/source-only provenance. Independently unverified source-only zero labels remain source-label evidence. Link presence has its own evidence strength.",
   "scope": "Retrospective reanalysis structural ranking. Accuracy/calibration and operational fixed-run/fixed-lead skill retain their own evidence requirements.",
   "promotionPolicy": "Keep production frozen through this experiment. A stronger ranking, numerical reliability and adequate independent observation coverage determine any later promotion decision.",
-  "numericalRanking": "Use per-event score +/- total numerical error estimates; combine the union of retained control intervals when controls are available. Overlapping intervals retain numerical ties. Preserve failed predictions as missing and report all-label pairwise sensitivity bounds, alongside nominal paired complete-case AUC and coverage."
+  "numericalRanking": "Use per-event score +/- total numerical error estimates; combine the union of retained control intervals when controls are available. Overlapping intervals retain numerical ties. Preserve failed predictions as missing and report all-label pairwise sensitivity bounds, alongside nominal paired complete-case AUC and coverage.",
+  "resourcePolicy": {
+    "numericalControlWallSeconds": 900,
+    "calendarPredictionWallSeconds": 900,
+    "workerConcurrency": 2,
+    "failurePolicy": "Preserve wall/ray/source budget failures as null predictions with their reason and retain all calendar identities"
+  }
 }

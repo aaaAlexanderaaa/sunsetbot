@@ -60,7 +60,8 @@ async function main() {
   for (const id of ids) for (const density of ['coarse', 'dense']) {
     const inputSources = (await loadInput(id, density, 'pilot')).sources;
     for (const mode of ['base', 'tight', 'gas', 'partition']) {
-      const definition = { id, density, mode, options: optionsFor(mode), inputSources, codeSha256: identity.sha256 };
+      const definition = { id, density, mode, options: optionsFor(mode), inputSources, codeSha256: identity.sha256,
+        maximumWallSeconds: 900 };
       jobs.push({ ...definition, jobIdentity: hash(JSON.stringify(definition)) });
     }
   }
@@ -79,8 +80,14 @@ async function main() {
         if (!result) {
           result = await new Promise((resolve, reject) => {
             const worker = new Worker(new URL(import.meta.url), { workerData: job });
-            worker.once('message', resolve);worker.once('error', reject);
-            worker.once('exit', code => { if (code !== 0) reject(Error('Acceptance worker exited: ' + code)); });
+            const timer = setTimeout(() => {
+              resolve({ ...job, computedAt: new Date().toISOString(), wallSeconds: job.maximumWallSeconds,
+                numericalStatus: 'not_converged', failure: { code: 'WALL_BUDGET', message: 'Numerical control exceeded its declared wall-time budget' } });
+              void worker.terminate();
+            }, job.maximumWallSeconds * 1000);
+            worker.once('message', value => { clearTimeout(timer);resolve(value); });
+            worker.once('error', error => { clearTimeout(timer);reject(error); });
+            worker.once('exit', code => { clearTimeout(timer);if (code !== 0) reject(Error('Acceptance worker exited: ' + code)); });
           });
           await save(file, result);
         }

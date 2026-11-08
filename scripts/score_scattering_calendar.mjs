@@ -42,6 +42,9 @@ async function main() {
   const selectionBytes = await readFile(selectionPath), selection = JSON.parse(selectionBytes);
   const identity = await codeIdentity();
   if (identity.sha256 !== selection.recipe.codeIdentity.sha256) throw Error('Calendar prediction requires the frozen candidate source');
+  for (const receipt of selection.recipe.analysisFiles) {
+    if (hash(await readFile(receipt.file)) !== receipt.sha256) throw Error('Frozen pipeline source changed: ' + receipt.file);
+  }
   const manifestBytes = await readFile(weatherDirectory + '/manifest.json'), manifest = JSON.parse(manifestBytes);
   const referenceBytes = await readFile('research/experiments/scattering-reference-predictions.json'), references = JSON.parse(referenceBytes);
   if (hash(manifestBytes) !== selection.recipe.weatherManifestSha256 ||
@@ -49,7 +52,8 @@ async function main() {
   const jobs = manifest.cases.map(input => {
     const reference = references.cases.find(c => c.id === input.id);
     if (!reference) throw Error('Prospective common-altitude reference missing');
-    return { id: input.id, input, reference: reference.reference, candidateIdentity: selection.candidateIdentity, codeSha256: identity.sha256 };
+    return { id: input.id, input, reference: reference.reference, candidateIdentity: selection.candidateIdentity,
+      codeSha256: identity.sha256, maximumWallSeconds: 900 };
   });
   const stage = 'var/reanalysis/scattering-calendar-predictions/' + selection.candidateIdentity;
   await mkdir(stage, { recursive: true });const results = [];let cursor = 0, stopped = false;
@@ -63,8 +67,15 @@ async function main() {
         if (!result) {
           result = await new Promise((resolve, reject) => {
             const worker = new Worker(new URL(import.meta.url), { workerData: job });
-            worker.once('message', resolve);worker.once('error', reject);
-            worker.once('exit', code => { if (code !== 0) reject(Error('Calendar worker exited: ' + code)); });
+            const timer = setTimeout(() => {
+              resolve({ ...job, numericalStatus: 'not_converged', score: null, errorEstimate: null,
+                computedAt: new Date().toISOString(), wallSeconds: job.maximumWallSeconds,
+                failure: { code: 'WALL_BUDGET', message: 'Calendar prediction exceeded its declared wall-time budget' } });
+              void worker.terminate();
+            }, job.maximumWallSeconds * 1000);
+            worker.once('message', value => { clearTimeout(timer);resolve(value); });
+            worker.once('error', error => { clearTimeout(timer);reject(error); });
+            worker.once('exit', code => { clearTimeout(timer);if (code !== 0) reject(Error('Calendar worker exited: ' + code)); });
           });
           await save(file, result);
         }

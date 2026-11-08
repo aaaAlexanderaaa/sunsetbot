@@ -1,0 +1,450 @@
+{
+  "id": "2023-06-09-sunset",
+  "density": "dense",
+  "mode": "partition",
+  "options": {
+    "maximumEmissionOpticalDepth": 0.35,
+    "azimuthPartitionFractions": [
+      0.25,
+      0.75
+    ],
+    "elevationEdgesDegrees": [
+      0.5,
+      0.75,
+      1.5,
+      3.5,
+      7.5,
+      15,
+      30,
+      55,
+      75,
+      85
+    ],
+    "maximumAngularRays": 8192
+  },
+  "inputSources": [
+    {
+      "file": "research/backtests/shanghai-era5-input-2023-06/2023-06-09-sunset.json",
+      "sha256": "8529600e0c2c02ef9969aa0661da5b855d4c3f6d1037b77073b9f07d16e2cd91"
+    },
+    {
+      "file": "research/experiments/cloud-column-dense-inputs/2023-06-09-sunset.json",
+      "sha256": "3e8d5c66deb5a3cb56eb891ff8ac14cd2a30c4e0691647ce90ea240f418afc60"
+    }
+  ],
+  "codeSha256": "4470c34660ede8d0abcde9e092513e5941052af0c01df9eccd6c982dc7099013",
+  "maximumWallSeconds": 900,
+  "jobIdentity": "e90c8b0d7ad2509734fc0a74e22d6e5253e747129ec7d701f95002c428d7c341",
+  "reference": {
+    "time": "2023-06-09T10:57:21.615Z",
+    "targetAltitude": -0.833,
+    "actualAltitude": -0.8330139601448501,
+    "offsetSeconds": -55.147
+  },
+  "frame": {
+    "modelVersion": "directional-single-scatter-0.2.1",
+    "time": "2023-06-09T10:57:21.615Z",
+    "sun": {
+      "altitude": -0.8330139601448501,
+      "azimuth": 297.6363936859718
+    },
+    "spectra": [
+      {
+        "asymmetry": 0,
+        "rgbIntegral": [
+          7.50096970686064e-7,
+          1.9018924286432294e-7,
+          1.4602371836725866e-8
+        ],
+        "coveredRgbIntegral": [
+          7.50096970686064e-7,
+          1.9018924286432294e-7,
+          1.4602371836725866e-8
+        ],
+        "rgbMean": [
+          0.0000010880702860583595,
+          2.7588334838805314e-7,
+          2.1181803849953925e-8
+        ],
+        "solidAngleSr": 0.6893828278349217,
+        "angularErrorEstimate": [
+          8.052252530169731e-10,
+          1.6011164328402203e-10,
+          1.0052498066380628e-11
+        ],
+        "coveredAngularErrorEstimate": [
+          8.052252530169731e-10,
+          1.6011164328402203e-10,
+          1.0052498066380628e-11
+        ],
+        "sourceErrorEstimate": [
+          5.959196153158977e-10,
+          1.6089271506562295e-10,
+          1.2338014799985856e-11
+        ],
+        "coveredSourceErrorEstimate": [
+          5.959196153158977e-10,
+          1.6089271506562295e-10,
+          1.2338014799985856e-11
+        ],
+        "tailUpperBound": 6.3943164293285815e-15,
+        "totalErrorEstimate": [
+          1.4011512626493002e-9,
+          3.210107526660743e-10,
+          2.2396907182795813e-11
+        ],
+        "coveredTotalErrorEstimate": [
+          1.4011512626493002e-9,
+          3.210107526660743e-10,
+          2.2396907182795813e-11
+        ],
+        "sides": {
+          "toward": {
+            "rgbIntegral": [
+              1.3225917505531222e-7,
+              3.831190408444577e-8,
+              3.5921871609493795e-9
+            ],
+            "solidAngleSr": 0.34469141391746083
+          },
+          "opposite": {
+            "rgbIntegral": [
+              6.178377956307518e-7,
+              1.5187733877987717e-7,
+              1.1010184675776487e-8
+            ],
+            "solidAngleSr": 0.34469141391746083
+          }
+        },
+        "redBlueRelativeTransmissionRatio": 51.368159849177644,
+        "redBlueRatioErrorInterval": {
+          "lower": 51.1936860359076,
+          "upper": 51.54316969544096,
+          "status": "bounded_by_error_estimates"
+        }
+      },
+      {
+        "asymmetry": 0.75,
+        "rgbIntegral": [
+          7.816829293008636e-7,
+          1.6282715597016947e-7,
+          1.039891336830694e-8
+        ],
+        "coveredRgbIntegral": [
+          7.816829293008636e-7,
+          1.6282715597016947e-7,
+          1.039891336830694e-8
+        ],
+        "rgbMean": [
+          0.0000011338880194562142,
+          2.3619264854847786e-7,
+          1.508438120074126e-8
+        ],
+        "solidAngleSr": 0.6893828278349217,
+        "angularErrorEstimate": [
+          1.07904716975983e-9,
+          1.8844811714598047e-10,
+          9.282786356633641e-12
+        ],
+        "coveredAngularErrorEstimate": [
+          1.07904716975983e-9,
+          1.8844811714598047e-10,
+          9.282786356633641e-12
+        ],
+        "sourceErrorEstimate": [
+          7.041069316841971e-10,
+          1.544097879121482e-10,
+          9.924595186554675e-12
+        ],
+        "coveredSourceErrorEstimate": [
+          7.041069316841971e-10,
+          1.544097879121482e-10,
+          9.924595186554675e-12
+        ],
+        "tailUpperBound": 2.1999272169441867e-15,
+        "totalErrorEstimate": [
+          1.7831563013712441e-9,
+          3.4286010498534556e-10,
+          1.920958147040526e-11
+        ],
+        "coveredTotalErrorEstimate": [
+          1.7831563013712441e-9,
+          3.4286010498534556e-10,
+          1.920958147040526e-11
+        ],
+        "sides": {
+          "toward": {
+            "rgbIntegral": [
+              7.249171804962135e-7,
+              1.4841260038695673e-7,
+              9.318470945964131e-9
+            ],
+            "solidAngleSr": 0.34469141391746083
+          },
+          "opposite": {
+            "rgbIntegral": [
+              5.67657488046501e-8,
+              1.4414555583212751e-8,
+              1.0804424223428097e-9
+            ],
+            "solidAngleSr": 0.34469141391746083
+          }
+        },
+        "redBlueRelativeTransmissionRatio": 75.16967413953276,
+        "redBlueRatioErrorInterval": {
+          "lower": 74.85991255422458,
+          "upper": 75.48058226823592,
+          "status": "bounded_by_error_estimates"
+        }
+      },
+      {
+        "asymmetry": 0.85,
+        "rgbIntegral": [
+          8.010581385316632e-7,
+          1.4878179451660707e-7,
+          8.393503206601129e-9
+        ],
+        "coveredRgbIntegral": [
+          8.010581385316632e-7,
+          1.4878179451660707e-7,
+          8.393503206601129e-9
+        ],
+        "rgbMean": [
+          0.0000011619931715553018,
+          2.1581882882675182e-7,
+          1.2175387705785764e-8
+        ],
+        "solidAngleSr": 0.6893828278349217,
+        "angularErrorEstimate": [
+          1.2383272234753086e-9,
+          1.9714684608118588e-10,
+          9.077742975488057e-12
+        ],
+        "coveredAngularErrorEstimate": [
+          1.2383272234753086e-9,
+          1.9714684608118588e-10,
+          9.077742975488057e-12
+        ],
+        "sourceErrorEstimate": [
+          6.886642726893442e-10,
+          1.379622875202644e-10,
+          8.042635792952436e-12
+        ],
+        "coveredSourceErrorEstimate": [
+          6.886642726893442e-10,
+          1.379622875202644e-10,
+          8.042635792952436e-12
+        ],
+        "tailUpperBound": 3.3365015116037252e-15,
+        "totalErrorEstimate": [
+          1.9269948326661644e-9,
+          3.351124701029619e-10,
+          1.71237152699521e-11
+        ],
+        "coveredTotalErrorEstimate": [
+          1.9269948326661644e-9,
+          3.351124701029619e-10,
+          1.71237152699521e-11
+        ],
+        "sides": {
+          "toward": {
+            "rgbIntegral": [
+              7.705218430026758e-7,
+              1.410234847641787e-7,
+              7.81163875210159e-9
+            ],
+            "solidAngleSr": 0.34469141391746083
+          },
+          "opposite": {
+            "rgbIntegral": [
+              3.0536295528987436e-8,
+              7.758309752428368e-9,
+              5.818644544995382e-10
+            ],
+            "solidAngleSr": 0.34469141391746083
+          }
+        },
+        "redBlueRelativeTransmissionRatio": 95.43787841787747,
+        "redBlueRatioErrorInterval": {
+          "lower": 95.01445624950124,
+          "upper": 95.86303177826996,
+          "status": "bounded_by_error_estimates"
+        }
+      },
+      {
+        "asymmetry": 0.9,
+        "rgbIntegral": [
+          6.882117911361114e-7,
+          1.1941015647825332e-7,
+          6.307908811173753e-9
+        ],
+        "coveredRgbIntegral": [
+          6.882117911361114e-7,
+          1.1941015647825332e-7,
+          6.307908811173753e-9
+        ],
+        "rgbMean": [
+          9.983013259809678e-7,
+          1.7321312869552222e-7,
+          9.150081139944253e-9
+        ],
+        "solidAngleSr": 0.6893828278349217,
+        "angularErrorEstimate": [
+          1.1299850112041225e-9,
+          1.671822696441158e-10,
+          7.309436322340539e-12
+        ],
+        "coveredAngularErrorEstimate": [
+          1.1299850112041225e-9,
+          1.671822696441158e-10,
+          7.309436322340539e-12
+        ],
+        "sourceErrorEstimate": [
+          5.706331097712601e-10,
+          1.0847226531628508e-10,
+          6.016386701366818e-12
+        ],
+        "coveredSourceErrorEstimate": [
+          5.706331097712601e-10,
+          1.0847226531628508e-10,
+          6.016386701366818e-12
+        ],
+        "tailUpperBound": 4.149633871560397e-15,
+        "totalErrorEstimate": [
+          1.7006222706092541e-9,
+          2.756586845942724e-10,
+          1.3329972657578917e-11
+        ],
+        "coveredTotalErrorEstimate": [
+          1.7006222706092541e-9,
+          2.756586845942724e-10,
+          1.3329972657578917e-11
+        ],
+        "sides": {
+          "toward": {
+            "rgbIntegral": [
+              6.6890123250379e-7,
+              1.1450321663284525e-7,
+              5.939834288158695e-9
+            ],
+            "solidAngleSr": 0.34469141391746083
+          },
+          "opposite": {
+            "rgbIntegral": [
+              1.93105586323215e-8,
+              4.906939845408076e-9,
+              3.680745230150572e-10
+            ],
+            "solidAngleSr": 0.34469141391746083
+          }
+        },
+        "redBlueRelativeTransmissionRatio": 109.10300255403526,
+        "redBlueRatioErrorInterval": {
+          "lower": 108.60389748627794,
+          "upper": 109.60422152236548,
+          "status": "bounded_by_error_estimates"
+        }
+      }
+    ],
+    "potentialLitCloudSolidAngleSr": 0.1974097431074805,
+    "diagnostics": {
+      "numericalStatus": "estimated_converged",
+      "criterionScope": "RGB adaptive error estimates including integration of inner/source/tail uncertainty, conservative dark-region and limit envelopes; independent gas/partition checks required. Subgrid peaks with resolved positive background retain adaptive-estimator scope.",
+      "quadraturePoints": 690882,
+      "uncoveredPoints": 0,
+      "angularRays": 5426,
+      "angularSlices": 26,
+      "angularErrorEstimate": 1.2383272234753086e-9,
+      "sourceErrorEstimate": 7.041069316841971e-10,
+      "omittedTailIntegralUpperBound": 6.3943164293285815e-15,
+      "angularDepthLimitCount": 0,
+      "angularBoundedLimitCount": 0,
+      "sourceDepthLimitCount": 0,
+      "sourceBoundedLimitCount": 0,
+      "sourceSupportBlocks": 18,
+      "cellCount": null,
+      "bearingClipped": false,
+      "representation": "Current solar section extruded along cross-track; U depends on longitude-like section coordinate and height bands"
+    },
+    "assumptions": {
+      "wavelengthsNm": [
+        680,
+        550,
+        440
+      ],
+      "directSolarIrradiancePerChannel": [
+        1,
+        1,
+        1
+      ],
+      "cloudExtinction": {
+        "low": 2,
+        "mid": 0.7,
+        "high": 0.2
+      },
+      "singleScatteringAlbedo": 1,
+      "asymmetry": 0.85,
+      "phaseScenarios": [
+        0,
+        0.75,
+        0.85,
+        0.9
+      ],
+      "correlationLengthKm": 50,
+      "cloudOverlap": "decorrelated",
+      "rayleigh550": 0.012,
+      "molecularScaleHeightKm": 8,
+      "aerosolScaleHeightKm": 1.5,
+      "aerosolAngstrom": 1.2,
+      "sourceExtentKm": 150,
+      "maximumViewingPathKm": 350,
+      "maximumSolarPathKm": 2200,
+      "azimuthHalfWidthDegrees": 10,
+      "referenceSolarAltitudeDegrees": -0.833,
+      "gasStepKm": 4,
+      "maximumEmissionOpticalDepth": 0.35,
+      "sourceTailAbsoluteTolerance": 1e-13,
+      "sourceRelativeTolerance": 0.002,
+      "sourceAbsoluteTolerance": 1e-11,
+      "sourceMaximumDepth": 18,
+      "angularIntegration": "adaptive-support",
+      "angularRelativeTolerance": 0.005,
+      "angularAbsoluteTolerance": 1e-10,
+      "angularMuMaximumDepth": 14,
+      "angularAzimuthMaximumDepth": 10,
+      "azimuthPartitionFractions": [
+        0.25,
+        0.75
+      ],
+      "maximumAngularRays": 8192,
+      "totalAbsoluteTolerance": 1e-10,
+      "totalRelativeTolerance": 0.02,
+      "elevationEdgesDegrees": [
+        0.5,
+        0.75,
+        1.5,
+        3.5,
+        7.5,
+        15,
+        30,
+        55,
+        75,
+        85
+      ],
+      "cloudField": "Current solar section extruded along cross-track; U depends on longitude-like section coordinate and height bands",
+      "terrain": "Nearest fixed horizontal column; constant within each probability column",
+      "scope": "Single cloud scattering with Rayleigh/aerosol extinction; relative spectral radiance per unit direct irradiance, sr^-1"
+    }
+  },
+  "worstNormalizedError": {
+    "asymmetry": 0.9,
+    "kind": "raw",
+    "wavelengthNm": 680,
+    "value": 6.882117911361114e-7,
+    "error": 1.7006222706092541e-9,
+    "normalizedError": 0.12355370051142532
+  },
+  "runtime": "v20.18.1",
+  "computedAt": "2026-11-08T02:20:46.194Z",
+  "wallSeconds": 519.860096375
+}

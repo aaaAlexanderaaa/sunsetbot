@@ -25,7 +25,9 @@ Its availability and proprietary forecast outputs are independent of runtime.
 - `src/radiance.mjs` and `src/quadrature.mjs`: normalized phase functions,
   formal-source checks, solid angles and numerical integration diagnostics.
 - `src/angular-support.mjs` and `src/angular-bound.mjs`: projected cloud
-  support and whole-elevation-interval sunlit/view-transmission envelopes.
+  support and per-source-cell whole-elevation-interval transfer envelopes.
+- `src/clear-depth-bound.mjs`: deterministic clear-gas optical-depth lower
+  bounds covering the angular interval and positive gas-quadrature panels.
 - `src/sky-radiance.mjs`: nested angular integration, RGB uncertainty
   propagation and explicit error ownership at bounded local limits.
 - `src/provider.mjs`: Open-Meteo requests, units, strict validation and metadata.

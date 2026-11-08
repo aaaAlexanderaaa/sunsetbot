@@ -97,13 +97,31 @@ peaks retain explicitly estimated-quadrature scope.
 
 The six-real-medium view-only envelope check passes 18,515 interior rays over
 2,645 boundary-aware intervals. It exposed and corrected a floating-point
-support exclusion on sub-1e-17-wide intervals. Sixty-seven Node tests and
+support exclusion on sub-1e-17-wide intervals. Seventy-two Node tests and
 thirteen Python checks pass. Full empirical acceptance is a separate 24-job
 gate: base, fourfold tighter tolerances, independent gas-step refinement, and
 changed source/angle partitions at both pressure resolutions. Job identities
 include actual input hashes, source hashes and options. Budget failures retain
 their zero-region samples. [Numerical evidence](../evidence/directional-scattering-numerics.md)
 preserves development failures and independent assessments.
+
+Version 0.2.0 completed 23 controls: 15 estimated-converged jobs and eight
+angular-budget failures on June 9 at both resolutions. The final expensive
+dense partition was stopped after acceptance was refuted. Those exact sources
+and results are preserved. Version 0.2.1 adds per-source-cell arrival distances
+and known viewing-gas attenuation to the interval envelope. AOD minima use
+every original column, including clear columns. Expanded density windows cover
+positive gas panels up to the production step. The former June-9 coarse
+failure now passes at 1,970 rays in 45.85 seconds. A fresh 24-job gate uses
+source/input/options identities and a declared 900-second job wall budget.
+
+That complete 24-job gate now passes all six media and all 432 comparisons.
+The largest material source/angle change is 0.6658%, within the 2% target.
+Candidate `f25187812a6edeb5132eccf76ee9c118ff9f63277eb260eb21ce18de05732b58`
+was frozen at 2026-11-08T02:39:04.998Z before new-date labels. The full 122-event
+weather-only prediction batch is running with unchanged source and analysis
+hashes. The [independent validation record](../evidence/scattering-independent-validation.md)
+owns prediction completion, subsequent source labels and ranking results.
 
 Five official weather retrievals are downloaded. Together with reused August
 and static-terrain files they normalize all 122 Sep/Oct events at 37 levels.

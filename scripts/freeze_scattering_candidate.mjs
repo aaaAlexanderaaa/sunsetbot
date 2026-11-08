@@ -44,7 +44,8 @@ const reference = await referenceModel(), analysisFiles = [];
 for (const path of [policyPath, 'scripts/validation-statistics.mjs', 'scripts/scattering-reference.mjs',
   'scripts/accept_scattering_numerics.mjs', 'scripts/verify_angular_envelopes.mjs', 'scripts/build_scattering_weather.py',
   'scripts/freeze_scattering_candidate.mjs', 'scripts/score_scattering_references.mjs', 'scripts/score_scattering_calendar.mjs',
-  'scripts/radiance-ranking.mjs']) {
+  'scripts/capture_scattering_labels.py',
+  'scripts/radiance-ranking.mjs', 'scripts/evaluate_scattering_calendar.mjs']) {
   analysisFiles.push({ file: path, sha256: hash(await readFile(path)) });
 }
 const recipe = { codeIdentity: identity, modelVersion: SCATTERING_VERSION, assumptions: SCATTERING_ASSUMPTIONS,

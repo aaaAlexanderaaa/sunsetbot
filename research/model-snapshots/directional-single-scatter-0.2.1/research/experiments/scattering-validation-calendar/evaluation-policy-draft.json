@@ -1,0 +1,47 @@
+{
+  "status": "draft_before_candidate_source_freeze",
+  "calendar": {
+    "location": "Shanghai",
+    "dates": [
+      "2023-09-01",
+      "2023-10-31"
+    ],
+    "possibleEvents": 122,
+    "selection": "Every calendar sunrise and sunset; no label-based or score-based selection"
+  },
+  "primaryObservable": {
+    "pressureLevels": 37,
+    "phaseAsymmetry": 0.85,
+    "channelNm": 680,
+    "quantity": "rgbIntegral[0]",
+    "time": "Common geometric solar altitude -0.833 degrees",
+    "domain": "Both fixed +/-10-degree Sun/antisolar azimuth wedges, elevation0.5..85 degrees; source|x|<=150km"
+  },
+  "primaryComparison": "Paired AUC difference: primary observable minus frozen section-optics-0.3.1 at the same common-altitude instant, with native cloud-layer baseline also reported",
+  "secondary": [
+    "Original heuristic maximum over its fixed +/-40-minute curve",
+    "Phase g=0,.75,.9 at the same altitude",
+    "Covered radiance and per-channel numerical sensitivity",
+    "Ordinal Spearman and top20 calendar source-label precision"
+  ],
+  "nativeBaseline": "max(native_mid,native_high)*(1-native_low/100) at the observer and common-altitude instant",
+  "ancillaryPolicy": "Pure ERA5/EAC4 comparison: no precipitation/visibility in these bundles. The frozen heuristic uses its declared neutral defaults for absent optional fields, reported explicitly.",
+  "numericalGate": "Six fixed coarse/dense media, base/tight/gas/changed-partition controls, all raw/covered RGB channels; same source identity as candidate. Each calendar failure remains missing with its reason and retained diagnostic frame.",
+  "missingness": "Report counts of calendar events, returned explicit labels, missing labels, numerical failures, and paired complete cases. Keep all records; report label distribution of failures when labels become available.",
+  "bootstrap": {
+    "replicates": 1000,
+    "blockDays": 3,
+    "seed": 20230901
+  },
+  "topK": 20,
+  "evidencePolicy": "Preserve explicit source grades and linked/source-only provenance. Independently unverified source-only zero labels remain source-label evidence. Link presence has its own evidence strength.",
+  "scope": "Retrospective reanalysis structural ranking. Accuracy/calibration and operational fixed-run/fixed-lead skill retain their own evidence requirements.",
+  "promotionPolicy": "Keep production frozen through this experiment. A stronger ranking, numerical reliability and adequate independent observation coverage determine any later promotion decision.",
+  "numericalRanking": "Use per-event score +/- total numerical error estimates; combine the union of retained control intervals when controls are available. Overlapping intervals retain numerical ties. Preserve failed predictions as missing and report all-label pairwise sensitivity bounds, alongside nominal paired complete-case AUC and coverage.",
+  "resourcePolicy": {
+    "numericalControlWallSeconds": 900,
+    "calendarPredictionWallSeconds": 900,
+    "workerConcurrency": 2,
+    "failurePolicy": "Preserve wall/ray/source budget failures as null predictions with their reason and retain all calendar identities"
+  }
+}

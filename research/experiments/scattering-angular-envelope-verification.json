@@ -1,11 +1,11 @@
 {
-  "verifiedAt": "2026-11-08T01:14:05.852Z",
+  "verifiedAt": "2026-11-08T01:48:52.147Z",
   "codeIdentity": {
-    "sha256": "ce23fc5d4a9171c999459c49452e6eee6077a8121becff7d68596e4ae2d46dab",
+    "sha256": "4470c34660ede8d0abcde9e092513e5941052af0c01df9eccd6c982dc7099013",
     "files": [
       {
         "file": "src/scattering-engine.mjs",
-        "sha256": "6db79e28c59e429ce6572991b51b7f48f33f6f9288ac9604112a3b55dbd0e1f2"
+        "sha256": "cd95d2b1d54e74f3dd6c3aaeedb54296d235791673d5a2ae716bc9365d386407"
       },
       {
         "file": "src/radiance.mjs",
@@ -17,7 +17,7 @@
       },
       {
         "file": "src/section-medium.mjs",
-        "sha256": "3a8ebaf53ce1027a0f4f77856d02de5f90fe7cc7470d1a4a786d4f0cbf1bdfc4"
+        "sha256": "8aea4d72ef82a0cd994eb5c074082e7228cc8d42c25e03ca91f3e7e625688044"
       },
       {
         "file": "src/quadrature.mjs",
@@ -29,11 +29,15 @@
       },
       {
         "file": "src/angular-bound.mjs",
-        "sha256": "b10318b05674f3387e11bd99b22814f02e7c661daa555881f51a748f07545f46"
+        "sha256": "301e92c628491c8d2360d034c800660413b39d489e5be53079f0fb3e3f5be886"
+      },
+      {
+        "file": "src/clear-depth-bound.mjs",
+        "sha256": "5f2203c8ba2872eec79d9cdf0ab9d47ea479839f76ab4aa1f58b0a8e595ec393"
       },
       {
         "file": "src/sky-radiance.mjs",
-        "sha256": "c7478556540ec3b40d95675189567fd8053a57f5542f31cde1f2225e5ba89c2f"
+        "sha256": "dfee99c361e67affa23c2986b7f4132864d3346fb7b79a2fbf7b850e59981a47"
       },
       {
         "file": "src/astro.mjs",
@@ -53,7 +57,7 @@
       },
       {
         "file": "scripts/diagnose_scattering.mjs",
-        "sha256": "bf1c4af258911a74a590ceebc6f88e114438513aab78f4c9bf285c172aec7398"
+        "sha256": "0f08329c484fd436f41b4249a74f6c628403ab96b1837ec69c9f5f8658ab2e86"
       },
       {
         "file": "research/model-snapshots/section-optics-0.3.1/engine.mjs",
@@ -65,7 +69,7 @@
       }
     ]
   },
-  "verifierSha256": "553e26203e3ed65112eae6c033fb8f58a269894b773ec9533746920dbf4e21f4",
+  "verifierSha256": "cc9192d7574f34ecd633cde608cc7555fadb02d6d261b70056b925ec3c60a8ef",
   "cases": [
     {
       "id": "2023-06-03-sunset",
@@ -98,8 +102,8 @@
       "intervals": 474,
       "rays": 3318,
       "zeroBounds": 3,
-      "tightenedBounds": 129,
-      "maximumSourceToBound": 0.9979204501931356
+      "tightenedBounds": 205,
+      "maximumSourceToBound": 0.9998823806815675
     },
     {
       "id": "2023-06-09-sunset",
@@ -113,7 +117,7 @@
       "intervals": 288,
       "rays": 2016,
       "zeroBounds": 0,
-      "tightenedBounds": 180,
+      "tightenedBounds": 189,
       "maximumSourceToBound": 0.9999999990000003
     },
     {
@@ -132,8 +136,8 @@
       "intervals": 526,
       "rays": 3682,
       "zeroBounds": 0,
-      "tightenedBounds": 247,
-      "maximumSourceToBound": 0.9546441413414741
+      "tightenedBounds": 331,
+      "maximumSourceToBound": 0.9999999206155277
     },
     {
       "id": "2023-06-10-sunrise",
@@ -147,7 +151,7 @@
       "intervals": 402,
       "rays": 2814,
       "zeroBounds": 3,
-      "tightenedBounds": 270,
+      "tightenedBounds": 339,
       "maximumSourceToBound": 0.9999999965481366
     },
     {
@@ -166,11 +170,11 @@
       "intervals": 613,
       "rays": 4291,
       "zeroBounds": 0,
-      "tightenedBounds": 172,
-      "maximumSourceToBound": 0.9851958004763496
+      "tightenedBounds": 199,
+      "maximumSourceToBound": 0.999981492631923
     }
   ],
   "violations": [],
   "passed": true,
-  "scope": "Six actual media; exact view-only sunlit source at seven interior locations per support/pressure boundary interval. Finite material geometry coverage, independent of solar-source quadrature and label grades."
+  "scope": "Six actual media; exact view-only sunlit source plus per-segment clear-transmission source upper bounds at seven interior locations per boundary interval. Gas uses 0.1km positive Simpson panels, compared against whole-angle envelopes covering panels up to4km. Finite geometry coverage, independent of solar-source quadrature and label grades."
 }

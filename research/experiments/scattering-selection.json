@@ -1,0 +1,384 @@
+{
+  "frozenAt": "2026-11-08T02:39:04.998Z",
+  "candidateIdentity": "f25187812a6edeb5132eccf76ee9c118ff9f63277eb260eb21ce18de05732b58",
+  "recipe": {
+    "codeIdentity": {
+      "sha256": "4470c34660ede8d0abcde9e092513e5941052af0c01df9eccd6c982dc7099013",
+      "files": [
+        {
+          "file": "src/scattering-engine.mjs",
+          "sha256": "cd95d2b1d54e74f3dd6c3aaeedb54296d235791673d5a2ae716bc9365d386407"
+        },
+        {
+          "file": "src/radiance.mjs",
+          "sha256": "eae7ad9d3b601cda5ac9ba3e370227ca4443ff09f9cc6b31b2f6f275fa35b3f0"
+        },
+        {
+          "file": "src/radiative-geometry.mjs",
+          "sha256": "4d8fde9f6641ab067bf82b4de6700e2cec0572bff98022bb9aa09dc9c6eaa15a"
+        },
+        {
+          "file": "src/section-medium.mjs",
+          "sha256": "8aea4d72ef82a0cd994eb5c074082e7228cc8d42c25e03ca91f3e7e625688044"
+        },
+        {
+          "file": "src/quadrature.mjs",
+          "sha256": "bd8f733ab48877fb4a216649e6aed5340f1fa6a43c31f3eea87b5ec31854c8fe"
+        },
+        {
+          "file": "src/angular-support.mjs",
+          "sha256": "a96db4a599e56d3c217f2e03eb14c28fa038c468b796f9e86fc5caf92b7c6900"
+        },
+        {
+          "file": "src/angular-bound.mjs",
+          "sha256": "301e92c628491c8d2360d034c800660413b39d489e5be53079f0fb3e3f5be886"
+        },
+        {
+          "file": "src/clear-depth-bound.mjs",
+          "sha256": "5f2203c8ba2872eec79d9cdf0ab9d47ea479839f76ab4aa1f58b0a8e595ec393"
+        },
+        {
+          "file": "src/sky-radiance.mjs",
+          "sha256": "dfee99c361e67affa23c2986b7f4132864d3346fb7b79a2fbf7b850e59981a47"
+        },
+        {
+          "file": "src/astro.mjs",
+          "sha256": "0662f77dfef70869dfe1912234bf5c45fe64de00bcc6bab634629928c5d21b8d"
+        },
+        {
+          "file": "src/cloud-optics.mjs",
+          "sha256": "74d100c6fabaa45c7095221fa642c1d2ce1cf483f366e5a87e0712cb09584c3b"
+        },
+        {
+          "file": "src/provider.mjs",
+          "sha256": "beef2d788599f4b82da2895416a104fc5fe30ea4e43d402733a8690f80f60abd"
+        },
+        {
+          "file": "package-lock.json",
+          "sha256": "e99c3274b12262ef68d348e7f212672fe150d416ab14d809d8e20f4d1af1c9f0"
+        },
+        {
+          "file": "scripts/diagnose_scattering.mjs",
+          "sha256": "0f08329c484fd436f41b4249a74f6c628403ab96b1837ec69c9f5f8658ab2e86"
+        },
+        {
+          "file": "research/model-snapshots/section-optics-0.3.1/engine.mjs",
+          "sha256": "bb57d43a8687f58a3c2342a7806c1011b404cf3da52b5e6c423b71ca68deb09a"
+        },
+        {
+          "file": "research/model-snapshots/section-optics-0.3.1/provider.mjs",
+          "sha256": "beef2d788599f4b82da2895416a104fc5fe30ea4e43d402733a8690f80f60abd"
+        }
+      ]
+    },
+    "modelVersion": "directional-single-scatter-0.2.1",
+    "assumptions": {
+      "wavelengthsNm": [
+        680,
+        550,
+        440
+      ],
+      "directSolarIrradiancePerChannel": [
+        1,
+        1,
+        1
+      ],
+      "cloudExtinction": {
+        "low": 2,
+        "mid": 0.7,
+        "high": 0.2
+      },
+      "singleScatteringAlbedo": 1,
+      "asymmetry": 0.85,
+      "phaseScenarios": [
+        0,
+        0.75,
+        0.85,
+        0.9
+      ],
+      "correlationLengthKm": 50,
+      "cloudOverlap": "decorrelated",
+      "rayleigh550": 0.012,
+      "molecularScaleHeightKm": 8,
+      "aerosolScaleHeightKm": 1.5,
+      "aerosolAngstrom": 1.2,
+      "sourceExtentKm": 150,
+      "maximumViewingPathKm": 350,
+      "maximumSolarPathKm": 2200,
+      "azimuthHalfWidthDegrees": 10,
+      "referenceSolarAltitudeDegrees": -0.833,
+      "gasStepKm": 4,
+      "maximumEmissionOpticalDepth": 0.5,
+      "sourceTailAbsoluteTolerance": 1e-13,
+      "sourceRelativeTolerance": 0.002,
+      "sourceAbsoluteTolerance": 1e-11,
+      "sourceMaximumDepth": 18,
+      "angularIntegration": "adaptive-support",
+      "angularRelativeTolerance": 0.005,
+      "angularAbsoluteTolerance": 1e-10,
+      "angularMuMaximumDepth": 14,
+      "angularAzimuthMaximumDepth": 10,
+      "azimuthPartitionFractions": [],
+      "maximumAngularRays": 4096,
+      "totalAbsoluteTolerance": 1e-10,
+      "totalRelativeTolerance": 0.02,
+      "elevationEdgesDegrees": [
+        0.5,
+        2,
+        5,
+        10,
+        20,
+        40,
+        65,
+        85
+      ],
+      "cloudField": "Current solar section extruded along cross-track; U depends on longitude-like section coordinate and height bands",
+      "terrain": "Nearest fixed horizontal column; constant within each probability column",
+      "scope": "Single cloud scattering with Rayleigh/aerosol extinction; relative spectral radiance per unit direct irradiance, sr^-1"
+    },
+    "policy": {
+      "status": "frozen_before_observed_labels",
+      "calendar": {
+        "location": "Shanghai",
+        "dates": [
+          "2023-09-01",
+          "2023-10-31"
+        ],
+        "possibleEvents": 122,
+        "selection": "Every calendar sunrise and sunset; no label-based or score-based selection"
+      },
+      "primaryObservable": {
+        "pressureLevels": 37,
+        "phaseAsymmetry": 0.85,
+        "channelNm": 680,
+        "quantity": "rgbIntegral[0]",
+        "time": "Common geometric solar altitude -0.833 degrees",
+        "domain": "Both fixed +/-10-degree Sun/antisolar azimuth wedges, elevation0.5..85 degrees; source|x|<=150km"
+      },
+      "primaryComparison": "Paired AUC difference: primary observable minus frozen section-optics-0.3.1 at the same common-altitude instant, with native cloud-layer baseline also reported",
+      "secondary": [
+        "Original heuristic maximum over its fixed +/-40-minute curve",
+        "Phase g=0,.75,.9 at the same altitude",
+        "Covered radiance and per-channel numerical sensitivity",
+        "Ordinal Spearman and top20 calendar source-label precision"
+      ],
+      "nativeBaseline": "max(native_mid,native_high)*(1-native_low/100) at the observer and common-altitude instant",
+      "ancillaryPolicy": "Pure ERA5/EAC4 comparison: no precipitation/visibility in these bundles. The frozen heuristic uses its declared neutral defaults for absent optional fields, reported explicitly.",
+      "numericalGate": "Six fixed coarse/dense media, base/tight/gas/changed-partition controls, all raw/covered RGB channels; same source identity as candidate. Each calendar failure remains missing with its reason and retained diagnostic frame.",
+      "missingness": "Report counts of calendar events, returned explicit labels, missing labels, numerical failures, and paired complete cases. Keep all records; report label distribution of failures when labels become available.",
+      "bootstrap": {
+        "replicates": 1000,
+        "blockDays": 3,
+        "seed": 20230901
+      },
+      "topK": 20,
+      "evidencePolicy": "Preserve explicit source grades and linked/source-only provenance. Independently unverified source-only zero labels remain source-label evidence. Link presence has its own evidence strength.",
+      "scope": "Retrospective reanalysis structural ranking. Accuracy/calibration and operational fixed-run/fixed-lead skill retain their own evidence requirements.",
+      "promotionPolicy": "Keep production frozen through this experiment. A stronger ranking, numerical reliability and adequate independent observation coverage determine any later promotion decision.",
+      "numericalRanking": "Use per-event score +/- total numerical error estimates; combine the union of retained control intervals when controls are available. Overlapping intervals retain numerical ties. Preserve failed predictions as missing and report all-label pairwise sensitivity bounds, alongside nominal paired complete-case AUC and coverage.",
+      "resourcePolicy": {
+        "numericalControlWallSeconds": 900,
+        "calendarPredictionWallSeconds": 900,
+        "workerConcurrency": 2,
+        "failurePolicy": "Preserve wall/ray/source budget failures as null predictions with their reason and retain all calendar identities"
+      }
+    },
+    "reference": {
+      "model": "section-optics-0.3.1",
+      "snapshotCoreSha256": "f80a37d9a92cb2a421fda2599af9e336e2261d7b4a49980159a931be5e28e71f",
+      "transformation": "Redirect imports to the verified snapshot and append an export of its existing frame function",
+      "factorySha256": "d56d76969c61086b27dd9f161adb863eda7b4c973ec07388dd8b0e064fddd7cb",
+      "dependencies": [
+        {
+          "file": "engine.mjs",
+          "source": "src/engine.mjs",
+          "sha256": "bb57d43a8687f58a3c2342a7806c1011b404cf3da52b5e6c423b71ca68deb09a"
+        },
+        {
+          "file": "cloud-optics.mjs",
+          "source": "src/cloud-optics.mjs",
+          "sha256": "74d100c6fabaa45c7095221fa642c1d2ce1cf483f366e5a87e0712cb09584c3b"
+        },
+        {
+          "file": "astro.mjs",
+          "source": "src/astro.mjs",
+          "sha256": "0662f77dfef70869dfe1912234bf5c45fe64de00bcc6bab634629928c5d21b8d"
+        },
+        {
+          "file": "provider.mjs",
+          "source": "src/provider.mjs",
+          "sha256": "beef2d788599f4b82da2895416a104fc5fe30ea4e43d402733a8690f80f60abd"
+        },
+        {
+          "file": "errors.mjs",
+          "source": "src/errors.mjs",
+          "sha256": "10b2b9b102779e01e897bddf8642263ced90add38f4ce3e39ef2e9b6bcb1eeef"
+        },
+        {
+          "file": "evaluation.mjs",
+          "source": "src/evaluation.mjs",
+          "sha256": "00050bd9742b83d6ce61f241c50da07f132226dbe3966a30ff9cfb9c0f2a254f"
+        }
+      ]
+    },
+    "analysisFiles": [
+      {
+        "file": "research/experiments/scattering-validation-calendar/evaluation-policy-draft.json",
+        "sha256": "1cd990d270de47b94acdbf06d37586ab1f9ea2429e7707ea96f506be2d0e53e7"
+      },
+      {
+        "file": "scripts/validation-statistics.mjs",
+        "sha256": "0a5a091c1cd1232c9ae0ff514d8d13fd9c1444b0fb481cd62476b6d82f20d434"
+      },
+      {
+        "file": "scripts/scattering-reference.mjs",
+        "sha256": "d56d76969c61086b27dd9f161adb863eda7b4c973ec07388dd8b0e064fddd7cb"
+      },
+      {
+        "file": "scripts/accept_scattering_numerics.mjs",
+        "sha256": "624ebc09f2a24ffe4decab0f2c844f0ef384d1511f3fb6d88b8f64dee5da571e"
+      },
+      {
+        "file": "scripts/verify_angular_envelopes.mjs",
+        "sha256": "cc9192d7574f34ecd633cde608cc7555fadb02d6d261b70056b925ec3c60a8ef"
+      },
+      {
+        "file": "scripts/build_scattering_weather.py",
+        "sha256": "44c28fd15e1427fbdddc51d6edcd27e18035815b43aee3f7f5cee225412a2959"
+      },
+      {
+        "file": "scripts/freeze_scattering_candidate.mjs",
+        "sha256": "7f2d54d4c7ed403aef211f489b552cec0e914a1966f18a197086e22f90ead5e4"
+      },
+      {
+        "file": "scripts/score_scattering_references.mjs",
+        "sha256": "159391194be59dd9dd2cd79bed2e349c1946f2f269a1d91b93736e4778a20ffc"
+      },
+      {
+        "file": "scripts/score_scattering_calendar.mjs",
+        "sha256": "c6dc57b8082d80d86904d862d35135ce9214b2299ebab80ed0dc4dbc3d7108c6"
+      },
+      {
+        "file": "scripts/capture_scattering_labels.py",
+        "sha256": "27a6b0ff6497195a540401b1df16f2e06828388aaf48e9b89f39ea873dcc1989"
+      },
+      {
+        "file": "scripts/radiance-ranking.mjs",
+        "sha256": "19f5442f8cc828f7504f0e93cec76f982a8f389189e980b782bcb107b7099c61"
+      },
+      {
+        "file": "scripts/evaluate_scattering_calendar.mjs",
+        "sha256": "e05dc248ac4c3c9818648c9a7cb5bf566a6a84797d82bba9804823a1c5c93958"
+      }
+    ],
+    "weatherManifestSha256": "63fb62dad6333cde50a5e4414a71b001c6705ac1095eaa2276544d59d47b9c8b",
+    "referencePredictionsSha256": "946cd856e9f55a9f22dacf9ca6da38cbfb07e31fbb9b342845f23f6adcadd9d8",
+    "acceptanceResults": [
+      {
+        "file": "research/experiments/scattering-numerical-acceptance/2023-06-03-sunset-coarse-base.json",
+        "sha256": "7d2beaefeef518529033f924f080ce275169e0d58d27825302cd6ccce4ebec95"
+      },
+      {
+        "file": "research/experiments/scattering-numerical-acceptance/2023-06-03-sunset-coarse-tight.json",
+        "sha256": "f7871ea6b1fcb9a8b3468419dd0f6a5b4fb6d0fd3058404aafb47dbf0b9a40f7"
+      },
+      {
+        "file": "research/experiments/scattering-numerical-acceptance/2023-06-03-sunset-coarse-gas.json",
+        "sha256": "ca48f96b88f70d2c76479e65e91734c6134bb554d27e1dacb7da3a4f66023390"
+      },
+      {
+        "file": "research/experiments/scattering-numerical-acceptance/2023-06-03-sunset-coarse-partition.json",
+        "sha256": "855922b356249deed804828f19c343c967d71c54aa85397964d3140a8bd62c4a"
+      },
+      {
+        "file": "research/experiments/scattering-numerical-acceptance/2023-06-03-sunset-dense-base.json",
+        "sha256": "24258eef23d7d9e1c3d7b1fca550b7607984427921767a4bc8bf8272c5dbf63d"
+      },
+      {
+        "file": "research/experiments/scattering-numerical-acceptance/2023-06-03-sunset-dense-tight.json",
+        "sha256": "f9455ccd06b5485460f84e1a624deeed2f54cb4b0f9f991a336f630acedc0702"
+      },
+      {
+        "file": "research/experiments/scattering-numerical-acceptance/2023-06-03-sunset-dense-gas.json",
+        "sha256": "093d2207b085aed4838307b6eebee6256cbd43a61b8684ed98c606e36f8202d8"
+      },
+      {
+        "file": "research/experiments/scattering-numerical-acceptance/2023-06-03-sunset-dense-partition.json",
+        "sha256": "92271a9ed363eda5a3b2f1773961e2b129ccca1d9ac8bfe7842dd0aff095f716"
+      },
+      {
+        "file": "research/experiments/scattering-numerical-acceptance/2023-06-09-sunset-coarse-base.json",
+        "sha256": "49998507b02c39ab0d4215340c76279abe9564c08bd7448dae21d3a262dd7e8e"
+      },
+      {
+        "file": "research/experiments/scattering-numerical-acceptance/2023-06-09-sunset-coarse-tight.json",
+        "sha256": "f9c37bd2903ce7a342f1290f6ea70eacbfa295c938994d7396b9decd2f191433"
+      },
+      {
+        "file": "research/experiments/scattering-numerical-acceptance/2023-06-09-sunset-coarse-gas.json",
+        "sha256": "1d257c4d66a6203db6097eaf0b1764637cbb0b0be3d2c4eb02791bda5573317d"
+      },
+      {
+        "file": "research/experiments/scattering-numerical-acceptance/2023-06-09-sunset-coarse-partition.json",
+        "sha256": "17708363bca9c731bef4b46089d96d478d035e1171f456b0bb101930027391e8"
+      },
+      {
+        "file": "research/experiments/scattering-numerical-acceptance/2023-06-09-sunset-dense-base.json",
+        "sha256": "cdd0b09c6ce151f0c47367f57b43e602c8e2b628b31eff3f3c0a2fbe1315ccaf"
+      },
+      {
+        "file": "research/experiments/scattering-numerical-acceptance/2023-06-09-sunset-dense-tight.json",
+        "sha256": "c89f5a3e349c4b105c5af4599dae826110c3deff9a642cdd9eb9824a1b33f542"
+      },
+      {
+        "file": "research/experiments/scattering-numerical-acceptance/2023-06-09-sunset-dense-gas.json",
+        "sha256": "cad817591ecd8198cfff2fb1715b8b57c84326de1a566dc0ef0978c6328eb8a6"
+      },
+      {
+        "file": "research/experiments/scattering-numerical-acceptance/2023-06-09-sunset-dense-partition.json",
+        "sha256": "2d2f796134c1709c5f6cd71313c0104f47c5434b5f5ee64c1a29e05eeb33db97"
+      },
+      {
+        "file": "research/experiments/scattering-numerical-acceptance/2023-06-10-sunrise-coarse-base.json",
+        "sha256": "d2e748c6591dfba9f67d2b6aa45f5e5aa579cc172f022704fb403220c77f656c"
+      },
+      {
+        "file": "research/experiments/scattering-numerical-acceptance/2023-06-10-sunrise-coarse-tight.json",
+        "sha256": "2ed9d60bacc15210977c11ff4a002567d26394c63a1256f282c3fd1b53cdf2b6"
+      },
+      {
+        "file": "research/experiments/scattering-numerical-acceptance/2023-06-10-sunrise-coarse-gas.json",
+        "sha256": "e8441a847366e3e57e9dfe0d563b757fc49dd50a45e01e865098e8af764bb371"
+      },
+      {
+        "file": "research/experiments/scattering-numerical-acceptance/2023-06-10-sunrise-coarse-partition.json",
+        "sha256": "f2538abb2723626c1d7290a711cbf09689a540a76a9e9b868025a120c926b396"
+      },
+      {
+        "file": "research/experiments/scattering-numerical-acceptance/2023-06-10-sunrise-dense-base.json",
+        "sha256": "3e680bfadc9fcda93c6806a69d8d2250228d4777f3850a4fae5acca225d04ddb"
+      },
+      {
+        "file": "research/experiments/scattering-numerical-acceptance/2023-06-10-sunrise-dense-tight.json",
+        "sha256": "1f0e9e9c883a38ddf357c29e691dc9d0425a32eca5ad9d768b82f60b557ebc24"
+      },
+      {
+        "file": "research/experiments/scattering-numerical-acceptance/2023-06-10-sunrise-dense-gas.json",
+        "sha256": "67b6b25c584ce9b330f5c3a69b8012f6509e352d489f4afd52a52059a83813c7"
+      },
+      {
+        "file": "research/experiments/scattering-numerical-acceptance/2023-06-10-sunrise-dense-partition.json",
+        "sha256": "22b173c7377f7f6299a35b7065b28223c0700c0530f7ce8f749f0d1a4ed72063"
+      }
+    ],
+    "acceptanceSummarySha256": "b65b72697459ea17675bade1fc47d8ec61208aa4b9dde89ea41cfa9cbab405dd",
+    "geometrySummarySha256": "959be4fc2351634b279c0ed535535bc506c243e2d8ed441c20f516779725bd76"
+  },
+  "independentDates": [
+    "2023-09-01",
+    "2023-10-31"
+  ],
+  "observedLabelsRead": 0,
+  "replayMethod": "Overlay archived source and scripts on source-base commit faaaed8; matching public input bundles remain in research/experiments/scattering-weather-inputs",
+  "scope": "Finite six-medium empirical numerical acceptance followed by an independent retrospective source-label calendar"
+}

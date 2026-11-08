@@ -1,52 +1,124 @@
 {
-  "verifiedAt": "2026-11-08T01:20:38.987101+00:00",
-  "nodeTests": 67,
+  "verifiedAt": "2026-11-08T02:53:35.641625+00:00",
+  "researchModelVersion": "directional-single-scatter-0.2.1",
+  "researchCodeIdentity": {
+    "sha256": "4470c34660ede8d0abcde9e092513e5941052af0c01df9eccd6c982dc7099013",
+    "files": [
+      {
+        "file": "src/scattering-engine.mjs",
+        "sha256": "cd95d2b1d54e74f3dd6c3aaeedb54296d235791673d5a2ae716bc9365d386407"
+      },
+      {
+        "file": "src/radiance.mjs",
+        "sha256": "eae7ad9d3b601cda5ac9ba3e370227ca4443ff09f9cc6b31b2f6f275fa35b3f0"
+      },
+      {
+        "file": "src/radiative-geometry.mjs",
+        "sha256": "4d8fde9f6641ab067bf82b4de6700e2cec0572bff98022bb9aa09dc9c6eaa15a"
+      },
+      {
+        "file": "src/section-medium.mjs",
+        "sha256": "8aea4d72ef82a0cd994eb5c074082e7228cc8d42c25e03ca91f3e7e625688044"
+      },
+      {
+        "file": "src/quadrature.mjs",
+        "sha256": "bd8f733ab48877fb4a216649e6aed5340f1fa6a43c31f3eea87b5ec31854c8fe"
+      },
+      {
+        "file": "src/angular-support.mjs",
+        "sha256": "a96db4a599e56d3c217f2e03eb14c28fa038c468b796f9e86fc5caf92b7c6900"
+      },
+      {
+        "file": "src/angular-bound.mjs",
+        "sha256": "301e92c628491c8d2360d034c800660413b39d489e5be53079f0fb3e3f5be886"
+      },
+      {
+        "file": "src/clear-depth-bound.mjs",
+        "sha256": "5f2203c8ba2872eec79d9cdf0ab9d47ea479839f76ab4aa1f58b0a8e595ec393"
+      },
+      {
+        "file": "src/sky-radiance.mjs",
+        "sha256": "dfee99c361e67affa23c2986b7f4132864d3346fb7b79a2fbf7b850e59981a47"
+      },
+      {
+        "file": "src/astro.mjs",
+        "sha256": "0662f77dfef70869dfe1912234bf5c45fe64de00bcc6bab634629928c5d21b8d"
+      },
+      {
+        "file": "src/cloud-optics.mjs",
+        "sha256": "74d100c6fabaa45c7095221fa642c1d2ce1cf483f366e5a87e0712cb09584c3b"
+      },
+      {
+        "file": "src/provider.mjs",
+        "sha256": "beef2d788599f4b82da2895416a104fc5fe30ea4e43d402733a8690f80f60abd"
+      },
+      {
+        "file": "package-lock.json",
+        "sha256": "e99c3274b12262ef68d348e7f212672fe150d416ab14d809d8e20f4d1af1c9f0"
+      },
+      {
+        "file": "scripts/diagnose_scattering.mjs",
+        "sha256": "0f08329c484fd436f41b4249a74f6c628403ab96b1837ec69c9f5f8658ab2e86"
+      },
+      {
+        "file": "research/model-snapshots/section-optics-0.3.1/engine.mjs",
+        "sha256": "bb57d43a8687f58a3c2342a7806c1011b404cf3da52b5e6c423b71ca68deb09a"
+      },
+      {
+        "file": "research/model-snapshots/section-optics-0.3.1/provider.mjs",
+        "sha256": "beef2d788599f4b82da2895416a104fc5fe30ea4e43d402733a8690f80f60abd"
+      }
+    ]
+  },
+  "nodeTests": 72,
   "pythonTests": 13,
-  "newSourceReceipts": [
-    {
-      "directory": "research/sources/integration",
-      "file": "gsl-integration.html",
-      "status": "failed"
-    },
-    {
-      "directory": "research/sources/integration",
-      "file": "quadpack-dqagp.f",
-      "status": 200
-    },
-    {
-      "directory": "research/sources/integration-followup",
-      "file": "fnc-adaptive.html",
-      "status": 200
-    },
-    {
-      "directory": "research/sources/integration-followup",
-      "file": "nist-interval.html",
-      "status": 200
-    }
-  ],
+  "publicFilesScanned": 1001,
   "configuredCredentialMatches": 0,
-  "guardChecks": [
+  "envelopeSweep": {
+    "passed": true,
+    "rays": 18515,
+    "violations": 0
+  },
+  "liveForecast": {
+    "http": 200,
+    "date": "2026-11-08",
+    "modelVersion": "section-optics-0.3.1",
+    "state": "ready",
+    "model": "gfs",
+    "weather": {
+      "fetchedAt": "2026-11-08T02:01:00.946Z",
+      "cache": "miss"
+    },
+    "aerosol": {
+      "fetchedAt": "2026-11-08T02:01:02.501Z",
+      "cache": "miss"
+    },
+    "retention": "saved"
+  },
+  "scope": "Engineering/provenance/real-gas envelope evidence. Full six-medium empirical gate remains its own numerical acceptance owner; new labels follow candidate/source freeze.",
+  "testLogScope": "Full72-check suite passed after adding synthetic end-to-end evaluation and paired missing-calendar checks",
+  "preFreezeGuardChecks": [
     {
       "script": "scripts/freeze_scattering_candidate.mjs",
-      "rejectedBeforeFreeze": true
+      "rejectedBeforePrerequisites": true
     },
     {
       "script": "scripts/score_scattering_calendar.mjs",
-      "rejectedBeforeFreeze": true
+      "rejectedBeforePrerequisites": true
+    },
+    {
+      "script": "scripts/capture_scattering_labels.py",
+      "rejectedBeforePrerequisites": true
     }
   ],
-  "runtime": {
-    "checkedAt": "2026-11-08T01:16:09.775573+00:00",
-    "health": {
-      "status": 200,
-      "modelVersion": "section-optics-0.3.1",
-      "state": "ok"
-    },
-    "evaluation": {
-      "status": 200,
-      "modelVersion": "section-optics-0.3.1",
-      "state": "experimental"
-    }
+  "guardCheckScope": "The prerequisite rejections were observed before candidate selection; frozen-source hashes are verified separately after selection.",
+  "testLogSha256": "43b74b2e9baeb1c44892b100c14913ee2e9db3d6ef2097fb5911212de6c5316a",
+  "testLogWrittenAt": "2026-11-08T02:25:55.912876+00:00",
+  "empiricalNumericalGate": {
+    "accepted": true,
+    "jobs": 24,
+    "channelComparisons": 432,
+    "summarySha256": "b65b72697459ea17675bade1fc47d8ec61208aa4b9dde89ea41cfa9cbab405dd"
   },
-  "scope": "Engineering and provenance preflight; complete numerical acceptance and new-date observed-label ranking remain separate"
+  "frozenSelectionSha256": "511cee030b7a3f50fb0513a766fec2e042926350986f6ad13a1ac0a16cee7d54"
 }

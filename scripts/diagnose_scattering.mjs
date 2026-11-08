@@ -15,7 +15,7 @@ const save = async (path, data) => {
 };
 const codeFiles = ['src/scattering-engine.mjs', 'src/radiance.mjs', 'src/radiative-geometry.mjs', 'src/section-medium.mjs',
   'src/quadrature.mjs',
-  'src/angular-support.mjs', 'src/angular-bound.mjs', 'src/sky-radiance.mjs',
+  'src/angular-support.mjs', 'src/angular-bound.mjs', 'src/clear-depth-bound.mjs', 'src/sky-radiance.mjs',
   'src/astro.mjs', 'src/cloud-optics.mjs', 'src/provider.mjs', 'package-lock.json', 'scripts/diagnose_scattering.mjs',
   'research/model-snapshots/section-optics-0.3.1/engine.mjs', 'research/model-snapshots/section-optics-0.3.1/provider.mjs'];
 export async function codeIdentity() {

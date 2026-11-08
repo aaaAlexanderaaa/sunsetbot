@@ -7,7 +7,7 @@ import { henyeyGreenstein, skyGrid, integrateSky } from './radiance.mjs';
 import { adaptiveSimpson } from './quadrature.mjs';
 import { adaptiveSkyRadiance } from './sky-radiance.mjs';
 
-export const SCATTERING_VERSION = 'directional-single-scatter-0.2.0';
+export const SCATTERING_VERSION = 'directional-single-scatter-0.2.1';
 export const SCATTERING_ASSUMPTIONS = {
   wavelengthsNm: [680, 550, 440], directSolarIrradiancePerChannel: [1, 1, 1],
   cloudExtinction: { low: 2, mid: 0.7, high: 0.2 }, singleScatteringAlbedo: 1,

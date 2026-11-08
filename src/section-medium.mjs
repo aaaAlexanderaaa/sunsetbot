@@ -104,5 +104,5 @@ export function sectionMedium(columns, optics) {
     }
     return blocks;
   }
-  return { sample, trace, clearDepth, emissionBlocks };
+  return { sample, trace, clearDepth, emissionBlocks, horizontalPositionsKm: Object.freeze(columns.map(c => c.x)) };
 }
