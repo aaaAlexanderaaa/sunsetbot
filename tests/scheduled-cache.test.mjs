@@ -84,6 +84,20 @@ test('a fixed eleven-city three-occurrence plan fits the daily budget by sharing
   }
 });
 
+test('an unconfigured manual-refresh key rejects requests before acquisition', async t => {
+  const { runtime, state, now } = await setup(t);
+  const app = createApp({ ...runtime, now, refreshKey: '' });
+  await new Promise(resolve => app.listen(0, '127.0.0.1', resolve));
+  t.after(() => new Promise(resolve => app.close(resolve)));
+  const base = `http://127.0.0.1:${app.address().port}`;
+  for (const headers of [{}, { 'X-Refresh-Key': 'test-refresh-key' }]) {
+    const response = await fetch(base + '/api/v1/refresh', { method: 'POST', headers });
+    assert.equal(response.status, 503);
+    assert.equal((await response.json()).error.code, 'REFRESH_KEY_UNCONFIGURED');
+  }
+  assert.equal(state.calls, 0);
+});
+
 test('real HTTP public reads and unauthorized refreshes have zero external effects', async t => {
   const { runtime, state, now } = await setup(t);
   const app = createApp({ ...runtime, now, refreshKey: 'test-refresh-key' });

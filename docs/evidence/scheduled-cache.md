@@ -26,9 +26,11 @@ Publication replaces the result map atomically, preserving prior output after
 required-source or publication failure. The full and forced source slots
 persist independently. The latest sixteen job receipts remain queryable.
 
-The owner explicitly requested the hardcoded server-only key. It appears in
-`src/refresh.mjs` and stays outside browser assets. Provider credentials retain
-their environment-only ownership. First-upgrade retained results migrate
+The original private delivery used an owner-selected server-only key. Public
+publication on November 10 moves that value to the local `SUNSETBOT_REFRESH_KEY`
+environment setting. The original credential stays in ignored local
+configuration; published history retains a configuration lookup. Provider
+credentials retain their environment-only ownership. First-upgrade retained results migrate
 locally. Public dates cover today through three days ahead so the third
 upcoming sunrise remains accessible after today's event.
 
@@ -37,6 +39,9 @@ upcoming sunrise remains accessible after today's event.
 The [machine-readable verification](../../research/experiments/scheduled-cache-http-verification.json)
 preserves all 132 tested identities, source hashes, job receipt, errors and
 before/after acquisition counters.
+Its source hashes describe the original private deployment. The public
+publication record preserves the distinction between that historical capture
+and the later credential-loading change.
 
 - Catch-up job `8a684300-c510-49b4-8840-eb1421ff643c` represents the November 8
   16:00 Shanghai slot. It ran from `2026-11-08T09:06:48.021Z` to

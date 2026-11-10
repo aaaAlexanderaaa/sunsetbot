@@ -12,9 +12,6 @@ import { PublishedForecasts, CachedForecastService, publicationFor } from './pub
 import { refreshSchedule } from './refresh-schedule.mjs';
 import { AppError } from './errors.mjs';
 
-// Owner-selected server-side shared key. Public assets never receive this value.
-export const REFRESH_KEY = process.env.SUNSETBOT_REFRESH_KEY ?? (() => { throw Error('Configure SUNSETBOT_REFRESH_KEY before starting the service'); })();
-
 export function createAcquisitionProvider({ directory, fetcher, now = () => Date.now(), dailyBudget = 10000, timeout = 20000, apiKey = '', pacer }) {
   const limiter = pacer ?? new AcquisitionPacer(join(directory, 'acquisition-rate'), { now });
   class PacedProvider extends WeatherProvider {

@@ -91,7 +91,8 @@ source snapshots. Cache absence and expiry have explicit states; a public
 request never initiates upstream acquisition. Custom-coordinate forecasts use
 the coverage of the locally acquired cells.
 
-`POST /api/v1/refresh` checks the hardcoded server-side `X-Refresh-Key` before
+`POST /api/v1/refresh` checks `X-Refresh-Key` against the server's private
+`SUNSETBOT_REFRESH_KEY` environment setting before
 starting the next strictly future sunrise and sunset refresh for the same
 configured locations and models. Active jobs coalesce. The response identifies
 the background job and its status URL. Matching event identities coalesce;
@@ -119,7 +120,9 @@ Local runtime records and optional observation reports belong under `var/`.
 Retain up to 180 distinct forecast identities with exact provider inputs for
 later observation pairing; report a retention failure while preserving output.
 Private user context and provider credentials stay outside source and research
-snapshots. The owner explicitly selects a hardcoded server-only refresh key.
+snapshots. Public publication keeps the server-only refresh key in local
+environment configuration. An empty key rejects manual refresh with HTTP 503
+and `REFRESH_KEY_UNCONFIGURED` before acquisition; scheduled jobs continue.
 The service exposes its model/data versions and forecast
 fetch timestamps for diagnosis. Original forecast run initialization time is
 reported only when supplied by a source that establishes it.

@@ -3,7 +3,7 @@ import { readFile, access } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { resolve, join } from 'node:path';
 import { timingSafeEqual } from 'node:crypto';
-import { createAcquisitionProvider, createForecastRuntime, REFRESH_KEY } from './refresh.mjs';
+import { createAcquisitionProvider, createForecastRuntime } from './refresh.mjs';
 import { PRESETS } from './presets.mjs';
 import { MODEL_VERSION } from './engine.mjs';
 import { evidenceForModel } from './model-evidence.mjs';
@@ -14,7 +14,7 @@ import { fetch as networkFetch, EnvHttpProxyAgent } from 'undici';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 
-export function createApp({ service, refresh = null, refreshKey = REFRESH_KEY, now = () => Date.now() }) {
+export function createApp({ service, refresh = null, refreshKey = process.env.SUNSETBOT_REFRESH_KEY ?? '', now = () => Date.now() }) {
   return createServer(async (request, response) => {
     response.setHeader('X-Content-Type-Options', 'nosniff');
     response.setHeader('Referrer-Policy', 'same-origin');
@@ -31,6 +31,7 @@ export function createApp({ service, refresh = null, refreshKey = REFRESH_KEY, n
           response.setHeader('Allow', 'POST');
           return send(405, { error: { code: 'METHOD', message: '更新接口使用带密钥的 POST 请求。' } });
         }
+        if (!refreshKey) throw new AppError('REFRESH_KEY_UNCONFIGURED', '请在服务端配置 SUNSETBOT_REFRESH_KEY 后使用手动更新。');
         const supplied = Buffer.from(request.headers['x-refresh-key'] ?? ''), expected = Buffer.from(refreshKey);
         if (supplied.length !== expected.length || !timingSafeEqual(supplied, expected)) {
           return send(401, { error: { code: 'REFRESH_UNAUTHORIZED', message: '请提供有效的更新密钥。' } });

@@ -29,7 +29,7 @@ endpoint refreshing the next strictly future occurrence of each event.
   sunsets per location. The ordinary calendar UI covers today through
   three days ahead, making the third upcoming sunrise accessible after today's
   event has passed. Previously published events remain available within retention.
-- `POST /api/v1/refresh`, authenticated with the hardcoded server-side key in
+- `POST /api/v1/refresh`, authenticated with the private server-side key in
   `X-Refresh-Key`, refreshes the next one of each event for all scheduled
   locations and both models. It has no caller-selected geographic expansion.
   It returns a background job receipt. Active refresh work is coalesced.
@@ -59,6 +59,11 @@ claim behavior; atomic publication; required-source failure and optional AOD;
 existing regressions, Docker startup and an actual bounded provider refresh.
 
 ## Verification outcome
+
+The November 10 public-publication pass moves manual-refresh credentials to
+`SUNSETBOT_REFRESH_KEY` in private environment configuration. An empty setting
+rejects manual refresh before acquisition; scheduled work remains available.
+The earlier private-delivery evidence retains its original capture scope.
 
 Ninety Node checks pass, including real HTTP authorization/read isolation,
 minute/hour admissions, crash reservations, interrupted-slot deduplication,

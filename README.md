@@ -134,12 +134,14 @@ POST /api/v1/refresh      X-Refresh-Key: <server key>
 GET /api/v1/status?job=<receipt job ID>
 ```
 
-The owner-requested hardcoded key is `REFRESH_KEY` in
-[`src/refresh.mjs`](src/refresh.mjs); it is server-only. For example:
+Set a private `SUNSETBOT_REFRESH_KEY` in the server environment or local `.env`.
+An empty value disables manual refresh with `REFRESH_KEY_UNCONFIGURED`;
+scheduled acquisition continues. Git and Docker build contexts exclude `.env`.
+For example:
 
 ```sh
 curl -X POST http://127.0.0.1:8787/api/v1/refresh \
-  -H 'X-Refresh-Key: <REFRESH_KEY from src/refresh.mjs>'
+  -H 'X-Refresh-Key: <your private SUNSETBOT_REFRESH_KEY>'
 curl http://127.0.0.1:8787/api/v1/status
 ```
 
