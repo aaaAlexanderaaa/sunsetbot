@@ -67,3 +67,22 @@ Completed on 2026-11-06. The requested regional self-hosted implementation,
 local public research archive, independent MCP assessments and operational
 verification are delivered. Source maintenance cause remains unresolved in
 the public evidence and is recorded without assigning a speculative cause.
+
+## Subsequent operational delivery
+
+On 2026-11-08 the owner selected fixed 08:00/16:00 source acquisition and
+server-key-protected upcoming-event refresh, with public reads/local computation
+isolated from external costs. The [scheduled-cache plan](scheduled-cache.md)
+is complete; its [observed evidence](../evidence/scheduled-cache.md) records 90
+passing checks, 132 actual published forecasts and unchanged acquisition
+counters through public reads and restart. Scientific calibration retains its
+existing model/study ownership.
+
+On 2026-11-10 the [saved-input audit](../evidence/bright-sky-audit.md) adds
+same-event model/source comparison, retained-input cloud-support diagnostics
+and explicit visible-colour calibration status even when both indices agree.
+All 94 Node checks pass, and actual retained-data HTTP/browser replay is verified.
+The original engine remains 0.3.1. The already frozen 122-event physical and
+empirical studies now have complete later source-label evaluation, with their
+respective numerical, observational and operational limits preserved at
+[the scientific owner](directional-scattering.md).

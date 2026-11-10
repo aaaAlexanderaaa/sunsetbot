@@ -7,6 +7,12 @@ export class ForecastArchive {
     this.maxEntries = maxEntries;
     this.queue = Promise.resolve();
   }
+  async inputsFor(result) {
+    const saved = await this.cache.get(result.id);
+    if (saved?.schemaVersion !== 1 || saved.result?.id !== result.id || saved.result.modelVersion !== result.modelVersion ||
+      saved.result.data?.weather?.fetchedAt !== result.data.weather.fetchedAt) return null;
+    return saved.inputs ?? null;
+  }
   save({ result, ...inputs }) {
     const operation = this.queue.then(async () => {
       const stored = await this.cache.get(result.id);

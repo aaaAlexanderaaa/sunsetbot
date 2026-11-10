@@ -2,20 +2,19 @@ import { createServer } from 'node:http';
 import { readFile, access } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { resolve, join } from 'node:path';
-import { DiskCache } from './cache.mjs';
-import { WeatherProvider } from './provider.mjs';
-import { ForecastService } from './service.mjs';
-import { ForecastArchive } from './archive.mjs';
+import { timingSafeEqual } from 'node:crypto';
+import { createAcquisitionProvider, createForecastRuntime, REFRESH_KEY } from './refresh.mjs';
 import { PRESETS } from './presets.mjs';
 import { MODEL_VERSION } from './engine.mjs';
 import { evidenceForModel } from './model-evidence.mjs';
-import { civilDate, addDays } from './astro.mjs';
+import { civilDate, addDays, solarEvent } from './astro.mjs';
+import { upcomingEvents } from './refresh-schedule.mjs';
 import { AppError } from './errors.mjs';
 import { fetch as networkFetch, EnvHttpProxyAgent } from 'undici';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 
-export function createApp({ service, now = () => Date.now() }) {
+export function createApp({ service, refresh = null, refreshKey = REFRESH_KEY, now = () => Date.now() }) {
   return createServer(async (request, response) => {
     response.setHeader('X-Content-Type-Options', 'nosniff');
     response.setHeader('Referrer-Policy', 'same-origin');
@@ -26,16 +25,34 @@ export function createApp({ service, now = () => Date.now() }) {
     };
     try {
       const url = new URL(request.url, 'http://localhost');
+      if (url.pathname === '/api/v1/refresh') {
+        request.resume();
+        if (request.method !== 'POST') {
+          response.setHeader('Allow', 'POST');
+          return send(405, { error: { code: 'METHOD', message: '更新接口使用带密钥的 POST 请求。' } });
+        }
+        const supplied = Buffer.from(request.headers['x-refresh-key'] ?? ''), expected = Buffer.from(refreshKey);
+        if (supplied.length !== expected.length || !timingSafeEqual(supplied, expected)) {
+          return send(401, { error: { code: 'REFRESH_UNAUTHORIZED', message: '请提供有效的更新密钥。' } });
+        }
+        if (!refresh) throw new AppError('REFRESH_UNAVAILABLE', '更新任务暂时待配置。');
+        const job = await refresh.trigger('forced');
+        return send(202, { job, statusUrl: '/api/v1/status?job=' + encodeURIComponent(job.id) });
+      }
       if (request.method !== 'GET' && request.method !== 'HEAD') {
         response.setHeader('Allow', 'GET, HEAD');
         return send(405, { error: { code: 'METHOD', message: '此接口使用 GET 请求。' } });
       }
       if (url.pathname === '/healthz') return send(200, { status: 'ok', modelVersion: MODEL_VERSION });
+      if (url.pathname === '/api/v1/status') return send(200, refresh?.status(url.searchParams.get('job')) ?? { state: 'unconfigured' });
       if (url.pathname === '/api/v1/evaluation') return send(200, { modelVersion: MODEL_VERSION, evidence: evidenceForModel(MODEL_VERSION) });
       if (url.pathname === '/api/v1/locations') {
         const today = civilDate(now());
+        const nextEvents = Object.fromEntries(PRESETS.map(location => [location.id,
+          Object.fromEntries(upcomingEvents(location, now(), 1).map(input => [input.event,
+            { date: input.date, time: solarEvent(input.date, input.event, location.lat, location.lon, location.timezone).time }]))]));
         return send(200, { locations: PRESETS, timezone: 'Asia/Shanghai', today,
-          dates: [today, addDays(today, 1), addDays(today, 2)] });
+          dates: [today, addDays(today, 1), addDays(today, 2), addDays(today, 3)], nextEvents });
       }
       if (url.pathname === '/api/v1/forecast') return send(200, await service.forecast(url.searchParams));
       const assets = { '/': ['index.html', 'text/html'], '/app.mjs': ['app.mjs', 'text/javascript'],
@@ -66,16 +83,21 @@ async function main() {
   catch (error) { if (error.code !== 'ENOENT') throw error; }
   const directory = resolve(process.env.DATA_DIR || './var');
   const dispatcher = new EnvHttpProxyAgent();
-  const provider = new WeatherProvider({ cache: new DiskCache(join(directory, 'cache')), directory,
+  const provider = createAcquisitionProvider({ directory,
     fetcher: (url, options) => networkFetch(url, { ...options, dispatcher }),
     timeout: numberSetting('UPSTREAM_TIMEOUT_MS', 20000, 1000, 60000),
-    dailyBudget: numberSetting('DAILY_WEATHER_BUDGET', 1500, 1, 10000), apiKey: process.env.OPEN_METEO_API_KEY || '' });
-  const app = createApp({ service: new ForecastService({ provider, archive: new ForecastArchive(join(directory, 'forecasts')) }) });
+    dailyBudget: numberSetting('DAILY_WEATHER_BUDGET', 10000, 1, 10000), apiKey: process.env.OPEN_METEO_API_KEY || '' });
+  const runtime = await createForecastRuntime({ directory, provider });
+  const app = createApp(runtime);
   const port = numberSetting('PORT', 8787, 0, 65535), host = process.env.HOST || '127.0.0.1';
   app.requestTimeout = 90000;
   app.headersTimeout = 10000;
-  app.listen(port, host, () => console.log(`Sunsetbot: http://${host}:${app.address().port}`));
+  app.listen(port, host, () => {
+    console.log(`Sunsetbot: http://${host}:${app.address().port}`);
+    runtime.refresh.start();
+  });
   for (const signal of ['SIGTERM', 'SIGINT']) process.on(signal, () => {
+    runtime.refresh.stop();
     app.close(() => process.exit(0));
     setTimeout(() => process.exit(1), 10000).unref();
   });

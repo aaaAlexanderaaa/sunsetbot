@@ -181,3 +181,35 @@ zero labels and distinguish 46 linked positive records from ten source-only
 positive records. Their observation coverage and retrospective input semantics
 remain explicit. Controlled vertical-overlap, scattering and sky-aggregation
 work follows this preserved result.
+
+## Visible-colour failure audit and independent research (2026-11-10)
+
+The [saved-input audit](evidence/bright-sky-audit.md) replays the November 10
+Shanghai sunset exactly: ECMWF 57.8, GFS 4.5. With the ECMWF geometry and other
+inputs fixed, replacing pressure-cloud fractions changes 57.8 to 4.6; replacing
+heights or aerosol leaves 57.8. The layer low-cloud diagnostic is 44.8% while
+all sampled low pressure-level fractions are zero. This establishes sensitivity
+and a vertical-support gap, with actual cloud truth and viewing quality retaining
+separate observational scope. The transmission-derived spectral proxy lacks
+cloud-source radiance and sky/background contrast. These are material hypotheses
+for ordinary bright-cloud false alarms.
+
+The product now exposes visible-colour calibration as unavailable for every
+forecast, alongside both saved weather-model indices and input-support notes.
+Agreement retains this calibration status. The original index, parameters,
+retained sources and matching historical evidence remain unchanged.
+
+The previously frozen 122-event Sep/Oct 2023 prediction calendar is now joined
+to seven subsequently captured public-label responses. The empirical ranking
+candidate gives AUC 0.740 versus 0.743 for its original-index feature; paired
+change is -0.00341 with 95% interval [-0.05181, 0.03766]. It remains research.
+The directional-scattering candidate gives AUC 0.872 on its 108 scored cases,
+with paired improvement 0.12458 [0.04797, 0.20166] over the same-case,
+same-altitude heuristic. Fourteen numerical failures retain unresolved order;
+all-calendar AUC sensitivity spans 0.725–0.894. Its top 20 include 12 positive
+source labels, versus 11 for the old peak index. This is encouraging structural
+ranking evidence with finite coverage. A calibrated vividness score, reduced
+bright-white false alarms, operational GFS/IFS transfer and a production compute
+budget each require their respective evidence. The next scientific owner remains
+the [directional-scattering plan](plans/directional-scattering.md), including
+cloud/sky colour contrast and independently covered visual outcomes.

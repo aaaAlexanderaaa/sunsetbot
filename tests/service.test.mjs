@@ -61,7 +61,7 @@ test('a response-body timeout keeps a stable upstream error and the spent reques
 test('invalid date, coordinates and model stop before provider effects', async () => {
   let calls = 0;
   const service = new ForecastService({ now: () => Date.parse('2026-11-06T07:00:00Z'), provider: { weather() { calls++; } } });
-  for (const query of ['date=2026-02-30', 'model=unknown', 'lat=&lon=121', 'lat=91&lon=121', 'date=2026-11-09']) {
+  for (const query of ['date=2026-02-30', 'model=unknown', 'lat=&lon=121', 'lat=91&lon=121', 'date=2026-11-10']) {
     await assert.rejects(service.forecast(new URLSearchParams(query)), e => e.status === 400);
   }
   assert.equal(calls, 0);

@@ -1,0 +1,122 @@
+{
+  "auditedAt": "2026-11-10T09:39:03.897Z",
+  "modelVersion": "section-optics-0.3.1",
+  "sources": {
+    "gfs": {
+      "file": "research/experiments/shanghai-sunset-2026-11-10/gfs-retained.json",
+      "sha256": "9fb3da078c70b4047b0d76827c40f86eebe305cecb713b892a71d81c2053cb8a"
+    },
+    "ecmwf": {
+      "file": "research/experiments/shanghai-sunset-2026-11-10/ecmwf-retained.json",
+      "sha256": "af2feae154ae6fca61ace790cf3da867fd3831c348eb48f4411cbab5855ae0fd"
+    }
+  },
+  "cases": {
+    "gfs": {
+      "id": "bcbc085a88cb7136255b",
+      "score": 4.5,
+      "peakTime": "2026-11-10T09:00:43.633Z",
+      "window": null,
+      "weatherFetchedAt": "2026-11-10T00:00:24.732Z",
+      "aerosolFetchedAt": "2026-11-10T00:06:30.606Z",
+      "cloudInputDiagnostics": {
+        "referenceTime": "2026-11-10T09:00:43.633Z",
+        "weatherFetchedAt": "2026-11-10T00:00:24.732Z",
+        "layers": {
+          "low": {
+            "layerCoverPercent": 0,
+            "maximumSampledPressureCoverPercent": 0,
+            "sampledPressureLevelsHpa": [
+              1000,
+              925,
+              850
+            ]
+          },
+          "mid": {
+            "layerCoverPercent": 0,
+            "maximumSampledPressureCoverPercent": 3,
+            "sampledPressureLevelsHpa": [
+              700,
+              600,
+              500,
+              400
+            ]
+          },
+          "high": {
+            "layerCoverPercent": 1.2120277749167547,
+            "maximumSampledPressureCoverPercent": 3.9515188890033297,
+            "sampledPressureLevelsHpa": [
+              300,
+              250,
+              200,
+              150
+            ]
+          }
+        },
+        "pressureCloudCoverMethod": "native-model-field",
+        "lowCloudGap": false,
+        "notes": []
+      }
+    },
+    "ecmwf": {
+      "id": "46eae98833ef77b6c7ea",
+      "score": 57.8,
+      "peakTime": "2026-11-10T09:00:43.633Z",
+      "window": {
+        "start": "2026-11-10T08:55:43.633Z",
+        "end": "2026-11-10T09:05:43.633Z",
+        "resolutionMinutes": 5,
+        "clipped": false
+      },
+      "weatherFetchedAt": "2026-11-10T00:03:29.207Z",
+      "aerosolFetchedAt": "2026-11-10T00:06:30.606Z",
+      "cloudInputDiagnostics": {
+        "referenceTime": "2026-11-10T09:00:43.633Z",
+        "weatherFetchedAt": "2026-11-10T00:03:29.207Z",
+        "layers": {
+          "low": {
+            "layerCoverPercent": 44.80607555601332,
+            "maximumSampledPressureCoverPercent": 0,
+            "sampledPressureLevelsHpa": [
+              1000,
+              925,
+              850
+            ]
+          },
+          "mid": {
+            "layerCoverPercent": 0,
+            "maximumSampledPressureCoverPercent": 0,
+            "sampledPressureLevelsHpa": [
+              700,
+              600,
+              500,
+              400
+            ]
+          },
+          "high": {
+            "layerCoverPercent": 36.15756361073918,
+            "maximumSampledPressureCoverPercent": 29.157563610739178,
+            "sampledPressureLevelsHpa": [
+              300,
+              250,
+              200,
+              150
+            ]
+          }
+        },
+        "pressureCloudCoverMethod": "relative-humidity-diagnostic",
+        "lowCloudGap": true,
+        "notes": [
+          "低云分层指标为 44.8%，采样低层等压面均为 0%；低云遮挡的垂直信息存在缺口。"
+        ]
+      }
+    }
+  },
+  "interventions": {
+    "pressureCloudOnly": 4.6,
+    "heightsOnly": 57.8,
+    "allWeather": 4.5,
+    "aerosolOnly": 57.8
+  },
+  "scope": "Exact saved-index/timeline replay and deterministic input sensitivity at the same requested sampling plan. Mixed inputs are development diagnostics; their meteorological consistency, actual cloud truth, viewing outcome and forecast skill have separate scope."
+}

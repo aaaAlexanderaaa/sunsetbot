@@ -1,7 +1,7 @@
 # Fast empirical quality-ranking study
 
-Status: trained and frozen; all 122 independent-date predictions saved.
-Independent source labels follow the ongoing physical prediction batch.
+Status: independently evaluated on 2026-11-10; all 122 predictions preceded
+source-label access. The candidate remains offline research.
 
 ## Purpose and scope
 
@@ -78,3 +78,29 @@ remain in [the superseded archive](../../research/experiments/quality-rank-0.1.0
 Features, fitted weights and the registered comparisons are unchanged. A real
 script-path synthetic test checks 121 labels across 122 events and rejects
 modified held-out features even when their fitted score is recomputed.
+
+## Completed independent result (2026-11-10)
+
+The [evaluation](../../research/experiments/quality-rank/evaluation.json) joins
+all 122 unchanged predictions to the subsequently captured public labels.
+There are 26 source-positive events and 96 source-only zeros, with no missing
+source labels. The registered comparison gives:
+
+| Model | AUC | Positive source labels among top 20 |
+| --- | ---: | ---: |
+| Frozen empirical ranker | 0.739984 | 10 |
+| Original neutralized peak index | 0.743389 | 11 |
+| Native ERA5 layer baseline | 0.713742 | 7 |
+
+Empirical minus original AUC is -0.003405 with three-day-block paired 95%
+interval [-0.051813, +0.037662]. Against the layer baseline the difference is
++0.026242 [-0.009303, +0.057784]. The candidate supplies no supported
+independent improvement over the original index in this calendar, and the
+top-20 comparison also favors retaining the original reference. The fitted
+parameters stay frozen; this observed result supplies no retrospective tuning.
+
+These are curator-source-label rankings with the stated negative-observation
+coverage and ERA5/EAC4 retrospective inputs. Visible-colour probability,
+bright-white false-alarm reduction and live GFS/ECMWF transfer retain their own
+validation. The scientific next step follows the completed physical comparison
+and explicit cloud/sky colour contrast, with independently covered outcomes.

@@ -1,0 +1,4009 @@
+{
+  "evaluatedAt": "2026-11-10T09:31:54.106Z",
+  "candidateIdentity": "a8905ab1c091eb5a27a5477fb29f36a122fb3bdad02f6903fb92374d80c5368c",
+  "policy": {
+    "definedAt": "2026-11-08T03:12:07.131528+00:00",
+    "candidate": "source-quality-rank-0.1.1",
+    "role": "Additional exploratory secondary candidate, defined before independent source-label access",
+    "features": [
+      "Frozen section-optics0.3.1 peak index over +/-40minutes with optional rain/visibility neutralized, divided by100",
+      "Native ERA5 max(mid,high)*(1-low/100) at common Sun altitude-.833deg, divided by100"
+    ],
+    "target": "Explicit public curator source grade>0; fitted source-label likelihood has weak-label scope",
+    "developmentDates": [
+      "2023-06-01",
+      "2023-08-31"
+    ],
+    "innerTrainingDates": [
+      "2023-06-01",
+      "2023-08-07"
+    ],
+    "innerValidationDates": [
+      "2023-08-08",
+      "2023-08-31"
+    ],
+    "ridgeGrid": [
+      0.001,
+      0.01,
+      0.1,
+      1
+    ],
+    "selection": "Minimum inner-validation mean log loss; ties prefer larger ridge; refit all184 development cases",
+    "parameters": 3,
+    "independentDates": [
+      "2023-09-01",
+      "2023-10-31"
+    ],
+    "possibleIndependentEvents": 122,
+    "primaryComparison": "Paired AUC minus the identical neutral peak-index feature",
+    "secondaryComparison": "Paired AUC minus native layer baseline",
+    "bootstrap": {
+      "replicates": 1000,
+      "blockDays": 3,
+      "seed": 20230901
+    },
+    "topK": 20,
+    "inputScope": "ERA5/EAC4 retrospective feature reconstruction; provider transfer to operational GFS/ECMWF remains separate",
+    "labelScope": "Preserve source-only zeros, linked/source-only positives and missing source records. Calibrated real-world probability requires verified observation coverage.",
+    "productionPolicy": "Keep section-optics0.3.1 through this study; no production promotion from source-label fit alone",
+    "registeredPhysicalStudy": "f25187812a6edeb5132eccf76ee9c118ff9f63277eb260eb21ce18de05732b58 remains unchanged",
+    "sourceCorrectionAt": "2026-11-08T03:21:57.360239+00:00",
+    "supersededCandidate": "d7b9b2e8a8f76ea9e8d2e08b23403a68ae8c3d0db3660343ef86b25e2ec62ec8",
+    "sourceCorrection": "Explicit labelled-row metric filtering; all calendar events stay in paired bootstrap and top-20 selection. Features, fitted weights and comparison policy unchanged; independent labels remain unaccessed."
+  },
+  "modelSha256": "60da7a8bec944189a72004d04b98326e84c1dc33ab263220191e1ce342969f8f",
+  "predictionSha256": "225ec54c758d252a8e3b6b92654b136fcf804d0b9f1ab8bf46dfdd07f8596c51",
+  "physicalEvaluationSha256": "95496043f0c50f27639b3f405c93fed4cb1cc8060307799e686f54baf1ad677e",
+  "sourceManifestSha256": "5da9993db7038e09d0ad2dc1b2b7c80aacdb92c7d78c43fa9e83608d79600608",
+  "cases": [
+    {
+      "id": "2023-09-01-sunrise",
+      "date": "2023-09-01",
+      "eventType": "sunrise",
+      "features": [
+        0.733,
+        0.6377549074951092
+      ],
+      "score": 47.065320971758354,
+      "peakIndex": 73.3,
+      "nativeBaseline": 63.77549074951092,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-09-01-sunrise",
+        "date": "2023-09-01",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "中到大烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309010000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230901_rise.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-01_2023-09-10.json",
+          "sha256": "b928e42ac10e99dcac5ec02d9513a93b0421fe90e7a13971fdaa9a32ebf6144e"
+        }
+      }
+    },
+    {
+      "id": "2023-09-01-sunset",
+      "date": "2023-09-01",
+      "eventType": "sunset",
+      "features": [
+        0.698,
+        0.6691630942624268
+      ],
+      "score": 46.61741907936649,
+      "peakIndex": 69.8,
+      "nativeBaseline": 66.91630942624268,
+      "observedGrade": 4,
+      "observation": {
+        "id": "2023-09-01-sunset",
+        "date": "2023-09-01",
+        "eventType": "sunset",
+        "observedGrade": 4,
+        "observedLabel": "中到大烧",
+        "observedCloud": "卷云,高积云",
+        "observedColour": "橘黄色,橘色,橘红色",
+        "originalPrediction": "中到大烧",
+        "evidenceUrls": "https://weibo.com/2642303692/Nhkl0sxM7\nhttps://weibo.com/1780075421/Nhkaj0roA\nhttps://weibo.com/1632542437/Nhk6GpNDZ\nhttps://weibo.com/1770475104/Nhk3pqImw\nhttps://weibo.com/7738187599/NhjGjA1hB\nhttps://weibo.com/1623721534/Nhj2kpp8N\nhttps://weibo.com/1883437194/NhnPelzYZ\nhttps://weibo.com/1402519174/Nhow1ySpj\nhttps://video.weibo.com/show?fid=1034:4941291767660632\nhttps://video.weibo.com/show?fid=1034:4941273950257242\nhttps://video.weibo.com/show?fid=1034:4941272788435018",
+        "originalMap": "/static/media/ERA5/202309010000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230901_set.jpg",
+        "evidenceState": "linked_source",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-01_2023-09-10.json",
+          "sha256": "b928e42ac10e99dcac5ec02d9513a93b0421fe90e7a13971fdaa9a32ebf6144e"
+        }
+      }
+    },
+    {
+      "id": "2023-09-02-sunrise",
+      "date": "2023-09-02",
+      "eventType": "sunrise",
+      "features": [
+        0.687,
+        0.8179566683428935
+      ],
+      "score": 49.22565804412175,
+      "peakIndex": 68.7,
+      "nativeBaseline": 81.79566683428935,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-09-02-sunrise",
+        "date": "2023-09-02",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "中到大烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309020000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230902_rise.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-01_2023-09-10.json",
+          "sha256": "b928e42ac10e99dcac5ec02d9513a93b0421fe90e7a13971fdaa9a32ebf6144e"
+        }
+      }
+    },
+    {
+      "id": "2023-09-02-sunset",
+      "date": "2023-09-02",
+      "eventType": "sunset",
+      "features": [
+        0.105,
+        0.40830029368662835
+      ],
+      "score": 25.55442050239243,
+      "peakIndex": 10.5,
+      "nativeBaseline": 40.830029368662835,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-09-02-sunset",
+        "date": "2023-09-02",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309020000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230902_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-01_2023-09-10.json",
+          "sha256": "b928e42ac10e99dcac5ec02d9513a93b0421fe90e7a13971fdaa9a32ebf6144e"
+        }
+      }
+    },
+    {
+      "id": "2023-09-03-sunrise",
+      "date": "2023-09-03",
+      "eventType": "sunrise",
+      "features": [
+        0,
+        0.26765330923400116
+      ],
+      "score": 21.256847259497814,
+      "peakIndex": 0,
+      "nativeBaseline": 26.765330923400118,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-09-03-sunrise",
+        "date": "2023-09-03",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309030000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230903_rise.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-01_2023-09-10.json",
+          "sha256": "b928e42ac10e99dcac5ec02d9513a93b0421fe90e7a13971fdaa9a32ebf6144e"
+        }
+      }
+    },
+    {
+      "id": "2023-09-03-sunset",
+      "date": "2023-09-03",
+      "eventType": "sunset",
+      "features": [
+        0.004,
+        0.8512778533851493
+      ],
+      "score": 30.117623805468874,
+      "peakIndex": 0.4,
+      "nativeBaseline": 85.12778533851493,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-09-03-sunset",
+        "date": "2023-09-03",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309030000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230903_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-01_2023-09-10.json",
+          "sha256": "b928e42ac10e99dcac5ec02d9513a93b0421fe90e7a13971fdaa9a32ebf6144e"
+        }
+      }
+    },
+    {
+      "id": "2023-09-04-sunrise",
+      "date": "2023-09-04",
+      "eventType": "sunrise",
+      "features": [
+        0,
+        0.4982550293206103
+      ],
+      "score": 24.478750287938965,
+      "peakIndex": 0,
+      "nativeBaseline": 49.82550293206103,
+      "observedGrade": 3,
+      "observation": {
+        "id": "2023-09-04-sunrise",
+        "date": "2023-09-04",
+        "eventType": "sunrise",
+        "observedGrade": 3,
+        "observedLabel": "小到中烧",
+        "observedCloud": "卷云",
+        "observedColour": "橘红色,橘色,橘黄色",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "https://weibo.com/1415104792/NhFGy85Xy",
+        "originalMap": "/static/media/ERA5/202309040000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230904_rise.jpg",
+        "evidenceState": "linked_source",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-01_2023-09-10.json",
+          "sha256": "b928e42ac10e99dcac5ec02d9513a93b0421fe90e7a13971fdaa9a32ebf6144e"
+        }
+      }
+    },
+    {
+      "id": "2023-09-04-sunset",
+      "date": "2023-09-04",
+      "eventType": "sunset",
+      "features": [
+        0.094,
+        0.38037058743268604
+      ],
+      "score": 24.882412714955944,
+      "peakIndex": 9.4,
+      "nativeBaseline": 38.0370587432686,
+      "observedGrade": 3,
+      "observation": {
+        "id": "2023-09-04-sunset",
+        "date": "2023-09-04",
+        "eventType": "sunset",
+        "observedGrade": 3,
+        "observedLabel": "小到中烧",
+        "observedCloud": "高积云,浓积云",
+        "observedColour": "橘黄色,橘色",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "https://weibo.com/5022072274/NhL8xs6YD\nhttps://weibo.com/2951798900/NhLyc9ANk\nhttps://weibo.com/5252166634/NhM7VbcIE",
+        "originalMap": "/static/media/ERA5/202309040000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230904_set.jpg",
+        "evidenceState": "linked_source",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-01_2023-09-10.json",
+          "sha256": "b928e42ac10e99dcac5ec02d9513a93b0421fe90e7a13971fdaa9a32ebf6144e"
+        }
+      }
+    },
+    {
+      "id": "2023-09-05-sunrise",
+      "date": "2023-09-05",
+      "eventType": "sunrise",
+      "features": [
+        0.39799999999999996,
+        0.5962952307932001
+      ],
+      "score": 36.33121482723834,
+      "peakIndex": 39.8,
+      "nativeBaseline": 59.62952307932001,
+      "observedGrade": 3,
+      "observation": {
+        "id": "2023-09-05-sunrise",
+        "date": "2023-09-05",
+        "eventType": "sunrise",
+        "observedGrade": 3,
+        "observedLabel": "小到中烧",
+        "observedCloud": "高积云",
+        "observedColour": "橘红色,橘色",
+        "originalPrediction": "大烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309050000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230905_rise.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-01_2023-09-10.json",
+          "sha256": "b928e42ac10e99dcac5ec02d9513a93b0421fe90e7a13971fdaa9a32ebf6144e"
+        }
+      }
+    },
+    {
+      "id": "2023-09-05-sunset",
+      "date": "2023-09-05",
+      "eventType": "sunset",
+      "features": [
+        0.833,
+        0.9620149462894187
+      ],
+      "score": 56.518626168031915,
+      "peakIndex": 83.3,
+      "nativeBaseline": 96.20149462894187,
+      "observedGrade": 4,
+      "observation": {
+        "id": "2023-09-05-sunset",
+        "date": "2023-09-05",
+        "eventType": "sunset",
+        "observedGrade": 4,
+        "observedLabel": "中到大烧",
+        "observedCloud": "高积云,卷云,卷层云",
+        "observedColour": "橘黄色,橘色",
+        "originalPrediction": "大烧",
+        "evidenceUrls": "https://weibo.com/5972339664/NhUHpuW6N\nhttps://weibo.com/1770475104/NhVP03gjx\nhttps://weibo.com/6716642729/NhViv1clK\nhttps://video.weibo.com/show?fid=1034:4942736936337423",
+        "originalMap": "/static/media/ERA5/202309050000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230905_set.jpg",
+        "evidenceState": "linked_source",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-01_2023-09-10.json",
+          "sha256": "b928e42ac10e99dcac5ec02d9513a93b0421fe90e7a13971fdaa9a32ebf6144e"
+        }
+      }
+    },
+    {
+      "id": "2023-09-06-sunrise",
+      "date": "2023-09-06",
+      "eventType": "sunrise",
+      "features": [
+        0,
+        0.08289206747462488
+      ],
+      "score": 18.9071120909934,
+      "peakIndex": 0,
+      "nativeBaseline": 8.289206747462488,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-09-06-sunrise",
+        "date": "2023-09-06",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309060000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230906_rise.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-01_2023-09-10.json",
+          "sha256": "b928e42ac10e99dcac5ec02d9513a93b0421fe90e7a13971fdaa9a32ebf6144e"
+        }
+      }
+    },
+    {
+      "id": "2023-09-06-sunset",
+      "date": "2023-09-06",
+      "eventType": "sunset",
+      "features": [
+        0,
+        0.08330964795104517
+      ],
+      "score": 18.91219079110812,
+      "peakIndex": 0,
+      "nativeBaseline": 8.330964795104517,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-09-06-sunset",
+        "date": "2023-09-06",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309060000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230906_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-01_2023-09-10.json",
+          "sha256": "b928e42ac10e99dcac5ec02d9513a93b0421fe90e7a13971fdaa9a32ebf6144e"
+        }
+      }
+    },
+    {
+      "id": "2023-09-07-sunrise",
+      "date": "2023-09-07",
+      "eventType": "sunrise",
+      "features": [
+        0,
+        0.019317108892514204
+      ],
+      "score": 18.146073178745873,
+      "peakIndex": 0,
+      "nativeBaseline": 1.9317108892514203,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-09-07-sunrise",
+        "date": "2023-09-07",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309070000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230907_rise.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-01_2023-09-10.json",
+          "sha256": "b928e42ac10e99dcac5ec02d9513a93b0421fe90e7a13971fdaa9a32ebf6144e"
+        }
+      }
+    },
+    {
+      "id": "2023-09-07-sunset",
+      "date": "2023-09-07",
+      "eventType": "sunset",
+      "features": [
+        0,
+        0.03802291588260532
+      ],
+      "score": 18.36748850717441,
+      "peakIndex": 0,
+      "nativeBaseline": 3.8022915882605317,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-09-07-sunset",
+        "date": "2023-09-07",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309070000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230907_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-01_2023-09-10.json",
+          "sha256": "b928e42ac10e99dcac5ec02d9513a93b0421fe90e7a13971fdaa9a32ebf6144e"
+        }
+      }
+    },
+    {
+      "id": "2023-09-08-sunrise",
+      "date": "2023-09-08",
+      "eventType": "sunrise",
+      "features": [
+        0,
+        0
+      ],
+      "score": 17.91960816150958,
+      "peakIndex": 0,
+      "nativeBaseline": 0,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-09-08-sunrise",
+        "date": "2023-09-08",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309080000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230908_rise.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-01_2023-09-10.json",
+          "sha256": "b928e42ac10e99dcac5ec02d9513a93b0421fe90e7a13971fdaa9a32ebf6144e"
+        }
+      }
+    },
+    {
+      "id": "2023-09-08-sunset",
+      "date": "2023-09-08",
+      "eventType": "sunset",
+      "features": [
+        0,
+        0
+      ],
+      "score": 17.91960816150958,
+      "peakIndex": 0,
+      "nativeBaseline": 0,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-09-08-sunset",
+        "date": "2023-09-08",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309080000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230908_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-01_2023-09-10.json",
+          "sha256": "b928e42ac10e99dcac5ec02d9513a93b0421fe90e7a13971fdaa9a32ebf6144e"
+        }
+      }
+    },
+    {
+      "id": "2023-09-09-sunrise",
+      "date": "2023-09-09",
+      "eventType": "sunrise",
+      "features": [
+        0.168,
+        0.16530190725543675
+      ],
+      "score": 23.41947560661055,
+      "peakIndex": 16.8,
+      "nativeBaseline": 16.530190725543676,
+      "observedGrade": 3,
+      "observation": {
+        "id": "2023-09-09-sunrise",
+        "date": "2023-09-09",
+        "eventType": "sunrise",
+        "observedGrade": 3,
+        "observedLabel": "小到中烧",
+        "observedCloud": "卷云",
+        "observedColour": "橘红色,橘色,橘黄色",
+        "originalPrediction": "微烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309090000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230909_rise.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-01_2023-09-10.json",
+          "sha256": "b928e42ac10e99dcac5ec02d9513a93b0421fe90e7a13971fdaa9a32ebf6144e"
+        }
+      }
+    },
+    {
+      "id": "2023-09-09-sunset",
+      "date": "2023-09-09",
+      "eventType": "sunset",
+      "features": [
+        0,
+        0
+      ],
+      "score": 17.91960816150958,
+      "peakIndex": 0,
+      "nativeBaseline": 0,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-09-09-sunset",
+        "date": "2023-09-09",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309090000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230909_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-01_2023-09-10.json",
+          "sha256": "b928e42ac10e99dcac5ec02d9513a93b0421fe90e7a13971fdaa9a32ebf6144e"
+        }
+      }
+    },
+    {
+      "id": "2023-09-10-sunrise",
+      "date": "2023-09-10",
+      "eventType": "sunrise",
+      "features": [
+        0,
+        0
+      ],
+      "score": 17.91960816150958,
+      "peakIndex": 0,
+      "nativeBaseline": 0,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-09-10-sunrise",
+        "date": "2023-09-10",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309100000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230910_rise.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-01_2023-09-10.json",
+          "sha256": "b928e42ac10e99dcac5ec02d9513a93b0421fe90e7a13971fdaa9a32ebf6144e"
+        }
+      }
+    },
+    {
+      "id": "2023-09-10-sunset",
+      "date": "2023-09-10",
+      "eventType": "sunset",
+      "features": [
+        0.31,
+        0.9295435913292551
+      ],
+      "score": 40.02171301415293,
+      "peakIndex": 31,
+      "nativeBaseline": 92.95435913292552,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-09-10-sunset",
+        "date": "2023-09-10",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "微烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309100000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230910_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-01_2023-09-10.json",
+          "sha256": "b928e42ac10e99dcac5ec02d9513a93b0421fe90e7a13971fdaa9a32ebf6144e"
+        }
+      }
+    },
+    {
+      "id": "2023-09-11-sunrise",
+      "date": "2023-09-11",
+      "eventType": "sunrise",
+      "features": [
+        0,
+        0.12005975325142489
+      ],
+      "score": 19.363254654609843,
+      "peakIndex": 0,
+      "nativeBaseline": 12.005975325142488,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-09-11-sunrise",
+        "date": "2023-09-11",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309110000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230911_rise.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-11_2023-09-20.json",
+          "sha256": "b95a499bd2fa1fde5d362fc1ae631dcfab84a4bda55fd39247031de168c2bcb3"
+        }
+      }
+    },
+    {
+      "id": "2023-09-11-sunset",
+      "date": "2023-09-11",
+      "eventType": "sunset",
+      "features": [
+        0.22699999999999998,
+        0.9834679962154041
+      ],
+      "score": 38.61503242020962,
+      "peakIndex": 22.7,
+      "nativeBaseline": 98.34679962154041,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-09-11-sunset",
+        "date": "2023-09-11",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309110000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230911_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-11_2023-09-20.json",
+          "sha256": "b95a499bd2fa1fde5d362fc1ae631dcfab84a4bda55fd39247031de168c2bcb3"
+        }
+      }
+    },
+    {
+      "id": "2023-09-12-sunrise",
+      "date": "2023-09-12",
+      "eventType": "sunrise",
+      "features": [
+        0.252,
+        0.9269212623327511
+      ],
+      "score": 38.2788005053301,
+      "peakIndex": 25.2,
+      "nativeBaseline": 92.6921262332751,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-09-12-sunrise",
+        "date": "2023-09-12",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309120000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230912_rise.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-11_2023-09-20.json",
+          "sha256": "b95a499bd2fa1fde5d362fc1ae631dcfab84a4bda55fd39247031de168c2bcb3"
+        }
+      }
+    },
+    {
+      "id": "2023-09-12-sunset",
+      "date": "2023-09-12",
+      "eventType": "sunset",
+      "features": [
+        0.08199999999999999,
+        0.4551755780956272
+      ],
+      "score": 25.725790824684815,
+      "peakIndex": 8.2,
+      "nativeBaseline": 45.51755780956272,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-09-12-sunset",
+        "date": "2023-09-12",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309120000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230912_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-11_2023-09-20.json",
+          "sha256": "b95a499bd2fa1fde5d362fc1ae631dcfab84a4bda55fd39247031de168c2bcb3"
+        }
+      }
+    },
+    {
+      "id": "2023-09-13-sunrise",
+      "date": "2023-09-13",
+      "eventType": "sunrise",
+      "features": [
+        0.41100000000000003,
+        0.9835686390957226
+      ],
+      "score": 44.08004799707692,
+      "peakIndex": 41.1,
+      "nativeBaseline": 98.35686390957225,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-09-13-sunrise",
+        "date": "2023-09-13",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309130000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230913_rise.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-11_2023-09-20.json",
+          "sha256": "b95a499bd2fa1fde5d362fc1ae631dcfab84a4bda55fd39247031de168c2bcb3"
+        }
+      }
+    },
+    {
+      "id": "2023-09-13-sunset",
+      "date": "2023-09-13",
+      "eventType": "sunset",
+      "features": [
+        0.008,
+        0.2579331004439665
+      ],
+      "score": 21.291951400420917,
+      "peakIndex": 0.8,
+      "nativeBaseline": 25.79331004439665,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-09-13-sunset",
+        "date": "2023-09-13",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309130000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230913_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-11_2023-09-20.json",
+          "sha256": "b95a499bd2fa1fde5d362fc1ae631dcfab84a4bda55fd39247031de168c2bcb3"
+        }
+      }
+    },
+    {
+      "id": "2023-09-14-sunrise",
+      "date": "2023-09-14",
+      "eventType": "sunrise",
+      "features": [
+        0.23199999999999998,
+        0.4492688215964329
+      ],
+      "score": 29.295005942187224,
+      "peakIndex": 23.2,
+      "nativeBaseline": 44.92688215964329,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-09-14-sunrise",
+        "date": "2023-09-14",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309140000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230914_rise.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-11_2023-09-20.json",
+          "sha256": "b95a499bd2fa1fde5d362fc1ae631dcfab84a4bda55fd39247031de168c2bcb3"
+        }
+      }
+    },
+    {
+      "id": "2023-09-14-sunset",
+      "date": "2023-09-14",
+      "eventType": "sunset",
+      "features": [
+        0.027000000000000003,
+        0.9516537567142223
+      ],
+      "score": 32.43399565445725,
+      "peakIndex": 2.7,
+      "nativeBaseline": 95.16537567142223,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-09-14-sunset",
+        "date": "2023-09-14",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309140000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230914_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-11_2023-09-20.json",
+          "sha256": "b95a499bd2fa1fde5d362fc1ae631dcfab84a4bda55fd39247031de168c2bcb3"
+        }
+      }
+    },
+    {
+      "id": "2023-09-15-sunrise",
+      "date": "2023-09-15",
+      "eventType": "sunrise",
+      "features": [
+        0.414,
+        0.9060292625315916
+      ],
+      "score": 42.65997305371497,
+      "peakIndex": 41.4,
+      "nativeBaseline": 90.60292625315915,
+      "observedGrade": 3,
+      "observation": {
+        "id": "2023-09-15-sunrise",
+        "date": "2023-09-15",
+        "eventType": "sunrise",
+        "observedGrade": 3,
+        "observedLabel": "小到中烧",
+        "observedCloud": "层积云",
+        "observedColour": "橘色,橘黄色",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "https://weibo.com/6115722047/NjrBwCPRU",
+        "originalMap": "/static/media/ERA5/202309150000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230915_rise.jpg",
+        "evidenceState": "linked_source",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-11_2023-09-20.json",
+          "sha256": "b95a499bd2fa1fde5d362fc1ae631dcfab84a4bda55fd39247031de168c2bcb3"
+        }
+      }
+    },
+    {
+      "id": "2023-09-15-sunset",
+      "date": "2023-09-15",
+      "eventType": "sunset",
+      "features": [
+        0.019,
+        0.6897925294706408
+      ],
+      "score": 27.860319842287495,
+      "peakIndex": 1.9,
+      "nativeBaseline": 68.97925294706408,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-09-15-sunset",
+        "date": "2023-09-15",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309150000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230915_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-11_2023-09-20.json",
+          "sha256": "b95a499bd2fa1fde5d362fc1ae631dcfab84a4bda55fd39247031de168c2bcb3"
+        }
+      }
+    },
+    {
+      "id": "2023-09-16-sunrise",
+      "date": "2023-09-16",
+      "eventType": "sunrise",
+      "features": [
+        0.10099999999999999,
+        0.6595155342140834
+      ],
+      "score": 29.423417816950607,
+      "peakIndex": 10.1,
+      "nativeBaseline": 65.95155342140833,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-09-16-sunrise",
+        "date": "2023-09-16",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309160000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230916_rise.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-11_2023-09-20.json",
+          "sha256": "b95a499bd2fa1fde5d362fc1ae631dcfab84a4bda55fd39247031de168c2bcb3"
+        }
+      }
+    },
+    {
+      "id": "2023-09-16-sunset",
+      "date": "2023-09-16",
+      "eventType": "sunset",
+      "features": [
+        0.268,
+        0.33661914740705773
+      ],
+      "score": 28.367133427534437,
+      "peakIndex": 26.8,
+      "nativeBaseline": 33.661914740705775,
+      "observedGrade": 3,
+      "observation": {
+        "id": "2023-09-16-sunset",
+        "date": "2023-09-16",
+        "eventType": "sunset",
+        "observedGrade": 3,
+        "observedLabel": "小到中烧",
+        "observedCloud": "高积云,卷云",
+        "observedColour": "橘黄色,橘色",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "https://weibo.com/6716642729/NjB8161Sj",
+        "originalMap": "/static/media/ERA5/202309160000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230916_set.jpg",
+        "evidenceState": "linked_source",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-11_2023-09-20.json",
+          "sha256": "b95a499bd2fa1fde5d362fc1ae631dcfab84a4bda55fd39247031de168c2bcb3"
+        }
+      }
+    },
+    {
+      "id": "2023-09-17-sunrise",
+      "date": "2023-09-17",
+      "eventType": "sunrise",
+      "features": [
+        0,
+        0.035910558385050265
+      ],
+      "score": 18.342380638860863,
+      "peakIndex": 0,
+      "nativeBaseline": 3.591055838505026,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-09-17-sunrise",
+        "date": "2023-09-17",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309170000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230917_rise.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-11_2023-09-20.json",
+          "sha256": "b95a499bd2fa1fde5d362fc1ae631dcfab84a4bda55fd39247031de168c2bcb3"
+        }
+      }
+    },
+    {
+      "id": "2023-09-17-sunset",
+      "date": "2023-09-17",
+      "eventType": "sunset",
+      "features": [
+        0,
+        0.28328888995694784
+      ],
+      "score": 21.465167092562773,
+      "peakIndex": 0,
+      "nativeBaseline": 28.328888995694786,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-09-17-sunset",
+        "date": "2023-09-17",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309170000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230917_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-11_2023-09-20.json",
+          "sha256": "b95a499bd2fa1fde5d362fc1ae631dcfab84a4bda55fd39247031de168c2bcb3"
+        }
+      }
+    },
+    {
+      "id": "2023-09-18-sunrise",
+      "date": "2023-09-18",
+      "eventType": "sunrise",
+      "features": [
+        0.509,
+        0.6126043957377303
+      ],
+      "score": 39.842588512798045,
+      "peakIndex": 50.9,
+      "nativeBaseline": 61.26043957377303,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-09-18-sunrise",
+        "date": "2023-09-18",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309180000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230918_rise.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-11_2023-09-20.json",
+          "sha256": "b95a499bd2fa1fde5d362fc1ae631dcfab84a4bda55fd39247031de168c2bcb3"
+        }
+      }
+    },
+    {
+      "id": "2023-09-18-sunset",
+      "date": "2023-09-18",
+      "eventType": "sunset",
+      "features": [
+        0,
+        0.06823460335770505
+      ],
+      "score": 18.72950733684413,
+      "peakIndex": 0,
+      "nativeBaseline": 6.8234603357705055,
+      "observedGrade": 1,
+      "observation": {
+        "id": "2023-09-18-sunset",
+        "date": "2023-09-18",
+        "eventType": "sunset",
+        "observedGrade": 1,
+        "observedLabel": "微烧",
+        "observedCloud": "高积云",
+        "observedColour": "橘黄色,橘色",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309180000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230918_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-11_2023-09-20.json",
+          "sha256": "b95a499bd2fa1fde5d362fc1ae631dcfab84a4bda55fd39247031de168c2bcb3"
+        }
+      }
+    },
+    {
+      "id": "2023-09-19-sunrise",
+      "date": "2023-09-19",
+      "eventType": "sunrise",
+      "features": [
+        0.503,
+        0.4637845653234035
+      ],
+      "score": 36.87879348984741,
+      "peakIndex": 50.3,
+      "nativeBaseline": 46.37845653234035,
+      "observedGrade": 2,
+      "observation": {
+        "id": "2023-09-19-sunrise",
+        "date": "2023-09-19",
+        "eventType": "sunrise",
+        "observedGrade": 2,
+        "observedLabel": "小烧",
+        "observedCloud": "卷云",
+        "observedColour": "橘色",
+        "originalPrediction": "小到中烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309190000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230919_rise.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-11_2023-09-20.json",
+          "sha256": "b95a499bd2fa1fde5d362fc1ae631dcfab84a4bda55fd39247031de168c2bcb3"
+        }
+      }
+    },
+    {
+      "id": "2023-09-19-sunset",
+      "date": "2023-09-19",
+      "eventType": "sunset",
+      "features": [
+        0.45,
+        0.9959399120222824
+      ],
+      "score": 45.50469215128983,
+      "peakIndex": 45,
+      "nativeBaseline": 99.59399120222824,
+      "observedGrade": 4,
+      "observation": {
+        "id": "2023-09-19-sunset",
+        "date": "2023-09-19",
+        "eventType": "sunset",
+        "observedGrade": 4,
+        "observedLabel": "中到大烧",
+        "observedCloud": "卷层云,高积云",
+        "observedColour": "橘色,橘红色",
+        "originalPrediction": "微烧",
+        "evidenceUrls": "https://weibo.com/7398429457/Nk25gpYCg\nhttps://weibo.com/1904104195/Nk27C2nC4\nhttps://video.weibo.com/show?fid=1034:4947807166201907",
+        "originalMap": "/static/media/ERA5/202309190000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230919_set.jpg",
+        "evidenceState": "linked_source",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-11_2023-09-20.json",
+          "sha256": "b95a499bd2fa1fde5d362fc1ae631dcfab84a4bda55fd39247031de168c2bcb3"
+        }
+      }
+    },
+    {
+      "id": "2023-09-20-sunrise",
+      "date": "2023-09-20",
+      "eventType": "sunrise",
+      "features": [
+        0.758,
+        1
+      ],
+      "score": 54.99423935785755,
+      "peakIndex": 75.8,
+      "nativeBaseline": 100,
+      "observedGrade": 5,
+      "observation": {
+        "id": "2023-09-20-sunrise",
+        "date": "2023-09-20",
+        "eventType": "sunrise",
+        "observedGrade": 5,
+        "observedLabel": "大烧",
+        "observedCloud": "卷层云,卷云",
+        "observedColour": "橘红色,橘色",
+        "originalPrediction": "大烧",
+        "evidenceUrls": "https://weibo.com/1911311020/NkrHIznte\nhttps://weibo.com/1041461672/Nk9zMA55y\nhttps://weibo.com/5759262544/NkabHduIb\nhttps://weibo.com/6441777827/Nk7R5AlaU\nhttps://weibo.com/1757792085/Nk7iFf2iB",
+        "originalMap": "/static/media/ERA5/202309200000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230920_rise.jpg",
+        "evidenceState": "linked_source",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-11_2023-09-20.json",
+          "sha256": "b95a499bd2fa1fde5d362fc1ae631dcfab84a4bda55fd39247031de168c2bcb3"
+        }
+      }
+    },
+    {
+      "id": "2023-09-20-sunset",
+      "date": "2023-09-20",
+      "eventType": "sunset",
+      "features": [
+        0.053,
+        0.9265341858643054
+      ],
+      "score": 32.69629922203362,
+      "peakIndex": 5.3,
+      "nativeBaseline": 92.65341858643053,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-09-20-sunset",
+        "date": "2023-09-20",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309200000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230920_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-11_2023-09-20.json",
+          "sha256": "b95a499bd2fa1fde5d362fc1ae631dcfab84a4bda55fd39247031de168c2bcb3"
+        }
+      }
+    },
+    {
+      "id": "2023-09-21-sunrise",
+      "date": "2023-09-21",
+      "eventType": "sunrise",
+      "features": [
+        0,
+        0
+      ],
+      "score": 17.91960816150958,
+      "peakIndex": 0,
+      "nativeBaseline": 0,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-09-21-sunrise",
+        "date": "2023-09-21",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309210000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230921_rise.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-21_2023-09-30.json",
+          "sha256": "9f2f99865c7a2a7ba6a2102bdcb661a0621215db337bba38c0a8e4758c572813"
+        }
+      }
+    },
+    {
+      "id": "2023-09-21-sunset",
+      "date": "2023-09-21",
+      "eventType": "sunset",
+      "features": [
+        0.009000000000000001,
+        0
+      ],
+      "score": 18.082436971642547,
+      "peakIndex": 0.9,
+      "nativeBaseline": 0,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-09-21-sunset",
+        "date": "2023-09-21",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309210000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230921_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-21_2023-09-30.json",
+          "sha256": "9f2f99865c7a2a7ba6a2102bdcb661a0621215db337bba38c0a8e4758c572813"
+        }
+      }
+    },
+    {
+      "id": "2023-09-22-sunrise",
+      "date": "2023-09-22",
+      "eventType": "sunrise",
+      "features": [
+        0.001,
+        0.02140783791581675
+      ],
+      "score": 18.18894911578436,
+      "peakIndex": 0.1,
+      "nativeBaseline": 2.140783791581675,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-09-22-sunrise",
+        "date": "2023-09-22",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309220000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230922_rise.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-21_2023-09-30.json",
+          "sha256": "9f2f99865c7a2a7ba6a2102bdcb661a0621215db337bba38c0a8e4758c572813"
+        }
+      }
+    },
+    {
+      "id": "2023-09-22-sunset",
+      "date": "2023-09-22",
+      "eventType": "sunset",
+      "features": [
+        0.03,
+        0.4756546835489147
+      ],
+      "score": 24.828813419068993,
+      "peakIndex": 3,
+      "nativeBaseline": 47.56546835489147,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-09-22-sunset",
+        "date": "2023-09-22",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309220000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230922_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-21_2023-09-30.json",
+          "sha256": "9f2f99865c7a2a7ba6a2102bdcb661a0621215db337bba38c0a8e4758c572813"
+        }
+      }
+    },
+    {
+      "id": "2023-09-23-sunrise",
+      "date": "2023-09-23",
+      "eventType": "sunrise",
+      "features": [
+        0,
+        0
+      ],
+      "score": 17.91960816150958,
+      "peakIndex": 0,
+      "nativeBaseline": 0,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-09-23-sunrise",
+        "date": "2023-09-23",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309230000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230923_rise.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-21_2023-09-30.json",
+          "sha256": "9f2f99865c7a2a7ba6a2102bdcb661a0621215db337bba38c0a8e4758c572813"
+        }
+      }
+    },
+    {
+      "id": "2023-09-23-sunset",
+      "date": "2023-09-23",
+      "eventType": "sunset",
+      "features": [
+        0,
+        0.06308530892405904
+      ],
+      "score": 18.6674187524189,
+      "peakIndex": 0,
+      "nativeBaseline": 6.308530892405905,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-09-23-sunset",
+        "date": "2023-09-23",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309230000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230923_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-21_2023-09-30.json",
+          "sha256": "9f2f99865c7a2a7ba6a2102bdcb661a0621215db337bba38c0a8e4758c572813"
+        }
+      }
+    },
+    {
+      "id": "2023-09-24-sunrise",
+      "date": "2023-09-24",
+      "eventType": "sunrise",
+      "features": [
+        0.002,
+        0
+      ],
+      "score": 17.955693016266554,
+      "peakIndex": 0.2,
+      "nativeBaseline": 0,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-09-24-sunrise",
+        "date": "2023-09-24",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309240000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230924_rise.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-21_2023-09-30.json",
+          "sha256": "9f2f99865c7a2a7ba6a2102bdcb661a0621215db337bba38c0a8e4758c572813"
+        }
+      }
+    },
+    {
+      "id": "2023-09-24-sunset",
+      "date": "2023-09-24",
+      "eventType": "sunset",
+      "features": [
+        0,
+        0.002526349138503386
+      ],
+      "score": 17.949099882354314,
+      "peakIndex": 0,
+      "nativeBaseline": 0.2526349138503386,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-09-24-sunset",
+        "date": "2023-09-24",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309240000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230924_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-21_2023-09-30.json",
+          "sha256": "9f2f99865c7a2a7ba6a2102bdcb661a0621215db337bba38c0a8e4758c572813"
+        }
+      }
+    },
+    {
+      "id": "2023-09-25-sunrise",
+      "date": "2023-09-25",
+      "eventType": "sunrise",
+      "features": [
+        0,
+        0.025099230250901914
+      ],
+      "score": 18.214291844606745,
+      "peakIndex": 0,
+      "nativeBaseline": 2.5099230250901914,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-09-25-sunrise",
+        "date": "2023-09-25",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309250000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230925_rise.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-21_2023-09-30.json",
+          "sha256": "9f2f99865c7a2a7ba6a2102bdcb661a0621215db337bba38c0a8e4758c572813"
+        }
+      }
+    },
+    {
+      "id": "2023-09-25-sunset",
+      "date": "2023-09-25",
+      "eventType": "sunset",
+      "features": [
+        0,
+        0.1628879470554685
+      ],
+      "score": 19.899177237495714,
+      "peakIndex": 0,
+      "nativeBaseline": 16.28879470554685,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-09-25-sunset",
+        "date": "2023-09-25",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309250000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230925_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-21_2023-09-30.json",
+          "sha256": "9f2f99865c7a2a7ba6a2102bdcb661a0621215db337bba38c0a8e4758c572813"
+        }
+      }
+    },
+    {
+      "id": "2023-09-26-sunrise",
+      "date": "2023-09-26",
+      "eventType": "sunrise",
+      "features": [
+        0,
+        0.07861319669852902
+      ],
+      "score": 18.85513183981609,
+      "peakIndex": 0,
+      "nativeBaseline": 7.861319669852903,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-09-26-sunrise",
+        "date": "2023-09-26",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309260000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230926_rise.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-21_2023-09-30.json",
+          "sha256": "9f2f99865c7a2a7ba6a2102bdcb661a0621215db337bba38c0a8e4758c572813"
+        }
+      }
+    },
+    {
+      "id": "2023-09-26-sunset",
+      "date": "2023-09-26",
+      "eventType": "sunset",
+      "features": [
+        0,
+        0.13228206674056758
+      ],
+      "score": 19.515069003795535,
+      "peakIndex": 0,
+      "nativeBaseline": 13.228206674056757,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-09-26-sunset",
+        "date": "2023-09-26",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309260000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230926_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-21_2023-09-30.json",
+          "sha256": "9f2f99865c7a2a7ba6a2102bdcb661a0621215db337bba38c0a8e4758c572813"
+        }
+      }
+    },
+    {
+      "id": "2023-09-27-sunrise",
+      "date": "2023-09-27",
+      "eventType": "sunrise",
+      "features": [
+        0,
+        0.011953017422719677
+      ],
+      "score": 18.059478234424006,
+      "peakIndex": 0,
+      "nativeBaseline": 1.1953017422719676,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-09-27-sunrise",
+        "date": "2023-09-27",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309270000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230927_rise.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-21_2023-09-30.json",
+          "sha256": "9f2f99865c7a2a7ba6a2102bdcb661a0621215db337bba38c0a8e4758c572813"
+        }
+      }
+    },
+    {
+      "id": "2023-09-27-sunset",
+      "date": "2023-09-27",
+      "eventType": "sunset",
+      "features": [
+        0,
+        0.2138953011580624
+      ],
+      "score": 20.551895660110254,
+      "peakIndex": 0,
+      "nativeBaseline": 21.38953011580624,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-09-27-sunset",
+        "date": "2023-09-27",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309270000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230927_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-21_2023-09-30.json",
+          "sha256": "9f2f99865c7a2a7ba6a2102bdcb661a0621215db337bba38c0a8e4758c572813"
+        }
+      }
+    },
+    {
+      "id": "2023-09-28-sunrise",
+      "date": "2023-09-28",
+      "eventType": "sunrise",
+      "features": [
+        0,
+        0.32601056747695656
+      ],
+      "score": 22.041910018522845,
+      "peakIndex": 0,
+      "nativeBaseline": 32.60105674769566,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-09-28-sunrise",
+        "date": "2023-09-28",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309280000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230928_rise.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-21_2023-09-30.json",
+          "sha256": "9f2f99865c7a2a7ba6a2102bdcb661a0621215db337bba38c0a8e4758c572813"
+        }
+      }
+    },
+    {
+      "id": "2023-09-28-sunset",
+      "date": "2023-09-28",
+      "eventType": "sunset",
+      "features": [
+        0,
+        0.2673723353922439
+      ],
+      "score": 21.25311725447969,
+      "peakIndex": 0,
+      "nativeBaseline": 26.73723353922439,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-09-28-sunset",
+        "date": "2023-09-28",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309280000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230928_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-21_2023-09-30.json",
+          "sha256": "9f2f99865c7a2a7ba6a2102bdcb661a0621215db337bba38c0a8e4758c572813"
+        }
+      }
+    },
+    {
+      "id": "2023-09-29-sunrise",
+      "date": "2023-09-29",
+      "eventType": "sunrise",
+      "features": [
+        0,
+        0.14944570114570685
+      ],
+      "score": 19.729779354084986,
+      "peakIndex": 0,
+      "nativeBaseline": 14.944570114570686,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-09-29-sunrise",
+        "date": "2023-09-29",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309290000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230929_rise.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-21_2023-09-30.json",
+          "sha256": "9f2f99865c7a2a7ba6a2102bdcb661a0621215db337bba38c0a8e4758c572813"
+        }
+      }
+    },
+    {
+      "id": "2023-09-29-sunset",
+      "date": "2023-09-29",
+      "eventType": "sunset",
+      "features": [
+        0,
+        0.12186822989874267
+      ],
+      "score": 19.38566119308774,
+      "peakIndex": 0,
+      "nativeBaseline": 12.186822989874267,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-09-29-sunset",
+        "date": "2023-09-29",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309290000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230929_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-21_2023-09-30.json",
+          "sha256": "9f2f99865c7a2a7ba6a2102bdcb661a0621215db337bba38c0a8e4758c572813"
+        }
+      }
+    },
+    {
+      "id": "2023-09-30-sunrise",
+      "date": "2023-09-30",
+      "eventType": "sunrise",
+      "features": [
+        0.025,
+        0.578182819714678
+      ],
+      "score": 26.25860237850659,
+      "peakIndex": 2.5,
+      "nativeBaseline": 57.818281971467805,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-09-30-sunrise",
+        "date": "2023-09-30",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309300000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230930_rise.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-21_2023-09-30.json",
+          "sha256": "9f2f99865c7a2a7ba6a2102bdcb661a0621215db337bba38c0a8e4758c572813"
+        }
+      }
+    },
+    {
+      "id": "2023-09-30-sunset",
+      "date": "2023-09-30",
+      "eventType": "sunset",
+      "features": [
+        0,
+        0.0001394634175033567
+      ],
+      "score": 17.921235220653443,
+      "peakIndex": 0,
+      "nativeBaseline": 0.013946341750335668,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-09-30-sunset",
+        "date": "2023-09-30",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202309300000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20230930_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-09-21_2023-09-30.json",
+          "sha256": "9f2f99865c7a2a7ba6a2102bdcb661a0621215db337bba38c0a8e4758c572813"
+        }
+      }
+    },
+    {
+      "id": "2023-10-01-sunrise",
+      "date": "2023-10-01",
+      "eventType": "sunrise",
+      "features": [
+        0.14300000000000002,
+        0.3842205819742906
+      ],
+      "score": 26.08066237115066,
+      "peakIndex": 14.3,
+      "nativeBaseline": 38.42205819742906,
+      "observedGrade": 4,
+      "observation": {
+        "id": "2023-10-01-sunrise",
+        "date": "2023-10-01",
+        "eventType": "sunrise",
+        "observedGrade": 4,
+        "observedLabel": "中到大烧",
+        "observedCloud": "高积云",
+        "observedColour": "橘红色,橘色",
+        "originalPrediction": "中到大烧",
+        "evidenceUrls": "https://weibo.com/7838180821/NlOAq31GR",
+        "originalMap": "/static/media/ERA5/202310010000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231001_rise.jpg",
+        "evidenceState": "linked_source",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-01_2023-10-10.json",
+          "sha256": "5ba3b7697b130f8d632a25a6ca19176dd92d39e06f4d0ecb20e7a20f8a81a419"
+        }
+      }
+    },
+    {
+      "id": "2023-10-01-sunset",
+      "date": "2023-10-01",
+      "eventType": "sunset",
+      "features": [
+        0,
+        0.0011860632953995835
+      ],
+      "score": 17.93344913209668,
+      "peakIndex": 0,
+      "nativeBaseline": 0.11860632953995834,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-10-01-sunset",
+        "date": "2023-10-01",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310010000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231001_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-01_2023-10-10.json",
+          "sha256": "5ba3b7697b130f8d632a25a6ca19176dd92d39e06f4d0ecb20e7a20f8a81a419"
+        }
+      }
+    },
+    {
+      "id": "2023-10-02-sunrise",
+      "date": "2023-10-02",
+      "eventType": "sunrise",
+      "features": [
+        0.43700000000000006,
+        0.4719219350837697
+      ],
+      "score": 35.163448845880126,
+      "peakIndex": 43.7,
+      "nativeBaseline": 47.19219350837697,
+      "observedGrade": 3,
+      "observation": {
+        "id": "2023-10-02-sunrise",
+        "date": "2023-10-02",
+        "eventType": "sunrise",
+        "observedGrade": 3,
+        "observedLabel": "小到中烧",
+        "observedCloud": "高积云",
+        "observedColour": "橘红色,橘色",
+        "originalPrediction": "中到大烧",
+        "evidenceUrls": "https://video.weibo.com/show?fid=1034:4952334678032437",
+        "originalMap": "/static/media/ERA5/202310020000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231002_rise.jpg",
+        "evidenceState": "linked_source",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-01_2023-10-10.json",
+          "sha256": "5ba3b7697b130f8d632a25a6ca19176dd92d39e06f4d0ecb20e7a20f8a81a419"
+        }
+      }
+    },
+    {
+      "id": "2023-10-02-sunset",
+      "date": "2023-10-02",
+      "eventType": "sunset",
+      "features": [
+        0.001,
+        0.31869002863727225
+      ],
+      "score": 21.96329962431187,
+      "peakIndex": 0.1,
+      "nativeBaseline": 31.869002863727225,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-10-02-sunset",
+        "date": "2023-10-02",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310020000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231002_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-01_2023-10-10.json",
+          "sha256": "5ba3b7697b130f8d632a25a6ca19176dd92d39e06f4d0ecb20e7a20f8a81a419"
+        }
+      }
+    },
+    {
+      "id": "2023-10-03-sunrise",
+      "date": "2023-10-03",
+      "eventType": "sunrise",
+      "features": [
+        0.326,
+        0.9746502146595958
+      ],
+      "score": 41.35830923586416,
+      "peakIndex": 32.6,
+      "nativeBaseline": 97.46502146595958,
+      "observedGrade": 4,
+      "observation": {
+        "id": "2023-10-03-sunrise",
+        "date": "2023-10-03",
+        "eventType": "sunrise",
+        "observedGrade": 4,
+        "observedLabel": "中到大烧",
+        "observedCloud": "高积云",
+        "observedColour": "橘红色,橘色",
+        "originalPrediction": "小烧",
+        "evidenceUrls": "https://weibo.com/1712194175/Nm9XjwYDd\nhttps://weibo.com/1808370032/Nm8Ui5Ysy\nhttps://weibo.com/6441777827/Nm6J6xnLc\nhttps://weibo.com/1883437194/Nm6y3tICu",
+        "originalMap": "/static/media/ERA5/202310030000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231003_rise.jpg",
+        "evidenceState": "linked_source",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-01_2023-10-10.json",
+          "sha256": "5ba3b7697b130f8d632a25a6ca19176dd92d39e06f4d0ecb20e7a20f8a81a419"
+        }
+      }
+    },
+    {
+      "id": "2023-10-03-sunset",
+      "date": "2023-10-03",
+      "eventType": "sunset",
+      "features": [
+        0,
+        0.21996852148327092
+      ],
+      "score": 20.630660031358982,
+      "peakIndex": 0,
+      "nativeBaseline": 21.996852148327093,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-10-03-sunset",
+        "date": "2023-10-03",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310030000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231003_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-01_2023-10-10.json",
+          "sha256": "5ba3b7697b130f8d632a25a6ca19176dd92d39e06f4d0ecb20e7a20f8a81a419"
+        }
+      }
+    },
+    {
+      "id": "2023-10-04-sunrise",
+      "date": "2023-10-04",
+      "eventType": "sunrise",
+      "features": [
+        0.205,
+        0.12542543601469835
+      ],
+      "score": 23.666486090601513,
+      "peakIndex": 20.5,
+      "nativeBaseline": 12.542543601469836,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-10-04-sunrise",
+        "date": "2023-10-04",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310040000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231004_rise.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-01_2023-10-10.json",
+          "sha256": "5ba3b7697b130f8d632a25a6ca19176dd92d39e06f4d0ecb20e7a20f8a81a419"
+        }
+      }
+    },
+    {
+      "id": "2023-10-04-sunset",
+      "date": "2023-10-04",
+      "eventType": "sunset",
+      "features": [
+        0.193,
+        0.20832435319574963
+      ],
+      "score": 24.600968239217185,
+      "peakIndex": 19.3,
+      "nativeBaseline": 20.832435319574962,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-10-04-sunset",
+        "date": "2023-10-04",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310040000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231004_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-01_2023-10-10.json",
+          "sha256": "5ba3b7697b130f8d632a25a6ca19176dd92d39e06f4d0ecb20e7a20f8a81a419"
+        }
+      }
+    },
+    {
+      "id": "2023-10-05-sunrise",
+      "date": "2023-10-05",
+      "eventType": "sunrise",
+      "features": [
+        0.040999999999999995,
+        0.6052403434091382
+      ],
+      "score": 27.061618813464662,
+      "peakIndex": 4.1,
+      "nativeBaseline": 60.52403434091383,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-10-05-sunrise",
+        "date": "2023-10-05",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "微烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310050000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231005_rise.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-01_2023-10-10.json",
+          "sha256": "5ba3b7697b130f8d632a25a6ca19176dd92d39e06f4d0ecb20e7a20f8a81a419"
+        }
+      }
+    },
+    {
+      "id": "2023-10-05-sunset",
+      "date": "2023-10-05",
+      "eventType": "sunset",
+      "features": [
+        0,
+        0.09157363658953337
+      ],
+      "score": 19.01291436325069,
+      "peakIndex": 0,
+      "nativeBaseline": 9.157363658953336,
+      "observedGrade": 2,
+      "observation": {
+        "id": "2023-10-05-sunset",
+        "date": "2023-10-05",
+        "eventType": "sunset",
+        "observedGrade": 2,
+        "observedLabel": "小烧",
+        "observedCloud": "高积云",
+        "observedColour": "橘色",
+        "originalPrediction": "微烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310050000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231005_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-01_2023-10-10.json",
+          "sha256": "5ba3b7697b130f8d632a25a6ca19176dd92d39e06f4d0ecb20e7a20f8a81a419"
+        }
+      }
+    },
+    {
+      "id": "2023-10-06-sunrise",
+      "date": "2023-10-06",
+      "eventType": "sunrise",
+      "features": [
+        0.004,
+        0.15072025657858984
+      ],
+      "score": 19.82360374182187,
+      "peakIndex": 0.4,
+      "nativeBaseline": 15.072025657858985,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-10-06-sunrise",
+        "date": "2023-10-06",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "小烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310060000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231006_rise.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-01_2023-10-10.json",
+          "sha256": "5ba3b7697b130f8d632a25a6ca19176dd92d39e06f4d0ecb20e7a20f8a81a419"
+        }
+      }
+    },
+    {
+      "id": "2023-10-06-sunset",
+      "date": "2023-10-06",
+      "eventType": "sunset",
+      "features": [
+        0.003,
+        0.8847806814235
+      ],
+      "score": 30.653780171518303,
+      "peakIndex": 0.3,
+      "nativeBaseline": 88.47806814235,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-10-06-sunset",
+        "date": "2023-10-06",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310060000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231006_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-01_2023-10-10.json",
+          "sha256": "5ba3b7697b130f8d632a25a6ca19176dd92d39e06f4d0ecb20e7a20f8a81a419"
+        }
+      }
+    },
+    {
+      "id": "2023-10-07-sunrise",
+      "date": "2023-10-07",
+      "eventType": "sunrise",
+      "features": [
+        0.051,
+        0.7797981969674348
+      ],
+      "score": 30.13685208067783,
+      "peakIndex": 5.1,
+      "nativeBaseline": 77.97981969674348,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-10-07-sunrise",
+        "date": "2023-10-07",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "微烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310070000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231007_rise.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-01_2023-10-10.json",
+          "sha256": "5ba3b7697b130f8d632a25a6ca19176dd92d39e06f4d0ecb20e7a20f8a81a419"
+        }
+      }
+    },
+    {
+      "id": "2023-10-07-sunset",
+      "date": "2023-10-07",
+      "eventType": "sunset",
+      "features": [
+        0,
+        0.8558202799326137
+      ],
+      "score": 30.090270864696567,
+      "peakIndex": 0,
+      "nativeBaseline": 85.58202799326136,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-10-07-sunset",
+        "date": "2023-10-07",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310070000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231007_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-01_2023-10-10.json",
+          "sha256": "5ba3b7697b130f8d632a25a6ca19176dd92d39e06f4d0ecb20e7a20f8a81a419"
+        }
+      }
+    },
+    {
+      "id": "2023-10-08-sunrise",
+      "date": "2023-10-08",
+      "eventType": "sunrise",
+      "features": [
+        0.46799999999999997,
+        0.9270589059529374
+      ],
+      "score": 44.69825483466834,
+      "peakIndex": 46.8,
+      "nativeBaseline": 92.70589059529374,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-10-08-sunrise",
+        "date": "2023-10-08",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310080000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231008_rise.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-01_2023-10-10.json",
+          "sha256": "5ba3b7697b130f8d632a25a6ca19176dd92d39e06f4d0ecb20e7a20f8a81a419"
+        }
+      }
+    },
+    {
+      "id": "2023-10-08-sunset",
+      "date": "2023-10-08",
+      "eventType": "sunset",
+      "features": [
+        0,
+        0.048508419319911615
+      ],
+      "score": 18.492515400875476,
+      "peakIndex": 0,
+      "nativeBaseline": 4.8508419319911615,
+      "observedGrade": 3,
+      "observation": {
+        "id": "2023-10-08-sunset",
+        "date": "2023-10-08",
+        "eventType": "sunset",
+        "observedGrade": 3,
+        "observedLabel": "小到中烧",
+        "observedCloud": "高积云,卷云",
+        "observedColour": "橘色",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "https://weibo.com/6004516853/NmV4ICMeZ\nhttps://weibo.com/5677499658/NmV8qh0ZB",
+        "originalMap": "/static/media/ERA5/202310080000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231008_set.jpg",
+        "evidenceState": "linked_source",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-01_2023-10-10.json",
+          "sha256": "5ba3b7697b130f8d632a25a6ca19176dd92d39e06f4d0ecb20e7a20f8a81a419"
+        }
+      }
+    },
+    {
+      "id": "2023-10-09-sunrise",
+      "date": "2023-10-09",
+      "eventType": "sunrise",
+      "features": [
+        0.003,
+        0.24595259232204467
+      ],
+      "score": 21.03117585669333,
+      "peakIndex": 0.3,
+      "nativeBaseline": 24.595259232204466,
+      "observedGrade": 2,
+      "observation": {
+        "id": "2023-10-09-sunrise",
+        "date": "2023-10-09",
+        "eventType": "sunrise",
+        "observedGrade": 2,
+        "observedLabel": "小烧",
+        "observedCloud": "高积云",
+        "observedColour": "橘红色,橘色",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310090000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231009_rise.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-01_2023-10-10.json",
+          "sha256": "5ba3b7697b130f8d632a25a6ca19176dd92d39e06f4d0ecb20e7a20f8a81a419"
+        }
+      }
+    },
+    {
+      "id": "2023-10-09-sunset",
+      "date": "2023-10-09",
+      "eventType": "sunset",
+      "features": [
+        0.092,
+        0.37976954262291135
+      ],
+      "score": 24.82772307437772,
+      "peakIndex": 9.2,
+      "nativeBaseline": 37.97695426229114,
+      "observedGrade": 3,
+      "observation": {
+        "id": "2023-10-09-sunset",
+        "date": "2023-10-09",
+        "eventType": "sunset",
+        "observedGrade": 3,
+        "observedLabel": "小到中烧",
+        "observedCloud": "高积云",
+        "observedColour": "橘色",
+        "originalPrediction": "中到大烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310090000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231009_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-01_2023-10-10.json",
+          "sha256": "5ba3b7697b130f8d632a25a6ca19176dd92d39e06f4d0ecb20e7a20f8a81a419"
+        }
+      }
+    },
+    {
+      "id": "2023-10-10-sunrise",
+      "date": "2023-10-10",
+      "eventType": "sunrise",
+      "features": [
+        0,
+        0.03219471550101701
+      ],
+      "score": 18.29827804638013,
+      "peakIndex": 0,
+      "nativeBaseline": 3.219471550101701,
+      "observedGrade": 5,
+      "observation": {
+        "id": "2023-10-10-sunrise",
+        "date": "2023-10-10",
+        "eventType": "sunrise",
+        "observedGrade": 5,
+        "observedLabel": "大烧",
+        "observedCloud": "高积云",
+        "observedColour": "橘红色,橘色",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "https://weibo.com/2929915142/Nna0b6J3s\nhttps://weibo.com/1842458205/Nn9FG5pC1\nhttps://weibo.com/1525790453/Nn9CGlaJ8\nhttps://weibo.com/6441777827/NncXl6Ic9\nhttps://weibo.com/5878164542/Nn9rs667O\nhttps://weibo.com/5615223329/Nnasu3uyZ",
+        "originalMap": "/static/media/ERA5/202310100000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231010_rise.jpg",
+        "evidenceState": "linked_source",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-01_2023-10-10.json",
+          "sha256": "5ba3b7697b130f8d632a25a6ca19176dd92d39e06f4d0ecb20e7a20f8a81a419"
+        }
+      }
+    },
+    {
+      "id": "2023-10-10-sunset",
+      "date": "2023-10-10",
+      "eventType": "sunset",
+      "features": [
+        0.006,
+        0.7842996471364426
+      ],
+      "score": 29.061977465021155,
+      "peakIndex": 0.6,
+      "nativeBaseline": 78.42996471364427,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-10-10-sunset",
+        "date": "2023-10-10",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310100000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231010_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-01_2023-10-10.json",
+          "sha256": "5ba3b7697b130f8d632a25a6ca19176dd92d39e06f4d0ecb20e7a20f8a81a419"
+        }
+      }
+    },
+    {
+      "id": "2023-10-11-sunrise",
+      "date": "2023-10-11",
+      "eventType": "sunrise",
+      "features": [
+        0,
+        0.002247503269543208
+      ],
+      "score": 17.94584287193423,
+      "peakIndex": 0,
+      "nativeBaseline": 0.22475032695432082,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-10-11-sunrise",
+        "date": "2023-10-11",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310110000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231011_rise.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-11_2023-10-20.json",
+          "sha256": "77b22fb80dc1f32b070d0c1d8818138dd597423111f286e85bd6cbed83cc1946"
+        }
+      }
+    },
+    {
+      "id": "2023-10-11-sunset",
+      "date": "2023-10-11",
+      "eventType": "sunset",
+      "features": [
+        0,
+        0.06017022593889175
+      ],
+      "score": 18.63233995142888,
+      "peakIndex": 0,
+      "nativeBaseline": 6.017022593889175,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-10-11-sunset",
+        "date": "2023-10-11",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310110000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231011_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-11_2023-10-20.json",
+          "sha256": "77b22fb80dc1f32b070d0c1d8818138dd597423111f286e85bd6cbed83cc1946"
+        }
+      }
+    },
+    {
+      "id": "2023-10-12-sunrise",
+      "date": "2023-10-12",
+      "eventType": "sunrise",
+      "features": [
+        0,
+        0
+      ],
+      "score": 17.91960816150958,
+      "peakIndex": 0,
+      "nativeBaseline": 0,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-10-12-sunrise",
+        "date": "2023-10-12",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310120000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231012_rise.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-11_2023-10-20.json",
+          "sha256": "77b22fb80dc1f32b070d0c1d8818138dd597423111f286e85bd6cbed83cc1946"
+        }
+      }
+    },
+    {
+      "id": "2023-10-12-sunset",
+      "date": "2023-10-12",
+      "eventType": "sunset",
+      "features": [
+        0,
+        0.30026701761841285
+      ],
+      "score": 21.693049885054013,
+      "peakIndex": 0,
+      "nativeBaseline": 30.026701761841284,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-10-12-sunset",
+        "date": "2023-10-12",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310120000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231012_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-11_2023-10-20.json",
+          "sha256": "77b22fb80dc1f32b070d0c1d8818138dd597423111f286e85bd6cbed83cc1946"
+        }
+      }
+    },
+    {
+      "id": "2023-10-13-sunrise",
+      "date": "2023-10-13",
+      "eventType": "sunrise",
+      "features": [
+        0,
+        0
+      ],
+      "score": 17.91960816150958,
+      "peakIndex": 0,
+      "nativeBaseline": 0,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-10-13-sunrise",
+        "date": "2023-10-13",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310130000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231013_rise.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-11_2023-10-20.json",
+          "sha256": "77b22fb80dc1f32b070d0c1d8818138dd597423111f286e85bd6cbed83cc1946"
+        }
+      }
+    },
+    {
+      "id": "2023-10-13-sunset",
+      "date": "2023-10-13",
+      "eventType": "sunset",
+      "features": [
+        0,
+        0.0747125280914046
+      ],
+      "score": 18.807841682006167,
+      "peakIndex": 0,
+      "nativeBaseline": 7.471252809140461,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-10-13-sunset",
+        "date": "2023-10-13",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310130000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231013_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-11_2023-10-20.json",
+          "sha256": "77b22fb80dc1f32b070d0c1d8818138dd597423111f286e85bd6cbed83cc1946"
+        }
+      }
+    },
+    {
+      "id": "2023-10-14-sunrise",
+      "date": "2023-10-14",
+      "eventType": "sunrise",
+      "features": [
+        0.451,
+        0.9053571536646607
+      ],
+      "score": 43.759709533869426,
+      "peakIndex": 45.1,
+      "nativeBaseline": 90.53571536646608,
+      "observedGrade": 2,
+      "observation": {
+        "id": "2023-10-14-sunrise",
+        "date": "2023-10-14",
+        "eventType": "sunrise",
+        "observedGrade": 2,
+        "observedLabel": "小烧",
+        "observedCloud": "高积云,卷云",
+        "observedColour": "橘红色,橘色",
+        "originalPrediction": "中到大烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310140000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231014_rise.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-11_2023-10-20.json",
+          "sha256": "77b22fb80dc1f32b070d0c1d8818138dd597423111f286e85bd6cbed83cc1946"
+        }
+      }
+    },
+    {
+      "id": "2023-10-14-sunset",
+      "date": "2023-10-14",
+      "eventType": "sunset",
+      "features": [
+        0,
+        0.04028524822534027
+      ],
+      "score": 18.394408534584336,
+      "peakIndex": 0,
+      "nativeBaseline": 4.028524822534027,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-10-14-sunset",
+        "date": "2023-10-14",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310140000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231014_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-11_2023-10-20.json",
+          "sha256": "77b22fb80dc1f32b070d0c1d8818138dd597423111f286e85bd6cbed83cc1946"
+        }
+      }
+    },
+    {
+      "id": "2023-10-15-sunrise",
+      "date": "2023-10-15",
+      "eventType": "sunrise",
+      "features": [
+        0,
+        0.2495838847546219
+      ],
+      "score": 21.017943553158926,
+      "peakIndex": 0,
+      "nativeBaseline": 24.95838847546219,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-10-15-sunrise",
+        "date": "2023-10-15",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310150000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231015_rise.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-11_2023-10-20.json",
+          "sha256": "77b22fb80dc1f32b070d0c1d8818138dd597423111f286e85bd6cbed83cc1946"
+        }
+      }
+    },
+    {
+      "id": "2023-10-15-sunset",
+      "date": "2023-10-15",
+      "eventType": "sunset",
+      "features": [
+        0,
+        0.39351698283011943
+      ],
+      "score": 22.975723716407156,
+      "peakIndex": 0,
+      "nativeBaseline": 39.35169828301194,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-10-15-sunset",
+        "date": "2023-10-15",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310150000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231015_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-11_2023-10-20.json",
+          "sha256": "77b22fb80dc1f32b070d0c1d8818138dd597423111f286e85bd6cbed83cc1946"
+        }
+      }
+    },
+    {
+      "id": "2023-10-16-sunrise",
+      "date": "2023-10-16",
+      "eventType": "sunrise",
+      "features": [
+        0,
+        0
+      ],
+      "score": 17.91960816150958,
+      "peakIndex": 0,
+      "nativeBaseline": 0,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-10-16-sunrise",
+        "date": "2023-10-16",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310160000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231016_rise.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-11_2023-10-20.json",
+          "sha256": "77b22fb80dc1f32b070d0c1d8818138dd597423111f286e85bd6cbed83cc1946"
+        }
+      }
+    },
+    {
+      "id": "2023-10-16-sunset",
+      "date": "2023-10-16",
+      "eventType": "sunset",
+      "features": [
+        0,
+        0
+      ],
+      "score": 17.91960816150958,
+      "peakIndex": 0,
+      "nativeBaseline": 0,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-10-16-sunset",
+        "date": "2023-10-16",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310160000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231016_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-11_2023-10-20.json",
+          "sha256": "77b22fb80dc1f32b070d0c1d8818138dd597423111f286e85bd6cbed83cc1946"
+        }
+      }
+    },
+    {
+      "id": "2023-10-17-sunrise",
+      "date": "2023-10-17",
+      "eventType": "sunrise",
+      "features": [
+        0,
+        0
+      ],
+      "score": 17.91960816150958,
+      "peakIndex": 0,
+      "nativeBaseline": 0,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-10-17-sunrise",
+        "date": "2023-10-17",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310170000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231017_rise.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-11_2023-10-20.json",
+          "sha256": "77b22fb80dc1f32b070d0c1d8818138dd597423111f286e85bd6cbed83cc1946"
+        }
+      }
+    },
+    {
+      "id": "2023-10-17-sunset",
+      "date": "2023-10-17",
+      "eventType": "sunset",
+      "features": [
+        0,
+        0.050358532816632454
+      ],
+      "score": 18.514643917969252,
+      "peakIndex": 0,
+      "nativeBaseline": 5.035853281663245,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-10-17-sunset",
+        "date": "2023-10-17",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310170000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231017_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-11_2023-10-20.json",
+          "sha256": "77b22fb80dc1f32b070d0c1d8818138dd597423111f286e85bd6cbed83cc1946"
+        }
+      }
+    },
+    {
+      "id": "2023-10-18-sunrise",
+      "date": "2023-10-18",
+      "eventType": "sunrise",
+      "features": [
+        0,
+        0
+      ],
+      "score": 17.91960816150958,
+      "peakIndex": 0,
+      "nativeBaseline": 0,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-10-18-sunrise",
+        "date": "2023-10-18",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310180000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231018_rise.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-11_2023-10-20.json",
+          "sha256": "77b22fb80dc1f32b070d0c1d8818138dd597423111f286e85bd6cbed83cc1946"
+        }
+      }
+    },
+    {
+      "id": "2023-10-18-sunset",
+      "date": "2023-10-18",
+      "eventType": "sunset",
+      "features": [
+        0,
+        0
+      ],
+      "score": 17.91960816150958,
+      "peakIndex": 0,
+      "nativeBaseline": 0,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-10-18-sunset",
+        "date": "2023-10-18",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310180000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231018_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-11_2023-10-20.json",
+          "sha256": "77b22fb80dc1f32b070d0c1d8818138dd597423111f286e85bd6cbed83cc1946"
+        }
+      }
+    },
+    {
+      "id": "2023-10-19-sunrise",
+      "date": "2023-10-19",
+      "eventType": "sunrise",
+      "features": [
+        0,
+        0.009905146891477569
+      ],
+      "score": 18.035454486372128,
+      "peakIndex": 0,
+      "nativeBaseline": 0.990514689147757,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-10-19-sunrise",
+        "date": "2023-10-19",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310190000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231019_rise.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-11_2023-10-20.json",
+          "sha256": "77b22fb80dc1f32b070d0c1d8818138dd597423111f286e85bd6cbed83cc1946"
+        }
+      }
+    },
+    {
+      "id": "2023-10-19-sunset",
+      "date": "2023-10-19",
+      "eventType": "sunset",
+      "features": [
+        0,
+        0.13551916712437026
+      ],
+      "score": 19.555427999536057,
+      "peakIndex": 0,
+      "nativeBaseline": 13.551916712437027,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-10-19-sunset",
+        "date": "2023-10-19",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310190000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231019_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-11_2023-10-20.json",
+          "sha256": "77b22fb80dc1f32b070d0c1d8818138dd597423111f286e85bd6cbed83cc1946"
+        }
+      }
+    },
+    {
+      "id": "2023-10-20-sunrise",
+      "date": "2023-10-20",
+      "eventType": "sunrise",
+      "features": [
+        0,
+        0.00019181029914761005
+      ],
+      "score": 17.921845958800674,
+      "peakIndex": 0,
+      "nativeBaseline": 0.019181029914761005,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-10-20-sunrise",
+        "date": "2023-10-20",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310200000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231020_rise.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-11_2023-10-20.json",
+          "sha256": "77b22fb80dc1f32b070d0c1d8818138dd597423111f286e85bd6cbed83cc1946"
+        }
+      }
+    },
+    {
+      "id": "2023-10-20-sunset",
+      "date": "2023-10-20",
+      "eventType": "sunset",
+      "features": [
+        0,
+        0.1541312468611972
+      ],
+      "score": 19.788702360380913,
+      "peakIndex": 0,
+      "nativeBaseline": 15.413124686119719,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-10-20-sunset",
+        "date": "2023-10-20",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310200000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231020_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-11_2023-10-20.json",
+          "sha256": "77b22fb80dc1f32b070d0c1d8818138dd597423111f286e85bd6cbed83cc1946"
+        }
+      }
+    },
+    {
+      "id": "2023-10-21-sunrise",
+      "date": "2023-10-21",
+      "eventType": "sunrise",
+      "features": [
+        0,
+        0
+      ],
+      "score": 17.91960816150958,
+      "peakIndex": 0,
+      "nativeBaseline": 0,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-10-21-sunrise",
+        "date": "2023-10-21",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310210000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231021_rise.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-21_2023-10-30.json",
+          "sha256": "cf313b72962ead47ac0f74d7d83e50d38c8f968c962d70287370a6f6fc05ac51"
+        }
+      }
+    },
+    {
+      "id": "2023-10-21-sunset",
+      "date": "2023-10-21",
+      "eventType": "sunset",
+      "features": [
+        0,
+        0
+      ],
+      "score": 17.91960816150958,
+      "peakIndex": 0,
+      "nativeBaseline": 0,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-10-21-sunset",
+        "date": "2023-10-21",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310210000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231021_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-21_2023-10-30.json",
+          "sha256": "cf313b72962ead47ac0f74d7d83e50d38c8f968c962d70287370a6f6fc05ac51"
+        }
+      }
+    },
+    {
+      "id": "2023-10-22-sunrise",
+      "date": "2023-10-22",
+      "eventType": "sunrise",
+      "features": [
+        0.22699999999999998,
+        0.47776874305745876
+      ],
+      "score": 29.637443024294676,
+      "peakIndex": 22.7,
+      "nativeBaseline": 47.77687430574588,
+      "observedGrade": 3,
+      "observation": {
+        "id": "2023-10-22-sunrise",
+        "date": "2023-10-22",
+        "eventType": "sunrise",
+        "observedGrade": 3,
+        "observedLabel": "小到中烧",
+        "observedCloud": "高积云",
+        "observedColour": "橘红色,橘色",
+        "originalPrediction": "中到大烧",
+        "evidenceUrls": "https://weibo.com/2816822382/NoZOfm6MZ",
+        "originalMap": "/static/media/ERA5/202310220000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231022_rise.jpg",
+        "evidenceState": "linked_source",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-21_2023-10-30.json",
+          "sha256": "cf313b72962ead47ac0f74d7d83e50d38c8f968c962d70287370a6f6fc05ac51"
+        }
+      }
+    },
+    {
+      "id": "2023-10-22-sunset",
+      "date": "2023-10-22",
+      "eventType": "sunset",
+      "features": [
+        0,
+        0.41925063207657404
+      ],
+      "score": 23.338922920152715,
+      "peakIndex": 0,
+      "nativeBaseline": 41.9250632076574,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-10-22-sunset",
+        "date": "2023-10-22",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310220000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231022_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-21_2023-10-30.json",
+          "sha256": "cf313b72962ead47ac0f74d7d83e50d38c8f968c962d70287370a6f6fc05ac51"
+        }
+      }
+    },
+    {
+      "id": "2023-10-23-sunrise",
+      "date": "2023-10-23",
+      "eventType": "sunrise",
+      "features": [
+        0,
+        0.23840289050475733
+      ],
+      "score": 20.87110464680136,
+      "peakIndex": 0,
+      "nativeBaseline": 23.840289050475732,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-10-23-sunrise",
+        "date": "2023-10-23",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310230000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231023_rise.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-21_2023-10-30.json",
+          "sha256": "cf313b72962ead47ac0f74d7d83e50d38c8f968c962d70287370a6f6fc05ac51"
+        }
+      }
+    },
+    {
+      "id": "2023-10-23-sunset",
+      "date": "2023-10-23",
+      "eventType": "sunset",
+      "features": [
+        0,
+        0.19269289759755992
+      ],
+      "score": 20.278668034383138,
+      "peakIndex": 0,
+      "nativeBaseline": 19.269289759755992,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-10-23-sunset",
+        "date": "2023-10-23",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310230000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231023_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-21_2023-10-30.json",
+          "sha256": "cf313b72962ead47ac0f74d7d83e50d38c8f968c962d70287370a6f6fc05ac51"
+        }
+      }
+    },
+    {
+      "id": "2023-10-24-sunrise",
+      "date": "2023-10-24",
+      "eventType": "sunrise",
+      "features": [
+        0,
+        0.0038098978254633626
+      ],
+      "score": 17.964098103763813,
+      "peakIndex": 0,
+      "nativeBaseline": 0.38098978254633625,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-10-24-sunrise",
+        "date": "2023-10-24",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310240000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231024_rise.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-21_2023-10-30.json",
+          "sha256": "cf313b72962ead47ac0f74d7d83e50d38c8f968c962d70287370a6f6fc05ac51"
+        }
+      }
+    },
+    {
+      "id": "2023-10-24-sunset",
+      "date": "2023-10-24",
+      "eventType": "sunset",
+      "features": [
+        0,
+        0.020454719974294135
+      ],
+      "score": 18.159479218393557,
+      "peakIndex": 0,
+      "nativeBaseline": 2.0454719974294133,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-10-24-sunset",
+        "date": "2023-10-24",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310240000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231024_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-21_2023-10-30.json",
+          "sha256": "cf313b72962ead47ac0f74d7d83e50d38c8f968c962d70287370a6f6fc05ac51"
+        }
+      }
+    },
+    {
+      "id": "2023-10-25-sunrise",
+      "date": "2023-10-25",
+      "eventType": "sunrise",
+      "features": [
+        0.439,
+        0
+      ],
+      "score": 27.21543603010686,
+      "peakIndex": 43.9,
+      "nativeBaseline": 0,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-10-25-sunrise",
+        "date": "2023-10-25",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "小烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310250000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231025_rise.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-21_2023-10-30.json",
+          "sha256": "cf313b72962ead47ac0f74d7d83e50d38c8f968c962d70287370a6f6fc05ac51"
+        }
+      }
+    },
+    {
+      "id": "2023-10-25-sunset",
+      "date": "2023-10-25",
+      "eventType": "sunset",
+      "features": [
+        0.35700000000000004,
+        0.9355975377808741
+      ],
+      "score": 41.52871508022396,
+      "peakIndex": 35.7,
+      "nativeBaseline": 93.55975377808741,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-10-25-sunset",
+        "date": "2023-10-25",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310250000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231025_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-21_2023-10-30.json",
+          "sha256": "cf313b72962ead47ac0f74d7d83e50d38c8f968c962d70287370a6f6fc05ac51"
+        }
+      }
+    },
+    {
+      "id": "2023-10-26-sunrise",
+      "date": "2023-10-26",
+      "eventType": "sunrise",
+      "features": [
+        0.376,
+        0
+      ],
+      "score": 25.713006410239093,
+      "peakIndex": 37.6,
+      "nativeBaseline": 0,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-10-26-sunrise",
+        "date": "2023-10-26",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310260000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231026_rise.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-21_2023-10-30.json",
+          "sha256": "cf313b72962ead47ac0f74d7d83e50d38c8f968c962d70287370a6f6fc05ac51"
+        }
+      }
+    },
+    {
+      "id": "2023-10-26-sunset",
+      "date": "2023-10-26",
+      "eventType": "sunset",
+      "features": [
+        0,
+        0.005556518300226243
+      ],
+      "score": 17.98452302235142,
+      "peakIndex": 0,
+      "nativeBaseline": 0.5556518300226243,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-10-26-sunset",
+        "date": "2023-10-26",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310260000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231026_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-21_2023-10-30.json",
+          "sha256": "cf313b72962ead47ac0f74d7d83e50d38c8f968c962d70287370a6f6fc05ac51"
+        }
+      }
+    },
+    {
+      "id": "2023-10-27-sunrise",
+      "date": "2023-10-27",
+      "eventType": "sunrise",
+      "features": [
+        0.294,
+        0.38652075283670834
+      ],
+      "score": 29.841129155195034,
+      "peakIndex": 29.4,
+      "nativeBaseline": 38.65207528367083,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-10-27-sunrise",
+        "date": "2023-10-27",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310270000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231027_rise.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-21_2023-10-30.json",
+          "sha256": "cf313b72962ead47ac0f74d7d83e50d38c8f968c962d70287370a6f6fc05ac51"
+        }
+      }
+    },
+    {
+      "id": "2023-10-27-sunset",
+      "date": "2023-10-27",
+      "eventType": "sunset",
+      "features": [
+        0.423,
+        1
+      ],
+      "score": 44.76493453847608,
+      "peakIndex": 42.3,
+      "nativeBaseline": 100,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-10-27-sunset",
+        "date": "2023-10-27",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310270000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231027_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-21_2023-10-30.json",
+          "sha256": "cf313b72962ead47ac0f74d7d83e50d38c8f968c962d70287370a6f6fc05ac51"
+        }
+      }
+    },
+    {
+      "id": "2023-10-28-sunrise",
+      "date": "2023-10-28",
+      "eventType": "sunrise",
+      "features": [
+        0.69,
+        0.9507011867949687
+      ],
+      "score": 51.94872065488107,
+      "peakIndex": 69,
+      "nativeBaseline": 95.07011867949687,
+      "observedGrade": 3,
+      "observation": {
+        "id": "2023-10-28-sunrise",
+        "date": "2023-10-28",
+        "eventType": "sunrise",
+        "observedGrade": 3,
+        "observedLabel": "小到中烧",
+        "observedCloud": "高积云,卷云",
+        "observedColour": "橘红色",
+        "originalPrediction": "中到大烧",
+        "evidenceUrls": "https://weibo.com/tv/show/1034:4961766027755588",
+        "originalMap": "/static/media/ERA5/202310280000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231028_rise.jpg",
+        "evidenceState": "linked_source",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-21_2023-10-30.json",
+          "sha256": "cf313b72962ead47ac0f74d7d83e50d38c8f968c962d70287370a6f6fc05ac51"
+        }
+      }
+    },
+    {
+      "id": "2023-10-28-sunset",
+      "date": "2023-10-28",
+      "eventType": "sunset",
+      "features": [
+        0,
+        0.1130576103857877
+      ],
+      "score": 19.27668562094775,
+      "peakIndex": 0,
+      "nativeBaseline": 11.305761038578769,
+      "observedGrade": 3,
+      "observation": {
+        "id": "2023-10-28-sunset",
+        "date": "2023-10-28",
+        "eventType": "sunset",
+        "observedGrade": 3,
+        "observedLabel": "小到中烧",
+        "observedCloud": "高积云",
+        "observedColour": "橘红色",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "https://weibo.com/7775955469/NpXHyBLLS",
+        "originalMap": "/static/media/ERA5/202310280000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231028_set.jpg",
+        "evidenceState": "linked_source",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-21_2023-10-30.json",
+          "sha256": "cf313b72962ead47ac0f74d7d83e50d38c8f968c962d70287370a6f6fc05ac51"
+        }
+      }
+    },
+    {
+      "id": "2023-10-29-sunrise",
+      "date": "2023-10-29",
+      "eventType": "sunrise",
+      "features": [
+        0.099,
+        0.28312558163990614
+      ],
+      "score": 23.579097861545673,
+      "peakIndex": 9.9,
+      "nativeBaseline": 28.312558163990616,
+      "observedGrade": 4,
+      "observation": {
+        "id": "2023-10-29-sunrise",
+        "date": "2023-10-29",
+        "eventType": "sunrise",
+        "observedGrade": 4,
+        "observedLabel": "中到大烧",
+        "observedCloud": "高积云",
+        "observedColour": "橘红色",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "https://weibo.com/1415104792/Nq2AczMgD",
+        "originalMap": "/static/media/ERA5/202310290000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231029_rise.jpg",
+        "evidenceState": "linked_source",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-21_2023-10-30.json",
+          "sha256": "cf313b72962ead47ac0f74d7d83e50d38c8f968c962d70287370a6f6fc05ac51"
+        }
+      }
+    },
+    {
+      "id": "2023-10-29-sunset",
+      "date": "2023-10-29",
+      "eventType": "sunset",
+      "features": [
+        0,
+        0.006795869767312172
+      ],
+      "score": 17.999026948648563,
+      "peakIndex": 0,
+      "nativeBaseline": 0.6795869767312172,
+      "observedGrade": 2,
+      "observation": {
+        "id": "2023-10-29-sunset",
+        "date": "2023-10-29",
+        "eventType": "sunset",
+        "observedGrade": 2,
+        "observedLabel": "小烧",
+        "observedCloud": "高积云",
+        "observedColour": "橘色,橘红色",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "https://weibo.com/1784206143/Nq6QCb4G9",
+        "originalMap": "/static/media/ERA5/202310290000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231029_set.jpg",
+        "evidenceState": "linked_source",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-21_2023-10-30.json",
+          "sha256": "cf313b72962ead47ac0f74d7d83e50d38c8f968c962d70287370a6f6fc05ac51"
+        }
+      }
+    },
+    {
+      "id": "2023-10-30-sunrise",
+      "date": "2023-10-30",
+      "eventType": "sunrise",
+      "features": [
+        0,
+        0
+      ],
+      "score": 17.91960816150958,
+      "peakIndex": 0,
+      "nativeBaseline": 0,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-10-30-sunrise",
+        "date": "2023-10-30",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310300000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231030_rise.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-21_2023-10-30.json",
+          "sha256": "cf313b72962ead47ac0f74d7d83e50d38c8f968c962d70287370a6f6fc05ac51"
+        }
+      }
+    },
+    {
+      "id": "2023-10-30-sunset",
+      "date": "2023-10-30",
+      "eventType": "sunset",
+      "features": [
+        0,
+        0.10589578490908554
+      ],
+      "score": 19.1884474835848,
+      "peakIndex": 0,
+      "nativeBaseline": 10.589578490908554,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-10-30-sunset",
+        "date": "2023-10-30",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310300000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231030_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-21_2023-10-30.json",
+          "sha256": "cf313b72962ead47ac0f74d7d83e50d38c8f968c962d70287370a6f6fc05ac51"
+        }
+      }
+    },
+    {
+      "id": "2023-10-31-sunrise",
+      "date": "2023-10-31",
+      "eventType": "sunrise",
+      "features": [
+        0,
+        0
+      ],
+      "score": 17.91960816150958,
+      "peakIndex": 0,
+      "nativeBaseline": 0,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-10-31-sunrise",
+        "date": "2023-10-31",
+        "eventType": "sunrise",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310310000_rise.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231031_rise.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-31_2023-10-31.json",
+          "sha256": "cb4ad2657a0a552b7ac02ec5728516e5b85e2f6ecb03d01698ad97f9f1ffbfed"
+        }
+      }
+    },
+    {
+      "id": "2023-10-31-sunset",
+      "date": "2023-10-31",
+      "eventType": "sunset",
+      "features": [
+        0,
+        0
+      ],
+      "score": 17.91960816150958,
+      "peakIndex": 0,
+      "nativeBaseline": 0,
+      "observedGrade": 0,
+      "observation": {
+        "id": "2023-10-31-sunset",
+        "date": "2023-10-31",
+        "eventType": "sunset",
+        "observedGrade": 0,
+        "observedLabel": "基本不烧",
+        "observedCloud": "-",
+        "observedColour": "-",
+        "originalPrediction": "基本不烧",
+        "evidenceUrls": "-",
+        "originalMap": "/static/media/ERA5/202310310000_set.jpg",
+        "originalSection": "/static/media/ERA5/上海市_20231031_set.jpg",
+        "evidenceState": "source_label_only",
+        "labelSource": {
+          "file": "research/sources/scattering-validation-calendar/shanghai-2023-10-31_2023-10-31.json",
+          "sha256": "cb4ad2657a0a552b7ac02ec5728516e5b85e2f6ecb03d01698ad97f9f1ffbfed"
+        }
+      }
+    }
+  ],
+  "calendarEvents": 122,
+  "missingSourceLabels": 0,
+  "rankings": {
+    "empirical": {
+      "evaluatedCases": 122,
+      "missingScores": 0,
+      "positiveControlPairs": 2496,
+      "correctlyOrderedPairs": 1847,
+      "tiedPairs": 0,
+      "pairwiseAuc": 0.7399839743589743,
+      "ordinalSpearman": 0.35603505847737654
+    },
+    "neutralPeakIndex": {
+      "evaluatedCases": 122,
+      "missingScores": 0,
+      "positiveControlPairs": 2496,
+      "correctlyOrderedPairs": 1641,
+      "tiedPairs": 429,
+      "pairwiseAuc": 0.7433894230769231,
+      "ordinalSpearman": 0.3969605808902334
+    },
+    "nativeLayerBaseline": {
+      "evaluatedCases": 122,
+      "missingScores": 0,
+      "positiveControlPairs": 2496,
+      "correctlyOrderedPairs": 1781,
+      "tiedPairs": 1,
+      "pairwiseAuc": 0.7137419871794872,
+      "ordinalSpearman": 0.31962460444948054
+    }
+  },
+  "primaryComparison": {
+    "difference": -0.003405448717948789,
+    "interval95": [
+      -0.051812600644122436,
+      0.03766170143800092
+    ],
+    "replicates": 1000,
+    "validReplicates": 1000,
+    "blockDays": 3,
+    "seed": 20230901,
+    "sampling": "paired circular moving blocks of whole calendar days",
+    "calendarDates": 61,
+    "pairedEvents": 122
+  },
+  "baselineComparison": {
+    "difference": 0.026241987179487114,
+    "interval95": [
+      -0.009302824498288363,
+      0.057783964786600694
+    ],
+    "replicates": 1000,
+    "validReplicates": 1000,
+    "blockDays": 3,
+    "seed": 20230901,
+    "sampling": "paired circular moving blocks of whole calendar days",
+    "calendarDates": 61,
+    "pairedEvents": 122
+  },
+  "alertBudget": {
+    "empirical": {
+      "budget": 20,
+      "availablePredictions": 122,
+      "selected": 20,
+      "knownLabels": 20,
+      "positive": 10,
+      "missingLabels": 0,
+      "precisionOnKnownLabels": 0.5,
+      "selectedLabelSensitivityRange": [
+        0.5,
+        0.5
+      ],
+      "selectedIds": [
+        "2023-09-05-sunset",
+        "2023-09-20-sunrise",
+        "2023-10-28-sunrise",
+        "2023-09-02-sunrise",
+        "2023-09-01-sunrise",
+        "2023-09-01-sunset",
+        "2023-09-19-sunset",
+        "2023-10-27-sunset",
+        "2023-10-08-sunrise",
+        "2023-09-13-sunrise",
+        "2023-10-14-sunrise",
+        "2023-09-15-sunrise",
+        "2023-10-25-sunset",
+        "2023-10-03-sunrise",
+        "2023-09-10-sunset",
+        "2023-09-18-sunrise",
+        "2023-09-11-sunset",
+        "2023-09-12-sunrise",
+        "2023-09-19-sunrise",
+        "2023-09-05-sunrise"
+      ]
+    },
+    "neutralPeakIndex": {
+      "budget": 20,
+      "availablePredictions": 122,
+      "selected": 20,
+      "knownLabels": 20,
+      "positive": 11,
+      "missingLabels": 0,
+      "precisionOnKnownLabels": 0.55,
+      "selectedLabelSensitivityRange": [
+        0.55,
+        0.55
+      ],
+      "selectedIds": [
+        "2023-09-05-sunset",
+        "2023-09-20-sunrise",
+        "2023-09-01-sunrise",
+        "2023-09-01-sunset",
+        "2023-10-28-sunrise",
+        "2023-09-02-sunrise",
+        "2023-09-18-sunrise",
+        "2023-09-19-sunrise",
+        "2023-10-08-sunrise",
+        "2023-10-14-sunrise",
+        "2023-09-19-sunset",
+        "2023-10-25-sunrise",
+        "2023-10-02-sunrise",
+        "2023-10-27-sunset",
+        "2023-09-15-sunrise",
+        "2023-09-13-sunrise",
+        "2023-09-05-sunrise",
+        "2023-10-26-sunrise",
+        "2023-10-25-sunset",
+        "2023-10-03-sunrise"
+      ]
+    },
+    "nativeLayerBaseline": {
+      "budget": 20,
+      "availablePredictions": 122,
+      "selected": 20,
+      "knownLabels": 20,
+      "positive": 7,
+      "missingLabels": 0,
+      "precisionOnKnownLabels": 0.35,
+      "selectedLabelSensitivityRange": [
+        0.35,
+        0.35
+      ],
+      "selectedIds": [
+        "2023-09-20-sunrise",
+        "2023-10-27-sunset",
+        "2023-09-19-sunset",
+        "2023-09-13-sunrise",
+        "2023-09-11-sunset",
+        "2023-10-03-sunrise",
+        "2023-09-05-sunset",
+        "2023-09-14-sunset",
+        "2023-10-28-sunrise",
+        "2023-10-25-sunset",
+        "2023-09-10-sunset",
+        "2023-10-08-sunrise",
+        "2023-09-12-sunrise",
+        "2023-09-20-sunset",
+        "2023-09-15-sunrise",
+        "2023-10-14-sunrise",
+        "2023-10-06-sunset",
+        "2023-10-07-sunset",
+        "2023-09-03-sunset",
+        "2023-09-02-sunrise"
+      ]
+    }
+  },
+  "scope": "Additional exploratory weak-source-label ranking candidate, separate from the frozen radiance primary study. Production remains section-optics-0.3.1. ERA5/EAC4 feature scope; operational provider transfer and verified probability calibration remain separate."
+}

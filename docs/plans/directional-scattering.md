@@ -1,8 +1,8 @@
 ---
 doc_type: plan
-status: active
+status: complete
 authority: planning
-last_reconciled: 2026-11-08
+last_reconciled: 2026-11-10
 ---
 
 # Directional cloud-scattering experiment
@@ -119,9 +119,9 @@ That complete 24-job gate now passes all six media and all 432 comparisons.
 The largest material source/angle change is 0.6658%, within the 2% target.
 Candidate `f25187812a6edeb5132eccf76ee9c118ff9f63277eb260eb21ce18de05732b58`
 was frozen at 2026-11-08T02:39:04.998Z before new-date labels. The full 122-event
-weather-only prediction batch is running with unchanged source and analysis
+weather-only prediction batch completed with unchanged source and analysis
 hashes. The [independent validation record](../evidence/scattering-independent-validation.md)
-owns prediction completion, subsequent source labels and ranking results.
+now contains all 122 predictions, later source labels and ranking results.
 
 The fourteenth completed Ask ChatGPT assessment (question 15) prioritizes
 forecast quality, observation coverage and operational input transfer. A
@@ -134,14 +134,35 @@ refinement alone.
 
 Five official weather retrievals are downloaded. Together with reused August
 and static-terrain files they normalize all 122 Sep/Oct events at 37 levels.
-All 399,672 weather field series pass alignment/range checks. New-date labels
-remain unrequested. A prospective evaluation-policy draft specifies equal-Sun-
-altitude comparison to an exactly exposed frozen heuristic frame and a native
-layer baseline. Candidate/source/policy freeze follows the numerical gate;
-observed-label retrieval and new-date scoring follow that freeze.
+All 399,672 weather field series pass alignment/range checks. The final frozen
+policy specifies equal-Sun-altitude comparison to an exactly exposed frozen
+heuristic frame and a native layer baseline. Candidate/source/policy freeze
+preceded all predictions; subsequent observation retrieval and independent
+scoring completed on November 10.
 
 The original component-ablation idea now has two explicit scopes: the earlier
 representation study isolates vertical discovery/density; the new comparison
 evaluates the combined directional-source/angular observable. Its source and
 area have different physical units from the old target-strength proxy, so a
 mixed-unit factorial score would require another defined observable.
+
+## Completed experiment and continuing scientific ownership
+
+The registered physical comparison improves paired AUC by 0.124578
+[0.047974, 0.201663] on 108 scored cases, with 14 numerical failures retained.
+The top-20 physical selection has 12 positive source labels versus 11 for the
+old peak index; source-only zero coverage remains explicit. The separate
+empirical ranker changes AUC by -0.003405 [-0.051813, 0.037662] relative to
+the old peak-index feature and remains offline. Frozen recipes and both
+independent results are preserved at their evidence owners.
+
+The scoped directional-source/angular experiment is complete. Continued
+forecast-quality research at this owner now requires: numerical failure and
+compute coverage, cloud/sky colour contrast under plausible optical scenarios,
+independently covered bright-white and coloured-cloud outcomes, and transfer
+to operational GFS/IFS inputs with source/run/lead provenance. Production
+retains its existing engine. The [visible-colour audit](../evidence/bright-sky-audit.md)
+separates the delivered assessment correction from these scientific outcomes.
+The Sep/Oct calendar is now observed development evidence for future revisions;
+freeze each revised candidate before retrieving a distinct next-date validation
+calendar. The completed frozen-candidate result retains its original identity.

@@ -275,3 +275,26 @@ probabilities and operational GFS/ECMWF transfer retain separate requirements.
 saved before independent source-label access. It is an additional exploratory
 comparison, with the physical study and production engine preserved. The
 [study record](../docs/evidence/quality-ranking.md) owns evaluation and limits.
+
+## Independent results and visible-colour audit (2026-11-10)
+
+All 122 frozen Sep/Oct physical and empirical predictions now precede seven
+successful [public source-label captures](sources/scattering-validation-calendar/manifest.json).
+The physical candidate has scored-case AUC 0.871807 on 108 events, paired
+same-altitude change +0.124578 [0.047974, 0.201663], and 14 retained numerical
+failures. Its top 20 include 12 positive source labels versus 11 for the old
+peak index. The empirical candidate gives AUC 0.739984 versus 0.743389 for its
+old-index feature, with paired change -0.003405 [-0.051813, 0.037662]. The
+[physical report](experiments/scattering-independent-validation/report.md) and
+[empirical evaluation](experiments/quality-rank/evaluation.json) preserve the
+full calendar, source-only zeros, failure sensitivity and frozen identities.
+
+The [operational input audit](experiments/shanghai-sunset-2026-11-10/audit.json)
+replays Shanghai's saved November 10 sunset inputs exactly and isolates pressure
+cloud-fraction sensitivity. [Provider and WMO sources](sources/bright-sky/)
+establish their input and cloud-colour scope. Two further self-contained Ask
+ChatGPT assessments receive the actual code and evolving evidence:
+[input disagreement](chatgpt/17-bright-sky-false-alarm.md) and
+[common colour-model limits](chatgpt/18-common-mode-bright-cloud-failure.md).
+The [delivered assessment record](../docs/evidence/bright-sky-audit.md) separates
+the local UI/API correction from future validated visible-colour prediction.

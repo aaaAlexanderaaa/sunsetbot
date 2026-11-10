@@ -1,0 +1,469 @@
+I am building an independent sunrise/sunset cloud-colour forecast for Shanghai. A user reports that today's roughly 50-point prediction corresponded to an ordinary bright sky without visible sunset glow or fiery clouds. The exact page/location/model is still awaiting clarification. I have recovered the actual retained Shanghai November 10, 2026 sunset forecasts from the stopped local service, and want your judgment on the strongest justified immediate correction to make the model's output useful for that actual goal.
+
+The production engine is the complete JavaScript source appended below. It uses Open-Meteo GFS or ECMWF IFS 0.25-degree pressure-level cloud fractions, geopotential heights, CAMS AOD, and optional precipitation/visibility. Its 0..100 score is an experimental uncalibrated heuristic. Three bearings, 14 columns and 11 pressure levels drive 17 five-minute frames. In targetLight the direct transmitted spectrum is transformed with sqrt(luminance)*warmth*2.5, clamped, then multiplied by cloud fraction. Angular section weights and a saturating gain produce the score. This has no cloud scattering source, background sky radiance/contrast, microphysical cloud water/ice, or perceptual colour calculation.
+
+Recovered exact data replay to ECMWF 57.8, GFS 4.5. In the ECMWF peak at local 17:00, only the 200hPa local pressure cloud fraction is material (29.1576%, reconstructed base 11.48km). 1000/925/850hPa cloud fractions are all zero even though cloud_cover_low is 44.8061%. The overhead target produces ~53.8% of the weighted section integral; the three columns at -25/0/+25km contribute ~90.9%. Keeping ECMWF heights and all other fields, replacing only all pressure-level cloud fractions with the already acquired same-grid GFS fractions changes 57.8 to 4.6. Replacing only heights leaves 57.8, only aerosol leaves 57.8. These are deterministic input interventions with both datasets at event-time geometry; they diagnose score sensitivity, while the true cloud field remains unknown. A JSON receipt is appended with all values and target contributions.
+
+Primary documentation checked today: https://open-meteo.com/en/docs/ecmwf-api explicitly states pressure cloud cover is estimated from relative humidity using Sundqvist et al (1989). Low/mid/high layers can use native model fields, while its older IFS definitions describe RH-derived layer diagnostics; the exact variable provenance for this saved run is not supplied by the API. https://open-meteo.com/en/docs/gfs-api states GFS pressure cover is native and warns pressure levels can differ from low/mid/high cloud aggregates. https://www.noaa.gov/jetstream/clouds/color-of-clouds explains cloud colour comes from incoming spectrum and cloud scattering, and visible cloud appearance depends on background contrast.
+
+Previous frozen retrospective evidence: 164 independent June-Aug 2023 Shanghai events using ERA5/EAC4 had original-model weak-source-label AUC .716 vs native layer baseline .660. A dense/adjacent representation candidate gave .707 with paired interval crossing zero, so production stayed original. 108 zeros were curator-source-only with unverified photographic negative coverage. A simple 3-parameter rank model on 184 development events and a directional single-scattering research solver have frozen independent prediction calendars but their held-out assessments are still outstanding. We preserve this boundary and avoid tuning a threshold to this one reported failure. The newer solver is too expensive for the live 17-frame curve and its cloud radiance is not yet a calibrated quality predictor.
+
+What immediate engineering/model correction is justified by this concrete failure evidence, and what mechanism most plausibly explains the mismatch between a bright sky and actual visible coloured clouds? I want a change that improves the real forecast decision, with a concrete way to evaluate it using already preserved forecasts/public observations. Distinguish what the supplied deterministic interventions establish from the remaining unknown actual atmosphere. Existing scheduled data acquisition (08:00/16:00, eleven cities, both models, same-grid cached inputs) should stay within its authorized scope and ordinary reads must remain local. I am considering surfacing the paired-model discrepancy and native-vs-pressure cloud coverage as decision evidence, while treating actual quality-score replacement as an empirical physics task. Please judge this against a minimally more physical fast colour signal or a native cloud layer veto; there is no need to preserve that candidate approach if a stronger one follows from the actual code and facts.
+
+Actual diagnostic receipt:
+{
+  "scope": "Shanghai preset investigation; user observation location/model remains pending",
+  "cases": {
+    "gfs": {
+      "id": "bcbc085a88cb7136255b",
+      "score": 4.5,
+      "replayedScore": 4.5,
+      "sourceFetchedAt": "2026-11-10T00:00:24.732Z",
+      "event": {
+        "time": "2026-11-10T09:00:43.633Z",
+        "azimuth": 250.6,
+        "altitude": -1.07
+      },
+      "peakTime": "2026-11-10T09:00:43.633Z",
+      "local": {
+        "cloud_cover_low": 0,
+        "cloud_cover_mid": 0,
+        "cloud_cover_high": 1.2120277749167547,
+        "cloud_cover_1000hPa": 0,
+        "cloud_cover_925hPa": 0,
+        "cloud_cover_850hPa": 0,
+        "cloud_cover_700hPa": 0,
+        "cloud_cover_600hPa": 0,
+        "cloud_cover_500hPa": 0,
+        "cloud_cover_400hPa": 3,
+        "cloud_cover_300hPa": 3.9515188890033297,
+        "cloud_cover_250hPa": 0,
+        "cloud_cover_200hPa": 0.8241788869433933,
+        "cloud_cover_150hPa": 0
+      },
+      "targets": [
+        {
+          "distanceKm": -100,
+          "baseKm": 8.47,
+          "cover": 0.65,
+          "strength": 0.0426,
+          "sectionWeight": 0.013378171901987266,
+          "contribution": 0.0005699101230246575,
+          "share": 0.061226899607878964
+        },
+        {
+          "distanceKm": -50,
+          "baseKm": 8.47,
+          "cover": 0.58,
+          "strength": 0.1053,
+          "sectionWeight": 0.039295596674260636,
+          "contribution": 0.004137826329799645,
+          "share": 0.4445372472854285
+        },
+        {
+          "distanceKm": 50,
+          "baseKm": 6.61,
+          "cover": 0.52,
+          "strength": 0.1484,
+          "sectionWeight": 0.031000196662668383,
+          "contribution": 0.004600429184739988,
+          "share": 0.49423585310669255
+        }
+      ],
+      "sourceSha256": "9fb3da078c70b4047b0d76827c40f86eebe305cecb713b892a71d81c2053cb8a"
+    },
+    "ecmwf": {
+      "id": "46eae98833ef77b6c7ea",
+      "score": 57.8,
+      "replayedScore": 57.8,
+      "sourceFetchedAt": "2026-11-10T00:03:29.207Z",
+      "event": {
+        "time": "2026-11-10T09:00:43.633Z",
+        "azimuth": 250.6,
+        "altitude": -1.07
+      },
+      "peakTime": "2026-11-10T09:00:43.633Z",
+      "local": {
+        "cloud_cover_low": 44.80607555601332,
+        "cloud_cover_mid": 0,
+        "cloud_cover_high": 36.15756361073918,
+        "cloud_cover_1000hPa": 0,
+        "cloud_cover_925hPa": 0,
+        "cloud_cover_850hPa": 0,
+        "cloud_cover_700hPa": 0,
+        "cloud_cover_600hPa": 0,
+        "cloud_cover_500hPa": 0,
+        "cloud_cover_400hPa": 0,
+        "cloud_cover_300hPa": 0,
+        "cloud_cover_250hPa": 0,
+        "cloud_cover_200hPa": 29.157563610739178,
+        "cloud_cover_150hPa": 0
+      },
+      "targets": [
+        {
+          "distanceKm": -150,
+          "baseKm": 11.45,
+          "cover": 0.57,
+          "strength": 0.0503,
+          "sectionWeight": 0.006037139101048435,
+          "contribution": 0.0003036680967827363,
+          "share": 0.001760847422685834
+        },
+        {
+          "distanceKm": -100,
+          "baseKm": 11.46,
+          "cover": 0.5,
+          "strength": 0.128,
+          "sectionWeight": 0.017996602978298602,
+          "contribution": 0.0023035651812222213,
+          "share": 0.013357434828743504
+        },
+        {
+          "distanceKm": -50,
+          "baseKm": 11.47,
+          "cover": 0.42,
+          "strength": 0.229,
+          "sectionWeight": 0.05201098139410432,
+          "contribution": 0.011910514739249891,
+          "share": 0.06906421650370127
+        },
+        {
+          "distanceKm": -25,
+          "baseKm": 11.48,
+          "cover": 0.35,
+          "strength": 0.2783,
+          "sectionWeight": 0.12068624052244756,
+          "contribution": 0.03358698073739715,
+          "share": 0.19475720068663718
+        },
+        {
+          "distanceKm": 0,
+          "baseKm": 11.48,
+          "cover": 0.29,
+          "strength": 0.2916,
+          "sectionWeight": 0.3183098861837907,
+          "contribution": 0.09281916281119337,
+          "share": 0.5382204628788596
+        },
+        {
+          "distanceKm": 25,
+          "baseKm": 11.48,
+          "cover": 0.29,
+          "strength": 0.2515,
+          "sectionWeight": 0.12068624052244756,
+          "contribution": 0.030352589491395562,
+          "share": 0.176002285205495
+        },
+        {
+          "distanceKm": 100,
+          "baseKm": 11.5,
+          "cover": 0.18,
+          "strength": 0.0653,
+          "sectionWeight": 0.01805780390411579,
+          "contribution": 0.001179174594938761,
+          "share": 0.006837552473877695
+        },
+        {
+          "distanceKm": 200,
+          "baseKm": 10.18,
+          "cover": 0.18,
+          "strength": 0,
+          "sectionWeight": 0.006057670685592235,
+          "contribution": 0,
+          "share": 0
+        }
+      ],
+      "sourceSha256": "af2feae154ae6fca61ace790cf3da867fd3831c348eb48f4411cbab5855ae0fd"
+    }
+  },
+  "interventions": {
+    "pressureCloudOnly": 4.6,
+    "heightsOnly": 57.8,
+    "allWeather": 4.5,
+    "aerosolOnly": 57.8
+  }
+}
+
+Actual production engine:
+```javascript
+import { EARTH_KM, RAD, clamp, round, sectionPoint, rayPoint, earthBlocks, viewElevation, sunPosition } from './astro.mjs';
+import { LEVELS, interpolate, precedingAccumulation } from './provider.mjs';
+import { cloudTransmission } from './cloud-optics.mjs';
+import { AppError } from './errors.mjs';
+
+export const MODEL_VERSION = 'section-optics-0.3.1';
+export const DISTANCES = [-150, -100, -50, -25, 0, 25, 50, 100, 150, 200, 300, 450, 600, 800];
+export const ASSUMPTIONS = {
+  earthRadiusKm: EARTH_KM, molecularScaleHeightKm: 8, molecularExtinction550PerKm: 0.012,
+  aerosolScaleHeightsKm: [0.8, 1.5, 3], aerosolAngstromExponent: 1.2,
+  conditionalCloudExtinctionPerKm: { low: 2, mid: 0.7, high: 0.2 },
+  cloudOverlap: ['decorrelated', 'maximum', 'random-columns'], cloudHorizontalCorrelationLengthKm: 50,
+  profileCloudThreshold: 0.15,
+  minimumViewElevationDegrees: 0.5, maximumTargetDistanceKm: 300,
+  solarRayStepKm: 4, viewingRayStepKm: 0.5, timelineStepMinutes: 5,
+  qualityScale: 'independent heuristic 0–100', calibration: 'experimental',
+};
+
+const angleDifference = (a, b) => ((a - b + 540) % 360) - 180;
+export function samplingOffsets(event, location) {
+  const offsets = [-40, 40].map(m => Math.abs(angleDifference(
+    sunPosition(Date.parse(event.time) + m * 60000, location.lat, location.lon).azimuth, event.azimuth)));
+  const width = Math.ceil(Math.max(...offsets)) + 2;
+  return [-width, 0, width];
+}
+
+function profile(row, time) {
+  const levels = LEVELS.map(pressure => ({ pressure,
+    height: interpolate(row, `geopotential_height_${pressure}hPa`, time),
+    cover: interpolate(row, `cloud_cover_${pressure}hPa`, time),
+  }));
+  if (levels.some(p => p.cover === null || p.height === null || p.height < -1000 || p.cover < 0 || p.cover > 100)) {
+    throw new AppError('PROFILE_INCOMPLETE', '预报时段的垂直云层数据缺失，请选择其他时段或模型。');
+  }
+  levels.forEach(p => { p.cover /= 100; p.height /= 1000; });
+  levels.sort((a, b) => a.height - b.height);
+  if (levels.some((p, i) => i && p.height <= levels[i - 1].height)) {
+    throw new AppError('PROFILE_HEIGHT', '云层高度序列需要检查，请选择其他模型。');
+  }
+  return levels;
+}
+
+export function cloudDecks(levels, ground = 0) {
+  const decks = [];
+  let below = 0;
+  for (let i = 0; i < levels.length; i++) {
+    const level = levels[i];
+    if (level.height < ground) continue;
+    const lower = below;
+    below = Math.max(below, level.cover);
+    if (level.cover < ASSUMPTIONS.profileCloudThreshold || level.cover <= lower) continue;
+    const previous = levels[i - 1], next = levels[i + 1];
+    // A base face occupies the new fraction beyond all lower cloudy bands.
+    // Conditioning uses this exact U interval, preserving every original f.
+    const base = Math.max(ground + 0.05, previous ?
+      (previous.height + level.height) / 2 : level.height - 0.3);
+    const top = next ? (level.height + next.height) / 2 : level.height + 0.5;
+    if (top > base) decks.push({ base, top, cover: level.cover - lower, lower, upper: level.cover });
+  }
+  return decks;
+}
+
+function pair(values, value, key) {
+  let i = 0;
+  while (i < values.length - 2 && value > key(values[i + 1])) i++;
+  const a = values[i], b = values[i + 1];
+  return { a, b, index: i, w: clamp((value - key(a)) / (key(b) - key(a))) };
+}
+
+function prepareColumns(weather, aerosol, time, offset, fanOffsets) {
+  const single = fanOffsets.length === 1;
+  const angular = single ? { index: 0, w: 0 } : pair(fanOffsets, offset, v => v);
+  const first = angular.index * DISTANCES.length;
+  const second = single ? first : first + DISTANCES.length;
+  const blendOptional = (a, b) => a === null || b === null ? null : a * (1 - angular.w) + b * angular.w;
+  return DISTANCES.map((x, index) => {
+    const a = weather[first + index], b = weather[second + index];
+    const al = profile(a, time), bl = single ? al : profile(b, time);
+    const levels = al.map((p, j) => ({ pressure: p.pressure,
+      height: p.height * (1 - angular.w) + bl[j].height * angular.w,
+      cover: p.cover * (1 - angular.w) + bl[j].cover * angular.w }));
+    return { x, index, levels,
+      ground: Math.max(0, (Number(a.elevation) || 0) * (1 - angular.w) + (Number(b.elevation) || 0) * angular.w) / 1000,
+      aod: aerosol ? blendOptional(interpolate(aerosol[first + index], 'aerosol_optical_depth', time),
+        interpolate(aerosol[second + index], 'aerosol_optical_depth', time)) : null };
+  });
+}
+
+function atmosphere(columns, x, height, aerosolHeight) {
+  // Repeated integration steps share an occurrence variate per horizontal
+  // column/vertical-level cell, and accumulate conditional cloudy depth.
+  const { a, b, w } = pair(columns, x, c => c.x), column = w <= 0.5 ? a : b;
+  const levels = column.levels;
+  let level = 0;
+  while (level < levels.length - 1 && height > (levels[level].height + levels[level + 1].height) / 2) level++;
+  const within = height >= Math.max(column.ground, levels[0].height - 0.3) && height <= levels.at(-1).height + 0.5;
+  const fraction = within ? levels[level].cover : 0;
+  const coefficient = ASSUMPTIONS.conditionalCloudExtinctionPerKm[height < 3 ? 'low' : height < 8 ? 'mid' : 'high'];
+  const aod = a.aod === null || b.aod === null ? null : a.aod * (1 - w) + b.aod * w;
+  return { column: column.index, level, fraction, coefficient,
+    rayleigh: ASSUMPTIONS.molecularExtinction550PerKm * Math.exp(-Math.max(0, height) / ASSUMPTIONS.molecularScaleHeightKm),
+    aerosol: aod === null ? 0 : aod / aerosolHeight * Math.exp(-Math.max(0, height) / aerosolHeight),
+    terrain: a.ground * (1 - w) + b.ground * w, missingAerosol: aod === null };
+}
+
+function opticalDepth(columns, origin, direction, maxDistance, aerosolHeight, step) {
+  const depth = { pieces: [], rayleigh: 0, aerosol: 0, bounded: true, blocked: false, missingAerosol: false };
+  for (let start = 0; start < maxDistance; start += step) {
+    const ds = Math.min(step, maxDistance - start), p = rayPoint(origin, direction, start + ds / 2);
+    if (p.height > 65) break;
+    if (p.height < 0) { depth.blocked = true; break; }
+    const v = atmosphere(columns, p.x, p.height, aerosolHeight);
+    if ((p.x < columns[0].x || p.x > columns.at(-1).x) && p.height < 15) depth.bounded = false;
+    if (p.height < v.terrain) { depth.blocked = true; break; }
+    if (v.fraction > 0) depth.pieces.push({ column: v.column, x: columns[v.column].x, level: v.level, fraction: v.fraction, depth: v.coefficient * ds });
+    depth.rayleigh += v.rayleigh * ds;
+    depth.aerosol += v.aerosol * ds;
+    depth.missingAerosol ||= v.missingAerosol;
+  }
+  return depth;
+}
+
+function targetLight(columns, target, altitude, observerHeight, aerosolHeight, overlap) {
+  const origin = sectionPoint(target.x, target.base), direction = [Math.cos(altitude * RAD), Math.sin(altitude * RAD)];
+  const dark = { strength: 0, rgb: [0, 0, 0], bounded: true, missingAerosol: false, reason: 'earth-shadow' };
+  if (earthBlocks(origin, direction)) return dark;
+  const solar = opticalDepth(columns, origin, direction, 1600, aerosolHeight, ASSUMPTIONS.solarRayStepKm);
+  const observer = sectionPoint(0, observerHeight), delta = [origin[0] - observer[0], origin[1] - observer[1]];
+  const distance = Math.hypot(...delta);
+  const viewing = opticalDepth(columns, observer, delta.map(v => v / distance), distance,
+    aerosolHeight, ASSUMPTIONS.viewingRayStepKm);
+  if (solar.blocked || viewing.blocked) return { ...dark, reason: 'terrain-obstruction' };
+  const condition = { column: target.index, x: target.x, lower: target.lower, upper: target.upper };
+  const cloud = cloudTransmission([...solar.pieces, ...viewing.pieces], { overlap, condition,
+    correlationLengthKm: ASSUMPTIONS.cloudHorizontalCorrelationLengthKm });
+  const rgb = [680, 550, 440].map(wavelength => cloud * Math.exp(
+    -(solar.rayleigh + viewing.rayleigh) * (550 / wavelength) ** 4 -
+    (solar.aerosol + viewing.aerosol) * (550 / wavelength) ** ASSUMPTIONS.aerosolAngstromExponent));
+  const luminance = 0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[2];
+  const warmth = clamp((rgb[0] - rgb[2]) / Math.max(rgb[0], 0.00001));
+  return { strength: clamp(Math.sqrt(luminance) * warmth * 2.5) * target.cover, rgb,
+    bounded: solar.bounded && viewing.bounded, missingAerosol: solar.missingAerosol || viewing.missingAerosol,
+    viewingPathKm: round(distance, 4), viewingRayleighDepth550: round(viewing.rayleigh, 6),
+    reason: cloud < 0.05 ? 'cloud-obstruction' : 'illuminated' };
+}
+
+function frame(weather, aerosol, time, location, event, fanOffsets, aerosolHeight = 1.5, overlap = 'decorrelated') {
+  const sun = sunPosition(time, location.lat, location.lon);
+  const offset = angleDifference(sun.azimuth, event.azimuth);
+  const columns = prepareColumns(weather, aerosol, time, offset, fanOffsets);
+  const local = columns.find(c => c.x === 0), targets = [];
+  for (let i = 0; i < columns.length; i++) {
+    const column = columns[i];
+    if (Math.abs(column.x) > ASSUMPTIONS.maximumTargetDistanceKm) continue;
+    const width = ((columns[i + 1]?.x ?? column.x + 25) - (columns[i - 1]?.x ?? column.x - 25)) / 2;
+    for (const deck of cloudDecks(column.levels, column.ground)) {
+      const elevation = viewElevation(column.x, deck.base, local.ground);
+      if (elevation < ASSUMPTIONS.minimumViewElevationDegrees) continue;
+      const light = targetLight(columns, { ...deck, x: column.x, index: column.index }, sun.altitude, local.ground, aerosolHeight, overlap);
+      const weight = Math.min(1, width * Math.max(0.2, deck.base - local.ground) /
+        (column.x ** 2 + (deck.base - local.ground) ** 2)) / Math.PI;
+      targets.push({ x: column.x, baseKm: round(deck.base), topKm: round(deck.top), elevation: round(elevation),
+        cover: round(deck.cover), strength: round(light.strength, 4), weight, rgb: light.rgb,
+        reason: light.reason, bounded: light.bounded, missingAerosol: light.missingAerosol,
+        viewingPathKm: light.viewingPathKm ?? null, viewingRayleighDepth550: light.viewingRayleighDepth550 ?? null });
+    }
+  }
+  const integral = targets.reduce((sum, t) => sum + t.strength * t.weight, 0);
+  const localRow = weather[Math.floor(fanOffsets.length / 2) * DISTANCES.length + DISTANCES.indexOf(0)];
+  const rain = precedingAccumulation(localRow, 'precipitation', time), visibility = interpolate(localRow, 'visibility', time);
+  const localFactor = Math.exp(-Math.max(0, rain ?? 0) * 0.15) * (visibility === null ? 1 : clamp(visibility / 12000, 0.2, 1));
+  const score = 100 * (1 - Math.exp(-integral * 5)) * localFactor;
+  const directional = sign => 100 * (1 - Math.exp(-targets.filter(t => t.x * sign >= 0)
+    .reduce((sum, t) => sum + t.strength * t.weight * (t.x === 0 ? 0.5 : 1), 0) * 5)) * localFactor;
+  return { time: new Date(time).toISOString(), score: round(score, 1), solarAltitude: round(sun.altitude), bearing: sun.azimuth,
+    towardSun: round(directional(1), 1), oppositeSun: round(directional(-1), 1), targets, columns,
+    aod: local.aod, rain, visibility, bearingClipped: fanOffsets.length === 1 || offset < fanOffsets[0] || offset > fanOffsets.at(-1) };
+}
+
+export function computeForecast({ weather, aerosol = null, event, location, fanOffsets = [0] }) {
+  if (weather.length !== DISTANCES.length * fanOffsets.length || (aerosol && aerosol.length !== weather.length)) {
+    throw new AppError('SECTION_INCOMPLETE', '大气截面采样点缺失，请重新获取。');
+  }
+  const instant = Date.parse(event.time), timeline = [];
+  const at = (time, height = 1.5, overlap = 'decorrelated') => frame(weather, aerosol, time, location, event, fanOffsets, height, overlap);
+  for (let minutes = -40; minutes <= 40; minutes += ASSUMPTIONS.timelineStepMinutes) timeline.push(at(instant + minutes * 60000));
+  const maximum = timeline.reduce((a, b) => a.score >= b.score ? a : b);
+  const hasPeak = maximum.score > 0, peak = hasPeak ? maximum : timeline[Math.floor(timeline.length / 2)];
+  const peakIndex = timeline.indexOf(peak), missingAerosol = timeline.some(f => f.columns.some(c => c.aod === null) || f.targets.some(t => t.missingAerosol));
+  const sensitivity = missingAerosol ? [] : [0.8, 3].map(h => at(Date.parse(peak.time), h).score);
+  const overlapScores = ['maximum', 'random-columns'].map(overlap => at(Date.parse(peak.time), 1.5, overlap).score);
+  const threshold = Math.max(8, maximum.score * 0.6);
+  let left = peakIndex, right = peakIndex;
+  while (left > 0 && timeline[left - 1].score >= threshold) left--;
+  while (right < timeline.length - 1 && timeline[right + 1].score >= threshold) right++;
+  const range = maximum.score >= 8 ? { start: timeline[left].time, end: timeline[right].time,
+    resolutionMinutes: 5, clipped: left === 0 || right === timeline.length - 1 } : null;
+  const score = round(maximum.score), labels = score >= 65 ? ['较强观赏潜力', '模型显示较多受光云底，临近时结合云图观察'] : score >= 40 ?
+    ['中等观赏潜力', '模型显示部分受光云底，可留意天空变化'] : score >= 15 ? ['局部霞光潜力', '以临近云况为准'] : ['霞光条件偏弱', '留意临近日出日落的变化'];
+  const uncertainty = [
+    '云量代表出现面积，云内消光系数、云底重建及云层重叠方式采用情景假设；云水与冰含量仍待补充。',
+    '三方位插值形成随太阳转动的二维截面，细小云洞、云顶侧面受光与建筑遮挡需现场判断。',
+    '5 分钟曲线是天气场上的推算；GFS 原始资料约 1 小时、ECMWF 与 CAMS 约 3 小时，窗口精度受这些资料约束。',
+    '指数正在积累实测校准，当前表示模型观赏潜力。',
+  ];
+  if (missingAerosol) uncertainty.unshift('部分光路缺少 CAMS 气溶胶资料，缺失处按 AOD=0 计算，偏差方向与幅度待评估。');
+  if (peak.visibility === null) uncertainty.unshift('当前模式缺少能见度资料，视程修正系数暂取 1，雾与近地视程请结合现场判断。');
+  if (peak.rain === null) uncertainty.unshift('降水资料缺失，降水修正系数暂取 1。');
+  if (timeline.some(f => f.targets.some(t => !t.bounded))) uncertainty.unshift('部分低空光路超出采样边界，存在截面外遮挡风险。');
+  if (timeline.some(f => f.bearingClipped)) uncertainty.unshift('本次输入采用固定方位或超出扇面，太阳方位变化的空间信息受限。');
+  const illuminated = peak.targets.filter(t => t.strength > 0.05);
+  const minSensitivity = missingAerosol ? null : round(Math.min(peak.score, ...sensitivity));
+  const maxSensitivity = missingAerosol ? null : round(Math.max(peak.score, ...sensitivity));
+  const reasons = [
+    illuminated.length ? `参考时刻有 ${illuminated.length} 处采样云底具备可见受光条件。` : '采样云层的可见受光面积偏少。',
+    peak.aod === null ? '本地气溶胶分布待补充。' : `本地 AOD550 为 ${round(peak.aod)}，已按垂直分布假设纳入光路积分。`,
+    missingAerosol ? '气溶胶高度假设敏感性待资料齐备后评估。' : `参考时刻的气溶胶高度假设带来约 ${round(maxSensitivity - minSensitivity)} 分的变化。`,
+    `参考时刻的云层重叠情景给出 ${round(Math.min(peak.score, ...overlapScores))}–${round(Math.max(peak.score, ...overlapScores))} 分。`,
+  ];
+  return {
+    modelVersion: MODEL_VERSION, calibration: 'experimental', score, label: labels[0], advice: labels[1],
+    pathCoverage: timeline.some(f => f.targets.some(t => !t.bounded)) ? 'extrapolated' : 'within-sampling',
+    peakTime: hasPeak ? peak.time : null, window: range, towardSun: peak.towardSun, oppositeSun: peak.oppositeSun,
+    sensitivity: { minimum: minSensitivity, maximum: maxSensitivity, meaning: '参考时刻的气溶胶高度假设范围，条件为气溶胶资料齐备' },
+    cloudOverlapSensitivity: { minimum: round(Math.min(peak.score, ...overlapScores)), maximum: round(Math.max(peak.score, ...overlapScores)),
+      meaning: '参考时刻水平相关衰减、完全相关与独立水平云柱情景范围' },
+    aod: peak.aod === null ? null : round(peak.aod, 3), visibilityKm: peak.visibility === null ? null : round(peak.visibility / 1000),
+    precipitationMm: peak.rain === null ? null : round(peak.rain), missingAerosol, reasons, uncertainty,
+    timeline: timeline.map(({ time, score, solarAltitude, towardSun, oppositeSun }) => ({ time, score, solarAltitude, towardSun, oppositeSun })),
+    section: { time: peak.time, bearing: round(peak.bearing), fanOffsetsDegrees: fanOffsets, distancesKm: DISTANCES,
+      rays: peak.targets.filter(t => t.strength > 0.05).sort((a, b) => b.strength - a.strength).slice(0, 4).map(t => {
+        const origin = sectionPoint(t.x, t.baseKm), altitude = peak.solarAltitude * RAD;
+        return Array.from({ length: 49 }, (_, i) => rayPoint(origin, [Math.cos(altitude), Math.sin(altitude)], i * 25))
+          .map(p => ({ distanceKm: round(p.x), heightKm: round(p.height) }));
+      }),
+      columns: peak.columns.map(c => ({ distanceKm: c.x, terrainKm: c.ground,
+        aod: c.aod === null ? null : round(c.aod, 3), levels: c.levels.map(l => ({ pressureHpa: l.pressure, heightKm: round(l.height), cloudCover: round(l.cover * 100, 1) })) })),
+      targets: peak.targets.map(({ weight, rgb, ...t }) => ({ ...t, color: '#' + rgb.map(c => Math.round(clamp(c / Math.max(...rgb, 0.001)) ** (1 / 2.2) * 255).toString(16).padStart(2, '0')).join('') })) },
+    assumptions: ASSUMPTIONS,
+  };
+}
+
+```
+
+Provider pressure levels and fields:
+import { readFile, mkdir, writeFile, rename } from 'node:fs/promises';
+import { join } from 'node:path';
+import { AppError } from './errors.mjs';
+
+// Common actual pressure levels supported by both selected Open-Meteo models.
+export const LEVELS = [1000, 925, 850, 700, 600, 500, 400, 300, 250, 200, 150];
+export const WEATHER_FIELDS = [
+  'cloud_cover_low', 'cloud_cover_mid', 'cloud_cover_high', 'visibility',
+  'precipitation', 'relative_humidity_2m', 'wind_speed_10m',
+  ...LEVELS.flatMap(p => [`cloud_cover_${p}hPa`, `geopotential_height_${p}hPa`]),
+];
+
+export class WeatherProvider {
+  constructor({ cache, directory, now = () => Date.now(), fetcher = fetch,
+    timeout = 20000, dailyBudget = 1500, apiKey = '' }) {
+    Object.assign(this, { cache, directory, now, fetcher, timeout, dailyBudget, apiKey });
+    this.queue = Promise.resolve();
+    this.blockedUntil = 0;
+    this.requests = 0;
+    this.units = 0;
+  }
+  async budget(units) {
+    const day = new Date(this.now()).toISOString().slice(0, 10);
+    const file = join(this.directory, 'weather-budget.json');
+    let value;
+    try { value = JSON.parse(await readFile(file, 'utf8')); }
+    catch (error) {
+      if (error.code !== 'ENOENT') throw new AppError('BUDGET_STATE_INVALID', '天气额度记录需要检查，请查看服务日志。');
+    }
+    if (value !== undefined && (value === null || typeof value !== 'object' ||
+      !/^\d{4}-\d{2}-\d{2}$/.test(value.day) || !Number.isInteger(value.units) || value.units < 0 ||
+      (value.blockedUntil !== undefined && !Number.isFinite(value.blockedUntil)))) {
+      throw new AppError('BUDGET_STATE_INVALID', '天气额度记录需要检查，请查看服务日志。');
+    }
+    if (value?.blockedUntil > this.now()) {
+      this.blockedUntil = value.blockedUntil;

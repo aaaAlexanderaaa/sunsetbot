@@ -5,6 +5,23 @@ import { DISTANCES, computeForecast, samplingOffsets } from './engine.mjs';
 import { AppError } from './errors.mjs';
 import { LEVELS } from './provider.mjs';
 import { evidenceForModel } from './model-evidence.mjs';
+import { cloudInputDiagnostics } from './forecast-assessment.mjs';
+
+export function forecastSampling({ location, event: eventType, date }) {
+  const event = solarEvent(date, eventType, location.lat, location.lon, location.timezone);
+  if (!event) return { event, points: [], fanOffsets: [] };
+  const fanOffsets = samplingOffsets(event, location);
+  const points = fanOffsets.flatMap(offset => DISTANCES.map(distance =>
+    destination(location.lat, location.lon, event.azimuth + offset, distance)));
+  const utcDate = event.time.slice(0, 10);
+  return { event, points, fanOffsets, startDate: addDays(utcDate, -1), endDate: addDays(utcDate, 1) };
+}
+
+export function eventTimingNotes(hours) {
+  if (hours < 0) return ['所选日出日落事件已发生，当前显示这次事件已保存的资料计算结果。'];
+  if (hours > 36) return [`距离事件约 ${hours} 小时，建议在 36 小时内再次查看最新云况。`];
+  return [];
+}
 
 export class ForecastService {
   constructor({ provider, archive = null, now = () => Date.now() }) {
@@ -29,8 +46,8 @@ export class ForecastService {
     if (!['sunrise', 'sunset'].includes(event)) throw new AppError('EVENT_INVALID', '请选择朝霞或晚霞。', 400);
     if (!['gfs', 'ecmwf'].includes(model)) throw new AppError('MODEL_INVALID', '请选择 GFS 或 ECMWF。', 400);
     const today = civilDate(this.now(), location.timezone), date = params.get('date') ?? today;
-    if (!validDate(date) || date < today || date > addDays(today, 2)) {
-      throw new AppError('DATE_INVALID', '请选择当地今天起三天内的有效日期。', 400);
+    if (!validDate(date) || date < today || date > addDays(today, 3)) {
+      throw new AppError('DATE_INVALID', '请选择当地今天至大后天的有效日期。', 400);
     }
     return { location, event, model, date };
   }
@@ -43,19 +60,14 @@ export class ForecastService {
     try { return await task; } finally { this.pending.delete(key); }
   }
   async compute({ location, event: eventType, model, date }) {
-    const event = solarEvent(date, eventType, location.lat, location.lon, location.timezone);
+    const { event, fanOffsets, points, startDate, endDate } = forecastSampling({ location, event: eventType, date });
     if (!event) return { state: 'no_event', location, date, eventType, model };
-    const fanOffsets = samplingOffsets(event, location);
-    const points = fanOffsets.flatMap(offset => DISTANCES.map(distance => destination(location.lat, location.lon, event.azimuth + offset, distance)));
-    const utcDate = event.time.slice(0, 10), startDate = addDays(utcDate, -1), endDate = addDays(utcDate, 1);
     const weather = await this.provider.weather(points, model, startDate, endDate);
     let aerosol = null, aerosolError = null;
     try { aerosol = await this.provider.aerosol(points, startDate, endDate); }
     catch (error) { aerosolError = error.code ?? 'AEROSOL_UNAVAILABLE'; }
     const forecast = computeForecast({ weather: weather.data, aerosol: aerosol?.data ?? null, event, location, fanOffsets });
     const leadTimeHours = round((Date.parse(event.time) - this.now()) / 3600000, 1);
-    if (leadTimeHours > 36) forecast.uncertainty.unshift(`距离事件约 ${leadTimeHours} 小时，建议在 36 小时内再次查看最新云况。`);
-    if (leadTimeHours < 0) forecast.uncertainty.unshift('所选日出日落事件已发生，结果为当前资料下的回算。');
     const identity = JSON.stringify({ location, date, eventType, model, weatherAt: weather.fetchedAt,
       aerosolAt: aerosol?.fetchedAt, version: forecast.modelVersion });
     const fetchedAt = new Date(weather.fetchedAt).toISOString();
@@ -67,6 +79,7 @@ export class ForecastService {
       event: { time: event.time, azimuth: round(event.azimuth, 1), altitude: round(event.altitude, 2) },
       model, weatherModel: model === 'gfs' ? 'NCEP GFS (Open-Meteo GFS)' : 'ECMWF IFS 0.25°',
       leadTimeHours,
+      timingNotes: eventTimingNotes(leadTimeHours),
       data: { weather: { fetchedAt, cache: weather.cache, ageMinutes: round((this.now() - weather.fetchedAt) / 60000),
         initializationTime: null, provider: 'Open-Meteo', sourceUrl: model === 'gfs' ? 'https://open-meteo.com/en/docs/gfs-api' : 'https://open-meteo.com/en/docs/ecmwf-api',
         profile: 'Pressure-level cloud-cover diagnostic and geopotential height',
@@ -80,6 +93,7 @@ export class ForecastService {
       ...forecast,
       evaluation: evidenceForModel(forecast.modelVersion),
     };
+    result.cloudInputDiagnostics = cloudInputDiagnostics(result, weather.data, fanOffsets);
     result.retention = { state: 'disabled' };
     if (this.archive) {
       try { result.retention = await this.archive.save({ result, weather, aerosol, points, fanOffsets }); }

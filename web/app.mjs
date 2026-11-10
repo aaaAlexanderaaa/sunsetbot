@@ -4,6 +4,9 @@ let current = null, sequence = 0, controller, dates = [];
 const time = (instant, zone = 'Asia/Shanghai') => new Intl.DateTimeFormat('zh-CN', {
   timeZone: zone, hour: '2-digit', minute: '2-digit', hour12: false,
 }).format(new Date(instant));
+const sourceTime = instant => new Intl.DateTimeFormat('zh-CN', {
+  timeZone: 'Asia/Shanghai', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false,
+}).format(new Date(instant));
 const text = (id, value) => { $(id).textContent = value; };
 const esc = value => String(value).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
@@ -22,7 +25,7 @@ async function api(url, signal) {
   let value;
   try { value = await response.json(); }
   catch { throw Error('服务响应暂时无法读取，请重新获取。'); }
-  if (!response.ok) throw Error(`${value.error?.message || '请求失败，请稍后重新获取。'}${value.error?.retryAt ? ' 可重试时间 ' + time(value.error.retryAt) : ''}`);
+  if (!response.ok) throw Error(`${value.error?.message || '请求失败，请稍后重新获取。'}${value.error?.retryAt ? ' 可重试时间 ' + time(value.error.retryAt) : value.error?.nextUpdateAt ? ' 下次计划更新 ' + time(value.error.nextUpdateAt) : ''}`);
   return value;
 }
 
@@ -34,7 +37,7 @@ function invalidate() {
   $('empty').hidden = false;
   $('query').disabled = false;
   $('forecast-form').setAttribute('aria-busy', 'false');
-  status('条件已更新，点击“获取预报”查看结果。');
+  status('条件已更新，点击“查看预报”查看结果。');
 }
 
 function list(id, values) {
@@ -58,7 +61,7 @@ function timeline(data) {
     text('time-value', `${time(p.time)} · ${p.score.toFixed(1)} 分`);
     $('selected-line').setAttribute('d', `M${x(index)} ${top}V${base}`);
     $('selected-dot').setAttribute('cx', x(index)); $('selected-dot').setAttribute('cy', y(p.score));
-    $('time-slider').setAttribute('aria-valuetext', `${time(p.time)}，观赏潜力 ${p.score.toFixed(1)} 分`);
+    $('time-slider').setAttribute('aria-valuetext', `${time(p.time)}，受光云层指数 ${p.score.toFixed(1)} 分`);
   };
   $('time-slider').oninput = inspect;
   inspect();
@@ -96,7 +99,15 @@ function render(data) {
   text('result-title', `${data.location.name} · ${data.eventType === 'sunrise' ? '朝霞' : '晚霞'}预报`);
   text('summary-range', `云层情景 ${data.cloudOverlapSensitivity.minimum}–${data.cloudOverlapSensitivity.maximum} 分 · 研究模型`);
   text('validation-status', data.evaluation?.summaryZh ?? '当前指数用于研究诊断，历史检验资料待更新。');
-  text('score', data.score); text('verdict', data.label); text('advice', data.advice);
+  text('score', data.score); text('verdict', data.assessment?.label ?? data.label); text('advice', data.assessment?.advice ?? data.advice);
+  const comparison = data.modelComparison;
+  text('model-comparison', comparison?.state === 'available' ?
+    comparison.forecasts.map(f => `${f.model.toUpperCase()} ${f.score} 分（资料 ${sourceTime(f.weatherFetchedAt)}）`).join(' · ') + ` · 相差 ${comparison.difference} 分` :
+    comparison?.reason === 'saved_comparison_expired' ? '另一模式的对应预报已过期，待计划更新后对照' : '另一模式的对应预报待保存');
+  text('cloud-source', data.model === 'ecmwf' ?
+    'ECMWF 逐层云量由相对湿度推算，薄云与低云遮挡需结合临近云图核对。' :
+    data.model === 'gfs' ? 'GFS 逐层云量采用模式原生云量场；实际云色仍受云水、冰与天空背景影响。' :
+      '逐层云量的生成方式与实际云色资料请结合临近云图核对。');
   text('aod', data.aod === null ? '待补充' : data.aod.toFixed(3));
   text('visibility', data.visibilityKm === null ? '待补充' : `${data.visibilityKm} km`);
   text('model-value', data.model === 'gfs' ? 'GFS' : 'ECMWF');
@@ -105,23 +116,25 @@ function render(data) {
   text('window', data.window ? `${time(data.window.start)} — ${time(data.window.end)}` : '尚无明显受光窗口');
   text('window-note', data.window ? `按模型截面推算 · ${data.window.clipped ? '窗口延伸至计算边界' : '窗口随临近云况变化'}` : '可结合临近云图和现场天空再判断');
   text('toward', data.towardSun.toFixed(1)); text('opposite', data.oppositeSun.toFixed(1));
-  text('freshness', `${data.weatherModel} · 数据获取 ${time(data.data.weather.fetchedAt)} · ${data.data.weather.ageMinutes} 分钟前`);
-  const dataState = data.state === 'stale' ? '使用较早缓存资料' : data.state === 'partial' ? '气溶胶资料待补充' : '垂直云层与气溶胶资料齐备';
+  text('freshness', `${data.weatherModel} · 数据获取 ${time(data.data.weather.fetchedAt)} · ${data.data.weather.ageMinutes} 分钟前` +
+    (data.cache ? ` · 预报生成 ${time(data.generatedAt)} · 下次计划更新 ${time(data.cache.nextScheduledAt)}` : ''));
+  const dataState = (data.state === 'stale' ? '使用较早缓存资料' : data.state === 'partial' ? '气溶胶资料待补充' : '天气与气溶胶输入已获取') +
+    (data.cloudInputDiagnostics?.lowCloudGap ? ' · 低云垂直信息待核对' : '');
   text('data-state', (data.data.aerosol.fetchedAt ? `CAMS 获取 ${time(data.data.aerosol.fetchedAt)} · ${dataState}` : dataState) +
     (data.pathCoverage === 'extrapolated' ? ' · 部分光路含边界外推' : ''));
   text('peak', data.peakTime ? time(data.peakTime) : '暂无明显峰值');
   text('section-title', data.peakTime ? '参考时刻的大气截面' : '日出日落时刻的大气截面');
   text('section-time', `${time(data.section.time)} · 太阳方位 ${data.section.bearing}°`);
   text('section-bearing', `视线中心 ${data.section.bearing}°`);
-  list('reasons', data.reasons); list('uncertainty', data.uncertainty);
+  list('reasons', data.reasons); list('uncertainty', [...(data.timingNotes ?? []), ...data.uncertainty]);
   text('sensitivity', data.sensitivity.minimum === null ? '待气溶胶资料齐备后评估' : `${data.sensitivity.minimum} — ${data.sensitivity.maximum} 分`);
   text('overlap-sensitivity', `${data.cloudOverlapSensitivity.minimum} — ${data.cloudOverlapSensitivity.maximum} 分`);
   text('cadence', `曲线以 5 分钟推算；原始天气资料约 ${data.data.weather.nativeTimeStepMinutes / 60} 小时、CAMS 约 3 小时，经 API 逐小时插值。窗口用于临近观察参考。`);
   text('forecast-id', `${data.modelVersion} · ${data.id}`);
   $('windy').href = `https://www.windy.com/?clouds,${data.location.lat},${data.location.lon},7`;
   timeline(data); section(data);
-  const resultStatus = data.state === 'stale' ? '已显示带时间标记的缓存预报，可稍后重新获取。' : data.state === 'partial' ? '已生成预报，气溶胶缺失影响已列在说明中。' : '预报已更新，可结合临近云图与实际天空观察。';
-  status((data.leadTimeHours < 0 ? '所选事件已发生，当前显示资料回算；可选择明天查看预报。' : '') + resultStatus);
+  const resultStatus = data.state === 'stale' ? '已显示上一批预报，计划更新完成后可查看新结果。' : data.state === 'partial' ? '已显示预报，气溶胶缺失影响已列在说明中。' : '已显示最近一次更新的预报，可结合临近云图与实际天空观察。';
+  status(((data.timeUntilEventHours ?? data.leadTimeHours) < 0 ? '所选事件已发生，可选择明天查看预报。' : '') + resultStatus);
 }
 
 async function query(event) {
@@ -135,7 +148,7 @@ async function query(event) {
   const timeout = setTimeout(() => requestController.abort(), 85000);
   $('query').disabled = true; form.setAttribute('aria-busy', 'true');
   $('result').hidden = true; $('empty').hidden = true;
-  status('正在获取空间云层与气溶胶资料，计算光路…', 'loading');
+  status('正在读取预报资料…', 'loading');
   try {
     const data = await api('/api/v1/forecast?' + params, requestController.signal);
     if (id !== sequence) return;
@@ -145,7 +158,7 @@ async function query(event) {
   } catch (error) {
     if (id !== sequence) return;
     current = null; $('empty').hidden = false;
-    status(error.name === 'AbortError' ? '等待超时，请重新获取；已有天气请求会保留缓存。' : error.message, 'error');
+    status(error.name === 'AbortError' ? '等待超时，请稍后重新查看预报。' : error.message, 'error');
   } finally {
     clearTimeout(timeout);
     if (id === sequence) { $('query').disabled = false; form.setAttribute('aria-busy', 'false'); }
@@ -156,7 +169,7 @@ async function prepare() {
   const value = await api('/api/v1/locations');
   $('city').replaceChildren(...value.locations.map(p => new Option(p.name, p.id)));
   dates = value.dates;
-  $('date').replaceChildren(...dates.map((d, i) => new Option(`${['今天', '明天', '后天'][i]} · ${d.slice(5)}`, d)));
+  $('date').replaceChildren(...dates.map((d, i) => new Option(`${['今天', '明天', '后天', '大后天'][i]} · ${d.slice(5)}`, d)));
   const params = new URLSearchParams(location.search);
   let saved;
   try { saved = localStorage.getItem('sunsetbot-city'); } catch {}
@@ -166,6 +179,10 @@ async function prepare() {
   for (const name of ['model', 'event']) {
     const element = [...form.elements].find(e => e.name === name && e.value === params.get(name));
     if (element) element.checked = true;
+  }
+  if (!params.has('date')) {
+    const eventType = new FormData(form).get('event'), upcoming = value.nextEvents?.[$('city').value]?.[eventType]?.date;
+    if (dates.includes(upcoming)) $('date').value = upcoming;
   }
   if (params.has('lat') && params.has('lon')) {
     $('custom').checked = true; $('lat').value = params.get('lat'); $('lon').value = params.get('lon');
@@ -192,7 +209,7 @@ document.addEventListener('visibilitychange', async () => {
     const value = await api('/api/v1/locations');
     if (value.dates[0] !== dates[0]) {
       const previous = $('date').value; dates = value.dates;
-      $('date').replaceChildren(...dates.map((d, i) => new Option(`${['今天', '明天', '后天'][i]} · ${d.slice(5)}`, d)));
+      $('date').replaceChildren(...dates.map((d, i) => new Option(`${['今天', '明天', '后天', '大后天'][i]} · ${d.slice(5)}`, d)));
       if (dates.includes(previous)) $('date').value = previous;
       invalidate(); status('当地日期已更新，请重新获取预报。');
     }

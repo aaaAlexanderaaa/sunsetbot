@@ -25,11 +25,12 @@
           <label>日期<select id="date" name="date" required></select></label>
           <fieldset><legend>时段</legend><div class="segmented"><label><input type="radio" name="event" value="sunrise"><span>朝霞</span></label><label><input type="radio" name="event" value="sunset" checked><span>晚霞</span></label></div></fieldset>
           <fieldset><legend>天气模型</legend><div class="segmented"><label><input type="radio" name="model" value="gfs" checked><span>GFS</span></label><label><input type="radio" name="model" value="ecmwf"><span>ECMWF</span></label></div></fieldset>
-          <button class="primary" id="query" type="submit">获取预报 <span aria-hidden="true">↗</span></button>
+          <button class="primary" id="query" type="submit">查看预报 <span aria-hidden="true">↗</span></button>
         </div>
         <details class="custom"><summary>使用经纬度</summary><div class="custom-fields"><label class="check"><input id="custom" type="checkbox">启用自选位置</label><label>北纬 <input id="lat" type="number" step="0.0001" min="27" max="35" value="31.2304" disabled></label><label>东经 <input id="lon" type="number" step="0.0001" min="116" max="125" value="121.4737" disabled></label><p>WGS84 坐标 · 长三角范围</p></div></details>
       </form>
 
+      <p class="secondary">预报每天 08:00、16:00 更新 · 中国标准时间 · 自选位置使用已有资料覆盖</p>
       <div id="status" class="status" role="status" aria-live="polite">正在准备当地日期与观测点…</div>
       <section id="empty" class="empty" hidden><svg viewBox="0 0 100 50" aria-hidden="true"><path d="M5 40h90M30 40a20 20 0 0 1 40 0M18 15l6 6M50 2v8M82 15l-6 6"/></svg><h2>选择一个时刻，看看天空的条件。</h2><p>查询后可查看观测窗口、霞光曲线和大气截面。</p></section>
 
@@ -37,8 +38,8 @@
         <section class="forecast-top" aria-labelledby="result-title">
           <div class="summary">
             <p class="eyebrow" id="result-context"></p><h2 id="result-title"></h2>
-            <div class="score-line"><strong id="score"></strong><span>/ 100<small>霞光截面指数 · 实验模型</small></span></div>
-            <p class="verdict" id="verdict"></p><p id="advice" class="secondary"></p><p id="summary-range" class="secondary"></p><p class="secondary" id="validation-status">当前指数用于研究诊断。</p>
+            <div class="score-line"><strong id="score"></strong><span>/ 100<small>受光云层指数 · 实验模型</small></span></div>
+            <p class="verdict" id="verdict"></p><p id="advice" class="secondary"></p><p id="model-comparison" class="secondary"></p><p id="cloud-source" class="secondary"></p><p id="summary-range" class="secondary"></p><p class="secondary" id="validation-status">当前指数用于研究诊断。</p>
             <div class="conditions"><span>AOD550 <b id="aod"></b></span><span>能见度 <b id="visibility"></b></span><span>模型 <b id="model-value"></b></span></div>
           </div>
           <div class="observing">
@@ -52,8 +53,8 @@
         <div class="data-line"><span id="freshness"></span><span id="data-state"></span></div>
 
         <section class="panel chart-panel" aria-labelledby="timeline-title">
-          <div class="section-heading"><div><p class="eyebrow">THE COLOUR OF TIME</p><h2 id="timeline-title">模型里的霞光变化</h2></div><p>模型参考 <b id="peak"></b><span class="secondary"> · 当地时间</span></p></div>
-          <div id="timeline-chart" class="chart" role="img" aria-label="日出或日落前后观赏潜力曲线"></div>
+          <div class="section-heading"><div><p class="eyebrow">THE COLOUR OF TIME</p><h2 id="timeline-title">受光云层信号的变化</h2></div><p>模型参考 <b id="peak"></b><span class="secondary"> · 当地时间</span></p></div>
+          <div id="timeline-chart" class="chart" role="img" aria-label="日出或日落前后受光云层指数曲线"></div>
           <div class="timeline-inspector"><label for="time-slider">查看时刻</label><input id="time-slider" type="range" min="0" max="16" step="1" value="8"><output id="time-value" for="time-slider"></output></div>
           <p id="cadence" class="caption">曲线以 5 分钟推算；时间窗口受原始天气资料分辨率约束。</p>
         </section>
